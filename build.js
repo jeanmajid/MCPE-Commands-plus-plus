@@ -6,7 +6,7 @@ const archive = archiver("zip", {
     zlib: { level: 9 },
 });
 
-archive.pipe(output);
+archive.pipe(output); //ss
 
 archive.glob("**", {
     ignore: ["node_modules/**", ".git/**", ".github/**", "*.mcpack", "package-lock.json", "package.json"],
