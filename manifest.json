@@ -1,0 +1,58 @@
+{
+    "format_version": 2,
+    "header": {
+        "name": "Commands++ by Jeanmajid",
+        "description": "Better commands",
+        "uuid": "f24a7f10-d768-46a0-814e-23ae4b35f4a3",
+        "version": [
+            1,
+            0,
+            0
+        ],
+        "min_engine_version": [
+            1,
+            20,
+            40
+        ]
+    },
+    "modules": [
+        {
+            "type": "data",
+            "uuid": "08126ebf-00fb-432c-ba7f-8e9d57ab8b98",
+            "version": [
+                1,
+                0,
+                0
+            ]
+        },
+        {
+            "type": "script",
+            "language": "javascript",
+            "uuid": "75150995-4b63-403f-8fba-4b67be36cc4a",
+            "version": [
+                1,
+                0,
+                0
+            ],
+            "entry": "scripts/index.js"
+        }
+    ],
+    "capabilities": [
+        "script_eval"
+    ],
+    "metadata": {
+        "authors": [
+            "Jean majid"
+        ]
+    },
+    "dependencies": [
+        {
+            "module_name": "@minecraft/server",
+            "version": "1.8.0-beta"
+        },
+        {
+            "module_name": "@minecraft/server-ui",
+            "version": "1.2.0-beta"
+        }
+    ]
+}
