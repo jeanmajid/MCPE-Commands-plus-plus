@@ -1,15 +1,10 @@
-const fs = require("fs");
-const archiver = require("archiver");
+const { exec } = require("child_process");
 
-const output = fs.createWriteStream(__dirname + "/your-pack-name.mcpack");
-const archive = archiver("zip", {
-    zlib: { level: 9 },
+exec('zip -r commands++.zip . -x "*node_modules*" "*.git*" "package*"', (error, stdout, stderr) => {
+    if (error) {
+        console.error(`exec error: ${error}`);
+        return;
+    }
+    console.log(`stdout: ${stdout}`);
+    console.error(`stderr: ${stderr}`);
 });
-
-archive.pipe(output);
-
-archive.glob("**", {
-    ignore: ["node_modules/**", ".git/**", ".github/**", "*.mcpack", "package-lock.json", "package.json"],
-});
-
-archive.finalize();
