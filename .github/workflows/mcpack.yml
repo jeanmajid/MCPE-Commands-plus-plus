@@ -1,7 +1,6 @@
 name: Upload mcpack
-on:
-  release:
-    types: [published]
+
+on: [push]
 
 jobs:
   upload-mcpack:
