@@ -10,8 +10,8 @@ jobs:
       - uses: actions/checkout@master 
       - name: Install
         run: |
-          npm i --save-dev @actions/core 
-          npm i --save-dev @actions/github 
+          npm i --save-dev @actions/core
+          npm i --save-dev @actions/github
           
       - name: Get Name
         id: get-name
