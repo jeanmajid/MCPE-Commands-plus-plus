@@ -15,6 +15,10 @@ jobs:
       - name: Get Name
         id: get-name
         uses: ./.github/workflows/manifest/
+
+      - name: Make Archive
+        run: |
+          zip -r ${{ steps.get-name.outputs.fileName }} ./ -x "*.git*" "*node_modules*" "package-lock.json" "external"
           
       - name: Create Release
         id: create_release
@@ -26,10 +30,6 @@ jobs:
           release_name: Release ${{ github.ref }}
           draft: false
           prerelease: false
-
-      - name: Make Archive
-        run: |
-          zip -r ${{ steps.get-name.outputs.fileName }} ./ -x "*.git*" "*node_modules*" "package-lock.json" "external"
 
       - name: Upload Release Asset
         id: upload-release-asset 
