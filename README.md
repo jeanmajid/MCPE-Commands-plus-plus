@@ -4,6 +4,8 @@ MCBE Commands++ is a Minecraft Bedrock addon that extends the capabilities of va
 
 ![Minecraft Bedrock Edition Logo](./pack_icon.png)
 
+Join the [Discord](https://discord.gg/6PFMrzS3sG) for supprt
+
 ## Features
 
 - **Extended Commands**: Enhance your gameplay with extended commands that go beyond the vanilla Minecraft commands.
