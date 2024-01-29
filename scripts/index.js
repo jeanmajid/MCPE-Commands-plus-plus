@@ -55,6 +55,6 @@ import "./modules/BEvents/playerInteractWithEntity.js";
 import "./modules/BEvents/playerLeave.js";
 import "./modules/BEvents/playerPlaceBlock.js";
 import "./modules/scoreboard/xp.js";
-import "./modi.js";
+import "./init.js";
 import "./register.js";
 import "./commands.js";

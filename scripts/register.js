@@ -29,8 +29,7 @@ export function register() {
     for (const module of Module.eventModules) {
         if (module.state && !module.eventId) {
             module.eventId = module.event.subscribe(module.callback);
-        }
-        else if (!module.state && module.eventId) {
+        } else if (!module.state && module.eventId) {
             module.event.unsubscribe(module.eventId);
             module.eventId = undefined;
         }
