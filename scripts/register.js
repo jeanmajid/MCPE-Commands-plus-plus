@@ -26,6 +26,8 @@ export function register() {
         }
     }
 
+
+
     for (const module of Module.eventModules) {
         if (module.state && !module.eventId) {
             module.eventId = module.event.subscribe(module.callback);

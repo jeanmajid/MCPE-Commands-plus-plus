@@ -37,6 +37,9 @@
             "entry": "scripts/index.js"
         }
     ],
+    "capabilities": [
+        "script_eval"
+    ],
     "metadata": {
         "authors": [
             "Jean majid"

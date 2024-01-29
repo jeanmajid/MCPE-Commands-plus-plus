@@ -1,7 +1,6 @@
 import { world, Block } from "@minecraft/server";
 
 const id = world.afterEvents.playerSpawn.subscribe(() => {
-    console.warn(world.getDynamicProperty("firstUse"));
     if (!world.getDynamicProperty("firstUse")) {
         world.sendMessage(
             `
