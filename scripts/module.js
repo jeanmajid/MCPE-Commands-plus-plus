@@ -92,6 +92,7 @@ export class Module {
     }
 
     static updateCode(module) {
+        if (!module.state) return;
         module.compiledCode = undefined;
         system.run(() => {
             module.event.unsubscribe(module.eventId);

@@ -36,7 +36,7 @@ system.afterEvents.scriptEventReceive.subscribe((data) => {
 
 function handleCommands(command, args, source) {
     source.sendMessage ??= (_) => {};
-    let module;
+    let module = null;
     switch (command) {
         case "help":
             source.sendMessage("§9Available commands:");
@@ -79,10 +79,7 @@ function handleCommands(command, args, source) {
             break;
         case "interval":
             module = getModule(args[0]);
-            if (module.error) {
-                source.sendMessage(module.message);
-                return;
-            }
+            if (module.error) return source.sendMessage(module.message);
             if (!module.scoreboard) return source.sendMessage(`§cModule ${module.name} is not of type scoreboard`);
             const interval = parseInt(args[2]);
             if (isNaN(interval)) {
@@ -95,10 +92,7 @@ function handleCommands(command, args, source) {
             break;
         case "scoreboard":
             module = getModule(args[0]);
-            if (module.error) {
-                source.sendMessage(module.message);
-                return;
-            }
+            if (module.error) return source.sendMessage(module.message);
             if (!module.scoreboard) return source.sendMessage(`§cModule ${module.name} is not of type scoreboard`);
             module.scoreboard = args[2];
             source.sendMessage(`§aSet scoreboard of ${module.name} to ${module.scoreboard}`);
@@ -106,10 +100,7 @@ function handleCommands(command, args, source) {
             break;
         case "source":
             module = getModule(args[0]);
-            if (module.error) {
-                source.sendMessage(module.message);
-                return;
-            }
+            if (module.error) return source.sendMessage(module.message);
             if (!module.event) return source.sendMessage(`§cModule ${module.name} is not of type event`);
             switch (args[1]) {
                 case "show":
@@ -138,10 +129,7 @@ function handleCommands(command, args, source) {
         case "code":
             let lineIndex;
             module = getModule(args[0]);
-            if (module.error) {
-                source.sendMessage(module.message);
-                return;
-            }
+            if (module.error) return source.sendMessage(module.message);
             if (!module.event) return source.sendMessage(`§cModule ${module.name} is not of type event`);
             switch (args[1]) {
                 case "add":
@@ -207,10 +195,7 @@ function handleCommands(command, args, source) {
             break;
         case "methods":
             module = getModule(args[0]);
-            if (module.error) {
-                source.sendMessage(module.message);
-                return;
-            }
+            if (module.error) return source.sendMessage(module.message);
             if (!module.event) return source.sendMessage(`§cModule ${module.name} is not of type event`);
             if (args[1] && args[1].length > 0) {
                 const method = module.methods.find((method) => method === args[1]);
@@ -240,10 +225,7 @@ function handleCommands(command, args, source) {
                 break;
             }
             module = getModule(args[0]);
-            if (module.error) {
-                source.sendMessage(module.message);
-                return;
-            }
+            if (module.error) return source.sendMessage(module.message);
             const { property, variable } = Module.getAmountOfBytesUsed(module);
             source.sendMessage(`§9Amount of bytes used by ${module.name}:`);
             source.sendMessage(`§9- §bVariable: §7${variable}`);

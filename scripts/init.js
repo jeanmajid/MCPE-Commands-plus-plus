@@ -1,11 +1,11 @@
 import { world, Block } from "@minecraft/server";
 
 const id = world.afterEvents.playerSpawn.subscribe(() => {
-    if (!world.getDynamicProperty("firstUse")) {
+    if (world.getDynamicProperty("debugMode") === undefined) {
         world.sendMessage(
             `
-        
-§9§lWelcome to MCBE Commands++
+
+§9Welcome to MCBE Commands++
 
 §rThis is a Minecraft Bedrock addon that extends the capabilities of vanilla commands.
 §fIt allows you to use features from the Script API, opening up a whole new world of possibilities for your Minecraft experience
@@ -15,10 +15,11 @@ To get started, use the command §a"!help"§r. Please note that this addon may b
 
 §cIf you encounter any issues or have any feedback, please create an issue on GitHub or report it on Discord by contacting me.
 
-§a§lEnjoy!§r
+§aEnjoy!§r
+
 `
         );
-        world.setDynamicProperty("firstUse", 1);
+        world.setDynamicProperty("debugMode", 0);
     }
     world.afterEvents.playerSpawn.unsubscribe(id);
 });

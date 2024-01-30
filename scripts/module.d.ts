@@ -1,3 +1,5 @@
+import { Player } from "@minecraft/server";
+
 export class Module {
     static scoreModules: scoreModule[];
     static eventModules: eventModule[];
@@ -9,6 +11,7 @@ export class Module {
     static updateCode(module: scoreModule | eventModule): void;
     static getClosestModule(name: String): scoreModule | eventModule;
     static getAmountOfBytesUsed(module: scoreModule | eventModule): { variable: number, property: number };
+    static getTotalAmountOfBytesUsed(): { variable: number, property: number };
 }
 
 declare type callback = (player: Player) => void;
@@ -17,7 +20,7 @@ declare type scoreModule = {
     name: string
     description: string
     scoreboard: string
-    interval: number 
+    interval: number
     state?: boolean
 }
 
