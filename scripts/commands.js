@@ -120,6 +120,7 @@ function handleCommands(command, args, source) {
                     module.source = args[2];
                     source.sendMessage(`§aSet source of ${module.name} to ${module.source}`);
                     Module.updateModule(module);
+                    Module.updateCode(module);
                     break;
                 default:
                     source.sendMessage(`§cSpecify a subcommand (show, set, available)`);
