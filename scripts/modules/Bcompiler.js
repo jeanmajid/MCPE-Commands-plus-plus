@@ -2,7 +2,11 @@ import { system, world } from "@minecraft/server";
 globalThis.world = world; // pretty stupid that I gotta do this did not find another solution
 globalThis.system = system;
 
-export function handleEvent(data, module) {
+const methods = {
+    vd: (source, args) => `data.${source}.getViewDirection(${args.join(", ")})`,
+};
+
+export function compileCode(data, module) {
     if (!module.state) return;
     if (!module.compiledCode) {
         const addCode = (code) => (functionBody += code + "\n");
@@ -17,40 +21,19 @@ export function handleEvent(data, module) {
             for (let i = 0; i < args.length; i++) {
                 if (args[i].startsWith("@")) {
                     if (args[i] === "@a" || args[i] === "@e" || args[i] === "@p" || args[i] === "@r" || args[i] === "@s" || args[i] === "@cancel") continue;
-                    const method = args[i].slice(1).match(/^[^.]+/)[0];
+                    const [method, ...methodArgs] = args[i].slice(1).split(".");
                     if (!module.methods.includes(method)) world.sendMessage(`§c[§e${module.name}§c] §r§7Method §e${method}§7 is not allowed!`);
-                    // const dotargs = args[i].slice(1).split(".").slice(1);
-                    // for (let j = 0; j < dotargs.length; j++) {
-                    //     const dotarg = dotargs[j].toLowerCase();
-                    //     switch (dotarg) {
-                    //         case "vd":
-                    //         case "viewdirection":
-                    //             if (!dotargs[j + 1]) {
-                    //                 args[i] = `data.${source}.getViewDirection();`;
-                    //             } else {
-                    //                 switch (dotargs[j + 1].toLowerCase()) {
-                    //                     case "x":
-                    //                         args[i] = `data.${source}.getViewDirection().x`;
-                    //                         break;
-                    //                     case "y":
-                    //                         args[i] = `data.${source}.getViewDirection().y`;
-                    //                         break;
-                    //                     case "z":
-                    //                         args[i] = `data.${source}.getViewDirection().z`;
-                    //                         break;
-                    //                 }
-                    //             }
-                    //             stopConvertFirstLine = true;
-                    //             break;
-                    //     }
-                    // }
+                    console.warn(method, methodArgs);
+                    if (methods[method]) {
+                        args[i] = methods[method](source, methodArgs);
+                    }
                     args[i] = args[i].replace(/@/g, "data.");
                 }
             }
 
             switch (args[0]) {
                 case "@cancel":
-                    return world.sendMessage("§c[§e" + module.name + "§c@cancel is not allowed in After events.");
+                    addCode("data.cancel = true;");
                     break;
                 case "if":
                     addCode(
@@ -72,7 +55,18 @@ export function handleEvent(data, module) {
                     break;
             }
         }
-        module.compiledCode = new Function("data", functionBody);
+        let functionBodyLines = functionBody.split("\n");
+        for (let i = 0; i < functionBodyLines.length; i++) {
+            try {
+                eval(functionBodyLines[i]);
+            } catch (error) {
+                if (error.message.includes("does not have required privileges.")) {
+                    functionBodyLines[i] = functionBodyLines[i] = `system.run(() => {${functionBodyLines[i]}})`;
+                }
+            }
+        }
+        console.warn(functionBodyLines.join("\n"));
+        module.compiledCode = new Function("data", functionBodyLines.join("\n"));
         module.compiledCode(data);
         system.run(() => {
             module.event.unsubscribe(module.eventId);

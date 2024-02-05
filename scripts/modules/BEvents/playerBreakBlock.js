@@ -1,6 +1,6 @@
 import { world } from "@minecraft/server";
 import { Module } from "../../module.js";
-import { handleEvent } from "./utils.js";
+import { compileCode } from "../Bcompiler.js";
 
 let module = undefined;
 
@@ -17,6 +17,6 @@ Module.register(
     },
     (data) => {
         if (!module) module = Module.getModule("playerBreakBlockB");
-        handleEvent(data, module);
+        compileCode(data, module);
     }
 );

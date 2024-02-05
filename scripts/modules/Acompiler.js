@@ -2,7 +2,7 @@ import { system, world } from "@minecraft/server";
 globalThis.world = world; // pretty stupid that I gotta do this did not find another solution
 globalThis.system = system;
 
-export function handleEvent(data, module) {
+export function compileCode(data, module) {
     if (!module.state) return;
     if (!module.compiledCode) {
         const addCode = (code) => (functionBody += code + "\n");
@@ -50,7 +50,7 @@ export function handleEvent(data, module) {
 
             switch (args[0]) {
                 case "@cancel":
-                    addCode("data.cancel = true;");
+                    return world.sendMessage("§c[§e" + module.name + "§c@cancel is not allowed in After events.");
                     break;
                 case "if":
                     addCode(
@@ -72,18 +72,7 @@ export function handleEvent(data, module) {
                     break;
             }
         }
-        let functionBodyLines = functionBody.split("\n");
-        for (let i = 0; i < functionBodyLines.length; i++) {
-            try {
-                eval(functionBodyLines[i]);
-            } catch (error) {
-                if (error.message.includes("does not have required privileges.")) {
-                    functionBodyLines[i] = functionBodyLines[i] = `system.run(() => {${functionBodyLines[i]}})`;
-                }
-            }
-        }
-        // console.warn(functionBodyLines.join("\n"));
-        module.compiledCode = new Function("data", functionBodyLines.join("\n"));
+        module.compiledCode = new Function("data", functionBody);
         module.compiledCode(data);
         system.run(() => {
             module.event.unsubscribe(module.eventId);
@@ -91,4 +80,3 @@ export function handleEvent(data, module) {
         });
     }
 }
-

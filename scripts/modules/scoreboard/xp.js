@@ -1,5 +1,5 @@
 import { Module } from '../../module';
-import { setScore } from "./utils";
+import { setScore } from "../scoreUtils";
 
 Module.register(
     {

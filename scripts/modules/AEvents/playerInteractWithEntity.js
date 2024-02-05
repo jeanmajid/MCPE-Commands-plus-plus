@@ -1,6 +1,6 @@
 import { world } from "@minecraft/server";
 import { Module } from "../../module.js";
-import { handleEvent } from "./utils.js";
+import { compileCode } from "../Acompiler.js";
 
 let module = undefined;
 
@@ -8,7 +8,7 @@ Module.register(
     {
         name: "playerInteractWithEntityA",
         type: "after",
-        description: "",
+        description: "This event fires when a player interacts with an entity.",
         event: world.afterEvents.playerInteractWithEntity,
         code: [],
         source: "player",
@@ -17,6 +17,6 @@ Module.register(
     },
     (data) => {
         if (!module) module = Module.getModule("playerInteractWithEntityA");
-        handleEvent(data, module);
+        compileCode(data, module);
     }
 );

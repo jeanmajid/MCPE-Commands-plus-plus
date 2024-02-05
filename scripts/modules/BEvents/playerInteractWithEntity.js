@@ -1,6 +1,6 @@
 import { world } from "@minecraft/server";
 import { Module } from "../../module.js";
-import { handleEvent } from "./utils.js";
+import { compileCode } from "../Bcompiler.js";
 
 let module = undefined;
 
@@ -8,7 +8,7 @@ Module.register(
     {
         name: "playerInteractWithEntityB",
         type: "before",
-        description: "",
+        description: "Fires before a player interacts with an entity.",
         event: world.beforeEvents.playerInteractWithEntity,
         code: [],
         source: "player",
@@ -17,6 +17,6 @@ Module.register(
     },
     (data) => {
         if (!module) module = Module.getModule("playerInteractWithEntityB");
-        handleEvent(data, module);
+        compileCode(data, module);
     }
 );

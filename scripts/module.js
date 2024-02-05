@@ -59,16 +59,17 @@ export class Module {
     }
 
     static toggleModule(name, state) {
-        if (name === "all") {
-            this.getAllModules().forEach((m) => {
-                if (m.state !== state) {
-                    m.state = state;
-                    module.compiledCode = undefined;
-                    this.updateModule(m);
-                }
-            });
-            return `§aAll modules ${state ? "enabled" : "disabled"} successfully`;
-        }
+        // TODO toggle all is broken for some reason will fix later isn't really that important
+        // if (name === "all") {
+        //     this.getAllModules().forEach((m) => {
+        //         if (m.state !== state) {
+        //             m.state = state;
+        //             module.compiledCode = undefined;
+        //             this.updateModule(m);
+        //         }
+        //     });
+        //     return `§aAll modules ${state ? "enabled" : "disabled"} successfully`;
+        // }
         const module = this.getModule(name);
         if (!module) return `§cModule ${name} not found. Did you mean ${this.getClosestModule(name).name}?`;
         if (module.state === state) return `§cModule ${module.name} is already ${state ? "enabled" : "disabled"}`;
