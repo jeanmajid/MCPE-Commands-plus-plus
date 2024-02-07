@@ -1,5 +1,9 @@
 # MCBE Commands++
 
+## Important
+
+The project is currently paused and very early beta. it will be worked on when I get more time. I am currently very busy.
+
 MCBE Commands++ is a Minecraft Bedrock addon that extends the capabilities of vanilla commands. It allows you to use features from the Script API, opening up a whole new world of possibilities for your Minecraft experience.
 Join the [Discord](https://discord.gg/6PFMrzS3sG) for support and creations
 
