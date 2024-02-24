@@ -12,8 +12,8 @@ Module.register(
         event: world.afterEvents.chatSend,
         code: [],
         source: "sender",
-        methods: ["message", "sender", "sendToTargets", "getTargets"],
-        types: ["property", "property", "property", "function"],
+        methods: ["message", "sender", "targets"],
+        types: ["property", "property", "property"],
     },
     (data) => {
         if (!module) module = Module.getModule("chatSendA");

@@ -12,7 +12,7 @@ Module.register(
         event: world.beforeEvents.playerPlaceBlock,
         code: [],
         source: "player",
-        methods: ["cancel", "face", "faceLocation", "itemStack", "player", "block", "dimension"],
+        methods: ["cancel", "face", "faceLocation", "permutationBeingPlaced", "player", "block", "dimension"],
         types: ["property", "property", "property", "property", "property", "property", "property"],
     },
     (data) => {

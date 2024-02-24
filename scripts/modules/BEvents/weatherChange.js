@@ -6,17 +6,17 @@ let module = undefined;
 
 Module.register(
     {
-        name: "chatSendB",
+        name: "weatherChangeB",
         type: "before",
-        description: "This event is triggered after a chat message has been broadcast or sent to players.",
-        event: world.beforeEvents.chatSend,
+        description: "",
+        event: world.beforeEvents.weatherChange,
         code: [],
-        source: "sender",
-        methods: ["cancel", "message", "sender", "targets"],
+        source: "world",
+        methods: ["cancel", "duration", "newWeather", "previousWeather"],
         types: ["property", "property", "property", "property"],
     },
     (data) => {
-        if (!module) module = Module.getModule("chatSendB");
+        if (!module) module = Module.getModule("weatherChangeB");
         compileCode(data, module);
     }
 );
