@@ -2,10 +2,6 @@ import { system, world } from "@minecraft/server";
 globalThis.world = world; // pretty stupid that I gotta do this did not find another solution
 globalThis.system = system;
 
-const methods = {
-    vd: (source, args) => `data.${source}.getViewDirection(${args.join(", ")})`,
-};
-
 export function compileCode(data, module) {
     if (!module.state) return;
     if (!module.compiledCode) {
@@ -23,10 +19,6 @@ export function compileCode(data, module) {
                     if (args[i] === "@a" || args[i] === "@e" || args[i] === "@p" || args[i] === "@r" || args[i] === "@s" || args[i] === "@cancel") continue;
                     const [method, ...methodArgs] = args[i].slice(1).split(".");
                     if (!module.methods.includes(method)) world.sendMessage(`§c[§e${module.name}§c] §r§7Method §e${method}§7 is not allowed!`);
-                    console.warn(method, methodArgs);
-                    if (methods[method]) {
-                        args[i] = methods[method](source, methodArgs);
-                    }
                     args[i] = args[i].replace(/@/g, "data.");
                 }
             }

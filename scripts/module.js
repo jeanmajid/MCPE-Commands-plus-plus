@@ -43,8 +43,7 @@ export class Module {
                 this.updateModule(info);
             }
         } else {
-            throw new Error(`Failed to import ${info.name} please fix :)
-            Error: you forgot to specify the type of the module either use event or scoreboard`);
+            throw new Error(`Failed to import ${info.name} please fix :)`);
         }
     }
 

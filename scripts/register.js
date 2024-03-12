@@ -14,9 +14,10 @@ export function register() {
 
     for (const module of Module.scoreModules) {
         if (!module.state) continue;
-        const scoreboard = world.scoreboard.getObjective(module.scoreboard);
+        let scoreboard = world.scoreboard.getObjective(module.scoreboard);
         if (!scoreboard) {
             world.scoreboard.addObjective(module.scoreboard, module.scoreboard);
+            scoreboard = world.scoreboard.getObjective(module.scoreboard);
         }
         const intervalObject = intervals[module.interval];
         if (intervalObject) {
@@ -25,8 +26,6 @@ export function register() {
             intervals[module.interval] = [module];
         }
     }
-
-
 
     for (const module of Module.eventModules) {
         if (module.state && !module.eventId) {
