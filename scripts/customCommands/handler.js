@@ -16,6 +16,6 @@ export class CustomCommand {
     static getModule(name) {
         if (!name) return undefined;
         name = name.toLowerCase();
-        return this.commands.find((m) => m.name.toLowerCase() === name);
+        return this.commands.find((c) => c.name.toLowerCase() === name);
     }
 }
