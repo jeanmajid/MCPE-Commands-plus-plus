@@ -3,6 +3,7 @@ import { Module } from "./module";
 import { levenshteinDistance } from "./utils";
 import { register } from "./register";
 import { eventProperties } from "./eventProperties";
+import { CustomCommand } from "./customCommands/handler";
 
 const commands = [
     { name: "help", description: "Show available commands" },
@@ -43,6 +44,11 @@ function handleCommands(command, args, source) {
             commands.forEach((cmd) => {
                 source.sendMessage(`§9- §b${cmd.name}: §7${cmd.description}`);
             });
+            break;
+        case "command":
+            const command = CustomCommand.getCommand(args[0]);
+            if (command.notFound) return source.sendMessage(command.errormsg);
+            command.callback({ args: args.slice(1), source: source});
             break;
         case "search":
             switch (args[0]) {

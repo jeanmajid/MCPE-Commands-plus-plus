@@ -13,9 +13,11 @@ export class CustomCommand {
         return this.commands;
     }
 
-    static getModule(name) {
-        if (!name) return undefined;
+    static getCommand(name) {
+        if (!name) return {notFound: true, errormsg: "§cNo command name provided."};
         name = name.toLowerCase();
-        return this.commands.find((c) => c.name.toLowerCase() === name);
+        const command = this.commands.find((c) => c.name.toLowerCase() === name);
+        if (!command) return {notFound: true, errormsg: "§cCommand not found."};
+        return command;
     }
 }

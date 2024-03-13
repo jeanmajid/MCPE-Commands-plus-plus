@@ -86,7 +86,7 @@ export class Module {
                 interval: module.interval || undefined,
                 scoreboard: module.scoreboard || undefined,
                 source: module.source || undefined,
-                code: module.code || undefined,
+                code: module.code || undefined
             })
         );
     }

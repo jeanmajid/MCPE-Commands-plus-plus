@@ -16,7 +16,7 @@ Module.register(
         types: ["property", "property", "function"],
     },
     (data) => {
-        if (!module) module = Module.getModule("dataDrivenEntityTriggerEventA");
+        if (!module) module = Module.getModule("dataDrivenEntityTriggerA");
         compileCode(data, module);
     }
 );
