@@ -7,6 +7,7 @@ import { CustomCommand } from "./customCommands/handler";
 
 const commands = [
     { name: "help", description: "Show available commands" },
+    { name: "code", },
     { name: "search", description: "Search for modules" },
     { name: "disable", description: "Disable a module" },
     { name: "enable", description: "Enable a module" },
@@ -46,9 +47,15 @@ function handleCommands(command, args, source) {
             });
             break;
         case "command":
-            const command = CustomCommand.getCommand(args[0]);
-            if (command.notFound) return source.sendMessage(command.errormsg);
-            command.callback({ args: args.slice(1), source: source});
+            const customCommand = CustomCommand.getCommand(args[0]);
+            if (command.notFound) return source.sendMessage(customCommand.errormsg);
+            system.run(() => {
+                try {
+                    command.callback({ args: args.slice(1).map((arg) => parseInt(arg)), source: source });
+                } catch (error) {
+                    source.sendMessage(`ERROR: ${error}`)
+                }
+            });
             break;
         case "search":
             switch (args[0]) {
@@ -363,6 +370,8 @@ function colorizeCode(code) {
     code = code.replace(/(@\w+)/g, "§a$1§b");
     // if
     code = code.replace(/\b(if)\b/g, "§6$1§b");
+    //endif
+    code = code.replace(/\b(endif)\b/g, "§6$1§b");
 
     code = `§b${code}`;
 

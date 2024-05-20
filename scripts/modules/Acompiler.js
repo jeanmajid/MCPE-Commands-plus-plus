@@ -1,75 +1,96 @@
 import { system, world } from "@minecraft/server";
-globalThis.world = world; // pretty stupid that I gotta do this did not find another solution
+globalThis.world = world;
 globalThis.system = system;
+
+const allowedOperators = new Set(["==", "!=", "<", ">", "<=", ">="]);
+
+const argActions = new Map([
+    ["@cancel", ({ module }) => world.sendMessage(`§c[§e${module.name}§c] §c@cancel is not allowed in After events.`)],
+    [
+        "if",
+        ({ args, argMetaData, addCode }) => {
+            let ifLine = "";
+            ifLine += "if (";
+            if (argMetaData[1].processed || args[1].startsWith("data.")) {
+                ifLine += args[1];
+            } else {
+                ifLine += `"${args[1]}"`;
+            }
+
+            if (allowedOperators.has(args[2])) {
+                ifLine += ` ${args[2]} `;
+            } else {
+                world.sendMessage(`§c[§e${module.name}§c] §r§7Operator §e${args[2]}§7 is not allowed!`);
+            }
+
+            if (argMetaData[3].processed || args[3].startsWith("data.")) {
+                ifLine += args[3];
+            } else {
+                ifLine += `"${args[3]}"`;
+            }
+
+            ifLine += ") {";
+            addCode(ifLine);
+        },
+    ],
+    ["endif", ({ addCode }) => addCode("}")],
+]);
+
+const actorActions = new Map([["score", (source, args) => `world.scoreboard.getObjective("${args[0]}").getScore(data.${source})`]]);
 
 export function compileCode(data, module) {
     if (!module.state) return;
     if (!module.compiledCode) {
+        let functionBody = "";
         const addCode = (code) => (functionBody += code + "\n");
         const codeLines = module.code;
-        let functionBody = "";
-        for (let i = 0; i < codeLines.length; i++) {
-            let source = module.source;
-            if (source === "world") source = 'world.getDimension("overworld")';
-            else source = `data.${source}`;
-            const args = codeLines[i].split(/ /);
+        let source = module.source;
+        if (source === "world") source = 'world.getDimension("overworld")';
+        else source = `data.${source}`;
 
-            for (let i = 0; i < args.length; i++) {
-                if (args[i].startsWith("@")) {
-                    if (args[i] === "@a" || args[i] === "@e" || args[i] === "@p" || args[i] === "@r" || args[i] === "@s" || args[i] === "@cancel") continue;
-                    const method = args[i].slice(1).match(/^[^.]+/)[0];
+        for (let i = 0; i < codeLines.length; i++) {
+            const args = codeLines[i].split(/ /);
+            const argMetaData = Array.from({ length: args.length }, () => ({}));
+
+            for (let j = 0; j < args.length; j++) {
+                if (args[j].startsWith("@")) {
+                    const parts = args[j].slice(1).split(".");
+                    const method = parts[0];
                     if (!module.methods.includes(method)) world.sendMessage(`§c[§e${module.name}§c] §r§7Method §e${method}§7 is not allowed!`);
-                    // const dotargs = args[i].slice(1).split(".").slice(1);
-                    // for (let j = 0; j < dotargs.length; j++) {
-                    //     const dotarg = dotargs[j].toLowerCase();
-                    //     switch (dotarg) {
-                    //         case "vd":
-                    //         case "viewdirection":
-                    //             if (!dotargs[j + 1]) {
-                    //                 args[i] = `data.${source}.getViewDirection();`;
-                    //             } else {
-                    //                 switch (dotargs[j + 1].toLowerCase()) {
-                    //                     case "x":
-                    //                         args[i] = `data.${source}.getViewDirection().x`;
-                    //                         break;
-                    //                     case "y":
-                    //                         args[i] = `data.${source}.getViewDirection().y`;
-                    //                         break;
-                    //                     case "z":
-                    //                         args[i] = `data.${source}.getViewDirection().z`;
-                    //                         break;
-                    //                 }
-                    //             }
-                    //             stopConvertFirstLine = true;
-                    //             break;
-                    //     }
-                    // }
-                    args[i] = args[i].replace(/@/g, "data.");
+                    if (parts.length > 2 && actorActions.has(parts[1])) {
+                        const actorAction = actorActions.get(parts[1]);
+                        if (actorAction) {
+                            const newArgs = parts.slice(2);
+                            args[j] = actorAction(parts[0], newArgs);
+                            argMetaData[j].processed = true;
+                        }
+                    } else {
+                        args[j] = args[j].replace(/@/g, "data.");
+                    }
                 }
             }
 
-            switch (args[0]) {
-                case "@cancel":
-                    return world.sendMessage("§c[§e" + module.name + "§c@cancel is not allowed in After events.");
-                    break;
-                case "if":
-                    addCode(
-                        `if (${args[1].startsWith("data.") ? args[1] : `"${args[1]}"`} == ${args
-                            .splice(2)
-                            .map((arg) => (arg.startsWith("data.") ? arg : `"${arg}"`))
-                            .join(" ")}) {`
-                    );
-                    break;
-                case "endif":
-                    addCode("}");
-                    break;
-                default:
-                    if (args[0].startsWith("data.")) {
-                        addCode(`${args[0]}(${args.slice(1).join(", ")});`);
-                        continue;
+            const action = argActions.get(args[0]);
+            if (action) {
+                action({ module, args, argMetaData, addCode });
+            } else {
+                if (args[0].startsWith("data.")) {
+                    addCode(`${args[0]}(${args.slice(1).join(", ")});`);
+                    continue;
+                }
+                if (argMetaData.some((meta) => meta.processed)) {
+                    let processedArgs = [];
+                    for (let i = 0; i < args.length; i++) {
+                        if (argMetaData[i]?.processed) {
+                            processedArgs.push(`\${${args[i]}}`);
+                        } else {
+                            processedArgs.push(args[i]);
+                        }
                     }
-                    addCode(`${source}.runCommandAsync("${codeLines[i].replace(/\$/g, "@").replace(/"/g, '\\"')}");`);
-                    break;
+                    addCode(`${source}.runCommandAsync(\`${processedArgs.join(" ")}\`);`);
+                } else {
+                    addCode(`${source}.runCommandAsync("${args.join(" ").replace(/\$/g, "@").replace(/"/g, '\\"')}");`);
+                }
             }
         }
         module.compiledCode = new Function("data", functionBody);
