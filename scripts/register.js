@@ -1,5 +1,5 @@
 import { system, world } from "@minecraft/server";
-import { Module } from "./module";
+import { Module } from "./modules/module";
 
 let intervals = {};
 let intervalIds = [];

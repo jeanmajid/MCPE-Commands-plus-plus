@@ -1,6 +1,6 @@
 import { world, system } from "@minecraft/server";
-import { Module } from "./module";
-import { levenshteinDistance } from "./utils";
+import { Module } from "./modules/module";
+import { levenshteinDistance } from "./utils/levenshteinDistance";
 import { register } from "./register";
 import { eventProperties } from "./eventProperties";
 import { CustomCommand } from "./customCommands/handler";
@@ -352,7 +352,7 @@ function searchModules(args, modules, player) {
             }
         }
     }
-
+    
     if (filteredBeforeEvents.length > 0) {
         player.sendMessage("§b=== Before Events ===");
         for (const module of filteredBeforeEvents) {
