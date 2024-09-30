@@ -1,6 +1,6 @@
 import { world } from "@minecraft/server";
-import { Module } from "../../module.js";
-import { compileCode } from "../../../compiler/Acompiler";
+import { Module } from "../../../models/module.js";
+import { compileCode } from "../../../compiler/Acompiler.js";
 
 let module = undefined;
 

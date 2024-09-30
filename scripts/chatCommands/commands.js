@@ -20,22 +20,6 @@ const commands = [
     { name: "bytes", description: "Show the amount of bytes used by a module" },
 ];
 
-world.beforeEvents.chatSend.subscribe((data) => {
-    if (!data.sender.isOp()) return;
-    if (!data.message.startsWith("!")) return;
-    data.cancel = true;
-    const command = data.message.split(/ /)[0].slice(1).toLowerCase();
-    const args = data.message.split(/ /).slice(1);
-    handleCommands(command, args, data.sender);
-});
-
-system.afterEvents.scriptEventReceive.subscribe((data) => {
-    if (!data.id.startsWith("jmc:")) return;
-    const command = data.id.slice(4).toLowerCase();
-    const args = data.message.split(/ /);
-    handleCommands(command, args, data.initiator ?? data.sourceBlock ?? data.sourceEntity);
-});
-
 function handleCommands(command, args, source) {
     source.sendMessage ??= (_) => {};
     let module = null;

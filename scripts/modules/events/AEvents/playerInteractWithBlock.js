@@ -1,6 +1,6 @@
 import { world } from "@minecraft/server";
-import { Module } from "../../module.js";
-import { compileCode } from "../../../compiler/Acompiler";
+import { Module } from "../../../models/module.js";
+import { compileCode } from "../../../compiler/Acompiler.js";
 
 let module = undefined;
 
@@ -12,8 +12,8 @@ Module.register(
         event: world.afterEvents.playerInteractWithBlock,
         code: [],
         source: "player",
-        methods: ["block", "blockFace", "faceLocation", "itemStack", "player"],
-        types: ["property", "property", "property", "property", "property"],
+        methods: ["beforeItemStack", "block", "blockFace", "faceLocation", "isFirstEvent", "itemStack", "player"],
+        types: ["property", "property", "property", "property", "property", "property", "property"],
     },
     (data) => {
         if (!module) module = Module.getModule("playerInteractWithBlockA");

@@ -1,5 +1,5 @@
-import { Module } from '../module';
-import { setScore } from "../scoreUtils";
+import { Module } from '../../models/module.js';
+import { setScore } from "../../utils/score";
 
 Module.register(
     {
@@ -10,6 +10,5 @@ Module.register(
     },
     (player) => {
         setScore(player, "xp", player.level);
-        console.warn(player.level);
     }
 );

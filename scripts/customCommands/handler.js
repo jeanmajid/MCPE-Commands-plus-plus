@@ -1,6 +1,3 @@
-// Btw I do have an advanced command handler systems that handels selectores and such but
-// not going to implement it here for an while I will start with an more manual solution
-
 export class CustomCommand {
     static commands = [];
     /**

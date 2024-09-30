@@ -9,12 +9,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -45,7 +48,6 @@ export const eventProperties = {
             ],
             "permutation": [
                 "type",
-                "clone",
                 "getAllStates",
                 "getItemStack",
                 "getState",
@@ -113,6 +115,7 @@ export const eventProperties = {
             "east": [],
             "getComponent": [],
             "getItemStack": [],
+            "getMapColor": [],
             "getRedstonePower": [],
             "getTags": [],
             "hasTag": [],
@@ -160,12 +163,15 @@ export const eventProperties = {
             "fillBlocks": [],
             "findClosestBiome": [],
             "getBlock": [],
+            "getBlockAbove": [],
+            "getBlockBelow": [],
             "getBlockFromRay": [],
             "getBlocks": [],
             "getEntities": [],
             "getEntitiesAtBlockLocation": [],
             "getEntitiesFromRay": [],
             "getPlayers": [],
+            "getTopmostBlock": [],
             "getWeather": [],
             "playSound": [],
             "runCommand": [],
@@ -217,6 +223,10 @@ export const eventProperties = {
                 "clear",
                 "fade",
                 "setCamera"
+            ],
+            "inputPermissions": [
+                "cameraEnabled",
+                "movementEnabled"
             ],
             "isEmoting": [
                 "valueOf"
@@ -272,7 +282,7 @@ export const eventProperties = {
                 "setTitle",
                 "updateSubtitle"
             ],
-            "selectedSlot": [
+            "selectedSlotIndex": [
                 "toString",
                 "toFixed",
                 "toExponential",
@@ -324,12 +334,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -340,14 +353,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -396,29 +401,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -456,7 +438,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -466,7 +447,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -664,12 +644,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -680,14 +663,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -736,29 +711,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -796,7 +748,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -806,7 +757,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -932,12 +882,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -948,14 +901,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -1004,29 +949,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -1064,7 +986,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -1074,7 +995,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -1213,6 +1133,7 @@ export const eventProperties = {
         "block": "property",
         "blockFace": "property",
         "faceLocation": "property",
+        "isFirstEvent": "property",
         "itemStack": "property",
         "source": "property"
     },
@@ -1341,6 +1262,10 @@ export const eventProperties = {
                 "fade",
                 "setCamera"
             ],
+            "inputPermissions": [
+                "cameraEnabled",
+                "movementEnabled"
+            ],
             "isEmoting": [
                 "valueOf"
             ],
@@ -1395,7 +1320,7 @@ export const eventProperties = {
                 "setTitle",
                 "updateSubtitle"
             ],
-            "selectedSlot": [
+            "selectedSlotIndex": [
                 "toString",
                 "toFixed",
                 "toExponential",
@@ -1447,12 +1372,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -1463,14 +1391,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -1519,29 +1439,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -1579,7 +1476,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -1589,7 +1485,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -1747,6 +1642,10 @@ export const eventProperties = {
                 "fade",
                 "setCamera"
             ],
+            "inputPermissions": [
+                "cameraEnabled",
+                "movementEnabled"
+            ],
             "isEmoting": [
                 "valueOf"
             ],
@@ -1801,7 +1700,7 @@ export const eventProperties = {
                 "setTitle",
                 "updateSubtitle"
             ],
-            "selectedSlot": [
+            "selectedSlotIndex": [
                 "toString",
                 "toFixed",
                 "toExponential",
@@ -1853,12 +1752,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -1869,14 +1771,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -1925,29 +1819,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -1985,7 +1856,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -1995,7 +1865,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -2151,12 +2020,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -2187,7 +2059,6 @@ export const eventProperties = {
             ],
             "permutation": [
                 "type",
-                "clone",
                 "getAllStates",
                 "getItemStack",
                 "getState",
@@ -2255,6 +2126,7 @@ export const eventProperties = {
             "east": [],
             "getComponent": [],
             "getItemStack": [],
+            "getMapColor": [],
             "getRedstonePower": [],
             "getTags": [],
             "hasTag": [],
@@ -2327,6 +2199,9 @@ export const eventProperties = {
                 "valueOf",
                 "toLocaleString"
             ]
+        },
+        "isFirstEvent": {
+            "valueOf": []
         },
         "itemStack": {
             "amount": [
@@ -2449,6 +2324,10 @@ export const eventProperties = {
                 "fade",
                 "setCamera"
             ],
+            "inputPermissions": [
+                "cameraEnabled",
+                "movementEnabled"
+            ],
             "isEmoting": [
                 "valueOf"
             ],
@@ -2503,7 +2382,7 @@ export const eventProperties = {
                 "setTitle",
                 "updateSubtitle"
             ],
-            "selectedSlot": [
+            "selectedSlotIndex": [
                 "toString",
                 "toFixed",
                 "toExponential",
@@ -2555,12 +2434,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -2571,14 +2453,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -2627,29 +2501,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -2687,7 +2538,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -2697,7 +2547,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -2938,6 +2787,10 @@ export const eventProperties = {
                 "fade",
                 "setCamera"
             ],
+            "inputPermissions": [
+                "cameraEnabled",
+                "movementEnabled"
+            ],
             "isEmoting": [
                 "valueOf"
             ],
@@ -2992,7 +2845,7 @@ export const eventProperties = {
                 "setTitle",
                 "updateSubtitle"
             ],
-            "selectedSlot": [
+            "selectedSlotIndex": [
                 "toString",
                 "toFixed",
                 "toExponential",
@@ -3044,12 +2897,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -3060,14 +2916,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -3116,29 +2964,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -3176,7 +3001,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -3186,7 +3010,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -3310,12 +3133,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -3326,14 +3152,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -3382,29 +3200,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -3442,7 +3237,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -3452,7 +3246,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -3575,6 +3368,10 @@ export const eventProperties = {
                 "fade",
                 "setCamera"
             ],
+            "inputPermissions": [
+                "cameraEnabled",
+                "movementEnabled"
+            ],
             "isEmoting": [
                 "valueOf"
             ],
@@ -3629,7 +3426,7 @@ export const eventProperties = {
                 "setTitle",
                 "updateSubtitle"
             ],
-            "selectedSlot": [
+            "selectedSlotIndex": [
                 "toString",
                 "toFixed",
                 "toExponential",
@@ -3681,12 +3478,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -3697,14 +3497,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -3753,29 +3545,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -3813,7 +3582,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -3823,7 +3591,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -4004,7 +3771,6 @@ export const eventProperties = {
                 "canBeWaterlogged",
                 "id"
             ],
-            "clone": [],
             "getAllStates": [],
             "getItemStack": [],
             "getState": [],
@@ -4018,6 +3784,10 @@ export const eventProperties = {
                 "clear",
                 "fade",
                 "setCamera"
+            ],
+            "inputPermissions": [
+                "cameraEnabled",
+                "movementEnabled"
             ],
             "isEmoting": [
                 "valueOf"
@@ -4073,7 +3843,7 @@ export const eventProperties = {
                 "setTitle",
                 "updateSubtitle"
             ],
-            "selectedSlot": [
+            "selectedSlotIndex": [
                 "toString",
                 "toFixed",
                 "toExponential",
@@ -4125,12 +3895,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -4141,14 +3914,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -4197,29 +3962,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -4257,7 +3999,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -4267,7 +4008,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -4459,7 +4199,7 @@ export const eventProperties = {
         }
     },
     "worldInitializeB": {
-        "blockTypeRegistry": {
+        "blockComponentRegistry": {
             "registerCustomComponent": []
         },
         "itemComponentRegistry": {
@@ -4472,7 +4212,6 @@ export const eventProperties = {
                 "canBeWaterlogged",
                 "id"
             ],
-            "clone": [],
             "getAllStates": [],
             "getItemStack": [],
             "getState": [],
@@ -4490,12 +4229,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -4506,14 +4248,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -4562,29 +4296,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -4622,7 +4333,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -4632,7 +4342,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -4760,12 +4469,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -4776,14 +4488,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -4832,29 +4536,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -4892,7 +4573,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -4902,7 +4582,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -5057,6 +4736,10 @@ export const eventProperties = {
                 "fade",
                 "setCamera"
             ],
+            "inputPermissions": [
+                "cameraEnabled",
+                "movementEnabled"
+            ],
             "isEmoting": [
                 "valueOf"
             ],
@@ -5111,7 +4794,7 @@ export const eventProperties = {
                 "setTitle",
                 "updateSubtitle"
             ],
-            "selectedSlot": [
+            "selectedSlotIndex": [
                 "toString",
                 "toFixed",
                 "toExponential",
@@ -5163,12 +4846,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -5179,14 +4865,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -5235,29 +4913,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -5295,7 +4950,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -5305,7 +4959,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -5462,12 +5115,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -5478,14 +5134,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -5534,29 +5182,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -5594,7 +5219,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -5604,7 +5228,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -5826,12 +5449,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -5842,14 +5468,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -5898,29 +5516,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -5958,7 +5553,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -5968,7 +5562,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -6111,7 +5704,6 @@ export const eventProperties = {
             ],
             "damagingEntity": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -6121,7 +5713,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -6172,7 +5763,6 @@ export const eventProperties = {
             ],
             "damagingProjectile": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -6182,7 +5772,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -6241,12 +5830,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -6257,14 +5849,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -6313,29 +5897,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -6373,7 +5934,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -6383,7 +5943,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -6509,12 +6068,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -6525,14 +6087,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -6581,29 +6135,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -6641,7 +6172,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -6651,7 +6181,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -6823,12 +6352,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -6839,14 +6371,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -6895,29 +6419,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -6955,7 +6456,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -6965,7 +6465,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -7089,12 +6588,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -7125,7 +6627,6 @@ export const eventProperties = {
             ],
             "permutation": [
                 "type",
-                "clone",
                 "getAllStates",
                 "getItemStack",
                 "getState",
@@ -7193,6 +6694,7 @@ export const eventProperties = {
             "east": [],
             "getComponent": [],
             "getItemStack": [],
+            "getMapColor": [],
             "getRedstonePower": [],
             "getTags": [],
             "hasTag": [],
@@ -7212,7 +6714,6 @@ export const eventProperties = {
                 "canBeWaterlogged",
                 "id"
             ],
-            "clone": [],
             "getAllStates": [],
             "getItemStack": [],
             "getState": [],
@@ -7232,12 +6733,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -7248,14 +6752,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -7304,29 +6800,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -7364,7 +6837,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -7374,7 +6846,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -7498,12 +6969,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -7514,14 +6988,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -7570,29 +7036,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -7630,7 +7073,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -7640,7 +7082,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -7791,7 +7232,6 @@ export const eventProperties = {
             ],
             "damagingEntity": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -7801,7 +7241,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -7852,7 +7291,6 @@ export const eventProperties = {
             ],
             "damagingProjectile": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -7862,7 +7300,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -7921,12 +7358,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -7937,14 +7377,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -7993,29 +7425,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -8053,7 +7462,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -8063,7 +7471,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -8189,12 +7596,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -8205,14 +7615,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -8261,29 +7663,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -8321,7 +7700,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -8331,7 +7709,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -8549,12 +7926,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -8565,14 +7945,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -8621,29 +7993,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -8681,7 +8030,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -8691,7 +8039,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -8841,12 +8188,15 @@ export const eventProperties = {
             "fillBlocks": [],
             "findClosestBiome": [],
             "getBlock": [],
+            "getBlockAbove": [],
+            "getBlockBelow": [],
             "getBlockFromRay": [],
             "getBlocks": [],
             "getEntities": [],
             "getEntitiesAtBlockLocation": [],
             "getEntitiesFromRay": [],
             "getPlayers": [],
+            "getTopmostBlock": [],
             "getWeather": [],
             "playSound": [],
             "runCommand": [],
@@ -8867,12 +8217,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -8883,14 +8236,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -8939,29 +8284,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -8999,7 +8321,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -9009,7 +8330,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -9285,6 +8605,10 @@ export const eventProperties = {
                 "fade",
                 "setCamera"
             ],
+            "inputPermissions": [
+                "cameraEnabled",
+                "movementEnabled"
+            ],
             "isEmoting": [
                 "valueOf"
             ],
@@ -9339,7 +8663,7 @@ export const eventProperties = {
                 "setTitle",
                 "updateSubtitle"
             ],
-            "selectedSlot": [
+            "selectedSlotIndex": [
                 "toString",
                 "toFixed",
                 "toExponential",
@@ -9391,12 +8715,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -9407,14 +8734,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -9463,29 +8782,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -9523,7 +8819,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -9533,7 +8828,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -9779,6 +9073,10 @@ export const eventProperties = {
                 "fade",
                 "setCamera"
             ],
+            "inputPermissions": [
+                "cameraEnabled",
+                "movementEnabled"
+            ],
             "isEmoting": [
                 "valueOf"
             ],
@@ -9833,7 +9131,7 @@ export const eventProperties = {
                 "setTitle",
                 "updateSubtitle"
             ],
-            "selectedSlot": [
+            "selectedSlotIndex": [
                 "toString",
                 "toFixed",
                 "toExponential",
@@ -9885,12 +9183,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -9901,14 +9202,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -9957,29 +9250,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -10017,7 +9287,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -10027,7 +9296,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -10273,6 +9541,10 @@ export const eventProperties = {
                 "fade",
                 "setCamera"
             ],
+            "inputPermissions": [
+                "cameraEnabled",
+                "movementEnabled"
+            ],
             "isEmoting": [
                 "valueOf"
             ],
@@ -10327,7 +9599,7 @@ export const eventProperties = {
                 "setTitle",
                 "updateSubtitle"
             ],
-            "selectedSlot": [
+            "selectedSlotIndex": [
                 "toString",
                 "toFixed",
                 "toExponential",
@@ -10379,12 +9651,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -10395,14 +9670,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -10451,29 +9718,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -10511,7 +9755,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -10521,7 +9764,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -10655,12 +9897,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -10691,7 +9936,6 @@ export const eventProperties = {
             ],
             "permutation": [
                 "type",
-                "clone",
                 "getAllStates",
                 "getItemStack",
                 "getState",
@@ -10759,6 +10003,7 @@ export const eventProperties = {
             "east": [],
             "getComponent": [],
             "getItemStack": [],
+            "getMapColor": [],
             "getRedstonePower": [],
             "getTags": [],
             "hasTag": [],
@@ -10924,6 +10169,10 @@ export const eventProperties = {
                 "fade",
                 "setCamera"
             ],
+            "inputPermissions": [
+                "cameraEnabled",
+                "movementEnabled"
+            ],
             "isEmoting": [
                 "valueOf"
             ],
@@ -10978,7 +10227,7 @@ export const eventProperties = {
                 "setTitle",
                 "updateSubtitle"
             ],
-            "selectedSlot": [
+            "selectedSlotIndex": [
                 "toString",
                 "toFixed",
                 "toExponential",
@@ -11030,12 +10279,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -11046,14 +10298,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -11102,29 +10346,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -11162,7 +10383,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -11172,7 +10392,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -11410,6 +10629,10 @@ export const eventProperties = {
                 "fade",
                 "setCamera"
             ],
+            "inputPermissions": [
+                "cameraEnabled",
+                "movementEnabled"
+            ],
             "isEmoting": [
                 "valueOf"
             ],
@@ -11464,7 +10687,7 @@ export const eventProperties = {
                 "setTitle",
                 "updateSubtitle"
             ],
-            "selectedSlot": [
+            "selectedSlotIndex": [
                 "toString",
                 "toFixed",
                 "toExponential",
@@ -11516,12 +10739,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -11532,14 +10758,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -11588,29 +10806,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -11648,7 +10843,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -11658,7 +10852,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -11792,12 +10985,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -11828,7 +11024,6 @@ export const eventProperties = {
             ],
             "permutation": [
                 "type",
-                "clone",
                 "getAllStates",
                 "getItemStack",
                 "getState",
@@ -11896,6 +11091,7 @@ export const eventProperties = {
             "east": [],
             "getComponent": [],
             "getItemStack": [],
+            "getMapColor": [],
             "getRedstonePower": [],
             "getTags": [],
             "hasTag": [],
@@ -12031,6 +11227,10 @@ export const eventProperties = {
                 "fade",
                 "setCamera"
             ],
+            "inputPermissions": [
+                "cameraEnabled",
+                "movementEnabled"
+            ],
             "isEmoting": [
                 "valueOf"
             ],
@@ -12085,7 +11285,7 @@ export const eventProperties = {
                 "setTitle",
                 "updateSubtitle"
             ],
-            "selectedSlot": [
+            "selectedSlotIndex": [
                 "toString",
                 "toFixed",
                 "toExponential",
@@ -12137,12 +11337,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -12153,14 +11356,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -12209,29 +11404,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -12269,7 +11441,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -12279,7 +11450,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -12517,6 +11687,10 @@ export const eventProperties = {
                 "fade",
                 "setCamera"
             ],
+            "inputPermissions": [
+                "cameraEnabled",
+                "movementEnabled"
+            ],
             "isEmoting": [
                 "valueOf"
             ],
@@ -12571,7 +11745,7 @@ export const eventProperties = {
                 "setTitle",
                 "updateSubtitle"
             ],
-            "selectedSlot": [
+            "selectedSlotIndex": [
                 "toString",
                 "toFixed",
                 "toExponential",
@@ -12623,12 +11797,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -12639,14 +11816,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -12695,29 +11864,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -12755,7 +11901,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -12765,7 +11910,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -12891,12 +12035,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -12927,7 +12074,6 @@ export const eventProperties = {
             ],
             "permutation": [
                 "type",
-                "clone",
                 "getAllStates",
                 "getItemStack",
                 "getState",
@@ -12995,6 +12141,7 @@ export const eventProperties = {
             "east": [],
             "getComponent": [],
             "getItemStack": [],
+            "getMapColor": [],
             "getRedstonePower": [],
             "getTags": [],
             "hasTag": [],
@@ -13064,6 +12211,9 @@ export const eventProperties = {
                 "valueOf",
                 "toLocaleString"
             ]
+        },
+        "isFirstEvent": {
+            "valueOf": []
         },
         "itemStack": {
             "amount": [
@@ -13186,6 +12336,10 @@ export const eventProperties = {
                 "fade",
                 "setCamera"
             ],
+            "inputPermissions": [
+                "cameraEnabled",
+                "movementEnabled"
+            ],
             "isEmoting": [
                 "valueOf"
             ],
@@ -13240,7 +12394,7 @@ export const eventProperties = {
                 "setTitle",
                 "updateSubtitle"
             ],
-            "selectedSlot": [
+            "selectedSlotIndex": [
                 "toString",
                 "toFixed",
                 "toExponential",
@@ -13292,12 +12446,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -13308,14 +12465,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -13364,29 +12513,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -13424,7 +12550,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -13434,7 +12559,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -13560,6 +12684,10 @@ export const eventProperties = {
                 "fade",
                 "setCamera"
             ],
+            "inputPermissions": [
+                "cameraEnabled",
+                "movementEnabled"
+            ],
             "isEmoting": [
                 "valueOf"
             ],
@@ -13614,7 +12742,7 @@ export const eventProperties = {
                 "setTitle",
                 "updateSubtitle"
             ],
-            "selectedSlot": [
+            "selectedSlotIndex": [
                 "toString",
                 "toFixed",
                 "toExponential",
@@ -13666,12 +12794,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -13682,14 +12813,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -13738,29 +12861,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -13798,7 +12898,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -13808,7 +12907,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -13993,6 +13091,10 @@ export const eventProperties = {
                 "fade",
                 "setCamera"
             ],
+            "inputPermissions": [
+                "cameraEnabled",
+                "movementEnabled"
+            ],
             "isEmoting": [
                 "valueOf"
             ],
@@ -14047,7 +13149,7 @@ export const eventProperties = {
                 "setTitle",
                 "updateSubtitle"
             ],
-            "selectedSlot": [
+            "selectedSlotIndex": [
                 "toString",
                 "toFixed",
                 "toExponential",
@@ -14099,12 +13201,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -14115,14 +13220,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -14171,29 +13268,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -14231,7 +13305,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -14241,7 +13314,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -14411,6 +13483,7 @@ export const eventProperties = {
                 "east",
                 "getComponent",
                 "getItemStack",
+                "getMapColor",
                 "getRedstonePower",
                 "getTags",
                 "hasTag",
@@ -14459,7 +13532,6 @@ export const eventProperties = {
                 "canBeWaterlogged",
                 "id"
             ],
-            "clone": [],
             "getAllStates": [],
             "getItemStack": [],
             "getState": [],
@@ -14704,6 +13776,10 @@ export const eventProperties = {
                 "fade",
                 "setCamera"
             ],
+            "inputPermissions": [
+                "cameraEnabled",
+                "movementEnabled"
+            ],
             "isEmoting": [
                 "valueOf"
             ],
@@ -14758,7 +13834,7 @@ export const eventProperties = {
                 "setTitle",
                 "updateSubtitle"
             ],
-            "selectedSlot": [
+            "selectedSlotIndex": [
                 "toString",
                 "toFixed",
                 "toExponential",
@@ -14810,12 +13886,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -14826,14 +13905,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -14882,29 +13953,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -14942,7 +13990,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -14952,7 +13999,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -15104,12 +14150,15 @@ export const eventProperties = {
             "fillBlocks": [],
             "findClosestBiome": [],
             "getBlock": [],
+            "getBlockAbove": [],
+            "getBlockBelow": [],
             "getBlockFromRay": [],
             "getBlocks": [],
             "getEntities": [],
             "getEntitiesAtBlockLocation": [],
             "getEntitiesFromRay": [],
             "getPlayers": [],
+            "getTopmostBlock": [],
             "getWeather": [],
             "playSound": [],
             "runCommand": [],
@@ -15152,6 +14201,10 @@ export const eventProperties = {
                 "clear",
                 "fade",
                 "setCamera"
+            ],
+            "inputPermissions": [
+                "cameraEnabled",
+                "movementEnabled"
             ],
             "isEmoting": [
                 "valueOf"
@@ -15207,7 +14260,7 @@ export const eventProperties = {
                 "setTitle",
                 "updateSubtitle"
             ],
-            "selectedSlot": [
+            "selectedSlotIndex": [
                 "toString",
                 "toFixed",
                 "toExponential",
@@ -15259,12 +14312,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -15275,14 +14331,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -15331,29 +14379,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -15391,7 +14416,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -15401,7 +14425,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -15549,12 +14572,15 @@ export const eventProperties = {
             "fillBlocks": [],
             "findClosestBiome": [],
             "getBlock": [],
+            "getBlockAbove": [],
+            "getBlockBelow": [],
             "getBlockFromRay": [],
             "getBlocks": [],
             "getEntities": [],
             "getEntitiesAtBlockLocation": [],
             "getEntitiesFromRay": [],
             "getPlayers": [],
+            "getTopmostBlock": [],
             "getWeather": [],
             "playSound": [],
             "runCommand": [],
@@ -15593,8 +14619,8 @@ export const eventProperties = {
             ]
         }
     },
-    "playerGameModeChangeA": {
-        "fromGameMode": {
+    "playerEmoteA": {
+        "personaPieceId": {
             "toString": [],
             "charAt": [],
             "charCodeAt": [],
@@ -15629,6 +14655,10 @@ export const eventProperties = {
                 "clear",
                 "fade",
                 "setCamera"
+            ],
+            "inputPermissions": [
+                "cameraEnabled",
+                "movementEnabled"
             ],
             "isEmoting": [
                 "valueOf"
@@ -15684,7 +14714,7 @@ export const eventProperties = {
                 "setTitle",
                 "updateSubtitle"
             ],
-            "selectedSlot": [
+            "selectedSlotIndex": [
                 "toString",
                 "toFixed",
                 "toExponential",
@@ -15736,12 +14766,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -15752,14 +14785,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -15808,7 +14833,12 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
+            "location": [
+                "x",
+                "y",
+                "z"
+            ],
+            "nameTag": [
                 "toString",
                 "charAt",
                 "charCodeAt",
@@ -15829,6 +14859,353 @@ export const eventProperties = {
                 "trim",
                 "length",
                 "substr",
+                "valueOf"
+            ],
+            "scoreboardIdentity": [
+                "displayName",
+                "id",
+                "type",
+                "getEntity",
+                "isValid"
+            ],
+            "target": [
+                "dimension",
+                "id",
+                "isClimbing",
+                "isFalling",
+                "isInWater",
+                "isOnGround",
+                "isSleeping",
+                "isSneaking",
+                "isSprinting",
+                "isSwimming",
+                "location",
+                "nameTag",
+                "scoreboardIdentity",
+                "target",
+                "typeId",
+                "addEffect",
+                "addTag",
+                "applyDamage",
+                "applyImpulse",
+                "applyKnockback",
+                "clearDynamicProperties",
+                "clearVelocity",
+                "extinguishFire",
+                "getBlockFromViewDirection",
+                "getComponent",
+                "getComponents",
+                "getDynamicProperty",
+                "getDynamicPropertyIds",
+                "getDynamicPropertyTotalByteCount",
+                "getEffect",
+                "getEffects",
+                "getEntitiesFromViewDirection",
+                "getHeadLocation",
+                "getProperty",
+                "getRotation",
+                "getTags",
+                "getVelocity",
+                "getViewDirection",
+                "hasComponent",
+                "hasTag",
+                "isValid",
+                "kill",
+                "matches",
+                "playAnimation",
+                "remove",
+                "removeEffect",
+                "removeTag",
+                "resetProperty",
+                "runCommand",
+                "runCommandAsync",
+                "setDynamicProperty",
+                "setOnFire",
+                "setProperty",
+                "setRotation",
+                "teleport",
+                "triggerEvent",
+                "tryTeleport"
+            ],
+            "typeId": [
+                "toString",
+                "charAt",
+                "charCodeAt",
+                "concat",
+                "indexOf",
+                "lastIndexOf",
+                "localeCompare",
+                "match",
+                "replace",
+                "search",
+                "slice",
+                "split",
+                "substring",
+                "toLowerCase",
+                "toLocaleLowerCase",
+                "toUpperCase",
+                "toLocaleUpperCase",
+                "trim",
+                "length",
+                "substr",
+                "valueOf"
+            ],
+            "addEffect": [],
+            "addTag": [],
+            "applyDamage": [],
+            "applyImpulse": [],
+            "applyKnockback": [],
+            "clearDynamicProperties": [],
+            "clearVelocity": [],
+            "extinguishFire": [],
+            "getBlockFromViewDirection": [],
+            "getComponent": [],
+            "getComponents": [],
+            "getDynamicProperty": [],
+            "getDynamicPropertyIds": [],
+            "getDynamicPropertyTotalByteCount": [],
+            "getEffect": [],
+            "getEffects": [],
+            "getEntitiesFromViewDirection": [],
+            "getHeadLocation": [],
+            "getProperty": [],
+            "getRotation": [],
+            "getTags": [],
+            "getVelocity": [],
+            "getViewDirection": [],
+            "hasComponent": [],
+            "hasTag": [],
+            "isValid": [],
+            "kill": [],
+            "matches": [],
+            "playAnimation": [],
+            "remove": [],
+            "removeEffect": [],
+            "removeTag": [],
+            "resetProperty": [],
+            "runCommand": [],
+            "runCommandAsync": [],
+            "setDynamicProperty": [],
+            "setOnFire": [],
+            "setProperty": [],
+            "setRotation": [],
+            "teleport": [],
+            "triggerEvent": [],
+            "tryTeleport": []
+        }
+    },
+    "playerGameModeChangeA": {
+        "fromGameMode": {
+            "toString": [],
+            "charAt": [],
+            "charCodeAt": [],
+            "concat": [],
+            "indexOf": [],
+            "lastIndexOf": [],
+            "localeCompare": [],
+            "match": [],
+            "replace": [],
+            "search": [],
+            "slice": [],
+            "split": [],
+            "substring": [],
+            "toLowerCase": [],
+            "toLocaleLowerCase": [],
+            "toUpperCase": [],
+            "toLocaleUpperCase": [],
+            "trim": [],
+            "length": [
+                "toString",
+                "toFixed",
+                "toExponential",
+                "toPrecision",
+                "valueOf",
+                "toLocaleString"
+            ],
+            "substr": [],
+            "valueOf": []
+        },
+        "player": {
+            "camera": [
+                "clear",
+                "fade",
+                "setCamera"
+            ],
+            "inputPermissions": [
+                "cameraEnabled",
+                "movementEnabled"
+            ],
+            "isEmoting": [
+                "valueOf"
+            ],
+            "isFlying": [
+                "valueOf"
+            ],
+            "isGliding": [
+                "valueOf"
+            ],
+            "isJumping": [
+                "valueOf"
+            ],
+            "level": [
+                "toString",
+                "toFixed",
+                "toExponential",
+                "toPrecision",
+                "valueOf",
+                "toLocaleString"
+            ],
+            "name": [
+                "toString",
+                "charAt",
+                "charCodeAt",
+                "concat",
+                "indexOf",
+                "lastIndexOf",
+                "localeCompare",
+                "match",
+                "replace",
+                "search",
+                "slice",
+                "split",
+                "substring",
+                "toLowerCase",
+                "toLocaleLowerCase",
+                "toUpperCase",
+                "toLocaleUpperCase",
+                "trim",
+                "length",
+                "substr",
+                "valueOf"
+            ],
+            "onScreenDisplay": [
+                "getHiddenHudElements",
+                "hideAllExcept",
+                "isForcedHidden",
+                "isValid",
+                "resetHudElements",
+                "setActionBar",
+                "setHudVisibility",
+                "setTitle",
+                "updateSubtitle"
+            ],
+            "selectedSlotIndex": [
+                "toString",
+                "toFixed",
+                "toExponential",
+                "toPrecision",
+                "valueOf",
+                "toLocaleString"
+            ],
+            "totalXpNeededForNextLevel": [
+                "toString",
+                "toFixed",
+                "toExponential",
+                "toPrecision",
+                "valueOf",
+                "toLocaleString"
+            ],
+            "xpEarnedAtCurrentLevel": [
+                "toString",
+                "toFixed",
+                "toExponential",
+                "toPrecision",
+                "valueOf",
+                "toLocaleString"
+            ],
+            "addExperience": [],
+            "addLevels": [],
+            "eatItem": [],
+            "getGameMode": [],
+            "getItemCooldown": [],
+            "getSpawnPoint": [],
+            "getTotalXp": [],
+            "isOp": [],
+            "playMusic": [],
+            "playSound": [],
+            "postClientMessage": [],
+            "queueMusic": [],
+            "resetLevel": [],
+            "sendMessage": [],
+            "setGameMode": [],
+            "setOp": [],
+            "setSpawnPoint": [],
+            "spawnParticle": [],
+            "startItemCooldown": [],
+            "stopMusic": [],
+            "dimension": [
+                "heightRange",
+                "id",
+                "containsBlock",
+                "createExplosion",
+                "fillBlocks",
+                "findClosestBiome",
+                "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
+                "getBlockFromRay",
+                "getBlocks",
+                "getEntities",
+                "getEntitiesAtBlockLocation",
+                "getEntitiesFromRay",
+                "getPlayers",
+                "getTopmostBlock",
+                "getWeather",
+                "playSound",
+                "runCommand",
+                "runCommandAsync",
+                "setBlockPermutation",
+                "setBlockType",
+                "setWeather",
+                "spawnEntity",
+                "spawnItem",
+                "spawnParticle"
+            ],
+            "id": [
+                "toString",
+                "charAt",
+                "charCodeAt",
+                "concat",
+                "indexOf",
+                "lastIndexOf",
+                "localeCompare",
+                "match",
+                "replace",
+                "search",
+                "slice",
+                "split",
+                "substring",
+                "toLowerCase",
+                "toLocaleLowerCase",
+                "toUpperCase",
+                "toLocaleUpperCase",
+                "trim",
+                "length",
+                "substr",
+                "valueOf"
+            ],
+            "isClimbing": [
+                "valueOf"
+            ],
+            "isFalling": [
+                "valueOf"
+            ],
+            "isInWater": [
+                "valueOf"
+            ],
+            "isOnGround": [
+                "valueOf"
+            ],
+            "isSleeping": [
+                "valueOf"
+            ],
+            "isSneaking": [
+                "valueOf"
+            ],
+            "isSprinting": [
+                "valueOf"
+            ],
+            "isSwimming": [
                 "valueOf"
             ],
             "location": [
@@ -15868,7 +15245,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -15878,7 +15254,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -16024,7 +15399,478 @@ export const eventProperties = {
             "valueOf": []
         }
     },
+    "playerInputPermissionCategoryChangeA": {
+        "category": {
+            "toString": [],
+            "toFixed": [],
+            "toExponential": [],
+            "toPrecision": [],
+            "valueOf": [],
+            "toLocaleString": []
+        },
+        "enabled": {
+            "valueOf": []
+        },
+        "player": {
+            "camera": [
+                "clear",
+                "fade",
+                "setCamera"
+            ],
+            "inputPermissions": [
+                "cameraEnabled",
+                "movementEnabled"
+            ],
+            "isEmoting": [
+                "valueOf"
+            ],
+            "isFlying": [
+                "valueOf"
+            ],
+            "isGliding": [
+                "valueOf"
+            ],
+            "isJumping": [
+                "valueOf"
+            ],
+            "level": [
+                "toString",
+                "toFixed",
+                "toExponential",
+                "toPrecision",
+                "valueOf",
+                "toLocaleString"
+            ],
+            "name": [
+                "toString",
+                "charAt",
+                "charCodeAt",
+                "concat",
+                "indexOf",
+                "lastIndexOf",
+                "localeCompare",
+                "match",
+                "replace",
+                "search",
+                "slice",
+                "split",
+                "substring",
+                "toLowerCase",
+                "toLocaleLowerCase",
+                "toUpperCase",
+                "toLocaleUpperCase",
+                "trim",
+                "length",
+                "substr",
+                "valueOf"
+            ],
+            "onScreenDisplay": [
+                "getHiddenHudElements",
+                "hideAllExcept",
+                "isForcedHidden",
+                "isValid",
+                "resetHudElements",
+                "setActionBar",
+                "setHudVisibility",
+                "setTitle",
+                "updateSubtitle"
+            ],
+            "selectedSlotIndex": [
+                "toString",
+                "toFixed",
+                "toExponential",
+                "toPrecision",
+                "valueOf",
+                "toLocaleString"
+            ],
+            "totalXpNeededForNextLevel": [
+                "toString",
+                "toFixed",
+                "toExponential",
+                "toPrecision",
+                "valueOf",
+                "toLocaleString"
+            ],
+            "xpEarnedAtCurrentLevel": [
+                "toString",
+                "toFixed",
+                "toExponential",
+                "toPrecision",
+                "valueOf",
+                "toLocaleString"
+            ],
+            "addExperience": [],
+            "addLevels": [],
+            "eatItem": [],
+            "getGameMode": [],
+            "getItemCooldown": [],
+            "getSpawnPoint": [],
+            "getTotalXp": [],
+            "isOp": [],
+            "playMusic": [],
+            "playSound": [],
+            "postClientMessage": [],
+            "queueMusic": [],
+            "resetLevel": [],
+            "sendMessage": [],
+            "setGameMode": [],
+            "setOp": [],
+            "setSpawnPoint": [],
+            "spawnParticle": [],
+            "startItemCooldown": [],
+            "stopMusic": [],
+            "dimension": [
+                "heightRange",
+                "id",
+                "containsBlock",
+                "createExplosion",
+                "fillBlocks",
+                "findClosestBiome",
+                "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
+                "getBlockFromRay",
+                "getBlocks",
+                "getEntities",
+                "getEntitiesAtBlockLocation",
+                "getEntitiesFromRay",
+                "getPlayers",
+                "getTopmostBlock",
+                "getWeather",
+                "playSound",
+                "runCommand",
+                "runCommandAsync",
+                "setBlockPermutation",
+                "setBlockType",
+                "setWeather",
+                "spawnEntity",
+                "spawnItem",
+                "spawnParticle"
+            ],
+            "id": [
+                "toString",
+                "charAt",
+                "charCodeAt",
+                "concat",
+                "indexOf",
+                "lastIndexOf",
+                "localeCompare",
+                "match",
+                "replace",
+                "search",
+                "slice",
+                "split",
+                "substring",
+                "toLowerCase",
+                "toLocaleLowerCase",
+                "toUpperCase",
+                "toLocaleUpperCase",
+                "trim",
+                "length",
+                "substr",
+                "valueOf"
+            ],
+            "isClimbing": [
+                "valueOf"
+            ],
+            "isFalling": [
+                "valueOf"
+            ],
+            "isInWater": [
+                "valueOf"
+            ],
+            "isOnGround": [
+                "valueOf"
+            ],
+            "isSleeping": [
+                "valueOf"
+            ],
+            "isSneaking": [
+                "valueOf"
+            ],
+            "isSprinting": [
+                "valueOf"
+            ],
+            "isSwimming": [
+                "valueOf"
+            ],
+            "location": [
+                "x",
+                "y",
+                "z"
+            ],
+            "nameTag": [
+                "toString",
+                "charAt",
+                "charCodeAt",
+                "concat",
+                "indexOf",
+                "lastIndexOf",
+                "localeCompare",
+                "match",
+                "replace",
+                "search",
+                "slice",
+                "split",
+                "substring",
+                "toLowerCase",
+                "toLocaleLowerCase",
+                "toUpperCase",
+                "toLocaleUpperCase",
+                "trim",
+                "length",
+                "substr",
+                "valueOf"
+            ],
+            "scoreboardIdentity": [
+                "displayName",
+                "id",
+                "type",
+                "getEntity",
+                "isValid"
+            ],
+            "target": [
+                "dimension",
+                "id",
+                "isClimbing",
+                "isFalling",
+                "isInWater",
+                "isOnGround",
+                "isSleeping",
+                "isSneaking",
+                "isSprinting",
+                "isSwimming",
+                "location",
+                "nameTag",
+                "scoreboardIdentity",
+                "target",
+                "typeId",
+                "addEffect",
+                "addTag",
+                "applyDamage",
+                "applyImpulse",
+                "applyKnockback",
+                "clearDynamicProperties",
+                "clearVelocity",
+                "extinguishFire",
+                "getBlockFromViewDirection",
+                "getComponent",
+                "getComponents",
+                "getDynamicProperty",
+                "getDynamicPropertyIds",
+                "getDynamicPropertyTotalByteCount",
+                "getEffect",
+                "getEffects",
+                "getEntitiesFromViewDirection",
+                "getHeadLocation",
+                "getProperty",
+                "getRotation",
+                "getTags",
+                "getVelocity",
+                "getViewDirection",
+                "hasComponent",
+                "hasTag",
+                "isValid",
+                "kill",
+                "matches",
+                "playAnimation",
+                "remove",
+                "removeEffect",
+                "removeTag",
+                "resetProperty",
+                "runCommand",
+                "runCommandAsync",
+                "setDynamicProperty",
+                "setOnFire",
+                "setProperty",
+                "setRotation",
+                "teleport",
+                "triggerEvent",
+                "tryTeleport"
+            ],
+            "typeId": [
+                "toString",
+                "charAt",
+                "charCodeAt",
+                "concat",
+                "indexOf",
+                "lastIndexOf",
+                "localeCompare",
+                "match",
+                "replace",
+                "search",
+                "slice",
+                "split",
+                "substring",
+                "toLowerCase",
+                "toLocaleLowerCase",
+                "toUpperCase",
+                "toLocaleUpperCase",
+                "trim",
+                "length",
+                "substr",
+                "valueOf"
+            ],
+            "addEffect": [],
+            "addTag": [],
+            "applyDamage": [],
+            "applyImpulse": [],
+            "applyKnockback": [],
+            "clearDynamicProperties": [],
+            "clearVelocity": [],
+            "extinguishFire": [],
+            "getBlockFromViewDirection": [],
+            "getComponent": [],
+            "getComponents": [],
+            "getDynamicProperty": [],
+            "getDynamicPropertyIds": [],
+            "getDynamicPropertyTotalByteCount": [],
+            "getEffect": [],
+            "getEffects": [],
+            "getEntitiesFromViewDirection": [],
+            "getHeadLocation": [],
+            "getProperty": [],
+            "getRotation": [],
+            "getTags": [],
+            "getVelocity": [],
+            "getViewDirection": [],
+            "hasComponent": [],
+            "hasTag": [],
+            "isValid": [],
+            "kill": [],
+            "matches": [],
+            "playAnimation": [],
+            "remove": [],
+            "removeEffect": [],
+            "removeTag": [],
+            "resetProperty": [],
+            "runCommand": [],
+            "runCommandAsync": [],
+            "setDynamicProperty": [],
+            "setOnFire": [],
+            "setProperty": [],
+            "setRotation": [],
+            "teleport": [],
+            "triggerEvent": [],
+            "tryTeleport": []
+        }
+    },
     "playerInteractWithBlockA": {
+        "beforeItemStack": {
+            "amount": [
+                "toString",
+                "toFixed",
+                "toExponential",
+                "toPrecision",
+                "valueOf",
+                "toLocaleString"
+            ],
+            "isStackable": [
+                "valueOf"
+            ],
+            "keepOnDeath": [
+                "valueOf"
+            ],
+            "lockMode": [
+                "toString",
+                "charAt",
+                "charCodeAt",
+                "concat",
+                "indexOf",
+                "lastIndexOf",
+                "localeCompare",
+                "match",
+                "replace",
+                "search",
+                "slice",
+                "split",
+                "substring",
+                "toLowerCase",
+                "toLocaleLowerCase",
+                "toUpperCase",
+                "toLocaleUpperCase",
+                "trim",
+                "length",
+                "substr",
+                "valueOf"
+            ],
+            "maxAmount": [
+                "toString",
+                "toFixed",
+                "toExponential",
+                "toPrecision",
+                "valueOf",
+                "toLocaleString"
+            ],
+            "nameTag": [
+                "toString",
+                "charAt",
+                "charCodeAt",
+                "concat",
+                "indexOf",
+                "lastIndexOf",
+                "localeCompare",
+                "match",
+                "replace",
+                "search",
+                "slice",
+                "split",
+                "substring",
+                "toLowerCase",
+                "toLocaleLowerCase",
+                "toUpperCase",
+                "toLocaleUpperCase",
+                "trim",
+                "length",
+                "substr",
+                "valueOf"
+            ],
+            "type": [
+                "id"
+            ],
+            "typeId": [
+                "toString",
+                "charAt",
+                "charCodeAt",
+                "concat",
+                "indexOf",
+                "lastIndexOf",
+                "localeCompare",
+                "match",
+                "replace",
+                "search",
+                "slice",
+                "split",
+                "substring",
+                "toLowerCase",
+                "toLocaleLowerCase",
+                "toUpperCase",
+                "toLocaleUpperCase",
+                "trim",
+                "length",
+                "substr",
+                "valueOf"
+            ],
+            "clearDynamicProperties": [],
+            "clone": [],
+            "getCanDestroy": [],
+            "getCanPlaceOn": [],
+            "getComponent": [],
+            "getComponents": [],
+            "getDynamicProperty": [],
+            "getDynamicPropertyIds": [],
+            "getDynamicPropertyTotalByteCount": [],
+            "getLore": [],
+            "getTags": [],
+            "hasComponent": [],
+            "hasTag": [],
+            "isStackableWith": [],
+            "matches": [],
+            "setCanDestroy": [],
+            "setCanPlaceOn": [],
+            "setDynamicProperty": [],
+            "setLore": []
+        },
         "block": {
             "dimension": [
                 "heightRange",
@@ -16034,12 +15880,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -16070,7 +15919,6 @@ export const eventProperties = {
             ],
             "permutation": [
                 "type",
-                "clone",
                 "getAllStates",
                 "getItemStack",
                 "getState",
@@ -16138,6 +15986,7 @@ export const eventProperties = {
             "east": [],
             "getComponent": [],
             "getItemStack": [],
+            "getMapColor": [],
             "getRedstonePower": [],
             "getTags": [],
             "hasTag": [],
@@ -16207,6 +16056,9 @@ export const eventProperties = {
                 "valueOf",
                 "toLocaleString"
             ]
+        },
+        "isFirstEvent": {
+            "valueOf": []
         },
         "itemStack": {
             "amount": [
@@ -16329,6 +16181,10 @@ export const eventProperties = {
                 "fade",
                 "setCamera"
             ],
+            "inputPermissions": [
+                "cameraEnabled",
+                "movementEnabled"
+            ],
             "isEmoting": [
                 "valueOf"
             ],
@@ -16383,7 +16239,7 @@ export const eventProperties = {
                 "setTitle",
                 "updateSubtitle"
             ],
-            "selectedSlot": [
+            "selectedSlotIndex": [
                 "toString",
                 "toFixed",
                 "toExponential",
@@ -16435,12 +16291,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -16451,14 +16310,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -16507,29 +16358,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -16567,7 +16395,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -16577,7 +16404,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -16694,6 +16520,121 @@ export const eventProperties = {
         }
     },
     "playerInteractWithEntityA": {
+        "beforeItemStack": {
+            "amount": [
+                "toString",
+                "toFixed",
+                "toExponential",
+                "toPrecision",
+                "valueOf",
+                "toLocaleString"
+            ],
+            "isStackable": [
+                "valueOf"
+            ],
+            "keepOnDeath": [
+                "valueOf"
+            ],
+            "lockMode": [
+                "toString",
+                "charAt",
+                "charCodeAt",
+                "concat",
+                "indexOf",
+                "lastIndexOf",
+                "localeCompare",
+                "match",
+                "replace",
+                "search",
+                "slice",
+                "split",
+                "substring",
+                "toLowerCase",
+                "toLocaleLowerCase",
+                "toUpperCase",
+                "toLocaleUpperCase",
+                "trim",
+                "length",
+                "substr",
+                "valueOf"
+            ],
+            "maxAmount": [
+                "toString",
+                "toFixed",
+                "toExponential",
+                "toPrecision",
+                "valueOf",
+                "toLocaleString"
+            ],
+            "nameTag": [
+                "toString",
+                "charAt",
+                "charCodeAt",
+                "concat",
+                "indexOf",
+                "lastIndexOf",
+                "localeCompare",
+                "match",
+                "replace",
+                "search",
+                "slice",
+                "split",
+                "substring",
+                "toLowerCase",
+                "toLocaleLowerCase",
+                "toUpperCase",
+                "toLocaleUpperCase",
+                "trim",
+                "length",
+                "substr",
+                "valueOf"
+            ],
+            "type": [
+                "id"
+            ],
+            "typeId": [
+                "toString",
+                "charAt",
+                "charCodeAt",
+                "concat",
+                "indexOf",
+                "lastIndexOf",
+                "localeCompare",
+                "match",
+                "replace",
+                "search",
+                "slice",
+                "split",
+                "substring",
+                "toLowerCase",
+                "toLocaleLowerCase",
+                "toUpperCase",
+                "toLocaleUpperCase",
+                "trim",
+                "length",
+                "substr",
+                "valueOf"
+            ],
+            "clearDynamicProperties": [],
+            "clone": [],
+            "getCanDestroy": [],
+            "getCanPlaceOn": [],
+            "getComponent": [],
+            "getComponents": [],
+            "getDynamicProperty": [],
+            "getDynamicPropertyIds": [],
+            "getDynamicPropertyTotalByteCount": [],
+            "getLore": [],
+            "getTags": [],
+            "hasComponent": [],
+            "hasTag": [],
+            "isStackableWith": [],
+            "matches": [],
+            "setCanDestroy": [],
+            "setCanPlaceOn": [],
+            "setDynamicProperty": [],
+            "setLore": []
+        },
         "itemStack": {
             "amount": [
                 "toString",
@@ -16815,6 +16756,10 @@ export const eventProperties = {
                 "fade",
                 "setCamera"
             ],
+            "inputPermissions": [
+                "cameraEnabled",
+                "movementEnabled"
+            ],
             "isEmoting": [
                 "valueOf"
             ],
@@ -16869,7 +16814,7 @@ export const eventProperties = {
                 "setTitle",
                 "updateSubtitle"
             ],
-            "selectedSlot": [
+            "selectedSlotIndex": [
                 "toString",
                 "toFixed",
                 "toExponential",
@@ -16921,12 +16866,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -16937,14 +16885,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -16993,29 +16933,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -17053,7 +16970,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -17063,7 +16979,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -17187,12 +17102,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -17203,14 +17121,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -17259,29 +17169,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -17319,7 +17206,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -17329,7 +17215,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -17576,6 +17461,10 @@ export const eventProperties = {
                 "fade",
                 "setCamera"
             ],
+            "inputPermissions": [
+                "cameraEnabled",
+                "movementEnabled"
+            ],
             "isEmoting": [
                 "valueOf"
             ],
@@ -17630,7 +17519,7 @@ export const eventProperties = {
                 "setTitle",
                 "updateSubtitle"
             ],
-            "selectedSlot": [
+            "selectedSlotIndex": [
                 "toString",
                 "toFixed",
                 "toExponential",
@@ -17682,12 +17571,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -17698,14 +17590,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -17754,29 +17638,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -17814,7 +17675,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -17824,7 +17684,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -17952,6 +17811,10 @@ export const eventProperties = {
                 "fade",
                 "setCamera"
             ],
+            "inputPermissions": [
+                "cameraEnabled",
+                "movementEnabled"
+            ],
             "isEmoting": [
                 "valueOf"
             ],
@@ -18006,7 +17869,7 @@ export const eventProperties = {
                 "setTitle",
                 "updateSubtitle"
             ],
-            "selectedSlot": [
+            "selectedSlotIndex": [
                 "toString",
                 "toFixed",
                 "toExponential",
@@ -18058,12 +17921,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -18074,14 +17940,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -18130,29 +17988,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -18190,7 +18025,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -18200,7 +18034,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -18362,12 +18195,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -18378,14 +18214,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -18434,29 +18262,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -18494,7 +18299,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -18504,7 +18308,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -18656,12 +18459,15 @@ export const eventProperties = {
             "fillBlocks": [],
             "findClosestBiome": [],
             "getBlock": [],
+            "getBlockAbove": [],
+            "getBlockBelow": [],
             "getBlockFromRay": [],
             "getBlocks": [],
             "getEntities": [],
             "getEntitiesAtBlockLocation": [],
             "getEntitiesFromRay": [],
             "getPlayers": [],
+            "getTopmostBlock": [],
             "getWeather": [],
             "playSound": [],
             "runCommand": [],
@@ -18734,12 +18540,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -18750,14 +18559,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -18806,29 +18607,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -18866,7 +18644,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -18876,7 +18653,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -19000,12 +18776,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -19016,14 +18795,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -19072,29 +18843,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -19132,7 +18880,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -19142,7 +18889,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -19293,12 +19039,15 @@ export const eventProperties = {
             "fillBlocks": [],
             "findClosestBiome": [],
             "getBlock": [],
+            "getBlockAbove": [],
+            "getBlockBelow": [],
             "getBlockFromRay": [],
             "getBlocks": [],
             "getEntities": [],
             "getEntitiesAtBlockLocation": [],
             "getEntitiesFromRay": [],
             "getPlayers": [],
+            "getTopmostBlock": [],
             "getWeather": [],
             "playSound": [],
             "runCommand": [],
@@ -19371,12 +19120,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -19387,14 +19139,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -19443,29 +19187,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -19503,7 +19224,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -19513,7 +19233,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -19637,12 +19356,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -19653,14 +19375,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -19709,29 +19423,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -19769,7 +19460,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -19779,7 +19469,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",
@@ -19948,12 +19637,15 @@ export const eventProperties = {
                 "fillBlocks",
                 "findClosestBiome",
                 "getBlock",
+                "getBlockAbove",
+                "getBlockBelow",
                 "getBlockFromRay",
                 "getBlocks",
                 "getEntities",
                 "getEntitiesAtBlockLocation",
                 "getEntitiesFromRay",
                 "getPlayers",
+                "getTopmostBlock",
                 "getWeather",
                 "playSound",
                 "runCommand",
@@ -19964,14 +19656,6 @@ export const eventProperties = {
                 "spawnEntity",
                 "spawnItem",
                 "spawnParticle"
-            ],
-            "fallDistance": [
-                "toString",
-                "toFixed",
-                "toExponential",
-                "toPrecision",
-                "valueOf",
-                "toLocaleString"
             ],
             "id": [
                 "toString",
@@ -20020,29 +19704,6 @@ export const eventProperties = {
             "isSwimming": [
                 "valueOf"
             ],
-            "lifetimeState": [
-                "toString",
-                "charAt",
-                "charCodeAt",
-                "concat",
-                "indexOf",
-                "lastIndexOf",
-                "localeCompare",
-                "match",
-                "replace",
-                "search",
-                "slice",
-                "split",
-                "substring",
-                "toLowerCase",
-                "toLocaleLowerCase",
-                "toUpperCase",
-                "toLocaleUpperCase",
-                "trim",
-                "length",
-                "substr",
-                "valueOf"
-            ],
             "location": [
                 "x",
                 "y",
@@ -20080,7 +19741,6 @@ export const eventProperties = {
             ],
             "target": [
                 "dimension",
-                "fallDistance",
                 "id",
                 "isClimbing",
                 "isFalling",
@@ -20090,7 +19750,6 @@ export const eventProperties = {
                 "isSneaking",
                 "isSprinting",
                 "isSwimming",
-                "lifetimeState",
                 "location",
                 "nameTag",
                 "scoreboardIdentity",

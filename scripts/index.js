@@ -28,7 +28,9 @@ import "./modules/events/AEvents/messageReceive.js";
 import "./modules/events/AEvents/pistonActivate.js";
 import "./modules/events/AEvents/playerBreakBlock.js";
 import "./modules/events/AEvents/playerDimensionChange.js";
+import "./modules/events/AEvents/playerEmote.js";
 import "./modules/events/AEvents/playerGameModeChange.js";
+import "./modules/events/AEvents/playerInputPermissionCategoryChange.js";
 import "./modules/events/AEvents/playerInteractWithBlock.js";
 import "./modules/events/AEvents/playerInteractWithEntity.js";
 import "./modules/events/AEvents/playerJoin.js";
@@ -59,13 +61,27 @@ import "./modules/events/BEvents/weatherChange.js";
 import "./modules/events/BEvents/worldInitialize.js";
 import "./modules/scoreboard/xp.js";
 
-// Commands
+// Custom commands
 
 import "./customCommands/commands/push.js";
+
+// Chat commands
+
+import "./chatCommands/registry/bytes.js";
+import "./chatCommands/registry/code.js";
+import "./chatCommands/registry/command.js";
+import "./chatCommands/registry/disable.js";
+import "./chatCommands/registry/enable.js";
+import "./chatCommands/registry/help.js";
+import "./chatCommands/registry/interval.js";
+import "./chatCommands/registry/methods.js";
+import "./chatCommands/registry/resetdata.js";
+import "./chatCommands/registry/scoreboard.js";
+import "./chatCommands/registry/search.js";
+import "./chatCommands/registry/source.js";
 
 // Handlers
 
 import "./init.js";
 import "./register.js";
-import "./commands.js";
-
+import "./chatCommands/handler.js";

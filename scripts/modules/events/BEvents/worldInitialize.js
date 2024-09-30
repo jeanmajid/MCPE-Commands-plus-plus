@@ -1,6 +1,6 @@
 import { world } from "@minecraft/server";
-import { Module } from "../../module.js";
-import { compileCode } from "../../../compiler/Bcompiler";
+import { Module } from "../../../models/module.js";
+import { compileCode } from "../../../compiler/Bcompiler.js";
 
 let module = undefined;
 
@@ -12,7 +12,7 @@ Module.register(
         event: world.beforeEvents.worldInitialize,
         code: [],
         source: "world",
-        methods: ["blockTypeRegistry", "itemComponentRegistry"],
+        methods: ["blockComponentRegistry", "itemComponentRegistry"],
         types: ["property", "property"],
     },
     (data) => {
