@@ -1,3 +1,13 @@
+/**
+ * @description
+ * Calculates the Levenshtein distance between two strings.
+ * The Levenshtein distance is a measure of the difference between two sequences.
+ * It is the minimum number of single-character edits (insertions, deletions, or substitutions)
+ * required to change one word into the other.
+ * @param {string} a - The first string.
+ * @param {string} b - The second string.
+ * @returns {number} The Levenshtein distance between the two strings.
+ */
 export function levenshteinDistance(a, b) {
     const matrix = [];
 

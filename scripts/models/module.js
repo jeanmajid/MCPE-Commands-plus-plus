@@ -1,33 +1,4 @@
-/**
- * @typedef {function(Player): void} callback
- */
-
-/**
- * @typedef {Object} EventSignal
- * @property {function(function({}): void, Object): function({}): void} subscribe
- * @property {function(function(any): void): void} unsubscribe
- */
-
-/**
- * @typedef {Object} scoreModule
- * @property {string} name
- * @property {string} description
- * @property {string} scoreboard
- * @property {number} interval
- * @property {boolean} [state]
- */
-
-/**
- * @typedef {Object} eventModule
- * @property {string} name
- * @property {"after" | "before"} type
- * @property {string} description
- * @property {EventSignal} event
- * @property {any} [eventId]
- * @property {boolean} [state]
- * @property {string[]} code
- * @property {Function} compiledCode
- */
+/**@import { callback, eventModule, scoreModule } from "./moduleTypes.d.ts" */
 
 import { world, system } from "@minecraft/server";
 import { levenshteinDistance } from "../utils/levenshteinDistance";
@@ -39,7 +10,7 @@ export class Module {
     static eventModules = [];
 
     /**
-     *
+     * @description Register a new module
      * @param {scoreModule | eventModule} info
      * @param {callback} callback
      */
@@ -86,17 +57,17 @@ export class Module {
     }
 
     /**
-     * @returns {scoreModule[] | eventModule[]}
      * @description Get all modules
+     * @returns {scoreModule[] | eventModule[]}
      */
     static getAllModules() {
         return [...this.eventModules, ...this.scoreModules];
     }
 
     /**
+     * @description Get a module based on its name
      * @param {String} name
      * @returns {scoreModule | eventModule | undefined}
-     * @description Get a module based on its name
      */
     static getModule(name) {
         if (!name) return undefined;
@@ -105,9 +76,9 @@ export class Module {
     }
 
     /**
+     * @description Get a module based on its name with some additional error handling
      * @param {String} name
      * @returns {scoreModule | eventModule | undefined}
-     * @description Get a module based on its name
      * @example
      * module = Module.getModuleWithMessage(args[0]);
      * if (module.error) return source.sendMessage(module.message);
@@ -121,9 +92,9 @@ export class Module {
     }
 
     /**
+     * @description Toggle a module on or off based on its state
      * @param {String} name
      * @returns {scoreModule | eventModule | undefined}
-     * @description Toggle a module on or off based on its state
      */
     static toggleModule(name, state) {
         // TODO toggle all is broken for some reason will fix later isn't really that important
@@ -147,8 +118,8 @@ export class Module {
     }
 
     /**
-     * @param {eventModule | scoreModule} module
      * @description Updates a module in the world properties
+     * @param {eventModule | scoreModule} module
      */
     static updateModule(module) {
         world.setDynamicProperty(
@@ -164,8 +135,8 @@ export class Module {
     }
 
     /**
-     * @param {eventModule} module
      * @description Updates the code of a module
+     * @param {eventModule} module
      */
     static updateCode(module) {
         if (!module.state) return;
@@ -178,9 +149,9 @@ export class Module {
     }
 
     /**
+     * @description Get the closest module based on the name
      * @param {String} name
      * @returns {scoreModule | eventModule | undefined}
-     * @description Get the closest module based on the name
      */
     static getClosestModule(name) {
         name = name.toLowerCase();
@@ -199,9 +170,9 @@ export class Module {
     }
 
     /**
+     * @description Get the amount of bytes used by a module
      * @param {eventModule | scoreModule} module
      * @returns {{ variable: number, property: number }}
-     * @description Get the amount of bytes used by a module
      */
     static getAmountOfBytesUsed(module) {
         if (module instanceof String) {
@@ -214,8 +185,8 @@ export class Module {
     }
 
     /**
-     * @returns {{ variable: number, property: number }}
      * @description Get the total amount of bytes used by all modules
+     * @returns {{ variable: number, property: number }}
      */
     static getTotalAmountOfBytesUsed() {
         let totalVar = 0;

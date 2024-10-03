@@ -1,30 +1,12 @@
-/**
- * @typedef {Object} CallbackParams
- * @property {import("@minecraft/server").Player | import("@minecraft/server").Entity | import("@minecraft/server").Block} source
- * @property {string[]} args
- */
-
-/**
- * @callback callback
- * @param {CallbackParams} params
- * @returns {void}
- */
-
-/**
- * @typedef {Object} chatCommand
- * @property {string} name
- * @property {string[]} aliases
- * @property {string} description
- * @property {Function} callback
- */
-
+/**@import { CallbackParams, callback, chatCommand } from "./chatCommand.d.ts" */
 import { levenshteinDistance } from "../utils/levenshteinDistance";
 
 export class ChatCommand {
-    /**@type {Object<string, ChatCommand>} */
+    /**@type {Object<string, chatCommand>} */
     static commands = {};
 
     /**
+     * @description Register a new command
      * @param {chatCommand} info
      * @param {callback} callback
      */
@@ -40,8 +22,9 @@ export class ChatCommand {
     }
 
     /**
+     * @description Get the closest command to the given name
      * @param {String} name
-     * @returns {ChatCommand}
+     * @returns {chatCommand}
      */
     static getClosestCommand(name) {
         name = name.toLowerCase();
@@ -60,8 +43,9 @@ export class ChatCommand {
     }
 
     /**
+     * @description Get a command by name or alias
      * @param {String} name
-     * @returns {ChatCommand | undefined}
+     * @returns {chatCommand | undefined}
      */
     static getCommand(name) {
         if (!name) return undefined;
