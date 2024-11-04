@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@minecraft/server": "^1.15.0-beta.1.21.30-stable",
+    "@minecraft/server": "^1.16.0-beta.1.21.43-stable",
     "@minecraft/server-ui": "^1.4.0-beta.1.21.30-stable",
     "typescript": "^5.4.2"
   }
