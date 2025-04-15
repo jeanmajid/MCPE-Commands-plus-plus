@@ -32,7 +32,7 @@ We welcome contributions! If you have a suggestion or found a bug, please open a
 
 ## License
 
-This project is licensed under a [Custom License](LICENSE).
+This project is licensed under [MIT](LICENSE).
 
 ## Disclaimer
 
