@@ -3,7 +3,8 @@
     "name": "MCPE-Commands-plus-plus",
     "description": "",
     "modules": [
-        "npm"
+        "npm",
+        "ts"
     ],
     "id": "wt1xv81y7omcvzdet8"
 }

@@ -1,7 +1,7 @@
 {
     "format_version": 2,
     "header": {
-        "name": "MCPE-Commands-plus-plus",
+        "name": "Commands++ by Jeanmajid",
         "description": "",
         "uuid": "c19202ba-1e38-4370-b4d5-fe66d6aa85e7",
         "version": [
@@ -12,7 +12,7 @@
         "min_engine_version": [
             1,
             21,
-            70
+            90
         ]
     },
     "modules": [
@@ -45,11 +45,11 @@
     "dependencies": [
         {
             "module_name": "@minecraft/server",
-            "version": "1.0.0-beta"
+            "version": "2.1.0-beta"
         },
         {
             "module_name": "@minecraft/server-ui",
-            "version": "1.0.0-beta"
+            "version": "2.1.0-beta"
         }
     ]
 }

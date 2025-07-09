@@ -18,6 +18,8 @@
     },
     "homepage": "https://github.com/jeanmajid/MCPE-Commands-plus-plus#readme",
     "dependencies": {
+        "@minecraft/server": "^2.1.0-beta.1.21.93-stable",
+        "@minecraft/server-ui": "^2.1.0-beta.1.21.93-stable",
         "@typescript-eslint/eslint-plugin": "^8.36.0",
         "@typescript-eslint/parser": "^8.36.0",
         "eslint": "^9.30.1",
