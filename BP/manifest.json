@@ -1,0 +1,55 @@
+{
+    "format_version": 2,
+    "header": {
+        "name": "MCPE-Commands-plus-plus",
+        "description": "",
+        "uuid": "c19202ba-1e38-4370-b4d5-fe66d6aa85e7",
+        "version": [
+            1,
+            0,
+            0
+        ],
+        "min_engine_version": [
+            1,
+            21,
+            70
+        ]
+    },
+    "modules": [
+        {
+            "type": "data",
+            "uuid": "ab9e600a-9933-4ec8-beef-a93fdf10fe71",
+            "version": [
+                1,
+                0,
+                0
+            ]
+        },
+        {
+            "type": "script",
+            "uuid": "adb456b5-017c-486a-89b6-a053b277d25d",
+            "version": [
+                1,
+                0,
+                0
+            ],
+            "language": "javascript",
+            "entry": "scripts/index.js"
+        }
+    ],
+    "metadata": {
+        "authors": [
+            "jeanmajid"
+        ]
+    },
+    "dependencies": [
+        {
+            "module_name": "@minecraft/server",
+            "version": "1.0.0-beta"
+        },
+        {
+            "module_name": "@minecraft/server-ui",
+            "version": "1.0.0-beta"
+        }
+    ]
+}

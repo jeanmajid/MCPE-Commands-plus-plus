@@ -1,0 +1,9 @@
+{
+    "$schema": "file:///C:/Users/jeanh/Documents/GitHub/MCPE-Tool/dist/core/config/mcConfigSchema.json",
+    "name": "MCPE-Commands-plus-plus",
+    "description": "",
+    "modules": [
+        "npm"
+    ],
+    "id": "wt1xv81y7omcvzdet8"
+}
