@@ -1,20 +1,17 @@
-# MCBE Commands++
+# MCPE Commands++
+
+<img src="./pack_icon.png" alt="Minecraft Bedrock Edition Logo" width="100">
 
 ## Important
 
-The project is currently paused and very early beta. it will be worked on when I get more time. I am currently very busy.
+Project is currently undergoing a rework, old code available under the [legacy branch](https://github.com/jeanmajid/MCPE-Commands-plus-plus/tree/legacy)
 
 MCBE Commands++ is a Minecraft Bedrock addon that extends the capabilities of vanilla commands. It allows you to use features from the Script API, opening up a whole new world of possibilities for your Minecraft experience.
 Join the [Discord](https://discord.gg/6PFMrzS3sG) for support and creations
 
-![Minecraft Bedrock Edition Logo](./pack_icon.png)
-
 ## Features
 
-- **Extended Commands**: Enhance your gameplay with extended commands that go beyond the vanilla Minecraft commands.
-- **Script API Integration**: Use features from the Script API directly in your commands.
-- **Easily share your creations**: Share event code and easily import code from others.
-- **Work in Progress**: This project is actively being developed. Expect more features and improvements!
+-   None
 
 ## Installation
 
