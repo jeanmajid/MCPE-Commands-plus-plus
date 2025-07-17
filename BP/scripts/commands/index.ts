@@ -8,4 +8,4 @@ import "./registry/remove.js";
 import "./registry/clearVelocity.js";
 // import "./registry/bind.js";
 import "./registry/nameTag.js";
-import "./registry/resetNametag.js";
+import "./registry/resetNameTag.js";
