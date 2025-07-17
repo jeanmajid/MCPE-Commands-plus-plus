@@ -3,7 +3,7 @@ import { NAMESPACE } from "../constants/namespace";
 
 type CustomCommandCallback = (
     origin: CustomCommandOrigin,
-    ...args: unknown[]
+    ...args: any[]
 ) => CustomCommandResult | undefined;
 
 type Command = {

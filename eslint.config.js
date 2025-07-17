@@ -92,7 +92,8 @@ export default [
             "@typescript-eslint/no-unused-vars": "warn",
             "@typescript-eslint/explicit-function-return-type": "warn",
             eqeqeq: "error",
-            curly: "error"
+            curly: "error",
+            "@typescript-eslint/no-explicit-any": "off"
         }
     },
     {
