@@ -29,7 +29,7 @@ CommandManager.registerCommand(
         system.run(() => {
             for (const entity of targets) {
                 try {
-                    entity.nameTag = nameTag;
+                    entity.nameTag = nameTag.replace(/{n}/g, "\n");
                 } catch {
                     // skip
                 }
