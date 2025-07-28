@@ -8,25 +8,19 @@ import {
 import { CommandManager } from "../command.js";
 import { AttributeManager } from "./../../attributes/attribute";
 
-CommandManager.registerEnum("bind", ["health"]);
-
 CommandManager.registerCommand(
     {
-        name: "bind",
-        description: "Bind an attribute to a score",
+        name: "unbind",
+        description: "unbind an attribute",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
             {
                 name: "jm:bind",
                 type: CustomCommandParamType.Enum
-            },
-            {
-                name: "scoreboardId",
-                type: CustomCommandParamType.String
             }
         ]
     },
-    (origin, attributeId: string, scoreboardId: string) => {
+    (origin, attributeId: string) => {
         const attribute = AttributeManager.getAttribute(attributeId);
         if (!attribute) {
             return {
@@ -34,27 +28,25 @@ CommandManager.registerCommand(
                 message: `Attribute ${attributeId} does not exist`
             };
         }
-        if (attribute.isBinded) {
+        if (!attribute.isBinded) {
             return {
                 status: CustomCommandStatus.Failure,
-                message: `Attribute ${attributeId} is already binded to ${attribute.score.id}`
+                message: `Attribute ${attributeId} isn't binded`
             };
         }
 
         system.run(() => {
-            world.setDynamicProperty(`attribute:${attributeId}`, scoreboardId);
-            const objective =
-                world.scoreboard.getObjective(scoreboardId) ||
-                world.scoreboard.addObjective(scoreboardId);
+            world.setDynamicProperty(`attribute:${attributeId}`, undefined);
+            attribute.cleanup();
+            world.scoreboard.removeObjective(attribute.score);
 
-            attribute.isBinded = true;
-            attribute.score = objective;
-            attribute.initialize();
+            attribute.isBinded = false;
+            attribute.score = undefined;
         });
 
         return {
             status: CustomCommandStatus.Success,
-            message: `Successfully binded ${attributeId} to score ${scoreboardId}`
+            message: `Successfully unbinded ${attributeId}`
         };
     }
 );

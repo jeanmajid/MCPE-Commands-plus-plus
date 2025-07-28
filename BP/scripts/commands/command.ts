@@ -11,8 +11,14 @@ type Command = {
     callback: CustomCommandCallback;
 };
 
+type CommandEnum = {
+    name: string;
+    values: string[];
+};
+
 export class CommandManager {
     static commands: Command[] = [];
+    static enums: CommandEnum[] = [];
 
     static registerCommand(
         customCommand: CustomCommand,
@@ -20,9 +26,20 @@ export class CommandManager {
     ): void {
         CommandManager.commands.push({ data: customCommand, callback: commandCallback });
     }
+
+    static registerEnum(name: string, values: string[]): void {
+        this.enums.push({ name, values });
+    }
 }
 
 system.beforeEvents.startup.subscribe(({ customCommandRegistry }) => {
+    for (const commandEnum of CommandManager.enums) {
+        if (!commandEnum.name.startsWith(NAMESPACE)) {
+            commandEnum.name = NAMESPACE + commandEnum.name;
+        }
+        customCommandRegistry.registerEnum(commandEnum.name, commandEnum.values);
+    }
+
     for (const command of CommandManager.commands) {
         if (!command.data.name.startsWith(NAMESPACE)) {
             command.data.name = NAMESPACE + command.data.name;
