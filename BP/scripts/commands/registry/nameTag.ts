@@ -5,7 +5,8 @@ import {
     CustomCommandStatus,
     system,
     CustomCommandParamType,
-    Entity
+    Entity,
+    Player
 } from "@minecraft/server";
 import { CommandManager } from "../command.js";
 
@@ -29,12 +30,14 @@ CommandManager.registerCommand(
         system.run(() => {
             for (const entity of targets) {
                 try {
-                    entity.nameTag = nameTag.replace(/{n}/g, "\n");
+                    entity.nameTag = nameTag
+                        .replace(/{n}/g, "\n")
+                        .replace(/{name}/g, (entity as Player).name ?? "default");
                 } catch {
                     // skip
                 }
             }
         });
-        return { status: CustomCommandStatus.Success };
+        return { status: CustomCommandStatus.Success, message: "Sucessfully changed nametags" };
     }
 );

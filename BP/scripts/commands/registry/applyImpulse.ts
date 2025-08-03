@@ -37,6 +37,6 @@ CommandManager.registerCommand(
                 entity.applyImpulse({ x, y, z });
             }
         });
-        return { status: CustomCommandStatus.Success };
+        return { status: CustomCommandStatus.Success, message: "Sucessfully applied Impulse" };
     }
 );

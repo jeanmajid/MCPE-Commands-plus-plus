@@ -16,3 +16,5 @@ import "./registry/t.js";
 import "./registry/removeTags.js";
 import "./registry/addTags.js";
 import "./registry/blockStates.js";
+import "./registry/rotate.js";
+import "./registry/drawLine.js";

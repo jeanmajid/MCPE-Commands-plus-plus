@@ -25,7 +25,7 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 
 /fillshape -- loads a shape with provided dimensions
 
-/phill -- better fill with gradients, ticking area loading, replacing with gradient and this and that 
+/phil -- better fill with gradients, ticking area loading, replacing with gradient and this and that 
 
 /ui -- suit of commands to create and manage ui's
 

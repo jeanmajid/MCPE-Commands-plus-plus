@@ -37,6 +37,6 @@ CommandManager.registerCommand(
                 entity.applyKnockback({ x, z }, y);
             }
         });
-        return { status: CustomCommandStatus.Success };
+        return { status: CustomCommandStatus.Success, message: "Sucessfully applied knockback" };
     }
 );

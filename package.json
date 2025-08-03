@@ -18,6 +18,7 @@
     },
     "homepage": "https://github.com/jeanmajid/MCPE-Commands-plus-plus#readme",
     "dependencies": {
+        "@minecraft/debug-utilities": "^1.0.0-beta.1.21.95-stable",
         "@minecraft/server": "^2.1.0-beta.1.21.95-stable",
         "@minecraft/server-ui": "^2.1.0-beta.1.21.95-stable",
         "@typescript-eslint/eslint-plugin": "^8.36.0",

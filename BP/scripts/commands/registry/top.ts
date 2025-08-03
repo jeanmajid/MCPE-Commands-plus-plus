@@ -34,7 +34,7 @@ CommandManager.registerCommand(
                 teleportEntityToTop(entity, minHeight);
             }
         });
-        return { status: CustomCommandStatus.Success };
+        return { status: CustomCommandStatus.Success, message: "Sucessfully teleported entities" };
     }
 );
 
