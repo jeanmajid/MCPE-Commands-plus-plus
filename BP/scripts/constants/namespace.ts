@@ -1,1 +1,1 @@
-export const NAMESPACE = "jm:";
+export const NAMESPACE = "jeanmajid:";

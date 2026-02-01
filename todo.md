@@ -31,6 +31,8 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 
 ## Attributes
 
+- Attributes per entity /atribute <selector> <atribute>
+
 - Weather
 - Real world time
 - Ingame times
