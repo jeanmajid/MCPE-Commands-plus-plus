@@ -2,10 +2,10 @@ import { system, world } from "@minecraft/server";
 import { AttributeManager, BaseAttribute } from "../attribute";
 
 class HealthAttribute extends BaseAttribute {
-    id = "health";
-    runId: number;
+    public id = "health";
+    public runId: number;
 
-    initialize(): void {
+    public initialize(): void {
         this.runId = system.runInterval(() => {
             for (const entity of world.getAllPlayers()) {
                 this.score.setScore(entity, entity.getComponent("health")?.currentValue ?? 0);
@@ -13,7 +13,7 @@ class HealthAttribute extends BaseAttribute {
         });
     }
 
-    cleanup(): void {
+    public cleanup(): void {
         system.clearRun(this.runId);
     }
 }

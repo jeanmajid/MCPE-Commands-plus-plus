@@ -1,33 +1,34 @@
 import { CustomCommand, CustomCommandOrigin, CustomCommandResult, system } from "@minecraft/server";
+
 import { NAMESPACE } from "../constants/namespace";
 
 type CustomCommandCallback = (
     origin: CustomCommandOrigin,
-    ...args: any[]
+    ...args: unknown[]
 ) => CustomCommandResult | undefined;
 
-type Command = {
+interface Command {
     data: CustomCommand;
     callback: CustomCommandCallback;
-};
+}
 
-type CommandEnum = {
+interface CommandEnum {
     name: string;
     values: string[];
-};
+}
 
 export class CommandManager {
-    static commands: Command[] = [];
-    static enums: CommandEnum[] = [];
+    public static commands: Command[] = [];
+    public static enums: CommandEnum[] = [];
 
-    static registerCommand(
+    public static registerCommand(
         customCommand: CustomCommand,
         commandCallback: CustomCommandCallback
     ): void {
         CommandManager.commands.push({ data: customCommand, callback: commandCallback });
     }
 
-    static registerEnum(name: string, values: string[]): void {
+    public static registerEnum(name: string, values: string[]): void {
         this.enums.push({ name, values });
     }
 }
