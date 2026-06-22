@@ -1,9 +1,10 @@
 import { system, world } from "@minecraft/server";
+
 import { AttributeManager, BaseAttribute } from "../attribute";
 
 class HealthAttribute extends BaseAttribute {
     public id = "health";
-    public runId: number;
+    public runId: number = -1;
 
     public initialize(): void {
         this.runId = system.runInterval(() => {
