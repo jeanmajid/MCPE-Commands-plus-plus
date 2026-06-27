@@ -20,7 +20,7 @@
     },
     "dependencies": {
         "@minecraft/debug-utilities": "^1.0.0-beta.1.26.32-stable",
-        "@minecraft/server": "^2.4.0-beta.1.21.120-stable",
+        "@minecraft/server": "2.9.0-beta.1.26.32-stable",
         "@minecraft/server-ui": "^2.2.0-beta.1.26.32-stable",
         "oxfmt": "^0.56.0",
         "oxlint": "^1.71.0"
