@@ -1,6 +1,10 @@
 /run "execute as @a at @s run give @s diamond {score.selector}"
 selector could something like {“score”:{“name”:”@s”,”objective”:”example”}}
 
+- valid keys:
+    - {@s.block_from_view_direction}
+    - {@s.score.objective}
+
 /transfer -- transfers player to a server with a port ( may be able to bind ports to names to )all easier
 
 /shootprojectile -- spawns a projectile (probs with velocity)
