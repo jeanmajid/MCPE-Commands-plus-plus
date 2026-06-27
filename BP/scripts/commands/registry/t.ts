@@ -13,6 +13,6 @@ CommandManager.registerCommand(
             return;
         }
         world.sendMessage("Command ran successfully");
-        return { status: CustomCommandStatus.Success, message: `Command ran successfully` };
+        return { status: CustomCommandStatus.Success, message: "" };
     }
 );
