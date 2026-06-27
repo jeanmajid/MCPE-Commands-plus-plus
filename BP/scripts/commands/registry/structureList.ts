@@ -3,15 +3,16 @@ import {
     Player,
     CustomCommandStatus,
     world,
-    system
+    system,
 } from "@minecraft/server";
+
 import { CommandManager } from "../command.js";
 
 CommandManager.registerCommand(
     {
         name: "structurelist",
         description: "list all the structures on the world",
-        permissionLevel: CommandPermissionLevel.Admin
+        permissionLevel: CommandPermissionLevel.Admin,
     },
     (origin) => {
         system.run(() => {

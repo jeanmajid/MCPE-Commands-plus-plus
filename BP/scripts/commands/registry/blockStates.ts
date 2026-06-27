@@ -4,10 +4,11 @@ import {
     CustomCommandParamType,
     Vector3,
     Block,
-    Player
+    Player,
 } from "@minecraft/server";
-import { CommandManager } from "../command.js";
+
 import { Vector } from "../../utils/vector.js";
+import { CommandManager } from "../command.js";
 
 CommandManager.registerCommand(
     {
@@ -15,25 +16,17 @@ CommandManager.registerCommand(
         description:
             "Lists all block states for the either the block being viewed or the block at the specified position",
         permissionLevel: CommandPermissionLevel.Admin,
-        optionalParameters: [
-            {
-                name: "position",
-                type: CustomCommandParamType.Location
-            }
-        ]
+        optionalParameters: [{ name: "position", type: CustomCommandParamType.Location }],
     },
     (origin, position: Vector3) => {
         if (!(origin?.sourceEntity instanceof Player)) {
             return;
         }
-        let block: Block;
+        let block: Block | undefined;
         if (!position) {
             block = origin.sourceEntity.getBlockFromViewDirection()?.block;
             if (!block) {
-                return {
-                    status: CustomCommandStatus.Failure,
-                    message: "No block found in view"
-                };
+                return { status: CustomCommandStatus.Failure, message: "No block found in view" };
             }
         } else {
             const dimension = origin.sourceEntity.dimension;
@@ -42,14 +35,14 @@ CommandManager.registerCommand(
             } catch {
                 return {
                     status: CustomCommandStatus.Failure,
-                    message: "Cannot get block outside of world"
+                    message: "Cannot get block outside of world",
                 };
             }
         }
         if (!block?.isValid) {
             return {
                 status: CustomCommandStatus.Failure,
-                message: "Cannot get block outside of world"
+                message: "Cannot get block outside of world",
             };
         }
         const states = block.permutation.getAllStates();
@@ -61,9 +54,6 @@ CommandManager.registerCommand(
         origin.sourceEntity.sendMessage(
             `The block (${block.typeId}) at §7${Vector.toString(block.location)} ${stateStrings.length === 0 ? "§fhas no states" : `§fhas the following Block States:\n${stateStrings.join("\n")}`}`
         );
-        return {
-            status: CustomCommandStatus.Success,
-            message: ""
-        };
+        return { status: CustomCommandStatus.Success, message: "" };
     }
 );

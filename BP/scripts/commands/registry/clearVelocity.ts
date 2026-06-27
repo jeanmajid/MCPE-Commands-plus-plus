@@ -3,8 +3,9 @@ import {
     CustomCommandStatus,
     system,
     CustomCommandParamType,
-    Entity
+    Entity,
 } from "@minecraft/server";
+
 import { CommandManager } from "../command.js";
 
 CommandManager.registerCommand(
@@ -12,12 +13,7 @@ CommandManager.registerCommand(
         name: "clearvelocity",
         description: "Clears target entities velocity",
         permissionLevel: CommandPermissionLevel.GameDirectors,
-        mandatoryParameters: [
-            {
-                name: "targets",
-                type: CustomCommandParamType.EntitySelector
-            }
-        ]
+        mandatoryParameters: [{ name: "targets", type: CustomCommandParamType.EntitySelector }],
     },
     (origin, targets: Entity[]) => {
         system.run(() => {

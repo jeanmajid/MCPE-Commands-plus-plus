@@ -4,8 +4,9 @@ import {
     system,
     CustomCommandParamType,
     Entity,
-    Player
+    Player,
 } from "@minecraft/server";
+
 import { CommandManager } from "../command.js";
 
 CommandManager.registerCommand(
@@ -13,12 +14,7 @@ CommandManager.registerCommand(
         name: "resetnametag",
         description: "Reset the nametag for players",
         permissionLevel: CommandPermissionLevel.GameDirectors,
-        mandatoryParameters: [
-            {
-                name: "targets",
-                type: CustomCommandParamType.EntitySelector
-            }
-        ]
+        mandatoryParameters: [{ name: "targets", type: CustomCommandParamType.EntitySelector }],
     },
     (origin, targets: Entity[]) => {
         system.run(() => {

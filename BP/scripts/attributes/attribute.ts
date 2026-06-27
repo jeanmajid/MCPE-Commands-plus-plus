@@ -23,7 +23,7 @@ export class AttributeManager {
     }
 
     public static getAttribute(id: string): BaseAttribute | undefined {
-        return this.attributes.find(attribute => attribute.id === id);
+        return this.attributes.find((attribute) => attribute.id === id);
     }
 
     public static loadAttributesFromMemory(): void {

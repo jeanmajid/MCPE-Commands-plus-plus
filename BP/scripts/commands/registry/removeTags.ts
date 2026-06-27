@@ -3,8 +3,9 @@ import {
     CustomCommandStatus,
     CustomCommandParamType,
     Entity,
-    system
+    system,
 } from "@minecraft/server";
+
 import { CommandManager } from "../command.js";
 
 CommandManager.registerCommand(
@@ -12,18 +13,8 @@ CommandManager.registerCommand(
         name: "removetags",
         description: "Removes an array of provided tags from the targets",
         permissionLevel: CommandPermissionLevel.GameDirectors,
-        mandatoryParameters: [
-            {
-                name: "targets",
-                type: CustomCommandParamType.EntitySelector
-            }
-        ],
-        optionalParameters: [
-            {
-                name: "tags",
-                type: CustomCommandParamType.String
-            }
-        ]
+        mandatoryParameters: [{ name: "targets", type: CustomCommandParamType.EntitySelector }],
+        optionalParameters: [{ name: "tags", type: CustomCommandParamType.String }],
     },
     (origin, targets: Entity[], tags: string) => {
         if (!tags) {
@@ -37,7 +28,7 @@ CommandManager.registerCommand(
             });
             return {
                 status: CustomCommandStatus.Success,
-                message: `All tags removed from ${targets.length} entities`
+                message: `All tags removed from ${targets.length} entities`,
             };
         }
 
@@ -54,7 +45,7 @@ CommandManager.registerCommand(
         });
         return {
             status: CustomCommandStatus.Success,
-            message: `Removed [${tags}] from ${targets.length} entities`
+            message: `Removed [${tags}] from ${targets.length} entities`,
         };
     }
 );

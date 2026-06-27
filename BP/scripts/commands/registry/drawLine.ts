@@ -1,12 +1,13 @@
+import { DebugLine, debugDrawer } from "@minecraft/debug-utilities";
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
     CustomCommandParamType,
-    Vector3
+    Vector3,
 } from "@minecraft/server";
+
+import { getNormalizedRgba } from "../../utils/color.js";
 import { CommandManager } from "../command.js";
-import { DebugLine, debugDrawer } from "@minecraft/debug-utilities";
-import { getNormalizedRgb } from "../../utils/color.js";
 
 CommandManager.registerCommand(
     {
@@ -14,37 +15,16 @@ CommandManager.registerCommand(
         description: "Draws a line via the Debug Drawer",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
-            {
-                name: "startPos",
-                type: CustomCommandParamType.Location
-            },
-            {
-                name: "endPos",
-                type: CustomCommandParamType.Location
-            },
-            {
-                name: "id",
-                type: CustomCommandParamType.String
-            }
+            { name: "startPos", type: CustomCommandParamType.Location },
+            { name: "endPos", type: CustomCommandParamType.Location },
+            { name: "id", type: CustomCommandParamType.String },
         ],
         optionalParameters: [
-            {
-                name: "colorRed",
-                type: CustomCommandParamType.Integer
-            },
-            {
-                name: "colorGreen",
-                type: CustomCommandParamType.Integer
-            },
-            {
-                name: "colorBlue",
-                type: CustomCommandParamType.Integer
-            },
-            {
-                name: "expirationTicks",
-                type: CustomCommandParamType.Integer
-            }
-        ]
+            { name: "colorRed", type: CustomCommandParamType.Integer },
+            { name: "colorGreen", type: CustomCommandParamType.Integer },
+            { name: "colorBlue", type: CustomCommandParamType.Integer },
+            { name: "expirationTicks", type: CustomCommandParamType.Integer },
+        ],
     },
     (
         origin,
@@ -58,7 +38,7 @@ CommandManager.registerCommand(
     ) => {
         const line = new DebugLine(startPos, endPos);
         if (colorBlue !== undefined) {
-            line.color = getNormalizedRgb(colorRed, colorGreen, colorBlue);
+            line.color = getNormalizedRgba(colorRed, colorGreen, colorBlue, 255);
         }
         if (expirationTicks !== undefined) {
             line.timeLeft = expirationTicks;

@@ -3,8 +3,9 @@ import {
     CustomCommandStatus,
     system,
     CustomCommandParamType,
-    world
+    world,
 } from "@minecraft/server";
+
 import { CommandManager } from "../command.js";
 
 const ranCommands: Map<string, string> = new Map();
@@ -15,19 +16,10 @@ CommandManager.registerCommand(
         description: "Delays the execution of a command",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
-            {
-                name: "id",
-                type: CustomCommandParamType.String
-            },
-            {
-                name: "delayInTicks",
-                type: CustomCommandParamType.Integer
-            },
-            {
-                name: "command",
-                type: CustomCommandParamType.String
-            }
-        ]
+            { name: "id", type: CustomCommandParamType.String },
+            { name: "delayInTicks", type: CustomCommandParamType.Integer },
+            { name: "command", type: CustomCommandParamType.String },
+        ],
     },
     (origin, id: string, delayInTicks: number, command: string) => {
         if (ranCommands.has(id)) {

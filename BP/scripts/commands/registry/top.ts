@@ -3,8 +3,9 @@ import {
     CustomCommandStatus,
     CustomCommandParamType,
     Entity,
-    system
+    system,
 } from "@minecraft/server";
+
 import { CommandManager } from "../command.js";
 
 CommandManager.registerCommand(
@@ -14,15 +15,9 @@ CommandManager.registerCommand(
         permissionLevel: CommandPermissionLevel.GameDirectors,
 
         optionalParameters: [
-            {
-                name: "target",
-                type: CustomCommandParamType.EntitySelector
-            },
-            {
-                name: "minHeight",
-                type: CustomCommandParamType.Float
-            }
-        ]
+            { name: "target", type: CustomCommandParamType.EntitySelector },
+            { name: "minHeight", type: CustomCommandParamType.Float },
+        ],
     },
     (origin, target: Entity[], minHeight: number) => {
         system.run(() => {

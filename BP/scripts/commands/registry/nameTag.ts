@@ -6,8 +6,9 @@ import {
     system,
     CustomCommandParamType,
     Entity,
-    Player
+    Player,
 } from "@minecraft/server";
+
 import { CommandManager } from "../command.js";
 
 CommandManager.registerCommand(
@@ -16,15 +17,9 @@ CommandManager.registerCommand(
         description: "Set nametag of entities",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
-            {
-                name: "targets",
-                type: CustomCommandParamType.EntitySelector
-            },
-            {
-                name: "nametag",
-                type: CustomCommandParamType.String
-            }
-        ]
+            { name: "targets", type: CustomCommandParamType.EntitySelector },
+            { name: "nametag", type: CustomCommandParamType.String },
+        ],
     },
     (origin, targets: Entity[], nameTag: string) => {
         system.run(() => {

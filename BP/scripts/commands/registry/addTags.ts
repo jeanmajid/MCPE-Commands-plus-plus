@@ -3,8 +3,9 @@ import {
     CustomCommandStatus,
     CustomCommandParamType,
     Entity,
-    system
+    system,
 } from "@minecraft/server";
+
 import { CommandManager } from "../command.js";
 
 CommandManager.registerCommand(
@@ -13,15 +14,9 @@ CommandManager.registerCommand(
         description: "Adds an array of provided tags to the targets",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
-            {
-                name: "targets",
-                type: CustomCommandParamType.EntitySelector
-            },
-            {
-                name: "tags",
-                type: CustomCommandParamType.String
-            }
-        ]
+            { name: "targets", type: CustomCommandParamType.EntitySelector },
+            { name: "tags", type: CustomCommandParamType.String },
+        ],
     },
     (origin, targets: Entity[], tags: string) => {
         system.run(() => {
@@ -34,7 +29,7 @@ CommandManager.registerCommand(
         });
         return {
             status: CustomCommandStatus.Success,
-            message: `Added [${tags}] to ${targets.length} entities`
+            message: `Added [${tags}] to ${targets.length} entities`,
         };
     }
 );

@@ -3,8 +3,9 @@ import {
     CustomCommandStatus,
     system,
     CustomCommandParamType,
-    Entity
+    Entity,
 } from "@minecraft/server";
+
 import { CommandManager } from "../command.js";
 
 CommandManager.registerCommand(
@@ -12,12 +13,7 @@ CommandManager.registerCommand(
         name: "remove",
         description: "Removes entites from the world",
         permissionLevel: CommandPermissionLevel.GameDirectors,
-        mandatoryParameters: [
-            {
-                name: "targets",
-                type: CustomCommandParamType.EntitySelector
-            }
-        ]
+        mandatoryParameters: [{ name: "targets", type: CustomCommandParamType.EntitySelector }],
     },
     (origin, targets: Entity[]) => {
         let amount = 0;
@@ -33,7 +29,7 @@ CommandManager.registerCommand(
         });
         return {
             status: CustomCommandStatus.Success,
-            message: `Sucessfully removed ${amount} entities`
+            message: `Sucessfully removed ${amount} entities`,
         };
     }
 );
