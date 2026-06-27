@@ -37,6 +37,7 @@ import "./registry/remove.js";
 import "./registry/removeTags.js";
 import "./registry/resetNameTag.js";
 import "./registry/rotate.js";
+import "./registry/setOnFire.js";
 import "./registry/structureList.js";
 import "./registry/t.js";
 import "./registry/top.js";
