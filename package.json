@@ -1,28 +1,28 @@
 {
-  "name": "mcpe-commands-plus-plus",
-  "version": "1.0.0",
-  "description": "<img src=\"./pack_icon.png\" alt=\"Minecraft Bedrock Edition Logo\" width=\"100\">",
-  "main": "eslint.config.js",
-  "dependencies": {
-    "@minecraft/debug-utilities": "^1.0.0-beta.1.21.114-stable",
-    "@minecraft/server": "^2.4.0-beta.1.21.120-stable",
-    "@minecraft/server-ui": "^2.1.0-beta.1.21.114-stable",
-    "oxfmt": "^0.56.0",
-    "oxlint": "^1.71.0"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jeanmajid/MCPE-Commands-plus-plus.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/jeanmajid/MCPE-Commands-plus-plus/issues"
-  },
-  "homepage": "https://github.com/jeanmajid/MCPE-Commands-plus-plus#readme"
+    "name": "mcpe-commands-plus-plus",
+    "version": "1.0.0",
+    "description": "<img src=\"./pack_icon.png\" alt=\"Minecraft Bedrock Edition Logo\" width=\"100\">",
+    "keywords": [],
+    "homepage": "https://github.com/jeanmajid/MCPE-Commands-plus-plus#readme",
+    "bugs": {
+        "url": "https://github.com/jeanmajid/MCPE-Commands-plus-plus/issues"
+    },
+    "license": "ISC",
+    "author": "",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jeanmajid/MCPE-Commands-plus-plus.git"
+    },
+    "type": "module",
+    "main": "eslint.config.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "dependencies": {
+        "@minecraft/debug-utilities": "^1.0.0-beta.1.26.32-stable",
+        "@minecraft/server": "^2.4.0-beta.1.21.120-stable",
+        "@minecraft/server-ui": "^2.2.0-beta.1.26.32-stable",
+        "oxfmt": "^0.56.0",
+        "oxlint": "^1.71.0"
+    }
 }

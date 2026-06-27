@@ -4,7 +4,8 @@ import { NAMESPACE } from "../constants/namespace";
 
 type CustomCommandCallback = (
     origin: CustomCommandOrigin,
-    ...args: unknown[]
+    // oxlint-disable-next-line typescript/no-explicit-any Commands are bound to specific types anyways, so any is fine
+    ...args: any[]
 ) => CustomCommandResult | undefined;
 
 interface Command {

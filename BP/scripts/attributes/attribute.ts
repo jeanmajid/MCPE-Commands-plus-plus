@@ -3,7 +3,7 @@ import { ScoreboardObjective, world } from "@minecraft/server";
 export abstract class BaseAttribute {
     public abstract id: string;
     public isBinded: boolean = false;
-    public score: ScoreboardObjective;
+    public score!: ScoreboardObjective;
     public selector?: string;
     /**
      * Function to initiate all your events or runIntervals
@@ -23,7 +23,7 @@ export class AttributeManager {
     }
 
     public static getAttribute(id: string): BaseAttribute | undefined {
-        return this.attributes.find((attribute) => attribute.id === id);
+        return this.attributes.find(attribute => attribute.id === id);
     }
 
     public static loadAttributesFromMemory(): void {

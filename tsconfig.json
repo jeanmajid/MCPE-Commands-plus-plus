@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "target": "esnext",
+        "module": "esnext",
+        "moduleResolution": "bundler",
+        "allowSyntheticDefaultImports": true,
+        "removeComments": true,
+        "outDir": "dist",
+        "noEmit": true,
+        "rootDir": "BP\\scripts"
+    },
+    "include": ["BP/scripts/**/*.ts"]
+}
