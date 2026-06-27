@@ -23,7 +23,7 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 
 /spawn -- alternative to the summon command with additional capabilities
 
-/score -- alternative for scoreboard with enhanced capabilities; focus on better operations like sqrt(), but also include base operations like +-\*/ without the need for fakeplayers
+/score -- alternative for scoreboard with enhanced capabilities; focus on better operations like sqrt(), but also include base operations like +-\*/ without the need for fakeplayers; Better score random
 
 /blockstates -- reads the block states of the block on the provided xyz position; may also have a "block id" param which lists all block states allowed for the provided block
 
@@ -33,7 +33,13 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 
 /ui -- suit of commands to create and manage ui's
 
+/og kick
+/ban
+/unban
+
 ## Attributes
+
+- Command on attribute change
 
 - Attributes per entity /atribute <selector> <atribute>
 
@@ -43,6 +49,7 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 - Coords, Velocity, FacingDirection
 - PlayerProperties (sneak, swim, level, xp, etc.)
 - tps
+- input
 
 ## Tags
 
