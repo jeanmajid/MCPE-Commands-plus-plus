@@ -22,6 +22,7 @@ CommandManager.registerCommand(
         if (!(origin?.sourceEntity instanceof Player)) {
             return;
         }
+
         let block: Block | undefined;
         if (!position) {
             block = origin.sourceEntity.getBlockFromViewDirection()?.block;
@@ -39,12 +40,14 @@ CommandManager.registerCommand(
                 };
             }
         }
+
         if (!block?.isValid) {
             return {
                 status: CustomCommandStatus.Failure,
                 message: "Cannot get block outside of world",
             };
         }
+
         const states = block.permutation.getAllStates();
         const stateStrings = [];
         for (const key in states) {
