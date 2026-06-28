@@ -25,6 +25,8 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 
 /score -- alternative for scoreboard with enhanced capabilities; focus on better operations like sqrt(), but also include base operations like +-\*/ without the need for fakeplayers; Better score random
 
+- Consider just taking in a single string containing the formula to allow for complex multi-operation calculations
+
 /blockstates -- reads the block states of the block on the provided xyz position; may also have a "block id" param which lists all block states allowed for the provided block
 
 /fillshape -- loads a shape with provided dimensions
