@@ -11,7 +11,7 @@ Join the [Discord](https://discord.gg/6PFMrzS3sG) for support and creations
 
 ## Features
 
--   None
+- None
 
 ## Installation
 
@@ -29,7 +29,7 @@ We welcome contributions! If you have a suggestion or found a bug, please open a
 
 ## License
 
-This project is licensed under [MIT](LICENSE).
+This project is licensed under [GPL](LICENSE).
 
 ## Disclaimer
 
