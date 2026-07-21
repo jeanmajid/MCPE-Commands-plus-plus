@@ -21,53 +21,34 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
+
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
-    CustomCommandParamType,
-    world,
     system,
+    CustomCommandParamType,
+    Entity,
 } from "@minecraft/server";
 
-import { CommandManager } from "../command.js";
-import { AttributeManager } from "./../../attributes/attribute";
+import { CommandManager } from "../../command.js";
 
 CommandManager.registerCommand(
     {
-        name: "unbind",
-        description: "unbind an attribute",
+        name: "clearvelocity",
+        description: "Clears target entities velocity",
         permissionLevel: CommandPermissionLevel.GameDirectors,
-        // TODO: get rid off jeanmajid: here and automate
-        mandatoryParameters: [{ name: "jeanmajid:bind", type: CustomCommandParamType.Enum }],
+        mandatoryParameters: [{ name: "targets", type: CustomCommandParamType.EntitySelector }],
     },
-    (origin, attributeId: string) => {
-        const attribute = AttributeManager.getAttribute(attributeId);
-        if (!attribute) {
-            return {
-                status: CustomCommandStatus.Failure,
-                message: `Attribute ${attributeId} does not exist`,
-            };
-        }
-        if (!attribute.isBinded) {
-            return {
-                status: CustomCommandStatus.Failure,
-                message: `Attribute ${attributeId} isn't binded`,
-            };
-        }
-
+    (origin, targets: Entity[]) => {
         system.run(() => {
-            world.setDynamicProperty(`attribute:${attributeId}`, undefined);
-            attribute.cleanup();
-            world.scoreboard.removeObjective(attribute.score);
-
-            attribute.isBinded = false;
-            // @ts-expect-error
-            attribute.score = undefined;
+            for (const entity of targets) {
+                try {
+                    entity.clearVelocity();
+                } catch {
+                    // skip
+                }
+            }
         });
-
-        return {
-            status: CustomCommandStatus.Success,
-            message: `Successfully unbinded ${attributeId}`,
-        };
+        return { status: CustomCommandStatus.Success, message: "Sucessfully cleared velocity" };
     }
 );

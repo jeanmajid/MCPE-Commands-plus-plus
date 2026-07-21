@@ -21,7 +21,15 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { CustomCommand, CustomCommandOrigin, CustomCommandResult, system } from "@minecraft/server";
+
+import {
+    CustomCommand,
+    CustomCommandOrigin,
+    CustomCommandParameter,
+    CustomCommandParamType,
+    CustomCommandResult,
+    system,
+} from "@minecraft/server";
 
 import { NAMESPACE } from "../constants/namespace";
 
@@ -69,6 +77,27 @@ system.beforeEvents.startup.subscribe(({ customCommandRegistry }) => {
         if (!command.data.name.startsWith(NAMESPACE)) {
             command.data.name = NAMESPACE + command.data.name;
         }
+
+        if (command.data.mandatoryParameters) {
+            processParams(command.data.mandatoryParameters);
+        }
+
+        if (command.data.optionalParameters) {
+            processParams(command.data.optionalParameters);
+        }
+
         customCommandRegistry.registerCommand(command.data, command.callback);
     }
 });
+
+function processParams(params: CustomCommandParameter[]): void {
+    for (const param of params) {
+        if (
+            param.type === CustomCommandParamType.Enum &&
+            param.enumName &&
+            !param.enumName.startsWith(NAMESPACE)
+        ) {
+            param.enumName = NAMESPACE + param.enumName;
+        }
+    }
+}

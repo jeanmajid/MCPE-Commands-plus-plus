@@ -21,6 +21,7 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
+
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
@@ -29,30 +30,25 @@ import {
     system,
 } from "@minecraft/server";
 
-import { CommandManager } from "../command.js";
+import { CommandManager } from "../../command.js";
 
 CommandManager.registerCommand(
     {
-        name: "addtags",
-        description: "Adds an array of provided tags to the targets",
+        name: "rotate",
+        description: "Rotates an entity",
         permissionLevel: CommandPermissionLevel.GameDirectors,
-        mandatoryParameters: [
-            { name: "targets", type: CustomCommandParamType.EntitySelector },
-            { name: "tags", type: CustomCommandParamType.String },
+        optionalParameters: [
+            { name: "target", type: CustomCommandParamType.EntitySelector },
+            { name: "rotationX", type: CustomCommandParamType.Float },
+            { name: "rotationY", type: CustomCommandParamType.Float },
         ],
     },
-    (origin, targets: Entity[], tags: string) => {
+    (origin, target: Entity[], rotationX: number, rotationY: number) => {
         system.run(() => {
-            for (const entity of targets) {
-                const selectorTags = tags.split(/[, ]/g).filter((t) => t !== "");
-                for (const tag of selectorTags) {
-                    entity.addTag(tag);
-                }
+            for (const entity of target) {
+                entity.setRotation({ x: rotationX, y: rotationY });
             }
         });
-        return {
-            status: CustomCommandStatus.Success,
-            message: `Added [${tags}] to ${targets.length} entities`,
-        };
+        return { status: CustomCommandStatus.Success };
     }
 );

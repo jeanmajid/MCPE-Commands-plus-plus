@@ -21,6 +21,7 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
+
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
@@ -29,8 +30,9 @@ import {
     system,
 } from "@minecraft/server";
 
-import { CommandManager } from "../command.js";
-import { AttributeManager } from "./../../attributes/attribute";
+import { AttributeManager } from "../../../attributes/attribute.js";
+import { ATTRIBUTE_KEY } from "../../../constants/dynamicPropertyKeys.js";
+import { CommandManager } from "../../command.js";
 
 CommandManager.registerEnum("bind", ["health"]);
 
@@ -40,8 +42,7 @@ CommandManager.registerCommand(
         description: "Bind an attribute to a score",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
-            // TODO: get rid off jeanmajid: here and automate
-            { name: "jeanmajid:bind", type: CustomCommandParamType.Enum },
+            { name: "bindtype", type: CustomCommandParamType.Enum, enumName: "bind" },
             { name: "scoreboardId", type: CustomCommandParamType.String },
         ],
     },
@@ -61,7 +62,7 @@ CommandManager.registerCommand(
         }
 
         system.run(() => {
-            world.setDynamicProperty(`attribute:${attributeId}`, scoreboardId);
+            world.setDynamicProperty(`${ATTRIBUTE_KEY}${attributeId}`, scoreboardId);
             const objective =
                 world.scoreboard.getObjective(scoreboardId) ||
                 world.scoreboard.addObjective(scoreboardId);

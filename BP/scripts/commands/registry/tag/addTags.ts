@@ -21,33 +21,39 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
+
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
-    system,
     CustomCommandParamType,
     Entity,
+    system,
 } from "@minecraft/server";
 
-import { CommandManager } from "../command.js";
+import { CommandManager } from "../../command.js";
 
 CommandManager.registerCommand(
     {
-        name: "clearvelocity",
-        description: "Clears target entities velocity",
+        name: "addtags",
+        description: "Adds an array of provided tags to the targets",
         permissionLevel: CommandPermissionLevel.GameDirectors,
-        mandatoryParameters: [{ name: "targets", type: CustomCommandParamType.EntitySelector }],
+        mandatoryParameters: [
+            { name: "targets", type: CustomCommandParamType.EntitySelector },
+            { name: "tags", type: CustomCommandParamType.String },
+        ],
     },
-    (origin, targets: Entity[]) => {
+    (origin, targets: Entity[], tags: string) => {
         system.run(() => {
             for (const entity of targets) {
-                try {
-                    entity.clearVelocity();
-                } catch {
-                    // skip
+                const selectorTags = tags.split(/[, ]/g).filter((t) => t !== "");
+                for (const tag of selectorTags) {
+                    entity.addTag(tag);
                 }
             }
         });
-        return { status: CustomCommandStatus.Success, message: "Sucessfully cleared velocity" };
+        return {
+            status: CustomCommandStatus.Success,
+            message: `Added [${tags}] to ${targets.length} entities`,
+        };
     }
 );

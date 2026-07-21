@@ -21,6 +21,7 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
+
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
@@ -30,8 +31,8 @@ import {
     Player,
 } from "@minecraft/server";
 
-import { Vector } from "../../utils/vector.js";
-import { CommandManager } from "../command.js";
+import { Vector } from "../../../utils/vector.js";
+import { CommandManager } from "../../command.js";
 
 CommandManager.registerCommand(
     {

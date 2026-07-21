@@ -21,54 +21,42 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
+
+// ${player.name} ${score.health}
+
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
+    system,
     CustomCommandParamType,
     Entity,
-    system,
+    Player,
 } from "@minecraft/server";
 
-import { CommandManager } from "../command.js";
+import { CommandManager } from "../../command.js";
 
 CommandManager.registerCommand(
     {
-        name: "removetags",
-        description: "Removes an array of provided tags from the targets",
+        name: "nametag",
+        description: "Set nametag of entities",
         permissionLevel: CommandPermissionLevel.GameDirectors,
-        mandatoryParameters: [{ name: "targets", type: CustomCommandParamType.EntitySelector }],
-        optionalParameters: [{ name: "tags", type: CustomCommandParamType.String }],
+        mandatoryParameters: [
+            { name: "targets", type: CustomCommandParamType.EntitySelector },
+            { name: "nametag", type: CustomCommandParamType.String },
+        ],
     },
-    (origin, targets: Entity[], tags: string) => {
-        if (!tags) {
-            system.run(() => {
-                for (const entity of targets) {
-                    const entityTags = entity.getTags();
-                    for (const tag of entityTags) {
-                        entity.removeTag(tag);
-                    }
-                }
-            });
-            return {
-                status: CustomCommandStatus.Success,
-                message: `All tags removed from ${targets.length} entities`,
-            };
-        }
-
+    (origin, targets: Entity[], nameTag: string) => {
         system.run(() => {
             for (const entity of targets) {
-                const selectorTags = tags.split(/[, ]/g).filter((t) => t !== "");
-                const entityTags = entity.getTags();
-                for (const tag of entityTags) {
-                    if (selectorTags.includes(tag)) {
-                        entity.removeTag(tag);
-                    }
+                try {
+                    entity.nameTag = nameTag
+                        .replace(/{n}/g, "\n")
+                        .replace(/{name}/g, (entity as Player).name ?? "default");
+                } catch {
+                    // skip
                 }
             }
         });
-        return {
-            status: CustomCommandStatus.Success,
-            message: `Removed [${tags}] from ${targets.length} entities`,
-        };
+        return { status: CustomCommandStatus.Success, message: "Sucessfully changed nametags" };
     }
 );

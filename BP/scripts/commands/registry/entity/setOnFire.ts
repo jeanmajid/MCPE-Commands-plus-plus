@@ -21,41 +21,34 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-// ${player.name} ${score.health}
-
 import {
     CommandPermissionLevel,
-    CustomCommandStatus,
-    system,
     CustomCommandParamType,
+    CustomCommandStatus,
     Entity,
-    Player,
+    system,
 } from "@minecraft/server";
 
-import { CommandManager } from "../command.js";
+import { CommandManager } from "../../command.js";
 
 CommandManager.registerCommand(
     {
-        name: "nametag",
-        description: "Set nametag of entities",
+        name: "setonfire",
+        description: "Sets the target entities on fire",
         permissionLevel: CommandPermissionLevel.GameDirectors,
-        mandatoryParameters: [
-            { name: "targets", type: CustomCommandParamType.EntitySelector },
-            { name: "nametag", type: CustomCommandParamType.String },
+        mandatoryParameters: [{ name: "targets", type: CustomCommandParamType.EntitySelector }],
+        optionalParameters: [
+            { name: "timeSeconds", type: CustomCommandParamType.Float },
+            { name: "useEffects", type: CustomCommandParamType.Boolean },
         ],
     },
-    (origin, targets: Entity[], nameTag: string) => {
+    (origin, targets: Entity[], timeSeconds: number = 3, useEffects: boolean = true) => {
         system.run(() => {
             for (const entity of targets) {
-                try {
-                    entity.nameTag = nameTag
-                        .replace(/{n}/g, "\n")
-                        .replace(/{name}/g, (entity as Player).name ?? "default");
-                } catch {
-                    // skip
-                }
+                entity.setOnFire(timeSeconds, useEffects);
             }
         });
-        return { status: CustomCommandStatus.Success, message: "Sucessfully changed nametags" };
+
+        return { status: CustomCommandStatus.Success, message: `Set targets on fire` };
     }
 );

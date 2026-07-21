@@ -39,6 +39,15 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 /ban
 /unban
 
+wiki
+listattributes get all + status (on off)
+setitemdata/readitemdata
+attributes should only be event based, anything that would require a runInterval, should just be triggered via command block as a custom command and not a attribute
+get/set redstone power of block (maybe more similar block methods like this)
+Document tooling setup
+maybe like spawnplayer or smth
+event system, run commands on certain events like og commands++, allowing command users to crazily optimise their works
+
 ## Attributes
 
 - Command on attribute change

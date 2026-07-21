@@ -21,33 +21,39 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
+
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
+    system,
     CustomCommandParamType,
     Entity,
-    system,
+    Player,
 } from "@minecraft/server";
 
-import { CommandManager } from "../command.js";
+import { CommandManager } from "../../command.js";
 
 CommandManager.registerCommand(
     {
-        name: "rotate",
-        description: "Rotates an entity",
+        name: "resetnametag",
+        description: "Reset the nametag for players",
         permissionLevel: CommandPermissionLevel.GameDirectors,
-        optionalParameters: [
-            { name: "target", type: CustomCommandParamType.EntitySelector },
-            { name: "rotationX", type: CustomCommandParamType.Float },
-            { name: "rotationY", type: CustomCommandParamType.Float },
-        ],
+        mandatoryParameters: [{ name: "targets", type: CustomCommandParamType.EntitySelector }],
     },
-    (origin, target: Entity[], rotationX: number, rotationY: number) => {
+    (origin, targets: Entity[]) => {
         system.run(() => {
-            for (const entity of target) {
-                entity.setRotation({ x: rotationX, y: rotationY });
+            for (const entity of targets) {
+                try {
+                    if (entity instanceof Player) {
+                        entity.nameTag = entity.name;
+                    } else {
+                        entity.nameTag = "";
+                    }
+                } catch {
+                    // skip
+                }
             }
         });
-        return { status: CustomCommandStatus.Success };
+        return { status: CustomCommandStatus.Success, message: "Sucessfully reset nametags" };
     }
 );

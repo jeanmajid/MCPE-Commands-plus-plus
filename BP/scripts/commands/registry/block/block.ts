@@ -21,40 +21,36 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
+
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
     system,
     CustomCommandParamType,
-    world,
 } from "@minecraft/server";
 
-import { CommandManager } from "../command.js";
-
-const ranCommands: Map<string, string> = new Map();
+import { Vector } from "../../../utils/vector.js";
+import { CommandManager } from "../../command.js";
 
 CommandManager.registerCommand(
     {
-        name: "delay",
-        description: "Delays the execution of a command",
-        permissionLevel: CommandPermissionLevel.GameDirectors,
-        mandatoryParameters: [
-            { name: "id", type: CustomCommandParamType.String },
-            { name: "delayInTicks", type: CustomCommandParamType.Integer },
-            { name: "command", type: CustomCommandParamType.String },
-        ],
+        name: "block",
+        description: "Places a block at the current position",
+        permissionLevel: CommandPermissionLevel.Admin,
+        optionalParameters: [{ name: "blockType", type: CustomCommandParamType.BlockType }],
     },
-    (origin, id: string, delayInTicks: number, command: string) => {
-        if (ranCommands.has(id)) {
-            return { status: CustomCommandStatus.Failure, message: "" };
+    (origin, blockType: string = "minecraft:glass") => {
+        if (!origin.sourceEntity) {
+            return;
         }
-        ranCommands.set(id, command);
-
-        system.runTimeout(() => {
-            world.getDimension("overworld").runCommand(command);
-            ranCommands.delete(id);
-        }, delayInTicks);
-
-        return { status: CustomCommandStatus.Success, message: "" };
+        const dimension = origin.sourceEntity.dimension;
+        const location = origin.sourceEntity.location;
+        system.run(() => {
+            dimension.setBlockType(location, blockType);
+        });
+        return {
+            status: CustomCommandStatus.Success,
+            message: `${blockType} placed successully at ${Vector.toStringFloored(location)}`,
+        };
     }
 );

@@ -21,24 +21,25 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
+
 import "./command.js";
 
 // TODO: Automate this
-import "./registry/addTags.js";
-import "./registry/applyImpulse.js";
-import "./registry/applyKnockback.js";
-import "./registry/bind.js";
-import "./registry/block.js";
-import "./registry/blockStates.js";
-import "./registry/clearVelocity.js";
-import "./registry/drawLine.js";
-import "./registry/nameTag.js";
-import "./registry/remove.js";
-import "./registry/removeTags.js";
-import "./registry/resetNameTag.js";
-import "./registry/rotate.js";
-import "./registry/setOnFire.js";
-import "./registry/structureList.js";
-import "./registry/t.js";
-import "./registry/top.js";
-import "./registry/unbind.js";
+import "./registry/attribute/bind.js";
+import "./registry/attribute/unbind.js";
+import "./registry/block/block.js";
+import "./registry/block/blockStates.js";
+import "./registry/debug/t.js";
+import "./registry/debugDrawer/drawLine.js";
+import "./registry/entity/remove.js";
+import "./registry/entity/rotate.js";
+import "./registry/entity/setOnFire.js";
+import "./registry/entity/top.js";
+import "./registry/nameTag/nameTag.js";
+import "./registry/nameTag/resetNameTag.js";
+import "./registry/structure/structureList.js";
+import "./registry/tag/addTags.js";
+import "./registry/tag/removeTags.js";
+import "./registry/velocity/applyImpulse.js";
+import "./registry/velocity/applyKnockback.js";
+import "./registry/velocity/clearVelocity.js";

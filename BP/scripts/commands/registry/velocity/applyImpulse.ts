@@ -21,6 +21,7 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
+
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
@@ -29,30 +30,26 @@ import {
     Entity,
 } from "@minecraft/server";
 
-import { CommandManager } from "../command.js";
+import { CommandManager } from "../../command.js";
 
 CommandManager.registerCommand(
     {
-        name: "remove",
-        description: "Removes entites from the world",
+        name: "applyimpulse",
+        description: "Applies an impulse to the selected entities",
         permissionLevel: CommandPermissionLevel.GameDirectors,
-        mandatoryParameters: [{ name: "targets", type: CustomCommandParamType.EntitySelector }],
+        mandatoryParameters: [
+            { name: "targets", type: CustomCommandParamType.EntitySelector },
+            { name: "x", type: CustomCommandParamType.Float },
+            { name: "y", type: CustomCommandParamType.Float },
+            { name: "z", type: CustomCommandParamType.Float },
+        ],
     },
-    (origin, targets: Entity[]) => {
-        let amount = 0;
+    (origin, targets: Entity[], x: number, y: number, z: number) => {
         system.run(() => {
             for (const entity of targets) {
-                try {
-                    entity.remove();
-                    ++amount;
-                } catch {
-                    // skip
-                }
+                entity.applyImpulse({ x, y, z });
             }
         });
-        return {
-            status: CustomCommandStatus.Success,
-            message: `Sucessfully removed ${amount} entities`,
-        };
+        return { status: CustomCommandStatus.Success, message: "Sucessfully applied Impulse" };
     }
 );

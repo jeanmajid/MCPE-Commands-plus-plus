@@ -21,7 +21,10 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
+
 import { ScoreboardObjective, world } from "@minecraft/server";
+
+import { ATTRIBUTE_KEY } from "../constants/dynamicPropertyKeys";
 
 export abstract class BaseAttribute {
     public abstract id: string;
@@ -51,11 +54,11 @@ export class AttributeManager {
 
     public static loadAttributesFromMemory(): void {
         for (const propertyId of world.getDynamicPropertyIds()) {
-            if (!propertyId.startsWith("attribute:")) {
+            if (!propertyId.startsWith(ATTRIBUTE_KEY)) {
                 continue;
             }
 
-            const attributeId = propertyId.replace("attribute:", "");
+            const attributeId = propertyId.replace(ATTRIBUTE_KEY, "");
             const attribute = this.getAttribute(attributeId);
             if (!attribute) {
                 console.warn(

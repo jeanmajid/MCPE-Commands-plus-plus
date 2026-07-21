@@ -21,24 +21,36 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { EntityHealthChangedAfterEvent, world } from "@minecraft/server";
 
-import { AttributeManager, BaseAttribute } from "../attribute";
+import {
+    CommandPermissionLevel,
+    Player,
+    CustomCommandStatus,
+    world,
+    system,
+} from "@minecraft/server";
 
-class HealthAttribute extends BaseAttribute {
-    public id = "health";
-    public event?: (arg0: EntityHealthChangedAfterEvent) => void;
+import { CommandManager } from "../../command.js";
 
-    public initialize(): void {
-        this.event = world.afterEvents.entityHealthChanged.subscribe(({ entity, newValue }) => {
-            this.score.setScore(entity, newValue);
+CommandManager.registerCommand(
+    {
+        name: "structurelist",
+        description: "list all the structures on the world",
+        permissionLevel: CommandPermissionLevel.Admin,
+    },
+    (origin) => {
+        system.run(() => {
+            if (!(origin.sourceEntity instanceof Player)) {
+                return { status: CustomCommandStatus.Failure };
+            }
+
+            const structureIds = world.structureManager.getWorldStructureIds();
+            const message =
+                structureIds.length > 0
+                    ? `§aStructures in world:\n§7${structureIds.join("\n§7")}`
+                    : "§cNo structures found in world";
+            origin.sourceEntity.sendMessage(message);
         });
+        return { status: CustomCommandStatus.Success };
     }
-
-    public cleanup(): void {
-        // oxlint-disable-next-line typescript/no-non-null-assertion
-        world.afterEvents.entityHealthChanged.unsubscribe(this.event!);
-    }
-}
-
-AttributeManager.registerAttribute(new HealthAttribute());
+);

@@ -21,34 +21,56 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
+
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
-    system,
     CustomCommandParamType,
-    Entity,
+    world,
+    system,
 } from "@minecraft/server";
 
-import { CommandManager } from "../command.js";
+import { AttributeManager } from "../../../attributes/attribute.js";
+import { ATTRIBUTE_KEY } from "../../../constants/dynamicPropertyKeys.js";
+import { CommandManager } from "../../command.js";
 
 CommandManager.registerCommand(
     {
-        name: "applyimpulse",
-        description: "Applies an impulse to the selected entities",
+        name: "unbind",
+        description: "unbind an attribute",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
-            { name: "targets", type: CustomCommandParamType.EntitySelector },
-            { name: "x", type: CustomCommandParamType.Float },
-            { name: "y", type: CustomCommandParamType.Float },
-            { name: "z", type: CustomCommandParamType.Float },
+            { name: "bindtype", type: CustomCommandParamType.Enum, enumName: "bind" },
         ],
     },
-    (origin, targets: Entity[], x: number, y: number, z: number) => {
+    (origin, attributeId: string) => {
+        const attribute = AttributeManager.getAttribute(attributeId);
+        if (!attribute) {
+            return {
+                status: CustomCommandStatus.Failure,
+                message: `Attribute ${attributeId} does not exist`,
+            };
+        }
+        if (!attribute.isBinded) {
+            return {
+                status: CustomCommandStatus.Failure,
+                message: `Attribute ${attributeId} isn't binded`,
+            };
+        }
+
         system.run(() => {
-            for (const entity of targets) {
-                entity.applyImpulse({ x, y, z });
-            }
+            world.setDynamicProperty(`${ATTRIBUTE_KEY}${attributeId}`, undefined);
+            attribute.cleanup();
+            world.scoreboard.removeObjective(attribute.score);
+
+            attribute.isBinded = false;
+            // @ts-expect-error
+            attribute.score = undefined;
         });
-        return { status: CustomCommandStatus.Success, message: "Sucessfully applied Impulse" };
+
+        return {
+            status: CustomCommandStatus.Success,
+            message: `Successfully unbinded ${attributeId}`,
+        };
     }
 );

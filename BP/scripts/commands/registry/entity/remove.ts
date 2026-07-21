@@ -21,46 +21,39 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
+
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
+    system,
     CustomCommandParamType,
     Entity,
-    system,
 } from "@minecraft/server";
 
-import { CommandManager } from "../command.js";
+import { CommandManager } from "../../command.js";
 
 CommandManager.registerCommand(
     {
-        name: "top",
-        description: "Teleports the target to the top most block at their position",
+        name: "remove",
+        description: "Removes entites from the world",
         permissionLevel: CommandPermissionLevel.GameDirectors,
-
-        optionalParameters: [
-            { name: "target", type: CustomCommandParamType.EntitySelector },
-            { name: "minHeight", type: CustomCommandParamType.Float },
-        ],
+        mandatoryParameters: [{ name: "targets", type: CustomCommandParamType.EntitySelector }],
     },
-    (origin, target: Entity[], minHeight: number) => {
+    (origin, targets: Entity[]) => {
+        let amount = 0;
         system.run(() => {
-            if (!target && origin.sourceEntity) {
-                teleportEntityToTop(origin.sourceEntity, minHeight);
-                return;
-            }
-            for (const entity of target) {
-                teleportEntityToTop(entity, minHeight);
+            for (const entity of targets) {
+                try {
+                    entity.remove();
+                    ++amount;
+                } catch {
+                    // skip
+                }
             }
         });
-        return { status: CustomCommandStatus.Success, message: "Sucessfully teleported entities" };
+        return {
+            status: CustomCommandStatus.Success,
+            message: `Sucessfully removed ${amount} entities`,
+        };
     }
 );
-
-function teleportEntityToTop(entity: Entity, minHeight: number): void {
-    const { x, y, z } = entity.location;
-    const topBlock = entity.dimension.getTopmostBlock({ x, z }, minHeight);
-    if (!topBlock || topBlock.y <= y) {
-        return;
-    }
-    entity.teleport({ x, y: topBlock.y + 1, z });
-}

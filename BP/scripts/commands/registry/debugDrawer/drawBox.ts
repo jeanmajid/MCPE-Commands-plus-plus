@@ -20,25 +20,3 @@
  * You should have received a copy of the GNU General Public License
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
-
-import { EntityHealthChangedAfterEvent, world } from "@minecraft/server";
-
-import { AttributeManager, BaseAttribute } from "../attribute";
-
-class HealthAttribute extends BaseAttribute {
-    public id = "health";
-    public event?: (arg0: EntityHealthChangedAfterEvent) => void;
-
-    public initialize(): void {
-        this.event = world.afterEvents.entityHealthChanged.subscribe(({ entity, newValue }) => {
-            this.score.setScore(entity, newValue);
-        });
-    }
-
-    public cleanup(): void {
-        // oxlint-disable-next-line typescript/no-non-null-assertion
-        world.afterEvents.entityHealthChanged.unsubscribe(this.event!);
-    }
-}
-
-AttributeManager.registerAttribute(new HealthAttribute());

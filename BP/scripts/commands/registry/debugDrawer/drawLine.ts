@@ -21,6 +21,7 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
+
 import { DebugLine, debugDrawer } from "@minecraft/debug-utilities";
 import {
     CommandPermissionLevel,
@@ -29,8 +30,8 @@ import {
     Vector3,
 } from "@minecraft/server";
 
-import { getNormalizedRgba } from "../../utils/color.js";
-import { CommandManager } from "../command.js";
+import { getNormalizedRgba } from "../../../utils/color.js";
+import { CommandManager } from "../../command.js";
 
 CommandManager.registerCommand(
     {
@@ -46,7 +47,7 @@ CommandManager.registerCommand(
             { name: "colorRed", type: CustomCommandParamType.Integer },
             { name: "colorGreen", type: CustomCommandParamType.Integer },
             { name: "colorBlue", type: CustomCommandParamType.Integer },
-            { name: "expirationTicks", type: CustomCommandParamType.Integer },
+            { name: "expirationSeconds", type: CustomCommandParamType.Float },
         ],
     },
     (
@@ -60,12 +61,15 @@ CommandManager.registerCommand(
         expirationTicks: number
     ) => {
         const line = new DebugLine(startPos, endPos);
+
         if (colorBlue !== undefined) {
-            line.color = getNormalizedRgba(colorRed, colorGreen, colorBlue, 255);
+            line.color = getNormalizedRgba(colorRed, colorGreen, colorBlue, 1);
         }
-        if (expirationTicks !== undefined) {
+
+        if (!expirationTicks) {
             line.timeLeft = expirationTicks;
         }
+
         debugDrawer.addShape(line);
         return { status: CustomCommandStatus.Success, message: "Line successfully drawn" };
     }
