@@ -21,3 +21,58 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
+import { DebugCircle, debugDrawer } from "@minecraft/debug-utilities";
+import {
+    CommandPermissionLevel,
+    CustomCommandStatus,
+    CustomCommandParamType,
+    Vector3,
+} from "@minecraft/server";
+
+import { getNormalizedRgba } from "../../../utils/color.js";
+import { CommandManager } from "../../command.js";
+
+CommandManager.registerCommand(
+    {
+        name: "drawcircle",
+        description: "Draws a circle via the Debug Drawer module",
+        permissionLevel: CommandPermissionLevel.GameDirectors,
+        mandatoryParameters: [
+            { name: "startPos", type: CustomCommandParamType.Location },
+            { name: "scale", type: CustomCommandParamType.Float }, // Maybe call this radius or diameter; idk what scale equates to
+            { name: "id", type: CustomCommandParamType.String },
+        ],
+        optionalParameters: [
+            { name: "rotation", type: CustomCommandParamType.Location },
+            { name: "colorRed", type: CustomCommandParamType.Integer },
+            { name: "colorGreen", type: CustomCommandParamType.Integer },
+            { name: "colorBlue", type: CustomCommandParamType.Integer },
+            { name: "expirationSeconds", type: CustomCommandParamType.Float },
+        ],
+    },
+    (
+        origin,
+        startPos: Vector3,
+        endPos: Vector3,
+        id: string,
+        scale: number,
+        rotation: Vector3,
+        colorRed: number,
+        colorGreen: number,
+        colorBlue: number,
+        expirationTicks: number
+    ) => {
+        const circle = new DebugCircle(startPos);
+
+        if (colorBlue !== undefined) {
+            circle.color = getNormalizedRgba(colorRed, colorGreen, colorBlue, 1);
+        }
+
+        if (expirationTicks) {
+            circle.timeLeft = expirationTicks;
+        }
+
+        debugDrawer.addShape(circle);
+        return { status: CustomCommandStatus.Success, message: "Circle successfully drawn" };
+    }
+);

@@ -20,3 +20,61 @@
  * You should have received a copy of the GNU General Public License
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
+
+import { DebugBox, debugDrawer } from "@minecraft/debug-utilities";
+import {
+    CommandPermissionLevel,
+    CustomCommandStatus,
+    CustomCommandParamType,
+    Vector3,
+} from "@minecraft/server";
+
+import { getNormalizedRgba } from "../../../utils/color.js";
+import { CommandManager } from "../../command.js";
+
+CommandManager.registerCommand(
+    {
+        name: "drawbox",
+        description: "Draws a box via the Debug Drawer module",
+        permissionLevel: CommandPermissionLevel.GameDirectors,
+        mandatoryParameters: [
+            { name: "startPos", type: CustomCommandParamType.Location },
+            { name: "bound", type: CustomCommandParamType.Location }, // xyz
+            { name: "scale", type: CustomCommandParamType.Float },
+            { name: "id", type: CustomCommandParamType.String },
+        ],
+        optionalParameters: [
+            { name: "rotation", type: CustomCommandParamType.Location },
+            { name: "colorRed", type: CustomCommandParamType.Integer },
+            { name: "colorGreen", type: CustomCommandParamType.Integer },
+            { name: "colorBlue", type: CustomCommandParamType.Integer },
+            { name: "expirationSeconds", type: CustomCommandParamType.Float },
+        ],
+    },
+    (
+        origin,
+        startPos: Vector3,
+        volume: Vector3,
+        id: string,
+        bound: Vector3,
+        scale: number,
+        rotation: Vector3,
+        colorRed: number,
+        colorGreen: number,
+        colorBlue: number,
+        expirationTicks: number
+    ) => {
+        const box = new DebugBox(startPos);
+
+        if (colorBlue !== undefined) {
+            box.color = getNormalizedRgba(colorRed, colorGreen, colorBlue, 1);
+        }
+
+        if (expirationTicks) {
+            box.timeLeft = expirationTicks;
+        }
+
+        debugDrawer.addShape(box);
+        return { status: CustomCommandStatus.Success, message: "Box successfully drawn" };
+    }
+);

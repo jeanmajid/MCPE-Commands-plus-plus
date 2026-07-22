@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import { DebugLine, debugDrawer } from "@minecraft/debug-utilities";
 import {
     CommandPermissionLevel,
@@ -36,7 +35,7 @@ import { CommandManager } from "../../command.js";
 CommandManager.registerCommand(
     {
         name: "drawline",
-        description: "Draws a line via the Debug Drawer",
+        description: "Draws a line via the Debug Drawer module",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
             { name: "startPos", type: CustomCommandParamType.Location },
@@ -66,7 +65,7 @@ CommandManager.registerCommand(
             line.color = getNormalizedRgba(colorRed, colorGreen, colorBlue, 1);
         }
 
-        if (!expirationTicks) {
+        if (expirationTicks) {
             line.timeLeft = expirationTicks;
         }
 

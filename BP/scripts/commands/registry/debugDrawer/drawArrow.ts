@@ -21,3 +21,58 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
+import { DebugArrow, debugDrawer } from "@minecraft/debug-utilities";
+import {
+    CommandPermissionLevel,
+    CustomCommandStatus,
+    CustomCommandParamType,
+    Vector3,
+} from "@minecraft/server";
+
+import { getNormalizedRgba } from "../../../utils/color.js";
+import { CommandManager } from "../../command.js";
+
+CommandManager.registerCommand(
+    {
+        name: "drawarrow",
+        description: "Draws a arrow via the Debug Drawer module",
+        permissionLevel: CommandPermissionLevel.GameDirectors,
+        mandatoryParameters: [
+            { name: "startPos", type: CustomCommandParamType.Location },
+            { name: "endPos", type: CustomCommandParamType.Location },
+            { name: "headLength", type: CustomCommandParamType.Float },
+            { name: "headRadius", type: CustomCommandParamType.Float },
+            { name: "headSegments", type: CustomCommandParamType.Integer },
+            { name: "id", type: CustomCommandParamType.String },
+        ],
+        optionalParameters: [
+            { name: "colorRed", type: CustomCommandParamType.Integer },
+            { name: "colorGreen", type: CustomCommandParamType.Integer },
+            { name: "colorBlue", type: CustomCommandParamType.Integer },
+            { name: "expirationSeconds", type: CustomCommandParamType.Float },
+        ],
+    },
+    (
+        origin,
+        startPos: Vector3,
+        endPos: Vector3,
+        id: string,
+        colorRed: number,
+        colorGreen: number,
+        colorBlue: number,
+        expirationTicks: number
+    ) => {
+        const arrow = new DebugArrow(startPos, endPos);
+
+        if (colorBlue !== undefined) {
+            arrow.color = getNormalizedRgba(colorRed, colorGreen, colorBlue, 1);
+        }
+
+        if (expirationTicks) {
+            arrow.timeLeft = expirationTicks;
+        }
+
+        debugDrawer.addShape(arrow);
+        return { status: CustomCommandStatus.Success, message: "Arrow successfully drawn" };
+    }
+);

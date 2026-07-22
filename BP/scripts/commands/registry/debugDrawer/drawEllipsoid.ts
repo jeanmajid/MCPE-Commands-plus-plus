@@ -21,3 +21,62 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
+import { DebugEllipsoid, debugDrawer } from "@minecraft/debug-utilities";
+import {
+    CommandPermissionLevel,
+    CustomCommandStatus,
+    CustomCommandParamType,
+    Vector3,
+} from "@minecraft/server";
+
+import { getNormalizedRgba } from "../../../utils/color.js";
+import { CommandManager } from "../../command.js";
+
+CommandManager.registerCommand(
+    {
+        name: "drawellipsoid", // please change da faking name or smt
+        description: "Draws a ellipsoid via the Debug Drawer module",
+        permissionLevel: CommandPermissionLevel.GameDirectors,
+        mandatoryParameters: [
+            { name: "startPos", type: CustomCommandParamType.Location },
+            { name: "radii", type: CustomCommandParamType.Float },
+            { name: "scale", type: CustomCommandParamType.Float },
+            { name: "segmentsPerAxis", type: CustomCommandParamType.Integer }, // Optional?
+            { name: "id", type: CustomCommandParamType.String },
+        ],
+        optionalParameters: [
+            { name: "rotation", type: CustomCommandParamType.Location },
+            { name: "colorRed", type: CustomCommandParamType.Integer },
+            { name: "colorGreen", type: CustomCommandParamType.Integer },
+            { name: "colorBlue", type: CustomCommandParamType.Integer },
+            { name: "expirationSeconds", type: CustomCommandParamType.Float },
+        ],
+    },
+    (
+        origin,
+        startPos: Vector3,
+        endPos: Vector3,
+        id: string,
+        radii: number,
+        scale: number,
+        segmentsPerAxis: number,
+        rotation: Vector3,
+        colorRed: number,
+        colorGreen: number,
+        colorBlue: number,
+        expirationTicks: number
+    ) => {
+        const ellipsoid = new DebugEllipsoid(startPos);
+
+        if (colorBlue !== undefined) {
+            ellipsoid.color = getNormalizedRgba(colorRed, colorGreen, colorBlue, 1);
+        }
+
+        if (expirationTicks) {
+            ellipsoid.timeLeft = expirationTicks;
+        }
+
+        debugDrawer.addShape(ellipsoid);
+        return { status: CustomCommandStatus.Success, message: "ellipsoid successfully drawn" };
+    }
+);
