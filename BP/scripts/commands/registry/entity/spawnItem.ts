@@ -29,6 +29,7 @@ import {
     Dimension,
     ItemStack,
     ItemType,
+    system,
 } from "@minecraft/server";
 
 import { CommandManager } from "../../command.js";
@@ -51,17 +52,21 @@ CommandManager.registerCommand(
             dimension = origin.sourceEntity.dimension;
         } else if (origin.sourceBlock) {
             dimension = origin.sourceBlock.dimension;
-        } else {
+        } else if (origin.initiator) {
             return;
         }
 
+        quantity = Math.max(Math.min(quantity, 255), 1);
+
         const itemStack = new ItemStack(item, quantity);
 
-        dimension.spawnItem(itemStack, location);
+        system.run(() => {
+            dimension.spawnItem(itemStack, location);
+        });
 
         return {
             status: CustomCommandStatus.Success,
-            message: `Summoned ${item.localizationKey} * ${quantity} at ${location.x}, ${location.y}, ${location.z}`,
+            message: `Summoned %${item.localizationKey} * ${quantity}`,
         };
     }
 );

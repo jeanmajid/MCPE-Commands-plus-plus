@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import "./command.js";
 
 // TODO: Automate this
@@ -30,10 +29,21 @@ import "./registry/attribute/unbind.js";
 import "./registry/block/block.js";
 import "./registry/block/blockStates.js";
 import "./registry/debug/t.js";
-import "./registry/debugDrawer/drawLine.js";
+import "./registry/drawer/drawArrow.js";
+import "./registry/drawer/drawBox.js";
+import "./registry/drawer/drawCircle.js";
+import "./registry/drawer/drawCone.js";
+import "./registry/drawer/drawCylinder.js";
+import "./registry/drawer/drawEllipsoid.js";
+import "./registry/drawer/drawLine.js";
+import "./registry/drawer/drawPyramid.js";
+import "./registry/drawer/drawSphere.js";
+import "./registry/drawer/drawText.js";
+import "./registry/drawer/drawVolume.js";
 import "./registry/entity/remove.js";
 import "./registry/entity/rotate.js";
 import "./registry/entity/setOnFire.js";
+import "./registry/entity/spawnItem.js";
 import "./registry/entity/top.js";
 import "./registry/nameTag/nameTag.js";
 import "./registry/nameTag/resetNameTag.js";
