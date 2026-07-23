@@ -21,12 +21,10 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { DebugLine } from "@minecraft/debug-utilities";
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
     CustomCommandParamType,
-    Vector3,
 } from "@minecraft/server";
 
 import { CommandManager } from "../../command.js";
@@ -34,19 +32,17 @@ import { DrawerManager } from "../../managers/drawerManger.js";
 
 CommandManager.registerCommand(
     {
-        name: "drawline",
-        description: "Add a line",
+        name: "draw",
+        description: "Draws a group of shapes under a given id",
         permissionLevel: CommandPermissionLevel.GameDirectors,
-        mandatoryParameters: [
-            { name: "startPos", type: CustomCommandParamType.Location },
-            { name: "endPos", type: CustomCommandParamType.Location },
-            { name: "id", type: CustomCommandParamType.String },
-        ],
+        mandatoryParameters: [{ name: "id", type: CustomCommandParamType.String }],
     },
-    (origin, startPos: Vector3, endPos: Vector3, id: string) => {
-        const line = new DebugLine(startPos, endPos);
-        DrawerManager.addShape(id, line);
+    (origin, id: string) => {
+        const result = DrawerManager.drawId(id);
 
-        return { status: CustomCommandStatus.Success, message: "Line successfully added" };
+        return {
+            status: CustomCommandStatus.Success,
+            message: result ? "Shape successfully drawn" : "Failed to draw shape",
+        };
     }
 );

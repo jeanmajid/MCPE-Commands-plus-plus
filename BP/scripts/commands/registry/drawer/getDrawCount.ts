@@ -21,32 +21,21 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { DebugLine } from "@minecraft/debug-utilities";
-import {
-    CommandPermissionLevel,
-    CustomCommandStatus,
-    CustomCommandParamType,
-    Vector3,
-} from "@minecraft/server";
+import { CommandPermissionLevel, CustomCommandStatus } from "@minecraft/server";
 
 import { CommandManager } from "../../command.js";
 import { DrawerManager } from "../../managers/drawerManger.js";
 
 CommandManager.registerCommand(
     {
-        name: "drawline",
-        description: "Add a line",
+        name: "getdrawcount",
+        description: "Display how many shapes are currently drawn",
         permissionLevel: CommandPermissionLevel.GameDirectors,
-        mandatoryParameters: [
-            { name: "startPos", type: CustomCommandParamType.Location },
-            { name: "endPos", type: CustomCommandParamType.Location },
-            { name: "id", type: CustomCommandParamType.String },
-        ],
     },
-    (origin, startPos: Vector3, endPos: Vector3, id: string) => {
-        const line = new DebugLine(startPos, endPos);
-        DrawerManager.addShape(id, line);
-
-        return { status: CustomCommandStatus.Success, message: "Line successfully added" };
+    (_) => {
+        return {
+            status: CustomCommandStatus.Success,
+            message: `There is currently ${DrawerManager.shapeCount} shapes stored in the manager`,
+        };
     }
 );

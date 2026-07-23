@@ -44,12 +44,15 @@ CommandManager.registerCommand(
         ],
     },
     (origin, shapeId, colorRed: number, colorGreen: number, colorBlue: number) => {
-        DrawerManager.setProperty(
+        const result = DrawerManager.setProperty(
             shapeId,
             "color",
             getNormalizedRgba(colorRed, colorGreen, colorBlue, 1)
         );
 
-        return { status: CustomCommandStatus.Success, message: "Box color successfully set" };
+        return {
+            status: CustomCommandStatus.Success,
+            message: result ? "Box color successfully set" : "Failed to set box color",
+        };
     }
 );

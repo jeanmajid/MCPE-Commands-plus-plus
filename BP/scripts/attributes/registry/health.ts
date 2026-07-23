@@ -30,6 +30,7 @@ class HealthAttribute extends BaseAttribute {
     public event?: (arg0: EntityHealthChangedAfterEvent) => void;
 
     public initialize(): void {
+        // TODO: get all entities and set their health score
         this.event = world.afterEvents.entityHealthChanged.subscribe(({ entity, newValue }) => {
             this.score.setScore(entity, newValue);
         });

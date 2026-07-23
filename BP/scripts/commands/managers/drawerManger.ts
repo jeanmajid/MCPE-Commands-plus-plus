@@ -6,10 +6,11 @@
 //     { name: "expirationSeconds", type: CustomCommandParamType.Float },
 // ],
 
-import { DebugShape } from "@minecraft/debug-utilities";
+import { debugDrawer, DebugShape } from "@minecraft/debug-utilities";
 import { DimensionLocation, Vector3 } from "@minecraft/server";
 
 export class DrawerManager {
+    public static shapeCount: number = 0;
     private static shapes: Map<string, DebugShape[]> = new Map();
 
     /**
@@ -23,8 +24,11 @@ export class DrawerManager {
      * add a shape to a group of shapes under the id
      */
     public static addShape(shapeId: string, shape: DebugShape): void {
-        const shapes: DebugShape[] = this.shapes.get(shapeId) || [];
+        const shapes: DebugShape[] = this.getShapes(shapeId) || [];
         shapes.push(shape);
+
+        this.shapes.set(shapeId, shapes);
+        ++this.shapeCount;
     }
 
     /**
@@ -34,27 +38,63 @@ export class DrawerManager {
         shapeId: string,
         property: P,
         value: DebugShape[P]
-    ): void {
+    ): boolean {
         const shapes = this.getShapes(shapeId);
 
         if (!shapes) {
-            return;
+            return false;
         }
 
         for (const shape of shapes) {
             shape[property] = value;
         }
+
+        return true;
     }
 
-    public static setLocation(shapeId: string, location: Vector3 | DimensionLocation): void {
+    public static setLocation(shapeId: string, location: Vector3 | DimensionLocation): boolean {
         const shapes = this.getShapes(shapeId);
 
         if (!shapes) {
-            return;
+            return false;
         }
 
         for (const shape of shapes) {
             shape.setLocation(location);
         }
+
+        return true;
+    }
+
+    public static drawId(shapeId: string): boolean {
+        const shapes = this.getShapes(shapeId);
+
+        if (!shapes) {
+            return false;
+        }
+
+        for (const shape of shapes) {
+            debugDrawer.addShape(shape);
+        }
+
+        return true;
+    }
+
+    public static removeId(shapeId: string): boolean {
+        const shapes = this.getShapes(shapeId);
+
+        if (!shapes) {
+            return false;
+        }
+
+        for (const shape of shapes) {
+            debugDrawer.removeShape(shape);
+        }
+
+        return true;
+    }
+
+    public static removeAll(): void {
+        debugDrawer.removeAll();
     }
 }
