@@ -21,18 +21,37 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { CommandPermissionLevel, CustomCommandStatus, world } from "@minecraft/server";
+import {
+    CommandPermissionLevel,
+    CustomCommandSource,
+    CustomCommandStatus,
+    Player,
+    world,
+} from "@minecraft/server";
 
 import { CommandManager } from "../../command.js";
 
 CommandManager.registerCommand(
     {
-        name: "t",
-        description: "Provides an output message in chat if the command has ran successfully",
+        name: "seed",
+        description: "Returns a message to the executor containing the world seed",
         permissionLevel: CommandPermissionLevel.GameDirectors,
     },
-    () => {
-        world.sendMessage("Command ran successfully");
-        return { status: CustomCommandStatus.Success, message: "" };
+    (origin) => {
+        const outputMessage = `World Seed: ${world.seed}`;
+
+        if (origin.sourceEntity instanceof Player) {
+            origin.sourceEntity.sendMessage(outputMessage);
+            return { status: CustomCommandStatus.Success };
+        }
+
+        if (
+            origin.sourceType === CustomCommandSource.NPCDialogue &&
+            origin.initiator instanceof Player
+        ) {
+            origin.initiator.sendMessage(outputMessage);
+        }
+
+        return { status: CustomCommandStatus.Success, message: outputMessage };
     }
 );
