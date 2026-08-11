@@ -28,7 +28,7 @@ import {
 } from "@minecraft/server";
 
 import { CommandManager } from "../../command.js";
-import { DrawerManager } from "../../managers/drawerManger.js";
+import { DrawManager } from "../../managers/drawManager.js";
 
 CommandManager.registerCommand(
     {
@@ -38,7 +38,7 @@ CommandManager.registerCommand(
         mandatoryParameters: [{ name: "id", type: CustomCommandParamType.String }],
     },
     (origin, id: string) => {
-        const result = DrawerManager.drawId(id);
+        const result = DrawManager.drawId(id);
 
         return {
             status: CustomCommandStatus.Success,

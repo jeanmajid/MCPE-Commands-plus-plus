@@ -29,7 +29,7 @@ import {
 
 import { getNormalizedRgba } from "../../../utils/color.js";
 import { CommandManager } from "../../command.js";
-import { DrawerManager } from "../../managers/drawerManger.js";
+import { DrawManager } from "../../managers/drawManager.js";
 
 CommandManager.registerCommand(
     {
@@ -44,7 +44,7 @@ CommandManager.registerCommand(
         ],
     },
     (origin, shapeId, colorRed: number, colorGreen: number, colorBlue: number) => {
-        const result = DrawerManager.setProperty(
+        const result = DrawManager.setProperty(
             shapeId,
             "color",
             getNormalizedRgba(colorRed, colorGreen, colorBlue, 1)

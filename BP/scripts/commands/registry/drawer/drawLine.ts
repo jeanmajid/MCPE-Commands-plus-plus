@@ -30,7 +30,7 @@ import {
 } from "@minecraft/server";
 
 import { CommandManager } from "../../command.js";
-import { DrawerManager } from "../../managers/drawerManger.js";
+import { DrawManager } from "../../managers/drawManager.js";
 
 CommandManager.registerCommand(
     {
@@ -45,7 +45,7 @@ CommandManager.registerCommand(
     },
     (origin, startPos: Vector3, endPos: Vector3, id: string) => {
         const line = new DebugLine(startPos, endPos);
-        DrawerManager.addShape(id, line);
+        DrawManager.addShape(id, line);
 
         return { status: CustomCommandStatus.Success, message: "Line successfully added" };
     }

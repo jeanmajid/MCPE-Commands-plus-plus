@@ -30,10 +30,44 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 /blockstates -- reads the block states of the block on the provided xyz position; may also have a "block id" param which lists all block states allowed for the provided block
 
 /fillshape -- loads a shape with provided dimensions
-
 /phil -- better fill with gradients, ticking area loading, replacing with gradient and this and that
 
 /ui -- suit of commands to create and manage ui's
+/ui -- modalform, returned value can be used in the command with custom syntax to be decided
+
+/waypoint -- class of commands to handle locator bar waypoints
+
+/dimension -- transport players between dimensions
+
+/givebutbetter -- give with extra parameters like nbt editing / lore, additional properties, enchants, whatever tha fak
+
+/damageitem -- modify an item durability by a positive or negative value
+/itemdurability -- set an item durability to a fixed value
+/enchantitem -- enchant an item in an entity's inventory
+/nameitem -- rename an item in an entity's inventory
+/nameitemraw -- same as nameitem but uses rawtext JSON formatting
+/moveitem -- move an item between slots in an entity's inventory
+
+/explode -- create an explosion with parameters
+
+/permissions -- modify player permissions like block breaking and entity damaging and shitting and such
+
+/phase -- teleport through the block in front of you
+
+/nametagraw -- same as /nametag but uses rawtext JSON formatting
+
+/clientparticle -- spawns a particle only visible by a certain client
+/clientanimation -- animates a target only visible by a certain client
+
+/gamerulesetup -- sets gamerules to world optimised default values (needs confirmation)
+
+/log -- logs a message to the console rather than to chat for lower profile debugging (class of commands including warn, info, whatever tha fak)
+/lograw -- same as /log but uses rawtext JSON formatting
+
+/seed -- logs the world seed
+/credits -- prints the credits of commands plus plus
+
+/wiki -- show wiki link (very importa)
 
 /og kick
 /ban

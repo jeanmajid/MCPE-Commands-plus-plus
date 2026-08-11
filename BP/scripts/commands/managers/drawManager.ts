@@ -9,7 +9,7 @@
 import { debugDrawer, DebugShape } from "@minecraft/debug-utilities";
 import { DimensionLocation, Vector3 } from "@minecraft/server";
 
-export class DrawerManager {
+export class DrawManager {
     public static shapeCount: number = 0;
     private static shapes: Map<string, DebugShape[]> = new Map();
 
@@ -24,7 +24,7 @@ export class DrawerManager {
      * add a shape to a group of shapes under the id
      */
     public static addShape(shapeId: string, shape: DebugShape): void {
-        const shapes: DebugShape[] = this.getShapes(shapeId) || [];
+        const shapes: DebugShape[] = this.getShapes(shapeId) ?? [];
         shapes.push(shape);
 
         this.shapes.set(shapeId, shapes);

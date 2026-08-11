@@ -24,7 +24,7 @@
 import { CommandPermissionLevel, CustomCommandStatus } from "@minecraft/server";
 
 import { CommandManager } from "../../command.js";
-import { DrawerManager } from "../../managers/drawerManger.js";
+import { DrawManager } from "../../managers/drawManager.js";
 
 CommandManager.registerCommand(
     {
@@ -35,7 +35,7 @@ CommandManager.registerCommand(
     (_) => {
         return {
             status: CustomCommandStatus.Success,
-            message: `There is currently ${DrawerManager.shapeCount} shapes stored in the manager`,
+            message: `There is currently ${DrawManager.shapeCount} shapes stored in the manager`,
         };
     }
 );
