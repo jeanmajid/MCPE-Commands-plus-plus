@@ -59,6 +59,7 @@ CommandManager.registerCommand(
                 break;
             case LogTypes.error:
                 console.error(message);
+                break;
         }
         return {
             status: CustomCommandStatus.Success,
