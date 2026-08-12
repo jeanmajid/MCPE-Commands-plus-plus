@@ -50,6 +50,7 @@ CommandManager.registerCommand(
             origin.initiator instanceof Player
         ) {
             origin.initiator.sendMessage(outputMessage);
+            return { status: CustomCommandStatus.Success };
         }
 
         return { status: CustomCommandStatus.Success, message: outputMessage };

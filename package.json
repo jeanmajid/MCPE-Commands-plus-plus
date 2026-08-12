@@ -14,14 +14,13 @@
         "url": "git+https://github.com/jeanmajid/MCPE-Commands-plus-plus.git"
     },
     "type": "module",
-    "main": "eslint.config.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "dependencies": {
-        "@minecraft/debug-utilities": "1.0.0-beta.1.26.36-stable",
-        "@minecraft/server": "2.9.0-beta.1.26.36-stable",
-        "@minecraft/server-ui": "2.2.0-beta.1.26.34-stable",
+        "@minecraft/debug-utilities": "1.0.0-beta.1.26.43-stable",
+        "@minecraft/server": "2.10.0-beta.1.26.43-stable",
+        "@minecraft/server-ui": "2.2.0-beta.1.26.43-stable",
         "oxfmt": "^0.56.0",
         "oxlint": "^1.71.0"
     }

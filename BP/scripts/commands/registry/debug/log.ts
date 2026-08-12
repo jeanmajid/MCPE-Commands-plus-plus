@@ -30,13 +30,13 @@ import {
 import { CommandManager } from "../../command.js";
 
 const LOG_TYPE_ENUM_KEY = "logTypeEnum";
-const enum LogTypes {
-    debug = "debug",
+enum LogTypes {
     info = "info",
     warn = "warn",
+    error = "error",
 }
 
-CommandManager.registerEnum(LOG_TYPE_ENUM_KEY, [LogTypes.debug, LogTypes.info, LogTypes.warn]);
+CommandManager.registerEnum(LOG_TYPE_ENUM_KEY, Object.values(LogTypes));
 
 CommandManager.registerCommand(
     {
@@ -51,15 +51,14 @@ CommandManager.registerCommand(
     },
     (origin, logType: string, message: string) => {
         switch (logType) {
-            case LogTypes.debug:
-                console.log(message);
-                break;
             case LogTypes.info:
                 console.info(message);
                 break;
             case LogTypes.warn:
                 console.warn(message);
                 break;
+            case LogTypes.error:
+                console.error(message);
         }
         return {
             status: CustomCommandStatus.Success,

@@ -28,6 +28,8 @@ import "./registry/attribute/bind.js";
 import "./registry/attribute/unbind.js";
 import "./registry/block/block.js";
 import "./registry/block/blockStates.js";
+import "./registry/debug/log.js";
+import "./registry/debug/seed.js";
 import "./registry/debug/t.js";
 import "./registry/drawer/draw.js";
 import "./registry/drawer/drawArrow.js";
