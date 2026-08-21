@@ -21,40 +21,26 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {
-    CommandPermissionLevel,
-    CustomCommandStatus,
-    system,
-    CustomCommandParamType,
-    world,
-} from "@minecraft/server";
+import { CommandPermissionLevel, CustomCommandStatus } from "@minecraft/server";
 
 import { CommandManager } from "../../command.js";
 
-const ranCommands: Map<string, string> = new Map();
-
 CommandManager.registerCommand(
     {
-        name: "delay",
-        description: "Delays the execution of a command",
+        name: "biometags",
+        description: "Outputs the tags for the biome based on the position of the executor",
         permissionLevel: CommandPermissionLevel.GameDirectors,
-        mandatoryParameters: [
-            { name: "id", type: CustomCommandParamType.String },
-            { name: "delayInTicks", type: CustomCommandParamType.Integer },
-            { name: "command", type: CustomCommandParamType.String },
-        ],
     },
-    (origin, id: string, delayInTicks: number, command: string) => {
-        if (ranCommands.has(id)) {
-            return { status: CustomCommandStatus.Failure, message: "Id already running" };
+    (origin) => {
+        const source = origin.sourceEntity ?? origin.sourceBlock ?? origin.initiator;
+        if (!source) {
+            return { status: CustomCommandStatus.Failure };
         }
-        ranCommands.set(id, command);
+        const biome = source.dimension.getBiome(source.location);
 
-        system.runTimeout(() => {
-            world.getDimension("overworld").runCommand(command);
-            ranCommands.delete(id);
-        }, delayInTicks);
-
-        return { status: CustomCommandStatus.Success, message: "Command scheduled to run" };
+        return {
+            status: CustomCommandStatus.Success,
+            message: `§aTags: §r${biome.getTags().join(", ")}`,
+        };
     }
 );

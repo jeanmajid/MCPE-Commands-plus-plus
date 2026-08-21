@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
@@ -64,7 +63,7 @@ CommandManager.registerCommand(
         system.run(() => {
             world.setDynamicProperty(`${ATTRIBUTE_KEY}${attributeId}`, scoreboardId);
             const objective =
-                world.scoreboard.getObjective(scoreboardId) ||
+                world.scoreboard.getObjective(scoreboardId) ??
                 world.scoreboard.addObjective(scoreboardId);
 
             attribute.isBinded = true;

@@ -21,18 +21,23 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { CommandPermissionLevel, CustomCommandStatus, world } from "@minecraft/server";
+import { CommandPermissionLevel, CustomCommandStatus } from "@minecraft/server";
 
 import { CommandManager } from "../../command.js";
 
 CommandManager.registerCommand(
     {
-        name: "t",
-        description: "Provides an output message in chat if the command has ran successfully",
+        name: "biome",
+        description: "Outputs the identifier for the biome based on the position of the executor",
         permissionLevel: CommandPermissionLevel.GameDirectors,
     },
-    () => {
-        world.sendMessage("Command ran successfully");
-        return { status: CustomCommandStatus.Success, message: "" };
+    (origin) => {
+        const source = origin.sourceEntity ?? origin.sourceBlock ?? origin.initiator;
+        if (!source) {
+            return { status: CustomCommandStatus.Failure };
+        }
+        const biome = source.dimension.getBiome(source.location);
+
+        return { status: CustomCommandStatus.Success, message: `§aBiome: §r${biome.id}` };
     }
 );

@@ -21,40 +21,19 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {
-    CommandPermissionLevel,
-    CustomCommandStatus,
-    system,
-    CustomCommandParamType,
-    world,
-} from "@minecraft/server";
+import { CommandPermissionLevel, CustomCommandStatus, world } from "@minecraft/server";
 
 import { CommandManager } from "../../command.js";
 
-const ranCommands: Map<string, string> = new Map();
-
 CommandManager.registerCommand(
     {
-        name: "delay",
-        description: "Delays the execution of a command",
+        name: "test",
+        aliases: ["t"],
+        description: "Provides an output message in chat if the command has ran successfully",
         permissionLevel: CommandPermissionLevel.GameDirectors,
-        mandatoryParameters: [
-            { name: "id", type: CustomCommandParamType.String },
-            { name: "delayInTicks", type: CustomCommandParamType.Integer },
-            { name: "command", type: CustomCommandParamType.String },
-        ],
     },
-    (origin, id: string, delayInTicks: number, command: string) => {
-        if (ranCommands.has(id)) {
-            return { status: CustomCommandStatus.Failure, message: "Id already running" };
-        }
-        ranCommands.set(id, command);
-
-        system.runTimeout(() => {
-            world.getDimension("overworld").runCommand(command);
-            ranCommands.delete(id);
-        }, delayInTicks);
-
-        return { status: CustomCommandStatus.Success, message: "Command scheduled to run" };
+    () => {
+        world.sendMessage("Command ran successfully");
+        return { status: CustomCommandStatus.Success };
     }
 );

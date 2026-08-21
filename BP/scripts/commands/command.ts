@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import {
     CustomCommand,
     CustomCommandOrigin,
@@ -39,8 +38,10 @@ type CustomCommandCallback = (
     ...args: any[]
 ) => CustomCommandResult | undefined;
 
+type CommandData = { aliases?: string[] } & CustomCommand;
+
 interface Command {
-    data: CustomCommand;
+    data: CommandData;
     callback: CustomCommandCallback;
 }
 
@@ -54,7 +55,7 @@ export class CommandManager {
     public static enums: CommandEnum[] = [];
 
     public static registerCommand(
-        customCommand: CustomCommand,
+        customCommand: CommandData,
         commandCallback: CustomCommandCallback
     ): void {
         CommandManager.commands.push({ data: customCommand, callback: commandCallback });
@@ -87,6 +88,22 @@ system.beforeEvents.startup.subscribe(({ customCommandRegistry }) => {
         }
 
         customCommandRegistry.registerCommand(command.data, command.callback);
+
+        if (command.data.aliases) {
+            const originalName = command.data.name;
+
+            for (let alias of command.data.aliases) {
+                if (!alias.startsWith(NAMESPACE)) {
+                    alias = NAMESPACE + alias;
+                }
+
+                command.data.name = alias;
+
+                customCommandRegistry.registerCommand(command.data, command.callback);
+            }
+
+            command.data.name = originalName;
+        }
     }
 });
 

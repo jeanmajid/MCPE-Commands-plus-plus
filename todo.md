@@ -13,13 +13,9 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 
 /container -- gives an item to a player from a speciic chest slot || /container <target> {vector} [slot_id]
 
-/draw - draw debug shapes, one commmand per shape
+/draw -- draw debug shapes, one commmand per shape
 
 /spawnparticle -- spawns a particle with more parameters than the regular particle command; includes particle spawn radius, variable modification, etc.
-
-✅ /rotate -- rotates an entity
-
-✅ /spawnitem -- summons an item entity
 
 /spawn -- alternative to the summon command with additional capabilities
 
@@ -27,7 +23,7 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 
 - Consider just taking in a single string containing the formula to allow for complex multi-operation calculations
 
-/blockstates -- reads the block states of the block on the provided xyz position; may also have a "block id" param which lists all block states allowed for the provided block
+[!] /blockstates -- reads the block states of the block on the provided xyz position; >>> may also have a "block id" param which lists all block states allowed for the provided block <<<
 
 /fillshape -- loads a shape with provided dimensions
 /phil -- better fill with gradients, ticking area loading, replacing with gradient and this and that
@@ -37,7 +33,7 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 
 /waypoint -- class of commands to handle locator bar waypoints
 
-/dimension -- transport players between dimensions
+[!] /dimension -- transport players between dimensions
 
 /givebutbetter -- give with extra parameters like nbt editing / lore, additional properties, enchants, whatever tha fak
 
@@ -48,30 +44,47 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 /nameitemraw -- same as nameitem but uses rawtext JSON formatting
 /moveitem -- move an item between slots in an entity's inventory
 
-/explode -- create an explosion with parameters
+[!] /explode -- create an explosion with parameters
 
 /permissions -- modify player permissions like block breaking and entity damaging and shitting and such
 
-/phase -- teleport through the block in front of you
+[!] /phase -- teleport through the block in front of you
 
 /nametagraw -- same as /nametag but uses rawtext JSON formatting
 
 /clientparticle -- spawns a particle only visible by a certain client
 /clientanimation -- animates a target only visible by a certain client
 
-/gamerulesetup -- sets gamerules to world optimised default values (needs confirmation)
+[!] /gamerulesetup -- sets gamerules to world optimised default values (needs confirmation)
 
-✅ /log -- logs a message to the console rather than to chat for lower profile debugging (class of commands including warn, info, whatever tha fak)
 /lograw -- same as /log but uses rawtext JSON formatting
 
-✅ /seed -- logs the world seed
-/credits -- prints the credits of commands plus plus
+/og kick -- allows kicking of players using target selectors (excluding the world owner)
+/ban -- permanently removes a player from the world (excluding the world owner)
+/unban -- removes a player from the ban list
 
-/wiki -- show wiki link (very importa)
+/heal -- heal the player by an integer value
+/hunger <set/add/remove> -- sets, adds, or removes hunger from the target player
 
-/og kick
-/ban
-/unban
+[!] /debugmode -- toggles a global boolean that enables some debug features like private logging
+
+/hitbox -- reveals the hitbox of the target
+
+/potion -- gives a potions with custom parameters
+
+/invulnerable -- makes an entity unable to be damaged by any source
+
+/vanish -- hides an entity to others and optionally tp back to original location when exiting (spectator mode)
+
+/helditems <target> [location] -- lists contents within the provided location in chat (if no location provided default to all held items)
+
+/entitycount <target> <fakeplayer> <score> -- counts entities of a certain type & produces them to a fakeplayer's scoreboard
+
+[!] /tpspawnpoint -- teleports a player to their spawnpoint
+[!] /tpworldspawn -- teleports an entity to the world's spawn
+
+/warp -- tp to a warp id
+/addwarp -- add the warp with permissions
 
 wiki
 listattributes get all + status (on off)
@@ -94,7 +107,9 @@ event system, run commands on certain events like og commands++, allowing comman
 - Coords, Velocity, FacingDirection
 - PlayerProperties (sneak, swim, level, xp, etc.)
 - tps
+- ping
 - input
+- biome
 
 ## Tags
 

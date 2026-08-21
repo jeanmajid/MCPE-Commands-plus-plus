@@ -21,40 +21,23 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {
-    CommandPermissionLevel,
-    CustomCommandStatus,
-    system,
-    CustomCommandParamType,
-    world,
-} from "@minecraft/server";
+import { CommandPermissionLevel, CustomCommandStatus, Player } from "@minecraft/server";
 
+import { WIKI_LINK } from "../../../constants/wiki.js";
 import { CommandManager } from "../../command.js";
-
-const ranCommands: Map<string, string> = new Map();
 
 CommandManager.registerCommand(
     {
-        name: "delay",
-        description: "Delays the execution of a command",
-        permissionLevel: CommandPermissionLevel.GameDirectors,
-        mandatoryParameters: [
-            { name: "id", type: CustomCommandParamType.String },
-            { name: "delayInTicks", type: CustomCommandParamType.Integer },
-            { name: "command", type: CustomCommandParamType.String },
-        ],
+        name: "wiki",
+        description: "Provides a link in chat to the wiki page of Commands++",
+        permissionLevel: CommandPermissionLevel.Admin,
     },
-    (origin, id: string, delayInTicks: number, command: string) => {
-        if (ranCommands.has(id)) {
-            return { status: CustomCommandStatus.Failure, message: "Id already running" };
+    (origin) => {
+        if (!origin.sourceEntity || !(origin.sourceEntity instanceof Player)) {
+            return { status: CustomCommandStatus.Failure };
         }
-        ranCommands.set(id, command);
 
-        system.runTimeout(() => {
-            world.getDimension("overworld").runCommand(command);
-            ranCommands.delete(id);
-        }, delayInTicks);
-
-        return { status: CustomCommandStatus.Success, message: "Command scheduled to run" };
+        (origin.sourceEntity as Player).sendMessage(WIKI_LINK);
+        return { status: CustomCommandStatus.Success };
     }
 );

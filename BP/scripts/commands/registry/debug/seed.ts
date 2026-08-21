@@ -38,7 +38,7 @@ CommandManager.registerCommand(
         permissionLevel: CommandPermissionLevel.GameDirectors,
     },
     (origin) => {
-        const outputMessage = `World Seed: ${world.seed}`;
+        const outputMessage = `§aSeed: §r${world.seed}`;
 
         if (origin.sourceEntity instanceof Player) {
             origin.sourceEntity.sendMessage(outputMessage);
