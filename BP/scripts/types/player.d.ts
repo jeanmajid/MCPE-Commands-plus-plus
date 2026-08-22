@@ -1,0 +1,7 @@
+import "@minecraft/server";
+
+declare module "@minecraft/server" {
+    interface Player {
+        vanishMode?: boolean;
+    }
+}

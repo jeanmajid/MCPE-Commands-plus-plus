@@ -7,7 +7,8 @@
         "removeComments": true,
         "outDir": "dist",
         "noEmit": true,
-        "rootDir": "BP\\scripts"
+        "rootDir": "BP\\scripts",
+        "typeRoots": ["./BP/scripts/types"]
     },
     "include": ["BP/scripts/**/*.ts"]
 }
