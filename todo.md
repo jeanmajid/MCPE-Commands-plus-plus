@@ -23,8 +23,6 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 
 - Consider just taking in a single string containing the formula to allow for complex multi-operation calculations
 
-[!] /blockstates -- reads the block states of the block on the provided xyz position; >>> may also have a "block id" param which lists all block states allowed for the provided block <<<
-
 /fillshape -- loads a shape with provided dimensions
 /phil -- better fill with gradients, ticking area loading, replacing with gradient and this and that
 
@@ -66,29 +64,34 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 /heal -- heal the player by an integer value
 /hunger <set/add/remove> -- sets, adds, or removes hunger from the target player
 
-[!] /debugmode -- toggles a global boolean that enables some debug features like private logging
-
 /hitbox -- reveals the hitbox of the target
 
 /potion -- gives a potions with custom parameters
 
 /invulnerable -- makes an entity unable to be damaged by any source
 
-/vanish -- hides an entity to others and optionally tp back to original location when exiting (spectator mode)
+[!] /vanish -- hides an entity to others and optionally tp back to original location when exiting (spectator mode)
+[!] /unvanish -- unhides entities from vanish mode
 
 /helditems <target> [location] -- lists contents within the provided location in chat (if no location provided default to all held items)
-
-/entitycount <target> <fakeplayer> <score> -- counts entities of a certain type & produces them to a fakeplayer's scoreboard
-
-[!] /tpspawnpoint -- teleports a player to their spawnpoint
-[!] /tpworldspawn -- teleports an entity to the world's spawn
 
 /warp -- tp to a warp id
 /addwarp -- add the warp with permissions
 
-/loadarea -- Alternative to /tickingarea using the Script API tickingArea module to allow for more total ticking areas & a different ticking system than the in-build command version; will need a class of commands to manage
+[!] /loadarea -- Alternative to /tickingarea using the Script API tickingArea module to allow for more total ticking areas & a different ticking system than the in-build command version; will need a class of commands to manage
 
 /getattribute -- One time trigger for an attribute which gets the value using the "on activate" method of the given attribute
+
+/config [rule] [value] -- custom gamerules handling; if no rule, query all; if no value, query the rule
+
+[!] /benchmarkstart <id> -- Save the current world time to memory under the provided ID for benchmarking
+[!] /benchmarkend <id> <console|chat> -- Logs to the console the time since the start time of the benchmark registered under the ID
+[!] /benchmarkendsave <id> <fakeplayer> <objective> -- Returns to the objective on the fakeplayer the current time minus the start time from the provided ID for benchmarking (time elapsed since start from run)
+
+/rules -- Allows non-operator players to view the world specific rules set by /rulesset; by default displays a message like "No defined rules for this world", or just doesnt log anything
+/rulesset -- Allows operators to set world specific rules using a fixed string
+
+[!] GAMERULES MANAGER WITH SYNTAX SIMILAR TO COMMANDS TO REGISTER NEW GAME RULES ON THE WORLD
 
 wiki
 listattributes get all + status (on off)
@@ -98,6 +101,13 @@ get/set redstone power of block (maybe more similar block methods like this)
 Document tooling setup
 maybe like spawnplayer or smth
 event system, run commands on certain events like og commands++, allowing command users to crazily optimise their works
+
+## Gamerules
+
+Custom gamerules under the /config command
+
+- debugmode <true | false> -- toggles the debug mode for the world which controls the activation of specific debug utilities (may be broken down into individual rules like private logging)
+- debughitboxes <true | false> -- toggles if hitboxes are shown from /hitbox
 
 ## Attributes
 
