@@ -23,6 +23,7 @@
 
 import { EntityHealthChangedAfterEvent, world } from "@minecraft/server";
 
+import { getAllEntities } from "../../utils/dimension";
 import { AttributeManager, BaseAttribute } from "../attribute";
 
 class HealthAttribute extends BaseAttribute {
@@ -30,10 +31,22 @@ class HealthAttribute extends BaseAttribute {
     public event?: (arg0: EntityHealthChangedAfterEvent) => void;
 
     public initialize(): void {
-        // TODO: get all entities and set their health score
+        this.setValues();
+
         this.event = world.afterEvents.entityHealthChanged.subscribe(({ entity, newValue }) => {
             this.score.setScore(entity, newValue);
         });
+    }
+
+    public setValues(): void {
+        for (const entity of getAllEntities()) {
+            const currentHealth = entity.getComponent("health")?.currentValue;
+            if (!currentHealth) {
+                continue;
+            }
+
+            this.score.setScore(entity, currentHealth);
+        }
     }
 
     public cleanup(): void {

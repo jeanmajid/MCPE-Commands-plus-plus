@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import { ScoreboardObjective, world } from "@minecraft/server";
 
 import { ATTRIBUTE_KEY } from "../constants/dynamicPropertyKeys";
@@ -35,6 +34,10 @@ export abstract class BaseAttribute {
      * Function to initiate all your events or runIntervals
      */
     public abstract initialize(): void;
+    /**
+     * Function to set the values once
+     */
+    public abstract setValues(): void;
     /**
      * Function to clear up all your events or runIntervals
      */
