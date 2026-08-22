@@ -88,6 +88,8 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 
 /loadarea -- Alternative to /tickingarea using the Script API tickingArea module to allow for more total ticking areas & a different ticking system than the in-build command version; will need a class of commands to manage
 
+/getattribute -- One time trigger for an attribute which gets the value using the "on activate" method of the given attribute
+
 wiki
 listattributes get all + status (on off)
 setitemdata/readitemdata
