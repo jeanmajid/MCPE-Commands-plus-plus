@@ -86,6 +86,8 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 /warp -- tp to a warp id
 /addwarp -- add the warp with permissions
 
+/loadarea -- Alternative to /tickingarea using the Script API tickingArea module to allow for more total ticking areas & a different ticking system than the in-build command version; will need a class of commands to manage
+
 wiki
 listattributes get all + status (on off)
 setitemdata/readitemdata
