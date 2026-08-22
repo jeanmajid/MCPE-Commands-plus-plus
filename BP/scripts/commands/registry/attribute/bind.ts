@@ -33,7 +33,8 @@ import { AttributeManager } from "../../../attributes/attribute.js";
 import { ATTRIBUTE_KEY } from "../../../constants/dynamicPropertyKeys.js";
 import { CommandManager } from "../../command.js";
 
-CommandManager.registerEnum("bind", ["health"]);
+// TODO: automate this
+CommandManager.registerEnum("bind", ["health", "selectedHotbarSlot"]);
 
 CommandManager.registerCommand(
     {
