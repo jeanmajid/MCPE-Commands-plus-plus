@@ -28,6 +28,7 @@ import {
     Player,
     Vector3,
     world,
+    system,
 } from "@minecraft/server";
 
 import { CommandManager } from "../../command.js";
@@ -48,6 +49,7 @@ CommandManager.registerCommand(
         const source = origin.sourceEntity;
         if (!player && source instanceof Player) {
             unvanishPlayer(source, tpBack);
+            return { status: CustomCommandStatus.Success };
         }
 
         for (const target of player) {
@@ -59,7 +61,7 @@ CommandManager.registerCommand(
 );
 
 function unvanishPlayer(player: Player, tpBack: boolean): void {
-    if (!player.vanishMode) {
+    if (!player.getDynamicProperty("vanishMode")) {
         return;
     }
 
@@ -73,8 +75,13 @@ function unvanishPlayer(player: Player, tpBack: boolean): void {
         const location: Vector3 = dataParsed.location;
         const dimensionId: string = dataParsed.dimension;
 
-        player.teleport(location, { dimension: world.getDimension(dimensionId) });
+        system.run(() => {
+            player.teleport(location, { dimension: world.getDimension(dimensionId) });
+        });
     }
+    system.run(() => {
+        player.setGameMode(dataParsed.gameMode);
+    });
 
-    player.setGameMode(dataParsed.gameMode);
+    player.setDynamicProperty("vanishMode", undefined);
 }

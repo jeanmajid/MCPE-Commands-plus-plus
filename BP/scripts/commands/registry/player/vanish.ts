@@ -27,6 +27,7 @@ import {
     CustomCommandParamType,
     Player,
     GameMode,
+    system,
 } from "@minecraft/server";
 
 import { CommandManager } from "../../command.js";
@@ -44,6 +45,7 @@ CommandManager.registerCommand(
         const source = origin.sourceEntity;
         if (!player && source instanceof Player) {
             vanishPlayer(source);
+            return { status: CustomCommandStatus.Success };
         }
 
         for (const target of player) {
@@ -55,11 +57,13 @@ CommandManager.registerCommand(
 );
 
 function vanishPlayer(player: Player): void {
-    if (player.vanishMode) {
+    if (player.getDynamicProperty("vanishMode")) {
         return;
     }
 
-    player.setGameMode(GameMode.Spectator);
+    system.run(() => {
+        player.setGameMode(GameMode.Spectator);
+    });
     player.setDynamicProperty(
         "vanishLocation",
         JSON.stringify({
@@ -68,4 +72,6 @@ function vanishPlayer(player: Player): void {
             gameMode: player.getGameMode(),
         })
     );
+
+    player.setDynamicProperty("vanishMode", true);
 }
