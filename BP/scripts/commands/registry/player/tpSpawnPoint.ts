@@ -21,6 +21,7 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
+
 // IDEA: support entities, need to load spawn area manually tho
 
 import {

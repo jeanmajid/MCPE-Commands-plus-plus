@@ -21,19 +21,22 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
+
 import {
     CommandPermissionLevel,
     CustomCommandParamType,
     CustomCommandStatus,
+    world,
 } from "@minecraft/server";
 
 import { CommandManager } from "../../command.js";
 
-const LOG_TYPE_ENUM_KEY = "logTypeEnum";
-enum LogTypes {
+export const LOG_TYPE_ENUM_KEY = "logTypeEnum";
+export enum LogTypes {
     info = "info",
     warn = "warn",
     error = "error",
+    chat = "chat",
 }
 
 CommandManager.registerEnum(LOG_TYPE_ENUM_KEY, Object.values(LogTypes));
@@ -50,20 +53,27 @@ CommandManager.registerCommand(
         ],
     },
     (origin, logType: string, message: string) => {
-        switch (logType) {
-            case LogTypes.info:
-                console.info(message);
-                break;
-            case LogTypes.warn:
-                console.warn(message);
-                break;
-            case LogTypes.error:
-                console.error(message);
-                break;
-        }
+        log(message, logType);
         return {
             status: CustomCommandStatus.Success,
             message: `Logged ${logType} message to the console`,
         };
     }
 );
+
+export function log(message: string, logType: string): void {
+    switch (logType) {
+        case LogTypes.info:
+            console.info(message);
+            break;
+        case LogTypes.warn:
+            console.warn(message);
+            break;
+        case LogTypes.error:
+            console.error(message);
+            break;
+        case LogTypes.chat:
+            world.sendMessage(message);
+            break;
+    }
+}
