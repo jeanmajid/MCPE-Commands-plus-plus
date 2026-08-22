@@ -35,7 +35,7 @@ import { CommandManager } from "../../command.js";
 CommandManager.registerCommand(
     {
         name: "blockstatesid",
-        description: "Lists all block states for the provided block",
+        description: "Lists all default block state values for the provided block",
         permissionLevel: CommandPermissionLevel.Admin,
         mandatoryParameters: [{ name: "blockId", type: CustomCommandParamType.BlockType }],
     },
@@ -54,7 +54,7 @@ CommandManager.registerCommand(
         }
 
         origin.sourceEntity.sendMessage(
-            `The block (${id}) ${stateStrings.length === 0 ? "§fhas no states" : `§fhas the following Block States:\n${stateStrings.join("\n")}`}`
+            `The block (${id}) ${stateStrings.length === 0 ? "§fhas no states" : `§fhas the following default Block States:\n${stateStrings.join("\n")}`}`
         );
         return { status: CustomCommandStatus.Success };
     }
