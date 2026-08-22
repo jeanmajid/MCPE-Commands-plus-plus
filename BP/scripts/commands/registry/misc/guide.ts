@@ -21,6 +21,7 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
+
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
@@ -29,6 +30,7 @@ import {
 } from "@minecraft/server";
 
 import { NAMESPACE } from "../../../constants/namespace.js";
+import { clamp } from "../../../utils/clamp.js";
 import { CommandManager } from "../../command.js";
 
 const COMMAND_HELP_WINDOW = 7;
@@ -47,7 +49,7 @@ CommandManager.registerCommand(
             return;
         }
 
-        page = Math.min(Math.max(page, 1), TOTAL_HELP_PAGES);
+        page = clamp(page, 1, TOTAL_HELP_PAGES);
 
         const guideWindowStartIndex = (page - 1) * COMMAND_HELP_WINDOW;
         const guideWindowEndIndex = guideWindowStartIndex + COMMAND_HELP_WINDOW;
