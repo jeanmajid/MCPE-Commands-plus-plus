@@ -25,61 +25,37 @@ import {
     CommandPermissionLevel,
     CustomCommandStatus,
     CustomCommandParamType,
-    Vector3,
-    Block,
     Player,
+    BlockPermutation,
+    BlockType,
 } from "@minecraft/server";
 
-import { Vector } from "../../../utils/vector.js";
 import { CommandManager } from "../../command.js";
 
 CommandManager.registerCommand(
     {
-        name: "blockstates",
-        description:
-            "Lists all block states for either the block being viewed or the block at the specified position",
+        name: "blockstatesid",
+        description: "Lists all block states for the provided block",
         permissionLevel: CommandPermissionLevel.Admin,
-        optionalParameters: [{ name: "position", type: CustomCommandParamType.Location }],
+        mandatoryParameters: [{ name: "blockId", type: CustomCommandParamType.BlockType }],
     },
-    (origin, position: Vector3) => {
+    (origin, blockType: BlockType) => {
         if (!(origin?.sourceEntity instanceof Player)) {
             return;
         }
 
-        let block: Block | undefined;
-        if (!position) {
-            block = origin.sourceEntity.getBlockFromViewDirection()?.block;
-            if (!block) {
-                return { status: CustomCommandStatus.Failure, message: "No block found in view" };
-            }
-        } else {
-            const dimension = origin.sourceEntity.dimension;
-            try {
-                block = dimension.getBlock(position);
-            } catch {
-                return {
-                    status: CustomCommandStatus.Failure,
-                    message: "Cannot get block outside of world",
-                };
-            }
-        }
+        const id = blockType.id;
+        const permutation = BlockPermutation.resolve(id);
+        const states = permutation.getAllStates();
 
-        if (!block?.isValid) {
-            return {
-                status: CustomCommandStatus.Failure,
-                message: "Cannot get block outside of world",
-            };
-        }
-
-        const states = block.permutation.getAllStates();
         const stateStrings = [];
         for (const key in states) {
             stateStrings.push(`§a${key}§7: §f${states[key]}`);
         }
 
         origin.sourceEntity.sendMessage(
-            `The block (${block.typeId}) at §7${Vector.toString(block.location)} ${stateStrings.length === 0 ? "§fhas no states" : `§fhas the following Block States:\n${stateStrings.join("\n")}`}`
+            `The block (${id}) ${stateStrings.length === 0 ? "§fhas no states" : `§fhas the following Block States:\n${stateStrings.join("\n")}`}`
         );
-        return { status: CustomCommandStatus.Success, message: "" };
+        return { status: CustomCommandStatus.Success };
     }
 );
