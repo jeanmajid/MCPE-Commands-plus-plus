@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
@@ -35,6 +34,7 @@ import { CommandManager } from "../../command.js";
 CommandManager.registerCommand(
     {
         name: "block",
+        aliases: ["b"],
         description: "Places a block at the current position",
         permissionLevel: CommandPermissionLevel.Admin,
         optionalParameters: [{ name: "blockType", type: CustomCommandParamType.BlockType }],
