@@ -21,17 +21,13 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { world } from "@minecraft/server";
+import { Entity, EntityQueryOptions } from "@minecraft/server";
 
-import { AttributeManager } from "./attributes/attribute.js";
-import "./attributes/index.js";
-import "./commands/index.js";
-import { Dimensions } from "./constants/dimensions.js";
+import { Dimensions } from "../constants/dimensions";
 
-world.afterEvents.worldLoad.subscribe(() => {
-    Dimensions.overworld = world.getDimension("overworld");
-    Dimensions.nether = world.getDimension("nether");
-    Dimensions.end = world.getDimension("the_end");
-    Dimensions.all = [Dimensions.overworld, Dimensions.nether, Dimensions.end];
-    AttributeManager.loadAttributesFromMemory();
-});
+/**
+ * Gets all entities from all dimensions
+ */
+export function getAllEntities(filter?: EntityQueryOptions): Entity[] {
+    return Dimensions.all.flatMap((d) => d.getEntities(filter));
+}

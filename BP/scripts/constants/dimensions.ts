@@ -21,17 +21,11 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { world } from "@minecraft/server";
+import { Dimension } from "@minecraft/server";
 
-import { AttributeManager } from "./attributes/attribute.js";
-import "./attributes/index.js";
-import "./commands/index.js";
-import { Dimensions } from "./constants/dimensions.js";
-
-world.afterEvents.worldLoad.subscribe(() => {
-    Dimensions.overworld = world.getDimension("overworld");
-    Dimensions.nether = world.getDimension("nether");
-    Dimensions.end = world.getDimension("the_end");
-    Dimensions.all = [Dimensions.overworld, Dimensions.nether, Dimensions.end];
-    AttributeManager.loadAttributesFromMemory();
-});
+export const Dimensions = {
+    overworld: undefined as unknown as Dimension,
+    nether: undefined as unknown as Dimension,
+    end: undefined as unknown as Dimension,
+    all: undefined as unknown as Dimension[],
+};
