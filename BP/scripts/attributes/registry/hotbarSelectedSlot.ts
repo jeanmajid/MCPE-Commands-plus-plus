@@ -30,11 +30,19 @@ class HotbarSelectedSlotAttribute extends BaseAttribute {
     public event?: (arg0: PlayerHotbarSelectedSlotChangeAfterEvent) => void;
 
     public initialize(): void {
+        this.setValues();
+
         this.event = world.afterEvents.playerHotbarSelectedSlotChange.subscribe(
             ({ player, newSlotSelected }) => {
                 this.score.setScore(player, newSlotSelected);
             }
         );
+    }
+
+    public setValues(): void {
+        for (const player of world.getAllPlayers()) {
+            this.score.setScore(player, player.selectedSlotIndex);
+        }
     }
 
     public cleanup(): void {

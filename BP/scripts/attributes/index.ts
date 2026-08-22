@@ -22,3 +22,4 @@
  */
 
 import "./registry/health.js";
+import "./registry/hotbarSelectedSlot.js";
