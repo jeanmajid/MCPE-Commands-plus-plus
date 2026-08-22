@@ -33,11 +33,11 @@ CommandManager.registerCommand(
     },
     (origin) => {
         const source = origin.sourceEntity ?? origin.sourceBlock ?? origin.initiator;
-        if (!source) {
+        if (!source || !source.dimension.isChunkLoaded(source.location)) {
             return { status: CustomCommandStatus.Failure };
         }
-        const biome = source.dimension.getBiome(source.location);
 
+        const biome = source.dimension.getBiome(source.location);
         return { status: CustomCommandStatus.Success, message: `§aBiome: §r${biome.id}` };
     }
 );
