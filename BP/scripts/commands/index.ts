@@ -58,6 +58,7 @@ import "./registry/entity/setOnFire.js";
 import "./registry/entity/spawnItem.js";
 import "./registry/entity/top.js";
 import "./registry/misc/credits.js";
+import "./registry/misc/gameRuleSetup.js";
 import "./registry/misc/guide.js";
 import "./registry/misc/wiki.js";
 import "./registry/nameTag/nameTag.js";
