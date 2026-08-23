@@ -7,9 +7,9 @@ let commandCount = 0;
 const COMMANDS_FOLDER_PATH = "../../BP/scripts/commands";
 const REGISTRY_PATH = join(COMMANDS_FOLDER_PATH, "/registry");
 
-recursiveRead(REGISTRY_PATH, "Main");
+recursiveRead(REGISTRY_PATH);
 
-function recursiveRead(path, currentDirectory) {
+function recursiveRead(path) {
     for (const filePath of readdirSync(path)) {
         const finalPath = join(path, filePath);
 
