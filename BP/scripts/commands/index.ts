@@ -33,7 +33,7 @@ import "./registry/command/delay.js";
 import "./registry/debug/benchmarkEnd.js";
 import "./registry/debug/benchmarkStart.js";
 import "./registry/debug/biome.js";
-import "./registry/debug/biometags.js";
+import "./registry/debug/biomeTags.js";
 import "./registry/debug/log.js";
 import "./registry/debug/seed.js";
 import "./registry/debug/test.js";
