@@ -1,0 +1,16 @@
+{
+    "name": "exportcommands",
+    "version": "1.0.0",
+    "description": "",
+    "keywords": [],
+    "license": "ISC",
+    "author": "",
+    "type": "module",
+    "main": "index.js",
+    "scripts": {
+        "start": "node src/main.js"
+    },
+    "dependencies": {
+        "@types/node": "^26.2.0"
+    }
+}
