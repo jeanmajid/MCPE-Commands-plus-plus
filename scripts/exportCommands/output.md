@@ -1,3 +1,9 @@
+# Commands++ Commands
+## Total Amount of Commands: 54
+
+
+## attribute
+
 > ### `/bind`
 > **Parameters:** `<bindtype: Enum>` • `<scoreboardId: String>`
 > 
@@ -11,6 +17,10 @@
 > Unbind an attribute
 > 
 > `GameDirectors`
+
+
+
+## block
 
 > ### `/block`
 > **Parameters:** `[blockType: BlockType]`
@@ -40,12 +50,20 @@
 > 
 > `Admin`
 
+
+
+## command
+
 > ### `/delay`
 > **Parameters:** `<id: String>` • `<delayInTicks: Integer>` • `<command: String>`
 > 
 > Delays the execution of a command
 > 
 > `GameDirectors`
+
+
+
+## debug
 
 > ### `/benchmarkend`
 > **Parameters:** `<startId: String>` • `[logType: Enum]`
@@ -97,6 +115,10 @@
 > Provides an output message in chat if the command has ran successfully
 > 
 > `GameDirectors` • *Alias of `/test`*
+
+
+
+## drawer
 
 > ### `/draw`
 > **Parameters:** `<id: String>`
@@ -195,6 +217,10 @@
 > 
 > `GameDirectors`
 
+
+
+## entity
+
 > ### `/entitycount`
 > **Parameters:** `<targets: EntitySelector>` • `<fakeplayer: String>` • `<objective: String>`
 > 
@@ -237,6 +263,10 @@
 > 
 > `GameDirectors`
 
+
+
+## misc
+
 > ### `/credits`
 > 
 > Provides an output message in chat containing the credits for Commands++
@@ -269,6 +299,10 @@
 > 
 > `Admin`
 
+
+
+## nameTag
+
 > ### `/nametag`
 > **Parameters:** `<targets: EntitySelector>` • `<nametag: String>`
 > 
@@ -282,6 +316,10 @@
 > Reset the nametag for players
 > 
 > `GameDirectors`
+
+
+
+## player
 
 > ### `/tpspawnpoint`
 > **Parameters:** `[target: PlayerSelector]`
@@ -325,11 +363,19 @@
 > 
 > `GameDirectors` • *Alias of `/vanish`*
 
+
+
+## structure
+
 > ### `/structurelist`
 > 
 > list all the structures on the world
 > 
 > `Admin`
+
+
+
+## tag
 
 > ### `/addtags`
 > **Parameters:** `<targets: EntitySelector>` • `<tags: String>`
@@ -344,6 +390,10 @@
 > Removes an array of provided tags from the targets
 > 
 > `GameDirectors`
+
+
+
+## velocity
 
 > ### `/applyimpulse`
 > **Parameters:** `<targets: EntitySelector>` • `<x: Float>` • `<y: Float>` • `<z: Float>`

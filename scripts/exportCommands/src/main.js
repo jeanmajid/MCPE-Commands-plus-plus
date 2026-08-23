@@ -1,14 +1,15 @@
 import { readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
+import { join, dirname, basename } from "node:path";
 
-let outputString = "";
+const outputStrings = new Map();
+let commandCount = 0;
 
 const COMMANDS_FOLDER_PATH = "../../BP/scripts/commands";
 const REGISTRY_PATH = join(COMMANDS_FOLDER_PATH, "/registry");
 
-recursiveRead(REGISTRY_PATH);
+recursiveRead(REGISTRY_PATH, "Main");
 
-function recursiveRead(path) {
+function recursiveRead(path, currentDirectory) {
     for (const filePath of readdirSync(path)) {
         const finalPath = join(path, filePath);
 
@@ -21,6 +22,8 @@ function recursiveRead(path) {
 }
 
 function processFile(path) {
+    const currentDirname = basename(dirname(path));
+    let currentOutputString = outputStrings.get(currentDirname) ?? "";
     const fileContents = readFileSync(path, "utf-8");
 
     // really hacky beautiful stable magnificent code, please look closely
@@ -84,15 +87,24 @@ function processFile(path) {
 
     commandWithoutName += `> \`${commandData.permissionLevel.replace("CommandPermissionLevel.", "")}\``;
 
-    outputString += `> ### \`/${commandData.name}\`${commandWithoutName}\n\n`;
+    currentOutputString += `> ### \`/${commandData.name}\`${commandWithoutName}\n\n`;
+    ++commandCount;
 
-    if (!commandData.aliases) {
-        return;
+    if (commandData.aliases) {
+        for (const alias of commandData.aliases) {
+            currentOutputString += `> ### \`/${alias}\`${commandWithoutName} • *Alias of \`/${commandData.name}\`*\n\n`;
+            ++commandCount;
+        }
     }
 
-    for (const alias of commandData.aliases) {
-        outputString += `> ### \`/${alias}\`${commandWithoutName} • *Alias of \`/${commandData.name}\`*\n\n`;
-    }
+    outputStrings.set(currentDirname, currentOutputString);
+}
+
+let outputString = "# Commands++ Commands\n";
+outputString += `## Total Amount of Commands: ${commandCount}\n`;
+
+for (const [key, value] of outputStrings.entries()) {
+    outputString += `\n\n## ${key}\n\n${value}`;
 }
 
 writeFileSync("./output.md", outputString);
