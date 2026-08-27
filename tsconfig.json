@@ -4,7 +4,7 @@
         "module": "esnext",
         "moduleResolution": "bundler",
         "allowSyntheticDefaultImports": true,
-        "removeComments": true,
+        "removeComments": false,
         "outDir": "dist",
         "noEmit": true,
         "rootDir": "BP\\scripts",
