@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import { PlayerHotbarSelectedSlotChangeAfterEvent, world } from "@minecraft/server";
 
 import { AttributeManager, BaseAttribute } from "../attribute";
@@ -47,7 +46,6 @@ class HotbarSelectedSlotAttribute extends BaseAttribute {
     }
 
     public cleanup(): void {
-        // oxlint-disable-next-line typescript/no-non-null-assertion
         world.afterEvents.playerHotbarSelectedSlotChange.unsubscribe(this.event!);
     }
 }

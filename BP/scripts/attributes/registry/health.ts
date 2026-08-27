@@ -50,7 +50,6 @@ class HealthAttribute extends BaseAttribute {
     }
 
     public cleanup(): void {
-        // oxlint-disable-next-line typescript/no-non-null-assertion
         world.afterEvents.entityHealthChanged.unsubscribe(this.event!);
     }
 }

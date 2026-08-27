@@ -116,7 +116,7 @@
         "typescript/no-unsafe-assignment": "warn",
         "typescript/no-unsafe-call": "warn",
         "typescript/no-unsafe-member-access": "warn",
-        "typescript/no-non-null-assertion": "warn",
+        "typescript/no-non-null-assertion": "allow",
         "typescript/consistent-type-definitions": ["warn", "interface"]
     },
     "settings": {
