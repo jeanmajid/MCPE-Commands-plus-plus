@@ -62,7 +62,14 @@ CommandManager.registerCommand(
         const itemStack = new ItemStack(item, quantity);
 
         system.run(() => {
-            dimension.spawnItem(itemStack, location);
+            try {
+                dimension.spawnItem(itemStack, location);
+            } catch {
+                return {
+                    status: CustomCommandStatus.Failure,
+                    message: "Cannot spawn item outside of the world",
+                };
+            }
         });
 
         return {
