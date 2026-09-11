@@ -79,8 +79,6 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 
 /config [rule] [value] -- custom gamerules handling; if no rule, query all; if no value, query the rule
 
-[!] /benchmarkendsave <id> <fakeplayer> <objective> -- Returns to the objective on the fakeplayer the current time minus the start time from the provided ID for benchmarking (time elapsed since start from run)
-
 /rules -- Allows non-operator players to view the world specific rules set by /rulesset; by default displays a message like "No defined rules for this world", or just doesnt log anything
 /rulesset -- Allows operators to set world specific rules using a fixed string
 
