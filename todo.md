@@ -51,7 +51,7 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 /clientparticle -- spawns a particle only visible by a certain client
 /clientanimation -- animates a target only visible by a certain client
 
-[!] /gamerulesetup -- sets gamerules to world optimised default values (needs confirmation)
+[!] /gamerulesetup -- sets gamerules to world optimised default values (NEEDS CONFIRMATION!!!!!!)
 
 /lograw -- same as /log but uses rawtext JSON formatting
 
@@ -68,9 +68,6 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 
 /invulnerable -- makes an entity unable to be damaged by any source
 
-[!] /vanish -- hides an entity to others and optionally tp back to original location when exiting (spectator mode)
-[!] /unvanish -- unhides entities from vanish mode
-
 /helditems <target> [location] -- lists contents within the provided location in chat (if no location provided default to all held items)
 
 /warp -- tp to a warp id
@@ -82,8 +79,6 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 
 /config [rule] [value] -- custom gamerules handling; if no rule, query all; if no value, query the rule
 
-[!] /benchmarkstart <id> -- Save the current world time to memory under the provided ID for benchmarking
-[!] /benchmarkend <id> <console|chat> -- Logs to the console the time since the start time of the benchmark registered under the ID
 [!] /benchmarkendsave <id> <fakeplayer> <objective> -- Returns to the objective on the fakeplayer the current time minus the start time from the provided ID for benchmarking (time elapsed since start from run)
 
 /rules -- Allows non-operator players to view the world specific rules set by /rulesset; by default displays a message like "No defined rules for this world", or just doesnt log anything
@@ -94,7 +89,9 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 
 [!] DEDICATED GAMERULES MANAGER WITH SYNTAX SIMILAR TO COMMANDS TO REGISTER NEW GAME RULES ON THE WORLD
 
-/fmbe -- class of commands that act as shortcuts for the fmbe mcfunctions
+[!] /fmbe -- class of commands that act as shortcuts for the fmbe mcfunctions
+
+/spawnplayer -- Spawns a player from the fake player module
 
 wiki
 listattributes get all + status (on off)
@@ -102,7 +99,6 @@ setitemdata/readitemdata
 attributes should only be event based, anything that would require a runInterval, should just be triggered via command block as a custom command and not a attribute
 get/set redstone power of block (maybe more similar block methods like this)
 Document tooling setup
-maybe like spawnplayer or smth
 event system, run commands on certain events like og commands++, allowing command users to crazily optimise their works
 
 ## Gamerules
