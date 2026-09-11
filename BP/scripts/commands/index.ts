@@ -56,6 +56,8 @@ import "./registry/drawer/getDrawCount.js";
 import "./registry/drawer/setDrawColor.js";
 import "./registry/entity/entityCount.js";
 import "./registry/entity/fmbe.js";
+import "./registry/entity/harm.js";
+import "./registry/entity/heal.js";
 import "./registry/entity/remove.js";
 import "./registry/entity/rotate.js";
 import "./registry/entity/setOnFire.js";

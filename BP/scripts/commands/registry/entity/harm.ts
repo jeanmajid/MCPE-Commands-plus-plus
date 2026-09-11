@@ -21,60 +21,51 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-// IDEA: support entities, need to load spawn area manually tho
-
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
     CustomCommandParamType,
-    Player,
-    system,
+    Entity,
 } from "@minecraft/server";
 
 import { CommandManager } from "../../command.js";
-import { teleportPlayersToWorldSpawn } from "./tpWorldSpawn.js";
 
 CommandManager.registerCommand(
     {
-        name: "tpspawnpoint",
-        description: "Teleports the target to their spawnpoint",
+        name: "harm",
+        description: "Decreases all targets' current health value by an amount",
         permissionLevel: CommandPermissionLevel.GameDirectors,
-
-        optionalParameters: [{ name: "target", type: CustomCommandParamType.PlayerSelector }],
+        optionalParameters: [
+            { name: "target", type: CustomCommandParamType.PlayerSelector },
+            { name: "value", type: CustomCommandParamType.Integer },
+        ],
     },
-    (origin, targets: Player[]) => {
-        const sourceEntity = origin.sourceEntity;
-
-        if (!targets && sourceEntity instanceof Player) {
-            targets = [sourceEntity];
+    (origin, targets: Entity[], amount: number) => {
+        if (!targets) {
+            if (!origin.sourceEntity) {
+                return {
+                    status: CustomCommandStatus.Failure,
+                    message: "Cannot harm invalid target",
+                };
+            }
+            targets = [origin.sourceEntity];
+        } else if (targets.length === 0) {
+            return { status: CustomCommandStatus.Failure, message: "No targets match selector" };
         }
-
-        const nonSpawnPlayers: Player[] = [];
 
         for (const target of targets) {
-            const spawnPoint = target.getSpawnPoint();
-            if (spawnPoint) {
-                system.run(() => {
-                    target.teleport(spawnPoint);
-                });
+            const health = target.getComponent("minecraft:health");
+
+            if (!health) {
+                continue;
+            }
+
+            if (amount !== undefined) {
+                health.setCurrentValue(health.currentValue - amount);
             } else {
-                nonSpawnPlayers.push(target);
+                health.setCurrentValue(health.effectiveMax);
             }
         }
-
-        if (nonSpawnPlayers.length > 0) {
-            system.run(() => {
-                teleportPlayersToWorldSpawn(nonSpawnPlayers);
-            });
-        }
-
-        return { status: CustomCommandStatus.Success, message: "Sucessfully teleported entities" };
+        return { status: CustomCommandStatus.Success, message: "Successfully harmed entities" };
     }
 );
-
-// const { x, z } = world.getDefaultSpawnLocation();
-// const topBlock = Dimensions.overworld.getTopmostBlock({ x: x, z: z });
-// spawnPoint = {
-//     ...(topBlock?.location ?? FALLBACK_SPAWN_POINT),
-//     dimension: Dimensions.overworld,
-// };
