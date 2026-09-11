@@ -89,8 +89,6 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 
 [!] DEDICATED GAMERULES MANAGER WITH SYNTAX SIMILAR TO COMMANDS TO REGISTER NEW GAME RULES ON THE WORLD
 
-[!] /fmbe -- class of commands that act as shortcuts for the fmbe mcfunctions
-
 /spawnplayer -- Spawns a player from the fake player module
 
 wiki
