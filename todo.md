@@ -57,7 +57,6 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 /ban -- permanently removes a player from the world (excluding the world owner)
 /unban -- removes a player from the ban list
 
-/heal -- heal the player by an integer value
 /hunger <set/add/remove> -- sets, adds, or removes hunger from the target player
 
 /hitbox -- reveals the hitbox of the target

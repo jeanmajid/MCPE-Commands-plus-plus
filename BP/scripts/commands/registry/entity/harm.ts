@@ -40,7 +40,7 @@ CommandManager.registerCommand(
             { name: "value", type: CustomCommandParamType.Integer },
         ],
     },
-    (origin, targets: Entity[], amount: number) => {
+    (origin, targets: Entity[], amount: number = 1) => {
         if (!targets) {
             if (!origin.sourceEntity) {
                 return {
@@ -60,11 +60,7 @@ CommandManager.registerCommand(
                 continue;
             }
 
-            if (amount !== undefined) {
-                health.setCurrentValue(health.currentValue - amount);
-            } else {
-                health.setCurrentValue(health.effectiveMax);
-            }
+            health.setCurrentValue(health.currentValue - amount);
         }
         return { status: CustomCommandStatus.Success, message: "Successfully harmed entities" };
     }
