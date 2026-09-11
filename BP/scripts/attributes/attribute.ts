@@ -21,9 +21,9 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import { ScoreboardObjective, world } from "@minecraft/server";
 
+import { Dimensions } from "../constants/dimensions";
 import { ATTRIBUTE_KEY } from "../constants/dynamicPropertyKeys";
 
 export abstract class BaseAttribute {
@@ -38,7 +38,7 @@ export abstract class BaseAttribute {
     /**
      * Function to set the values once
      */
-    public abstract setValues(): void;
+    public abstract setValues(score: ScoreboardObjective): void;
     /**
      * Function to clear up all your events or runIntervals
      */
@@ -78,6 +78,7 @@ export class AttributeManager {
             attribute.score =
                 world.scoreboard.getObjective(scoreboardId) ??
                 world.scoreboard.addObjective(scoreboardId);
+            Dimensions.overworld.runCommand(`scoreboard players reset * ${scoreboardId}`);
             attribute.initialize();
         }
     }

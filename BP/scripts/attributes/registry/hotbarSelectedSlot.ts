@@ -21,7 +21,11 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { PlayerHotbarSelectedSlotChangeAfterEvent, world } from "@minecraft/server";
+import {
+    PlayerHotbarSelectedSlotChangeAfterEvent,
+    ScoreboardObjective,
+    world,
+} from "@minecraft/server";
 
 import { AttributeManager, BaseAttribute } from "../attribute";
 
@@ -30,7 +34,7 @@ class HotbarSelectedSlotAttribute extends BaseAttribute {
     public event?: (arg0: PlayerHotbarSelectedSlotChangeAfterEvent) => void;
 
     public initialize(): void {
-        this.setValues();
+        this.setValues(this.score);
 
         this.event = world.afterEvents.playerHotbarSelectedSlotChange.subscribe(
             ({ player, newSlotSelected }) => {
@@ -39,9 +43,9 @@ class HotbarSelectedSlotAttribute extends BaseAttribute {
         );
     }
 
-    public setValues(): void {
+    public setValues(score: ScoreboardObjective): void {
         for (const player of world.getAllPlayers()) {
-            this.score.setScore(player, player.selectedSlotIndex);
+            score.setScore(player, player.selectedSlotIndex);
         }
     }
 

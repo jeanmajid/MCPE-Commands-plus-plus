@@ -21,7 +21,7 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { EntityHealthChangedAfterEvent, world } from "@minecraft/server";
+import { EntityHealthChangedAfterEvent, ScoreboardObjective, world } from "@minecraft/server";
 
 import { getAllEntities } from "../../utils/dimension";
 import { AttributeManager, BaseAttribute } from "../attribute";
@@ -31,21 +31,21 @@ class HealthAttribute extends BaseAttribute {
     public event?: (arg0: EntityHealthChangedAfterEvent) => void;
 
     public initialize(): void {
-        this.setValues();
+        this.setValues(this.score);
 
         this.event = world.afterEvents.entityHealthChanged.subscribe(({ entity, newValue }) => {
             this.score.setScore(entity, newValue);
         });
     }
 
-    public setValues(): void {
+    public setValues(score: ScoreboardObjective): void {
         for (const entity of getAllEntities()) {
             const currentHealth = entity.getComponent("health")?.currentValue;
             if (!currentHealth) {
                 continue;
             }
 
-            this.score.setScore(entity, currentHealth);
+            score.setScore(entity, currentHealth);
         }
     }
 
