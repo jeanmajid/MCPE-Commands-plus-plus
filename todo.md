@@ -114,6 +114,7 @@ Custom gamerules under the /config command
 - Command on attribute change
 
 - Attributes per entity /atribute <selector> <atribute>
+- /get/set attribute single time
 
 - Weather
 - Real world time
