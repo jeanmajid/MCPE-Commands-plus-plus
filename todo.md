@@ -42,8 +42,6 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 /nameitemraw -- same as nameitem but uses rawtext JSON formatting
 /moveitem -- move an item between slots in an entity's inventory
 
-[!] /explode -- create an explosion with parameters
-
 [!] /phase -- teleport through the block in front of you
 
 /nametagraw -- same as /nametag but uses rawtext JSON formatting
