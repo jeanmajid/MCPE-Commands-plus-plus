@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
@@ -33,6 +32,7 @@ import {
     system,
 } from "@minecraft/server";
 
+import { clamp } from "../../../utils/clamp.js";
 import { CommandManager } from "../../command.js";
 
 CommandManager.registerCommand(
@@ -57,7 +57,7 @@ CommandManager.registerCommand(
             return;
         }
 
-        quantity = Math.max(Math.min(quantity, 255), 1);
+        quantity = clamp(quantity, 1, 255);
 
         const itemStack = new ItemStack(item, quantity);
 
