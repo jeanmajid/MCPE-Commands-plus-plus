@@ -29,7 +29,7 @@ import {
 } from "@minecraft/server";
 
 import { CommandManager } from "../../command.js";
-import { VALUE_UPDATE_MODE_ENUM_KEY, ValueUpdateMode } from "./health.js";
+import { VALUE_UPDATE_MODE_ENUM_KEY, ValueUpdateMode } from "../entity/health.js";
 
 CommandManager.registerCommand(
     {
