@@ -32,7 +32,7 @@ import {
 import { CommandManager } from "../../command.js";
 
 export const FMBE_TYPE_ENUM_KEY = "fmbeTypeEnum";
-export enum FmbeTypes {
+enum FmbeTypes {
     standard = "standard",
     simple = "simple",
     advanced2d = "advanced_2d",
@@ -49,7 +49,9 @@ CommandManager.registerCommand(
             "Animates targets (fox) to appear as a full block when holding a three dimensional block item",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [{ name: "entities", type: CustomCommandParamType.EntitySelector }],
-        optionalParameters: [{ name: "fmbeType", type: CustomCommandParamType.Enum }],
+        optionalParameters: [
+            { name: "fmbeType", type: CustomCommandParamType.Enum, enumName: FMBE_TYPE_ENUM_KEY },
+        ],
     },
     (origin, targets: Entity[], fmbeType: FmbeTypes = FmbeTypes.standard) => {
         system.run(() => {
