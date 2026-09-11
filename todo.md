@@ -57,8 +57,6 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 /ban -- permanently removes a player from the world (excluding the world owner)
 /unban -- removes a player from the ban list
 
-/hunger <set/add/remove> -- sets, adds, or removes hunger from the target player
-
 /hitbox -- reveals the hitbox of the target
 
 /potion -- gives a potions with custom parameters
@@ -71,8 +69,6 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 /addwarp -- add the warp with permissions
 
 [!] /loadarea -- Alternative to /tickingarea using the Script API tickingArea module to allow for more total ticking areas & a different ticking system than the in-build command version; will need a class of commands to manage
-
-/getattribute -- One time trigger for an attribute which gets the value using the "on activate" method of the given attribute
 
 /config [rule] [value] -- custom gamerules handling; if no rule, query all; if no value, query the rule
 
