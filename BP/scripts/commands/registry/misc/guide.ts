@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
@@ -35,6 +34,8 @@ import { CommandManager } from "../../command.js";
 
 const COMMAND_HELP_WINDOW = 7;
 const TOTAL_HELP_PAGES = Math.ceil(CommandManager.commands.length / COMMAND_HELP_WINDOW);
+
+const guideCache: string[] = [];
 
 CommandManager.registerCommand(
     {
@@ -50,6 +51,11 @@ CommandManager.registerCommand(
         }
 
         page = clamp(page, 1, TOTAL_HELP_PAGES);
+
+        if (guideCache[page]) {
+            (origin.sourceEntity as Player).sendMessage(guideCache[page]);
+            return { status: CustomCommandStatus.Success };
+        }
 
         const guideWindowStartIndex = (page - 1) * COMMAND_HELP_WINDOW;
         const guideWindowEndIndex = guideWindowStartIndex + COMMAND_HELP_WINDOW;
