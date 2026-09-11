@@ -39,6 +39,7 @@ import "./registry/debug/biomeTags.js";
 import "./registry/debug/log.js";
 import "./registry/debug/seed.js";
 import "./registry/debug/test.js";
+import "./registry/dimension/explode.js";
 import "./registry/drawer/draw.js";
 import "./registry/drawer/drawArrow.js";
 import "./registry/drawer/drawBox.js";
