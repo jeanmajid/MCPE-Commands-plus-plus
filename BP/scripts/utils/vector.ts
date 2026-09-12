@@ -82,4 +82,22 @@ export class Vector {
     public static toStringFloored(vector: Vector3): string {
         return `${Math.floor(vector.x)}, ${Math.floor(vector.y)}, ${Math.floor(vector.z)}`;
     }
+
+    public static setSmallestAndBiggest(smaller: Vector3, bigger: Vector3): void {
+        const { x: fx, y: fy, z: fz } = smaller;
+        const { x: tx, y: ty, z: tz } = bigger;
+
+        if (fx > tx) {
+            smaller.x = tx;
+            bigger.x = fx;
+        }
+        if (fy > ty) {
+            smaller.y = ty;
+            bigger.y = fy;
+        }
+        if (fz > tz) {
+            smaller.z = tz;
+            bigger.z = fz;
+        }
+    }
 }

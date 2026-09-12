@@ -38,6 +38,8 @@ export enum ValueUpdateMode {
 
 export const VALUE_UPDATE_MODE_ENUM_KEY = "valueUpdateMode";
 
+CommandManager.registerEnum(VALUE_UPDATE_MODE_ENUM_KEY, Object.values(ValueUpdateMode));
+
 CommandManager.registerCommand(
     {
         name: "health",

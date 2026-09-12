@@ -31,6 +31,7 @@ import {
 } from "@minecraft/server";
 
 import { clamp } from "../../../utils/clamp.js";
+import { getDimensionFromCommandOrigin } from "../../../utils/dimension.js";
 import { CommandManager } from "../../command.js";
 
 CommandManager.registerCommand(
@@ -56,8 +57,7 @@ CommandManager.registerCommand(
         allowUnderwater: boolean = false,
         explosionSource: Entity[] = []
     ) => {
-        const source = origin.sourceEntity ?? origin.sourceBlock ?? origin.initiator;
-        const dimension = source?.dimension;
+        const dimension = getDimensionFromCommandOrigin(origin);
         radius = clamp(radius, 1, 1000);
 
         system.run(() => {
