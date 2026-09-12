@@ -26,16 +26,41 @@ import {
     Dimension,
     Entity,
     EntityQueryOptions,
+    system,
     world,
 } from "@minecraft/server";
 
-import { Dimensions } from "../constants/dimensions";
+import { CUSTOM_DIMENSIONS, Dimensions } from "../constants/dimensions";
+import { NAMESPACE } from "../constants/namespace";
+
+export function registerCustomDimensions(): void {
+    const event = system.beforeEvents.startup.subscribe((data) => {
+        for (let dimensionId of CUSTOM_DIMENSIONS) {
+            if (!dimensionId.startsWith(NAMESPACE)) {
+                dimensionId = NAMESPACE + dimensionId;
+            }
+            data.dimensionRegistry.registerCustomDimension(dimensionId);
+        }
+
+        system.beforeEvents.startup.unsubscribe(event);
+    });
+}
 
 export function initializeDimensions(): void {
     Dimensions.overworld = world.getDimension("overworld");
     Dimensions.nether = world.getDimension("nether");
     Dimensions.end = world.getDimension("the_end");
-    Dimensions.all = [Dimensions.overworld, Dimensions.nether, Dimensions.end];
+    Dimensions.dimension1 = world.getDimension(NAMESPACE + "dimension1");
+    Dimensions.dimension2 = world.getDimension(NAMESPACE + "dimension2");
+    Dimensions.dimension3 = world.getDimension(NAMESPACE + "dimension3");
+    Dimensions.all = [
+        Dimensions.overworld,
+        Dimensions.nether,
+        Dimensions.end,
+        Dimensions.dimension1,
+        Dimensions.dimension2,
+        Dimensions.dimension3,
+    ];
 }
 
 /**
