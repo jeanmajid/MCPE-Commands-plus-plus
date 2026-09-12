@@ -29,12 +29,14 @@ import {
     system,
 } from "@minecraft/server";
 
+import { MAX_SIGNED_INT32, MIN_SIGNED_INT32 } from "../../../constants/unsignedInt32.js";
 import { clamp } from "../../../utils/clamp.js";
 import { getScoreboardObjective } from "../../../utils/getObjective.js";
 import { CommandManager } from "../../command.js";
 
 const SCORE_OPERATIONS_ENUM_KEY = "scoreOperationsEnum";
 export enum ScoreOperations {
+    equals = "equals",
     add = "add",
     subtract = "subtract",
     multiply = "multiply",
@@ -131,22 +133,30 @@ CommandManager.registerCommand(
                 const objective2 = getScoreboardObjective(objective);
 
                 for (const target1 of targets) {
-                    let score1 = objective1.getScore(target1);
+                    if (!target1.isValid || !target1.scoreboardIdentity) {
+                        continue;
+                    }
+
+                    const score1 = objective1.getScore(target1);
                     if (score1 === undefined) {
                         continue;
                     }
 
-                    score1 = clamp(score1, -2147483648, 214748347);
-
                     for (const target2 of selectors) {
-                        let score2 = objective2.getScore(target2);
+                        if (!target2.isValid || !target2.scoreboardIdentity) {
+                            continue;
+                        }
+
+                        const score2 = objective2.getScore(target2);
                         if (score2 === undefined) {
                             continue;
                         }
 
-                        score2 = clamp(score2, -2147483648, 214748347);
-
-                        const result = callback(score1, score2);
+                        const result = clamp(
+                            callback(score1, score2),
+                            MIN_SIGNED_INT32,
+                            MAX_SIGNED_INT32
+                        );
                         objective1.setScore(target1, result);
                     }
                 }
@@ -159,14 +169,17 @@ CommandManager.registerCommand(
             const objective1 = getScoreboardObjective(targetObjective);
 
             for (const target of targets) {
-                let score = objective1.getScore(target);
+                if (!target.isValid || !target.scoreboardIdentity) {
+                    continue;
+                }
+
+                const score = objective1.getScore(target);
                 if (score === undefined) {
                     continue;
                 }
 
-                score = clamp(score, -2147483648, 214748347); // add a custom gamerule to /config that determines whether these should clamp or overflow
+                const result = clamp(callback(score), MIN_SIGNED_INT32, MAX_SIGNED_INT32); // add a custom gamerule to /config that determines whether these should clamp or overflow
 
-                const result = callback(score);
                 objective1.setScore(target, result);
             }
         });
@@ -205,6 +218,7 @@ export const operations: [
         [ScoreOperations.not]: (num1: number): number => ~num1,
     },
     {
+        [ScoreOperations.equals]: (_, num2: number): number => num2,
         [ScoreOperations.add]: (num1: number, num2: number): number => num1 + num2,
         [ScoreOperations.subtract]: (num1: number, num2: number): number => num1 - num2,
         [ScoreOperations.multiply]: (num1: number, num2: number): number => num1 * num2,
