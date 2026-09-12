@@ -34,7 +34,7 @@ import { VALUE_UPDATE_MODE_ENUM_KEY, ValueUpdateMode } from "../entity/health.js
 CommandManager.registerCommand(
     {
         name: "hunger",
-        description: "Modifies all target players' hunger based on the mode and value",
+        description: "Modifies all target players hunger based on the mode and value",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
             { name: "players", type: CustomCommandParamType.PlayerSelector },

@@ -21,9 +21,16 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Entity, EntityQueryOptions } from "@minecraft/server";
+import { Entity, EntityQueryOptions, world } from "@minecraft/server";
 
 import { Dimensions } from "../constants/dimensions";
+
+export function initializeDimensions(): void {
+    Dimensions.overworld = world.getDimension("overworld");
+    Dimensions.nether = world.getDimension("nether");
+    Dimensions.end = world.getDimension("the_end");
+    Dimensions.all = [Dimensions.overworld, Dimensions.nether, Dimensions.end];
+}
 
 /**
  * Gets all entities from all dimensions
