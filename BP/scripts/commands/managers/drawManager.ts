@@ -113,7 +113,7 @@ export class DrawManager {
         return true;
     }
 
-    public static removeId(shapeId: string): boolean {
+    public static undrawId(shapeId: string): boolean {
         const shapes = this.getShapes(shapeId);
 
         if (!shapes) {
@@ -127,7 +127,24 @@ export class DrawManager {
         return true;
     }
 
-    public static removeAll(): void {
+    public static undrawAll(): void {
         debugDrawer.removeAll();
+    }
+
+    public static removeId(id: string): boolean {
+        const result = this.undrawId(id);
+
+        if (!result) {
+            return false;
+        }
+
+        this.shapes.delete(id);
+
+        return true;
+    }
+
+    public static removeAll(): void {
+        this.undrawAll();
+        this.shapes.clear();
     }
 }

@@ -29,7 +29,9 @@ import {
     Vector3,
 } from "@minecraft/server";
 
+import { getDimensionFromCommandOrigin } from "../../../utils/dimension.js";
 import { CommandManager } from "../../command.js";
+import { DrawManager } from "../../managers/drawManager.js";
 
 CommandManager.registerCommand(
     {
@@ -47,7 +49,7 @@ CommandManager.registerCommand(
         ],
     },
     (
-        _,
+        origin,
         id: string,
         location: Vector3,
         text: string,
@@ -56,11 +58,15 @@ CommandManager.registerCommand(
         backfaceVisible: boolean,
         textBackfaceVisible: boolean
     ) => {
-        const textShape = new DebugText(location, text);
-        textShape.useRotation = useRotation;
+        const dimension = getDimensionFromCommandOrigin(origin);
+
+        const textShape = new DebugText({ ...location, dimension }, text);
+        textShape.useRotation = !useRotation;
         textShape.backfaceVisible = !showThroughBlocks;
         textShape.backfaceVisible = backfaceVisible;
         textShape.textBackfaceVisible = textBackfaceVisible;
+
+        DrawManager.addShape(id, textShape);
 
         return { status: CustomCommandStatus.Success, message: `Text shape ${id} registered` };
     }

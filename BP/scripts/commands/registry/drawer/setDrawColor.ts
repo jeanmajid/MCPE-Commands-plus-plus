@@ -41,13 +41,14 @@ CommandManager.registerCommand(
             { name: "colorRed", type: CustomCommandParamType.Integer },
             { name: "colorGreen", type: CustomCommandParamType.Integer },
             { name: "colorBlue", type: CustomCommandParamType.Integer },
+            { name: "alpha", type: CustomCommandParamType.Integer },
         ],
     },
-    (_, shapeId, colorRed: number, colorGreen: number, colorBlue: number) => {
+    (_, shapeId, colorRed: number, colorGreen: number, colorBlue: number, alpha: number) => {
         const result = DrawManager.setProperty(
             shapeId,
             "color",
-            getNormalizedRgba(colorRed, colorGreen, colorBlue, 1)
+            getNormalizedRgba(colorRed, colorGreen, colorBlue, alpha)
         );
 
         return {

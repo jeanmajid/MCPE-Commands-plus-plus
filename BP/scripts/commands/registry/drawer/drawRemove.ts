@@ -21,49 +21,28 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { DebugArrow } from "@minecraft/debug-utilities";
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
     CustomCommandParamType,
-    Vector3,
 } from "@minecraft/server";
 
-import { getDimensionFromCommandOrigin } from "../../../utils/dimension.js";
 import { CommandManager } from "../../command.js";
 import { DrawManager } from "../../managers/drawManager.js";
 
 CommandManager.registerCommand(
     {
-        name: "drawarrow",
-        description: "Draws a arrow via the Debug Drawer module",
+        name: "drawremove",
+        description: "Undraws and removes a group of shapes permanently",
         permissionLevel: CommandPermissionLevel.GameDirectors,
-        mandatoryParameters: [
-            { name: "id", type: CustomCommandParamType.String },
-            { name: "startPos", type: CustomCommandParamType.Location },
-            { name: "endPos", type: CustomCommandParamType.Location },
-            { name: "headLength", type: CustomCommandParamType.Float },
-            { name: "headRadius", type: CustomCommandParamType.Float },
-            { name: "headSegments", type: CustomCommandParamType.Integer },
-        ],
+        mandatoryParameters: [{ name: "id", type: CustomCommandParamType.String }],
     },
-    (
-        origin,
-        id: string,
-        startPos: Vector3,
-        endPos: Vector3,
-        headLength: number,
-        headRadius: number,
-        headSegments: number
-    ) => {
-        const dimension = getDimensionFromCommandOrigin(origin);
+    (_, id: string) => {
+        const result = DrawManager.removeId(id);
 
-        const arrow = new DebugArrow({ ...startPos, dimension }, endPos);
-        arrow.headLength = headLength;
-        arrow.headRadius = headRadius;
-        arrow.headSegments = headSegments;
-
-        DrawManager.addShape(id, arrow);
-        return { status: CustomCommandStatus.Success, message: "Arrow successfully drawn" };
+        return {
+            status: CustomCommandStatus.Success,
+            message: result ? "Shape successfully removed" : "Failed to remove shape",
+        };
     }
 );

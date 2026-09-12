@@ -30,6 +30,7 @@ import {
 } from "@minecraft/server";
 
 import { clamp } from "../../../utils/clamp.js";
+import { getDimensionFromCommandOrigin } from "../../../utils/dimension.js";
 import { CommandManager } from "../../command.js";
 import { DrawManager } from "../../managers/drawManager.js";
 
@@ -49,7 +50,7 @@ CommandManager.registerCommand(
         ],
     },
     (
-        _,
+        origin,
         id: string,
         position: Vector3,
         height: number,
@@ -58,7 +59,9 @@ CommandManager.registerCommand(
         scale: number,
         numSegments: number
     ) => {
-        const cylinder = new DebugCylinder(position);
+        const dimension = getDimensionFromCommandOrigin(origin);
+
+        const cylinder = new DebugCylinder({ ...position, dimension });
         cylinder.height = height;
         cylinder.radii = { x: radiiBottom, y: radiiTop };
         cylinder.scale = scale;

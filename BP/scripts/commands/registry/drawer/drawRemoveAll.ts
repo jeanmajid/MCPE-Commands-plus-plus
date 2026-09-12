@@ -21,35 +21,21 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { DebugLine } from "@minecraft/debug-utilities";
-import {
-    CommandPermissionLevel,
-    CustomCommandStatus,
-    CustomCommandParamType,
-    Vector3,
-} from "@minecraft/server";
+import { CommandPermissionLevel, CustomCommandStatus } from "@minecraft/server";
 
-import { getDimensionFromCommandOrigin } from "../../../utils/dimension.js";
 import { CommandManager } from "../../command.js";
 import { DrawManager } from "../../managers/drawManager.js";
 
 CommandManager.registerCommand(
     {
-        name: "drawline",
-        description: "Add a line",
+        name: "drawremoveall",
+        description: "Undraws and removes all shapes permanently",
         permissionLevel: CommandPermissionLevel.GameDirectors,
-        mandatoryParameters: [
-            { name: "id", type: CustomCommandParamType.String },
-            { name: "startPos", type: CustomCommandParamType.Location },
-            { name: "endPos", type: CustomCommandParamType.Location },
-        ],
+        mandatoryParameters: [],
     },
-    (origin, id: string, startPos: Vector3, endPos: Vector3) => {
-        const dimension = getDimensionFromCommandOrigin(origin);
+    (_) => {
+        DrawManager.removeAll();
 
-        const line = new DebugLine({ ...startPos, dimension }, endPos);
-        DrawManager.addShape(id, line);
-
-        return { status: CustomCommandStatus.Success, message: "Line successfully added" };
+        return { status: CustomCommandStatus.Success, message: "All Shapes successfully removed" };
     }
 );

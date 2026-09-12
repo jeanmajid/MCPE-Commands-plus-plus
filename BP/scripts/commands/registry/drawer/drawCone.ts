@@ -29,6 +29,7 @@ import {
     Vector3,
 } from "@minecraft/server";
 
+import { getDimensionFromCommandOrigin } from "../../../utils/dimension.js";
 import { CommandManager } from "../../command.js";
 import { DrawManager } from "../../managers/drawManager.js";
 
@@ -45,8 +46,10 @@ CommandManager.registerCommand(
             { name: "scale", type: CustomCommandParamType.Float },
         ],
     },
-    (_, id: string, position: Vector3, height: number, radii: number, scale: number) => {
-        const cone = new DebugCone(position);
+    (origin, id: string, position: Vector3, height: number, radii: number, scale: number) => {
+        const dimension = getDimensionFromCommandOrigin(origin);
+
+        const cone = new DebugCone({ ...position, dimension });
         cone.height = height;
         cone.radii = { x: radii, y: radii };
         cone.scale = scale;

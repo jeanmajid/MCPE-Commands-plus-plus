@@ -29,6 +29,7 @@ import {
     Vector3,
 } from "@minecraft/server";
 
+import { getDimensionFromCommandOrigin } from "../../../utils/dimension.js";
 import { Vector } from "../../../utils/vector.js";
 import { CommandManager } from "../../command.js";
 import { DrawManager } from "../../managers/drawManager.js";
@@ -44,8 +45,10 @@ CommandManager.registerCommand(
             { name: "endPos", type: CustomCommandParamType.Location },
         ],
     },
-    (_, id: string, startPos: Vector3, endPos: Vector3) => {
-        const box = new DebugBox(startPos);
+    (origin, id: string, startPos: Vector3, endPos: Vector3) => {
+        const dimension = getDimensionFromCommandOrigin(origin);
+
+        const box = new DebugBox({ ...startPos, dimension });
 
         Vector.setSmallestAndBiggest(startPos, endPos);
         const bound = Vector.subtract(endPos, startPos);

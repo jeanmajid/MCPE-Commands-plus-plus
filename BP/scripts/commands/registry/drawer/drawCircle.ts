@@ -29,6 +29,7 @@ import {
     Vector3,
 } from "@minecraft/server";
 
+import { getDimensionFromCommandOrigin } from "../../../utils/dimension.js";
 import { CommandManager } from "../../command.js";
 import { DrawManager } from "../../managers/drawManager.js";
 
@@ -43,8 +44,10 @@ CommandManager.registerCommand(
             { name: "scale", type: CustomCommandParamType.Float }, // Maybe call this radius or diameter; idk what scale equates to
         ],
     },
-    (_, id: string, position: Vector3, scale: number) => {
-        const circle = new DebugCircle(position);
+    (origin, id: string, position: Vector3, scale: number) => {
+        const dimension = getDimensionFromCommandOrigin(origin);
+
+        const circle = new DebugCircle({ ...position, dimension });
         circle.scale = scale;
 
         DrawManager.addShape(id, circle);

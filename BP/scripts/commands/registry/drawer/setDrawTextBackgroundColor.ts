@@ -34,7 +34,7 @@ import { DrawManager } from "../../managers/drawManager.js";
 
 CommandManager.registerCommand(
     {
-        name: "setdrawtextcolor",
+        name: "setdrawtextbackgroundcolor",
         description: "Sets the draw color for text",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
@@ -42,13 +42,14 @@ CommandManager.registerCommand(
             { name: "colorRed", type: CustomCommandParamType.Integer },
             { name: "colorGreen", type: CustomCommandParamType.Integer },
             { name: "colorBlue", type: CustomCommandParamType.Integer },
+            { name: "alpha", type: CustomCommandParamType.Integer },
         ],
     },
-    (_, shapeId, colorRed: number, colorGreen: number, colorBlue: number) => {
+    (_, shapeId, colorRed: number, colorGreen: number, colorBlue: number, alpha: number) => {
         const result = DrawManager.setProperty(
             shapeId,
             "backgroundColorOverride",
-            getNormalizedRgba(colorRed, colorGreen, colorBlue, 1),
+            getNormalizedRgba(colorRed, colorGreen, colorBlue, alpha),
             DebugText
         );
 

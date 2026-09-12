@@ -29,6 +29,7 @@ import {
     Vector3,
 } from "@minecraft/server";
 
+import { getDimensionFromCommandOrigin } from "../../../utils/dimension.js";
 import { CommandManager } from "../../command.js";
 import { DrawManager } from "../../managers/drawManager.js";
 
@@ -45,8 +46,17 @@ CommandManager.registerCommand(
             { name: "segmentsPerAxis", type: CustomCommandParamType.Integer }, // Optional?
         ],
     },
-    (_, id: string, position: Vector3, radii: number, scale: number, segmentsPerAxis: number) => {
-        const ellipsoid = new DebugEllipsoid(position);
+    (
+        origin,
+        id: string,
+        position: Vector3,
+        radii: number,
+        scale: number,
+        segmentsPerAxis: number
+    ) => {
+        const dimension = getDimensionFromCommandOrigin(origin);
+
+        const ellipsoid = new DebugEllipsoid({ ...position, dimension });
         ellipsoid.radii = { x: radii, y: radii, z: radii };
         ellipsoid.scale = scale;
         ellipsoid.segmentsPerAxis = segmentsPerAxis;
