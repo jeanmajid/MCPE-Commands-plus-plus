@@ -38,14 +38,14 @@ CommandManager.registerCommand(
         description: "Draws a cone via the Debug Drawer module",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
+            { name: "id", type: CustomCommandParamType.String },
             { name: "position", type: CustomCommandParamType.Location },
             { name: "height", type: CustomCommandParamType.Float },
             { name: "radii", type: CustomCommandParamType.Float },
             { name: "scale", type: CustomCommandParamType.Float },
-            { name: "id", type: CustomCommandParamType.String },
         ],
     },
-    (_, position: Vector3, height: number, radii: number, scale: number, id: string) => {
+    (_, id: string, position: Vector3, height: number, radii: number, scale: number) => {
         const cone = new DebugCone(position);
         cone.height = height;
         cone.radii = { x: radii, y: radii };

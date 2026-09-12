@@ -38,12 +38,12 @@ CommandManager.registerCommand(
         description: "Draws a sphere via the Debug Drawer module",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
+            { name: "id", type: CustomCommandParamType.String },
             { name: "position", type: CustomCommandParamType.Location },
             { name: "scale", type: CustomCommandParamType.Float },
-            { name: "id", type: CustomCommandParamType.String },
         ],
     },
-    (_, position: Vector3, scale: number, id: string) => {
+    (_, id: string, position: Vector3, scale: number) => {
         const sphere = new DebugSphere(position);
         sphere.scale = scale;
 

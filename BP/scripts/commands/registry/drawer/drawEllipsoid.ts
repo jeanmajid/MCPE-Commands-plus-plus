@@ -38,14 +38,14 @@ CommandManager.registerCommand(
         description: "Draws a ellipsoid via the Debug Drawer module",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
+            { name: "id", type: CustomCommandParamType.String },
             { name: "position", type: CustomCommandParamType.Location },
             { name: "radii", type: CustomCommandParamType.Float },
             { name: "scale", type: CustomCommandParamType.Float },
             { name: "segmentsPerAxis", type: CustomCommandParamType.Integer }, // Optional?
-            { name: "id", type: CustomCommandParamType.String },
         ],
     },
-    (_, position: Vector3, radii: number, scale: number, segmentsPerAxis: number, id: string) => {
+    (_, id: string, position: Vector3, radii: number, scale: number, segmentsPerAxis: number) => {
         const ellipsoid = new DebugEllipsoid(position);
         ellipsoid.radii = { x: radii, y: radii, z: radii };
         ellipsoid.scale = scale;

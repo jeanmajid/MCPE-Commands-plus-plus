@@ -26,6 +26,7 @@ import {
     CommandPermissionLevel,
     CustomCommandStatus,
     CustomCommandParamType,
+    Vector3,
 } from "@minecraft/server";
 
 import { CommandManager } from "../../command.js";
@@ -35,10 +36,32 @@ CommandManager.registerCommand(
         name: "drawtext",
         description: "Draws a text via the Debug Drawer module",
         permissionLevel: CommandPermissionLevel.GameDirectors,
-        mandatoryParameters: [{ name: "id", type: CustomCommandParamType.String }],
+        mandatoryParameters: [
+            { name: "id", type: CustomCommandParamType.String },
+            { name: "location", type: CustomCommandParamType.Location },
+            { name: "text", type: CustomCommandParamType.String },
+            { name: "useRotation", type: CustomCommandParamType.Boolean },
+            { name: "showThroughBlocks", type: CustomCommandParamType.Boolean },
+            { name: "backfaceVisible", type: CustomCommandParamType.Boolean },
+            { name: "textBackfaceVisible", type: CustomCommandParamType.Boolean },
+        ],
     },
-    (_, id: string) => {
-        // const text = new DebugText();
+    (
+        _,
+        id: string,
+        location: Vector3,
+        text: string,
+        useRotation: boolean,
+        showThroughBlocks: boolean,
+        backfaceVisible: boolean,
+        textBackfaceVisible: boolean
+    ) => {
+        const textShape = new DebugText(location, text);
+        textShape.useRotation = useRotation;
+        textShape.backfaceVisible = !showThroughBlocks;
+        textShape.backfaceVisible = backfaceVisible;
+        textShape.textBackfaceVisible = textBackfaceVisible;
+
         return { status: CustomCommandStatus.Success, message: `Text shape ${id} registered` };
     }
 );

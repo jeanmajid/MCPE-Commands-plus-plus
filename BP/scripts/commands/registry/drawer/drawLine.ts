@@ -38,12 +38,12 @@ CommandManager.registerCommand(
         description: "Add a line",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
+            { name: "id", type: CustomCommandParamType.String },
             { name: "startPos", type: CustomCommandParamType.Location },
             { name: "endPos", type: CustomCommandParamType.Location },
-            { name: "id", type: CustomCommandParamType.String },
         ],
     },
-    (_, startPos: Vector3, endPos: Vector3, id: string) => {
+    (_, id: string, startPos: Vector3, endPos: Vector3) => {
         const line = new DebugLine(startPos, endPos);
         DrawManager.addShape(id, line);
 

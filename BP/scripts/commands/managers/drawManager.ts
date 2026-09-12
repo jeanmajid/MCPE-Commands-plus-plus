@@ -57,10 +57,12 @@ export class DrawManager {
     /**
      * set a property of a group of shapes
      */
-    public static setProperty<P extends keyof DebugShape>(
+    public static setProperty<T extends DebugShape, P extends keyof T>(
         shapeId: string,
         property: P,
-        value: DebugShape[P]
+        value: T[P],
+        // oxlint-disable-next-line typescript/no-explicit-any
+        targetShape?: abstract new (...args: any[]) => T
     ): boolean {
         const shapes = this.getShapes(shapeId);
 
@@ -68,8 +70,16 @@ export class DrawManager {
             return false;
         }
 
-        for (const shape of shapes) {
-            shape[property] = value;
+        if (!targetShape) {
+            for (const shape of shapes) {
+                (shape as T)[property] = value;
+            }
+        } else {
+            for (const shape of shapes) {
+                if (shape instanceof targetShape) {
+                    (shape as T)[property] = value;
+                }
+            }
         }
 
         return true;

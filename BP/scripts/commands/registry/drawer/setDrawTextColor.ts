@@ -21,47 +21,40 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { DebugPyramid } from "@minecraft/debug-utilities";
+import { DebugText } from "@minecraft/debug-utilities";
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
     CustomCommandParamType,
-    Vector3,
 } from "@minecraft/server";
 
+import { getNormalizedRgba } from "../../../utils/color.js";
 import { CommandManager } from "../../command.js";
 import { DrawManager } from "../../managers/drawManager.js";
 
 CommandManager.registerCommand(
     {
-        name: "drawpyramid",
-        description: "Draws a pyramid via the Debug Drawer module",
+        name: "setdrawtextcolor",
+        description: "Sets the draw color for text",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
-            { name: "id", type: CustomCommandParamType.String },
-            { name: "position", type: CustomCommandParamType.Location },
-            { name: "height", type: CustomCommandParamType.Float },
-            { name: "width", type: CustomCommandParamType.Float },
-            { name: "depth", type: CustomCommandParamType.Float },
-            { name: "scale", type: CustomCommandParamType.Float },
+            { name: "shapeId", type: CustomCommandParamType.String },
+            { name: "colorRed", type: CustomCommandParamType.Integer },
+            { name: "colorGreen", type: CustomCommandParamType.Integer },
+            { name: "colorBlue", type: CustomCommandParamType.Integer },
         ],
     },
-    (
-        _,
-        id: string,
-        position: Vector3,
-        height: number,
-        width: number,
-        depth: number,
-        scale: number
-    ) => {
-        const pyramid = new DebugPyramid(position);
-        pyramid.height = height;
-        pyramid.width = width;
-        pyramid.depth = depth;
-        pyramid.scale = scale;
+    (_, shapeId, colorRed: number, colorGreen: number, colorBlue: number) => {
+        const result = DrawManager.setProperty(
+            shapeId,
+            "backgroundColorOverride",
+            getNormalizedRgba(colorRed, colorGreen, colorBlue, 1),
+            DebugText
+        );
 
-        DrawManager.addShape(id, pyramid);
-        return { status: CustomCommandStatus.Success, message: "Pyramid successfully drawn" };
+        return {
+            status: CustomCommandStatus.Success,
+            message: result ? "Box color successfully set" : "Failed to set box color",
+        };
     }
 );

@@ -38,22 +38,22 @@ CommandManager.registerCommand(
         description: "Draws a box via the Debug Drawer module",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
+            { name: "id", type: CustomCommandParamType.String },
             { name: "position", type: CustomCommandParamType.Location },
             { name: "boundX", type: CustomCommandParamType.Location },
             { name: "boundY", type: CustomCommandParamType.Location },
             { name: "boundZ", type: CustomCommandParamType.Location },
             { name: "scale", type: CustomCommandParamType.Float },
-            { name: "id", type: CustomCommandParamType.String },
         ],
     },
     (
         _,
+        id: string,
         position: Vector3,
         boundX: Vector3,
         boundY: Vector3,
         boundZ: Vector3,
-        scale: number,
-        id: string
+        scale: number
     ) => {
         const box = new DebugBox(position);
         box.bound = { x: boundX.x, y: boundY.y, z: boundZ.z };

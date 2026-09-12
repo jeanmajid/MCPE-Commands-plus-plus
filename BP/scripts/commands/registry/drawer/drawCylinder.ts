@@ -29,6 +29,7 @@ import {
     Vector3,
 } from "@minecraft/server";
 
+import { clamp } from "../../../utils/clamp.js";
 import { CommandManager } from "../../command.js";
 import { DrawManager } from "../../managers/drawManager.js";
 
@@ -38,28 +39,30 @@ CommandManager.registerCommand(
         description: "Draws a cylinder via the Debug Drawer module",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
+            { name: "id", type: CustomCommandParamType.String },
             { name: "position", type: CustomCommandParamType.Location },
             { name: "height", type: CustomCommandParamType.Float },
-            { name: "radii", type: CustomCommandParamType.Float },
+            { name: "radiiBottom", type: CustomCommandParamType.Float },
+            { name: "radiiTop", type: CustomCommandParamType.Float },
             { name: "scale", type: CustomCommandParamType.Float },
             { name: "numSegments", type: CustomCommandParamType.Integer }, // Optional?
-            { name: "id", type: CustomCommandParamType.String },
         ],
     },
     (
         _,
+        id: string,
         position: Vector3,
         height: number,
-        radii: number,
+        radiiBottom: number,
+        radiiTop: number,
         scale: number,
-        numSegments: number,
-        id: string
+        numSegments: number
     ) => {
         const cylinder = new DebugCylinder(position);
         cylinder.height = height;
-        cylinder.radii = { x: radii, y: radii };
+        cylinder.radii = { x: radiiBottom, y: radiiTop };
         cylinder.scale = scale;
-        cylinder.numSegments = numSegments;
+        cylinder.numSegments = clamp(numSegments, 3, 128);
 
         DrawManager.addShape(id, cylinder);
         return { status: CustomCommandStatus.Success, message: "Cylinder successfully drawn" };

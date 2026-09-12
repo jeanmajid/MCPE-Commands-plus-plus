@@ -38,12 +38,12 @@ CommandManager.registerCommand(
         description: "Draws a circle via the Debug Drawer module",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
+            { name: "id", type: CustomCommandParamType.String },
             { name: "position", type: CustomCommandParamType.Location },
             { name: "scale", type: CustomCommandParamType.Float }, // Maybe call this radius or diameter; idk what scale equates to
-            { name: "id", type: CustomCommandParamType.String },
         ],
     },
-    (_, position: Vector3, scale: number, id: string) => {
+    (_, id: string, position: Vector3, scale: number) => {
         const circle = new DebugCircle(position);
         circle.scale = scale;
 
