@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
@@ -44,7 +43,7 @@ CommandManager.registerCommand(
             { name: "colorBlue", type: CustomCommandParamType.Integer },
         ],
     },
-    (origin, shapeId, colorRed: number, colorGreen: number, colorBlue: number) => {
+    (_, shapeId, colorRed: number, colorGreen: number, colorBlue: number) => {
         const result = DrawManager.setProperty(
             shapeId,
             "color",

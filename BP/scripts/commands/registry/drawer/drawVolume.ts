@@ -21,8 +21,7 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
-import { DebugBox, debugDrawer } from "@minecraft/debug-utilities";
+import { DebugBox } from "@minecraft/debug-utilities";
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
@@ -30,8 +29,9 @@ import {
     Vector3,
 } from "@minecraft/server";
 
-import { getNormalizedRgba } from "../../../utils/color.js";
+import { Vector } from "../../../utils/vector.js";
 import { CommandManager } from "../../command.js";
+import { DrawManager } from "../../managers/drawManager.js";
 
 CommandManager.registerCommand(
     {
@@ -44,32 +44,23 @@ CommandManager.registerCommand(
             { name: "id", type: CustomCommandParamType.String },
         ],
     },
-    (
-        origin,
-        startPos: Vector3,
-        endPos: Vector3,
-        id: string,
-        bound: Vector3,
-        scale: number,
-        rotation: Vector3,
-        colorRed: number,
-        colorGreen: number,
-        colorBlue: number,
-        expirationTicks: number
-    ) => {
+    (_, startPos: Vector3, endPos: Vector3, id: string) => {
         const box = new DebugBox(startPos);
 
-        if (colorBlue !== undefined) {
-            box.color = getNormalizedRgba(colorRed, colorGreen, colorBlue, 1);
-        }
+        Vector.setSmallestAndBiggest(startPos, endPos);
+        const bound = Vector.subtract(endPos, startPos);
 
-        if (expirationTicks) {
-            box.timeLeft = expirationTicks;
-        }
+        bound.x += 1;
+        bound.y += 1;
+        bound.z += 1;
 
-        // TODO calculate the stuff
+        startPos.x += bound.x / 2;
+        startPos.y += bound.y / 2;
+        startPos.z += bound.z / 2;
 
-        debugDrawer.addShape(box);
+        box.bound = startPos;
+
+        DrawManager.addShape(id, box);
         return { status: CustomCommandStatus.Success, message: "Box successfully drawn" };
     }
 );

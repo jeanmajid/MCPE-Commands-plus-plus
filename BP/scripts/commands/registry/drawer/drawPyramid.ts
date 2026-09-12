@@ -21,8 +21,7 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
-import { DebugPyramid, debugDrawer } from "@minecraft/debug-utilities";
+import { DebugPyramid } from "@minecraft/debug-utilities";
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
@@ -30,8 +29,8 @@ import {
     Vector3,
 } from "@minecraft/server";
 
-import { getNormalizedRgba } from "../../../utils/color.js";
 import { CommandManager } from "../../command.js";
+import { DrawManager } from "../../managers/drawManager.js";
 
 CommandManager.registerCommand(
     {
@@ -39,7 +38,7 @@ CommandManager.registerCommand(
         description: "Draws a pyramid via the Debug Drawer module",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
-            { name: "startPos", type: CustomCommandParamType.Location },
+            { name: "position", type: CustomCommandParamType.Location },
             { name: "height", type: CustomCommandParamType.Float },
             { name: "width", type: CustomCommandParamType.Float },
             { name: "depth", type: CustomCommandParamType.Float },
@@ -48,31 +47,21 @@ CommandManager.registerCommand(
         ],
     },
     (
-        origin,
-        startPos: Vector3,
-        endPos: Vector3,
-        id: string,
+        _,
+        position: Vector3,
         height: number,
         width: number,
         depth: number,
         scale: number,
-        rotation: Vector3,
-        colorRed: number,
-        colorGreen: number,
-        colorBlue: number,
-        expirationTicks: number
+        id: string
     ) => {
-        const pyramid = new DebugPyramid(startPos);
+        const pyramid = new DebugPyramid(position);
+        pyramid.height = height;
+        pyramid.width = width;
+        pyramid.depth = depth;
+        pyramid.scale = scale;
 
-        if (colorBlue !== undefined) {
-            pyramid.color = getNormalizedRgba(colorRed, colorGreen, colorBlue, 1);
-        }
-
-        if (expirationTicks) {
-            pyramid.timeLeft = expirationTicks;
-        }
-
-        debugDrawer.addShape(pyramid);
+        DrawManager.addShape(id, pyramid);
         return { status: CustomCommandStatus.Success, message: "Pyramid successfully drawn" };
     }
 );

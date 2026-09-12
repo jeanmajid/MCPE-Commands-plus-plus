@@ -21,7 +21,13 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Entity, EntityQueryOptions, world } from "@minecraft/server";
+import {
+    CustomCommandOrigin,
+    Dimension,
+    Entity,
+    EntityQueryOptions,
+    world,
+} from "@minecraft/server";
 
 import { Dimensions } from "../constants/dimensions";
 
@@ -37,4 +43,16 @@ export function initializeDimensions(): void {
  */
 export function getAllEntities(filter?: EntityQueryOptions): Entity[] {
     return Dimensions.all.flatMap((d) => d.getEntities(filter));
+}
+
+export function getDimensionFromCommandOrigin(origin: CustomCommandOrigin): Dimension {
+    if (origin.sourceEntity) {
+        return origin.sourceEntity.dimension;
+    } else if (origin.sourceBlock) {
+        return origin.sourceBlock.dimension;
+    } else if (origin.initiator) {
+        return origin.initiator.dimension;
+    } else {
+        return Dimensions.overworld;
+    }
 }

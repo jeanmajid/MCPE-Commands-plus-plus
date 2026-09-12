@@ -21,8 +21,7 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
-import { DebugCone, debugDrawer } from "@minecraft/debug-utilities";
+import { DebugCone } from "@minecraft/debug-utilities";
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
@@ -30,8 +29,8 @@ import {
     Vector3,
 } from "@minecraft/server";
 
-import { getNormalizedRgba } from "../../../utils/color.js";
 import { CommandManager } from "../../command.js";
+import { DrawManager } from "../../managers/drawManager.js";
 
 CommandManager.registerCommand(
     {
@@ -39,38 +38,20 @@ CommandManager.registerCommand(
         description: "Draws a cone via the Debug Drawer module",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
-            { name: "startPos", type: CustomCommandParamType.Location },
+            { name: "position", type: CustomCommandParamType.Location },
             { name: "height", type: CustomCommandParamType.Float },
             { name: "radii", type: CustomCommandParamType.Float },
             { name: "scale", type: CustomCommandParamType.Float },
             { name: "id", type: CustomCommandParamType.String },
         ],
     },
-    (
-        origin,
-        startPos: Vector3,
-        endPos: Vector3,
-        id: string,
-        height: number,
-        radii: number,
-        scale: number,
-        rotation: Vector3,
-        colorRed: number,
-        colorGreen: number,
-        colorBlue: number,
-        expirationTicks: number
-    ) => {
-        const cone = new DebugCone(startPos);
+    (_, position: Vector3, height: number, radii: number, scale: number, id: string) => {
+        const cone = new DebugCone(position);
+        cone.height = height;
+        cone.radii = { x: radii, y: radii };
+        cone.scale = scale;
 
-        if (colorBlue !== undefined) {
-            cone.color = getNormalizedRgba(colorRed, colorGreen, colorBlue, 1);
-        }
-
-        if (expirationTicks) {
-            cone.timeLeft = expirationTicks;
-        }
-
-        debugDrawer.addShape(cone);
+        DrawManager.addShape(id, cone);
         return { status: CustomCommandStatus.Success, message: "Cone successfully drawn" };
     }
 );

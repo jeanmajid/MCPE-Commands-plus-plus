@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import { DebugLine } from "@minecraft/debug-utilities";
 import {
     CommandPermissionLevel,
@@ -44,7 +43,7 @@ CommandManager.registerCommand(
             { name: "id", type: CustomCommandParamType.String },
         ],
     },
-    (origin, startPos: Vector3, endPos: Vector3, id: string) => {
+    (_, startPos: Vector3, endPos: Vector3, id: string) => {
         const line = new DebugLine(startPos, endPos);
         DrawManager.addShape(id, line);
 

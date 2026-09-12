@@ -26,13 +26,13 @@ import {
     CustomCommandStatus,
     CustomCommandParamType,
     Vector3,
-    Dimension,
     ItemStack,
     ItemType,
     system,
 } from "@minecraft/server";
 
 import { clamp } from "../../../utils/clamp.js";
+import { getDimensionFromCommandOrigin } from "../../../utils/dimension.js";
 import { CommandManager } from "../../command.js";
 
 CommandManager.registerCommand(
@@ -47,15 +47,7 @@ CommandManager.registerCommand(
         optionalParameters: [{ name: "quantity", type: CustomCommandParamType.Integer }],
     },
     (origin, item: ItemType, location: Vector3, quantity: number = 1) => {
-        let dimension: Dimension;
-
-        if (origin.sourceEntity) {
-            dimension = origin.sourceEntity.dimension;
-        } else if (origin.sourceBlock) {
-            dimension = origin.sourceBlock.dimension;
-        } else if (origin.initiator) {
-            return;
-        }
+        const dimension = getDimensionFromCommandOrigin(origin);
 
         quantity = clamp(quantity, 1, 255);
 

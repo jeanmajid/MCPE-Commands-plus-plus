@@ -21,8 +21,7 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
-import { DebugCylinder, debugDrawer } from "@minecraft/debug-utilities";
+import { DebugCylinder } from "@minecraft/debug-utilities";
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
@@ -30,8 +29,8 @@ import {
     Vector3,
 } from "@minecraft/server";
 
-import { getNormalizedRgba } from "../../../utils/color.js";
 import { CommandManager } from "../../command.js";
+import { DrawManager } from "../../managers/drawManager.js";
 
 CommandManager.registerCommand(
     {
@@ -39,7 +38,7 @@ CommandManager.registerCommand(
         description: "Draws a cylinder via the Debug Drawer module",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
-            { name: "startPos", type: CustomCommandParamType.Location },
+            { name: "position", type: CustomCommandParamType.Location },
             { name: "height", type: CustomCommandParamType.Float },
             { name: "radii", type: CustomCommandParamType.Float },
             { name: "scale", type: CustomCommandParamType.Float },
@@ -48,30 +47,21 @@ CommandManager.registerCommand(
         ],
     },
     (
-        origin,
-        startPos: Vector3,
-        endPos: Vector3,
-        id: string,
+        _,
+        position: Vector3,
         height: number,
         radii: number,
         scale: number,
-        rotation: Vector3,
-        colorRed: number,
-        colorGreen: number,
-        colorBlue: number,
-        expirationTicks: number
+        numSegments: number,
+        id: string
     ) => {
-        const cylinder = new DebugCylinder(startPos);
+        const cylinder = new DebugCylinder(position);
+        cylinder.height = height;
+        cylinder.radii = { x: radii, y: radii };
+        cylinder.scale = scale;
+        cylinder.numSegments = numSegments;
 
-        if (colorBlue !== undefined) {
-            cylinder.color = getNormalizedRgba(colorRed, colorGreen, colorBlue, 1);
-        }
-
-        if (expirationTicks) {
-            cylinder.timeLeft = expirationTicks;
-        }
-
-        debugDrawer.addShape(cylinder);
+        DrawManager.addShape(id, cylinder);
         return { status: CustomCommandStatus.Success, message: "Cylinder successfully drawn" };
     }
 );
