@@ -21,8 +21,7 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
-import { DebugBox, debugDrawer } from "@minecraft/debug-utilities";
+import { DebugBox } from "@minecraft/debug-utilities";
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
@@ -30,8 +29,8 @@ import {
     Vector3,
 } from "@minecraft/server";
 
-import { getNormalizedRgba } from "../../../utils/color.js";
 import { CommandManager } from "../../command.js";
+import { DrawManager } from "../../managers/drawManager.js";
 
 CommandManager.registerCommand(
     {
@@ -39,7 +38,7 @@ CommandManager.registerCommand(
         description: "Draws a box via the Debug Drawer module",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
-            { name: "startPos", type: CustomCommandParamType.Location },
+            { name: "position", type: CustomCommandParamType.Location },
             { name: "boundX", type: CustomCommandParamType.Location },
             { name: "boundY", type: CustomCommandParamType.Location },
             { name: "boundZ", type: CustomCommandParamType.Location },
@@ -48,31 +47,19 @@ CommandManager.registerCommand(
         ],
     },
     (
-        origin,
-        startPos: Vector3,
-        x: number,
-        y: number,
-        z: number,
-        id: string,
-        bound: Vector3,
+        _,
+        position: Vector3,
+        boundX: Vector3,
+        boundY: Vector3,
+        boundZ: Vector3,
         scale: number,
-        rotation: Vector3,
-        colorRed: number,
-        colorGreen: number,
-        colorBlue: number,
-        expirationTicks: number
+        id: string
     ) => {
-        const box = new DebugBox(startPos);
+        const box = new DebugBox(position);
+        box.bound = { x: boundX.x, y: boundY.y, z: boundZ.z };
+        box.scale = scale;
 
-        if (colorBlue !== undefined) {
-            box.color = getNormalizedRgba(colorRed, colorGreen, colorBlue, 1);
-        }
-
-        if (expirationTicks) {
-            box.timeLeft = expirationTicks;
-        }
-
-        debugDrawer.addShape(box);
+        DrawManager.addShape(id, box);
         return { status: CustomCommandStatus.Success, message: "Box successfully drawn" };
     }
 );

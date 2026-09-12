@@ -21,8 +21,7 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
-import { DebugSphere, debugDrawer } from "@minecraft/debug-utilities";
+import { DebugSphere } from "@minecraft/debug-utilities";
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
@@ -30,8 +29,8 @@ import {
     Vector3,
 } from "@minecraft/server";
 
-import { getNormalizedRgba } from "../../../utils/color.js";
 import { CommandManager } from "../../command.js";
+import { DrawManager } from "../../managers/drawManager.js";
 
 CommandManager.registerCommand(
     {
@@ -39,33 +38,16 @@ CommandManager.registerCommand(
         description: "Draws a sphere via the Debug Drawer module",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
-            { name: "startPos", type: CustomCommandParamType.Location },
+            { name: "position", type: CustomCommandParamType.Location },
             { name: "scale", type: CustomCommandParamType.Float },
             { name: "id", type: CustomCommandParamType.String },
         ],
     },
-    (
-        origin,
-        startPos: Vector3,
-        endPos: Vector3,
-        id: string,
-        rotation: number, // wha tha fak
-        colorRed: number,
-        colorGreen: number,
-        colorBlue: number,
-        expirationTicks: number
-    ) => {
-        const sphere = new DebugSphere(startPos);
+    (_, position: Vector3, scale: number, id: string) => {
+        const sphere = new DebugSphere(position);
+        sphere.scale = scale;
 
-        if (colorBlue !== undefined) {
-            sphere.color = getNormalizedRgba(colorRed, colorGreen, colorBlue, 1);
-        }
-
-        if (expirationTicks) {
-            sphere.timeLeft = expirationTicks;
-        }
-
-        debugDrawer.addShape(sphere);
+        DrawManager.addShape(id, sphere);
         return { status: CustomCommandStatus.Success, message: "Sphere successfully drawn" };
     }
 );

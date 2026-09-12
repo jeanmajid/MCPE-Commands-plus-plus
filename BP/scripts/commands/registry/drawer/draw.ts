@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
@@ -38,7 +37,7 @@ CommandManager.registerCommand(
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [{ name: "id", type: CustomCommandParamType.String }],
     },
-    (origin, id: string) => {
+    (_, id: string) => {
         const result = DrawManager.drawId(id);
 
         return {

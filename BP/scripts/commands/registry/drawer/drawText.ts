@@ -21,18 +21,13 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
-// TODO
-
-import { DebugLine, debugDrawer } from "@minecraft/debug-utilities";
+import { DebugText } from "@minecraft/debug-utilities";
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
     CustomCommandParamType,
-    Vector3,
 } from "@minecraft/server";
 
-import { getNormalizedRgba } from "../../../utils/color.js";
 import { CommandManager } from "../../command.js";
 
 CommandManager.registerCommand(
@@ -42,27 +37,8 @@ CommandManager.registerCommand(
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [{ name: "id", type: CustomCommandParamType.String }],
     },
-    (
-        origin,
-        startPos: Vector3,
-        endPos: Vector3,
-        id: string,
-        colorRed: number,
-        colorGreen: number,
-        colorBlue: number,
-        expirationTicks: number
-    ) => {
-        const line = new DebugLine(startPos, endPos);
-
-        if (colorBlue !== undefined) {
-            line.color = getNormalizedRgba(colorRed, colorGreen, colorBlue, 1);
-        }
-
-        if (expirationTicks) {
-            line.timeLeft = expirationTicks;
-        }
-
-        debugDrawer.addShape(line);
-        return { status: CustomCommandStatus.Success, message: "Line successfully drawn" };
+    (_, id: string) => {
+        // const text = new DebugText();
+        return { status: CustomCommandStatus.Success, message: `Text shape ${id} registered` };
     }
 );

@@ -21,8 +21,7 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
-import { DebugArrow, debugDrawer } from "@minecraft/debug-utilities";
+import { DebugArrow } from "@minecraft/debug-utilities";
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
@@ -30,8 +29,8 @@ import {
     Vector3,
 } from "@minecraft/server";
 
-import { getNormalizedRgba } from "../../../utils/color.js";
 import { CommandManager } from "../../command.js";
+import { DrawManager } from "../../managers/drawManager.js";
 
 CommandManager.registerCommand(
     {
@@ -48,26 +47,20 @@ CommandManager.registerCommand(
         ],
     },
     (
-        origin,
+        _,
         startPos: Vector3,
         endPos: Vector3,
-        id: string,
-        colorRed: number,
-        colorGreen: number,
-        colorBlue: number,
-        expirationTicks: number
+        headLength: number,
+        headRadius: number,
+        headSegments: number,
+        id: string
     ) => {
         const arrow = new DebugArrow(startPos, endPos);
+        arrow.headLength = headLength;
+        arrow.headRadius = headRadius;
+        arrow.headSegments = headSegments;
 
-        if (colorBlue !== undefined) {
-            arrow.color = getNormalizedRgba(colorRed, colorGreen, colorBlue, 1);
-        }
-
-        if (expirationTicks) {
-            arrow.timeLeft = expirationTicks;
-        }
-
-        debugDrawer.addShape(arrow);
+        DrawManager.addShape(id, arrow);
         return { status: CustomCommandStatus.Success, message: "Arrow successfully drawn" };
     }
 );

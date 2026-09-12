@@ -21,8 +21,7 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
-import { DebugEllipsoid, debugDrawer } from "@minecraft/debug-utilities";
+import { DebugEllipsoid } from "@minecraft/debug-utilities";
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
@@ -30,8 +29,8 @@ import {
     Vector3,
 } from "@minecraft/server";
 
-import { getNormalizedRgba } from "../../../utils/color.js";
 import { CommandManager } from "../../command.js";
+import { DrawManager } from "../../managers/drawManager.js";
 
 CommandManager.registerCommand(
     {
@@ -39,38 +38,20 @@ CommandManager.registerCommand(
         description: "Draws a ellipsoid via the Debug Drawer module",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
-            { name: "startPos", type: CustomCommandParamType.Location },
+            { name: "position", type: CustomCommandParamType.Location },
             { name: "radii", type: CustomCommandParamType.Float },
             { name: "scale", type: CustomCommandParamType.Float },
             { name: "segmentsPerAxis", type: CustomCommandParamType.Integer }, // Optional?
             { name: "id", type: CustomCommandParamType.String },
         ],
     },
-    (
-        origin,
-        startPos: Vector3,
-        endPos: Vector3,
-        id: string,
-        radii: number,
-        scale: number,
-        segmentsPerAxis: number,
-        rotation: Vector3,
-        colorRed: number,
-        colorGreen: number,
-        colorBlue: number,
-        expirationTicks: number
-    ) => {
-        const ellipsoid = new DebugEllipsoid(startPos);
+    (_, position: Vector3, radii: number, scale: number, segmentsPerAxis: number, id: string) => {
+        const ellipsoid = new DebugEllipsoid(position);
+        ellipsoid.radii = { x: radii, y: radii, z: radii };
+        ellipsoid.scale = scale;
+        ellipsoid.segmentsPerAxis = segmentsPerAxis;
 
-        if (colorBlue !== undefined) {
-            ellipsoid.color = getNormalizedRgba(colorRed, colorGreen, colorBlue, 1);
-        }
-
-        if (expirationTicks) {
-            ellipsoid.timeLeft = expirationTicks;
-        }
-
-        debugDrawer.addShape(ellipsoid);
+        DrawManager.addShape(id, ellipsoid);
         return { status: CustomCommandStatus.Success, message: "ellipsoid successfully drawn" };
     }
 );

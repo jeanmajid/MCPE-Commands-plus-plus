@@ -21,8 +21,7 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
-import { DebugCircle, debugDrawer } from "@minecraft/debug-utilities";
+import { DebugCircle } from "@minecraft/debug-utilities";
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
@@ -30,8 +29,8 @@ import {
     Vector3,
 } from "@minecraft/server";
 
-import { getNormalizedRgba } from "../../../utils/color.js";
 import { CommandManager } from "../../command.js";
+import { DrawManager } from "../../managers/drawManager.js";
 
 CommandManager.registerCommand(
     {
@@ -39,34 +38,16 @@ CommandManager.registerCommand(
         description: "Draws a circle via the Debug Drawer module",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
-            { name: "startPos", type: CustomCommandParamType.Location },
+            { name: "position", type: CustomCommandParamType.Location },
             { name: "scale", type: CustomCommandParamType.Float }, // Maybe call this radius or diameter; idk what scale equates to
             { name: "id", type: CustomCommandParamType.String },
         ],
     },
-    (
-        origin,
-        startPos: Vector3,
-        endPos: Vector3,
-        id: string,
-        scale: number,
-        rotation: Vector3,
-        colorRed: number,
-        colorGreen: number,
-        colorBlue: number,
-        expirationTicks: number
-    ) => {
-        const circle = new DebugCircle(startPos);
+    (_, position: Vector3, scale: number, id: string) => {
+        const circle = new DebugCircle(position);
+        circle.scale = scale;
 
-        if (colorBlue !== undefined) {
-            circle.color = getNormalizedRgba(colorRed, colorGreen, colorBlue, 1);
-        }
-
-        if (expirationTicks) {
-            circle.timeLeft = expirationTicks;
-        }
-
-        debugDrawer.addShape(circle);
+        DrawManager.addShape(id, circle);
         return { status: CustomCommandStatus.Success, message: "Circle successfully drawn" };
     }
 );
