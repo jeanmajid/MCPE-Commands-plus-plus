@@ -13,8 +13,6 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 
 /container -- gives an item to a player from a speciic chest slot || /container <target> {vector} [slot_id]
 
-/draw -- draw debug shapes, one commmand per shape
-
 /spawnparticle -- spawns a particle with more parameters than the regular particle command; includes particle spawn radius, variable modification, etc.
 
 /spawn -- alternative to the summon command with additional capabilities
@@ -53,7 +51,6 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 
 /lograw -- same as /log but uses rawtext JSON formatting
 
-/og kick -- allows kicking of players using target selectors (excluding the world owner)
 /ban -- permanently removes a player from the world (excluding the world owner)
 /unban -- removes a player from the ban list
 
