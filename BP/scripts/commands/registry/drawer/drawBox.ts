@@ -41,25 +41,15 @@ CommandManager.registerCommand(
         mandatoryParameters: [
             { name: "id", type: CustomCommandParamType.String },
             { name: "position", type: CustomCommandParamType.Location },
-            { name: "boundX", type: CustomCommandParamType.Location },
-            { name: "boundY", type: CustomCommandParamType.Location },
-            { name: "boundZ", type: CustomCommandParamType.Location },
+            { name: "bound", type: CustomCommandParamType.Location },
             { name: "scale", type: CustomCommandParamType.Float },
         ],
     },
-    (
-        origin,
-        id: string,
-        position: Vector3,
-        boundX: Vector3,
-        boundY: Vector3,
-        boundZ: Vector3,
-        scale: number
-    ) => {
+    (origin, id: string, position: Vector3, bound: Vector3, scale: number) => {
         const dimension = getDimensionFromCommandOrigin(origin);
 
         const box = new DebugBox({ ...position, dimension });
-        box.bound = { x: boundX.x, y: boundY.y, z: boundZ.z };
+        box.bound = { x: bound.x, y: bound.y, z: bound.z };
         box.scale = scale;
 
         DrawManager.addShape(id, box);
