@@ -58,20 +58,19 @@ CommandManager.registerCommand(
         }
 
         const biome = source.dimension.getBiome(source.location);
-        switch (biomeData) {
-            case BiomeData.all:
-                return {
-                    status: CustomCommandStatus.Success,
-                    message: `§aBiome: §r${biome.id}\n§aTags: §r${getBiomeTags(biome)}`,
-                };
-            case BiomeData.id:
-                return { status: CustomCommandStatus.Success, message: `§aBiome: §r${biome.id}` };
-            case BiomeData.tags:
-                return {
-                    status: CustomCommandStatus.Success,
-                    message: `§aTags: §r${getBiomeTags(biome)}`,
-                };
+        if (biomeData === BiomeData.id) {
+            return { status: CustomCommandStatus.Success, message: `§aBiome: §r${biome.id}` };
         }
+        if (biomeData === BiomeData.tags) {
+            return {
+                status: CustomCommandStatus.Success,
+                message: `§aTags: §r${getBiomeTags(biome)}`,
+            };
+        }
+        return {
+            status: CustomCommandStatus.Success,
+            message: `§aBiome: §r${biome.id}\n§aTags: §r${getBiomeTags(biome)}`,
+        };
     }
 );
 
