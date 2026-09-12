@@ -11,7 +11,7 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 
 [!] /pickup -- gives target an item from a drop
 
-/container -- gives an item to a player from a speciic chest slot || /container <target> {vector} [slot_id]
+[!SLOTS] /container -- gives an item to a player from a speciic chest slot || /container <target> {vector} [slot_id]
 
 /spawnparticle -- spawns a particle with more parameters than the regular particle command; includes particle spawn radius, variable modification, etc.
 
@@ -30,13 +30,13 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 [!] /locator -- class of commands to handle locator bar waypoints
 
 /givebutbetter -- give with extra parameters like nbt editing / lore, additional properties, enchants, whatever tha fak
+[!SLOTS] /replaceitembutbetter -- same as above but with item slots rather than first priority
 
-/damageitem -- modify an item durability by a positive or negative value
-/setitemdurability -- set an item durability to a fixed value
-/enchantitem -- enchant an item in an entity's inventory
-/nameitem -- rename an item in an entity's inventory
-/nameitemraw -- same as nameitem but uses rawtext JSON formatting
-/moveitem -- move an item between slots in an entity's inventory
+[!SLOTS] /itemdurability <itemSlot> <set | add | remove> <value: number> -- modify an item durability
+[!SLOTS] /enchantitem <itemSlot> <enchantment> <level: number> -- enchant an item in an entity's inventory
+[!SLOTS] /nameitem <itemSlot> <name: string> -- rename an item in an entity's inventory
+[!RAWTEXT+SLOTS] /nameitemraw <itemSlot> <name: rawtext> -- same as nameitem but uses rawtext JSON formatting
+[!SLOTS] /moveitem <sourceSlot> <destinationSlot> <copy: boolean> -- move an item between slots in an entity's inventory
 
 [!] /phase -- teleport through the block in front of you
 
@@ -49,8 +49,10 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 
 [!RAWTEXT] /lograw -- same as /log but uses rawtext JSON formatting
 
-/ban -- permanently removes a player from the world (excluding the world owner)
-/unban -- removes a player from the ban list
+[!PLAYERS] /ban -- permanently removes a player from the world (excluding the world owner)
+[!PLAYERS] /unban -- removes a player from the ban list
+[!PLAYERS] /playerhistory <page> -- Produces a log of all players who have ever joined the world and a brief of some of their available data
+[!PLAYERS] /playerdata <player> -- Produces a more detailed log of a specific player's data
 
 /hitbox -- reveals the hitbox of the target
 
@@ -58,7 +60,7 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 
 [!] /invulnerable -- makes an entity unable to be damaged by any source
 
-/viewcontents <target> [location] -- lists contents within the provided location in chat (if no location provided default to all held items)
+[!SLOTS] /viewcontents <target> [location] -- lists contents within the provided location in chat (if no location provided default to all held items)
 
 [!] /warp -- tp to a warp id
 [!] /addwarp -- add the warp with permissions
@@ -78,6 +80,11 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 /spawnplayer -- Spawns a player from the fake player module
 
 /sound -- new sound api stuff
+
+[PLAYERS] /tagoffline -- grants an offline player a tag
+[PLAYERS] /scoreoffline -- modifies the score of an offline player
+
+- include other offline commands
 
 wiki
 listattributes get all + status (on off)
