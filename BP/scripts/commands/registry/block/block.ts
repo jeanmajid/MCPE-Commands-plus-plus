@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
@@ -51,7 +50,7 @@ CommandManager.registerCommand(
         });
         return {
             status: CustomCommandStatus.Success,
-            message: `${blockType} placed successully at ${Vector.toStringFloored(location)}`,
+            message: `${blockType} placed successfully at ${Vector.toStringFloored(location)}`,
         };
     }
 );
