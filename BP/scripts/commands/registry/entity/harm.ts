@@ -33,7 +33,7 @@ import { CommandManager } from "../../command.js";
 CommandManager.registerCommand(
     {
         name: "harm",
-        description: "Decreases all targets' current health value by an amount",
+        description: "Decreases all targets current health value by an amount",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         optionalParameters: [
             { name: "target", type: CustomCommandParamType.PlayerSelector },

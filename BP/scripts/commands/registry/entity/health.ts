@@ -41,7 +41,7 @@ export const VALUE_UPDATE_MODE_ENUM_KEY = "valueUpdateMode";
 CommandManager.registerCommand(
     {
         name: "health",
-        description: "Modifies all targets' health based on the mode and value",
+        description: "Modifies all targets health based on the mode and value",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
             { name: "target", type: CustomCommandParamType.PlayerSelector },
