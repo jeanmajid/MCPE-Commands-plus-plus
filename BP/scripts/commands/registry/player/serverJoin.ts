@@ -45,7 +45,7 @@ CommandManager.registerCommand(
     },
     (origin, players: Player[], ip: string, port: number) => {
         if (players.length === 0) {
-            return { status: CustomCommandStatus.Failure, message: "No targets match selector" };
+            return { status: CustomCommandStatus.Failure, message: "No targets match selector " };
         }
 
         for (const player of players) {
