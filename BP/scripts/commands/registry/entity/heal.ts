@@ -26,8 +26,10 @@ import {
     CustomCommandStatus,
     CustomCommandParamType,
     Entity,
+    system,
 } from "@minecraft/server";
 
+import { clamp } from "../../../utils/clamp.js";
 import { CommandManager } from "../../command.js";
 
 CommandManager.registerCommand(
@@ -60,11 +62,14 @@ CommandManager.registerCommand(
                 continue;
             }
 
-            if (amount !== undefined) {
-                health.setCurrentValue(health.currentValue + amount);
-            } else {
-                health.setCurrentValue(health.effectiveMax);
-            }
+            system.run(() => {
+                if (amount !== undefined) {
+                    const newValue = clamp(health.currentValue + amount, 0, health.effectiveMax);
+                    health.setCurrentValue(newValue);
+                } else {
+                    health.setCurrentValue(health.effectiveMax);
+                }
+            });
         }
         return { status: CustomCommandStatus.Success, message: "Successfully healed entities" };
     }
