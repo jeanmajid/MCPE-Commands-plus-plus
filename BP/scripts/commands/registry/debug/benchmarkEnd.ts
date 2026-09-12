@@ -25,6 +25,8 @@ import {
     CommandPermissionLevel,
     CustomCommandParamType,
     CustomCommandStatus,
+    system,
+    world,
 } from "@minecraft/server";
 
 import { CommandManager } from "../../command.js";
@@ -34,14 +36,22 @@ import { LOG_TYPE_ENUM_KEY, LogTypes, log } from "./log.js";
 CommandManager.registerCommand(
     {
         name: "benchmarkend",
-        description: "Logs the time since the benchmark started in milliseconds",
+        description: "Logs and saves the time since the benchmark started in milliseconds",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [{ name: "startId", type: CustomCommandParamType.String }],
         optionalParameters: [
             { name: "logType", type: CustomCommandParamType.Enum, enumName: LOG_TYPE_ENUM_KEY },
+            { name: "fakeplayer", type: CustomCommandParamType.String },
+            { name: "objective", type: CustomCommandParamType.String },
         ],
     },
-    (origin, startId: string, logType: string = LogTypes.info) => {
+    (
+        origin,
+        startId: string,
+        logType: string = LogTypes.info,
+        fakeplayer: string,
+        objective: string
+    ) => {
         const start = benchmark_data[startId];
         if (!start) {
             return {
@@ -49,10 +59,31 @@ CommandManager.registerCommand(
                 message: `Could not find a benchmark test with the start ID ${startId}`,
             };
         }
+
         const elapsedTime = Date.now() - start;
-        const output = `Elapsed ${elapsedTime}ms`;
+
+        const output = `[${startId}] Elapsed ${elapsedTime}ms`;
         log(output, logType);
 
-        return { status: CustomCommandStatus.Success, message: output };
+        if (!fakeplayer) {
+            return { status: CustomCommandStatus.Success, message: output };
+        }
+
+        if (!objective) {
+            return { status: CustomCommandStatus.Failure, message: "Missing objective parameter" };
+        }
+
+        system.run(() => {
+            const scoreboard =
+                world.scoreboard.getObjective(objective) ??
+                world.scoreboard.addObjective(objective);
+
+            scoreboard.setScore(fakeplayer, elapsedTime);
+        });
+
+        return {
+            status: CustomCommandStatus.Success,
+            message: `[${startId}] Set [${objective}] for ${fakeplayer} to ${elapsedTime}`,
+        };
     }
 );

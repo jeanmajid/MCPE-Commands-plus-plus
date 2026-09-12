@@ -32,7 +32,6 @@ import "./registry/block/blockStates.js";
 import "./registry/block/blockStatesId.js";
 import "./registry/command/delay.js";
 import "./registry/debug/benchmarkEnd.js";
-import "./registry/debug/benchmarkEndSave.js";
 import "./registry/debug/benchmarkStart.js";
 import "./registry/debug/biome.js";
 import "./registry/debug/log.js";

@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import {
     CommandPermissionLevel,
     CustomCommandParamType,
@@ -37,6 +36,7 @@ export enum LogTypes {
     warn = "warn",
     error = "error",
     chat = "chat",
+    none = "none",
 }
 
 CommandManager.registerEnum(LOG_TYPE_ENUM_KEY, Object.values(LogTypes));
@@ -63,6 +63,8 @@ CommandManager.registerCommand(
 
 export function log(message: string, logType: string): void {
     switch (logType) {
+        case LogTypes.none:
+            break;
         case LogTypes.info:
             console.info(message);
             break;
