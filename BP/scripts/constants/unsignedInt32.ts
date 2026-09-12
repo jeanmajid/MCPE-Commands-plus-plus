@@ -1,0 +1,2 @@
+export const MAX_SIGNED_INT32 = 2147483647;
+export const MIN_SIGNED_INT32 = -2147483648;
