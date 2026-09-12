@@ -25,11 +25,8 @@ import {
     CommandPermissionLevel,
     CustomCommandStatus,
     CustomCommandParamType,
-    Entity,
-    system,
     Player,
 } from "@minecraft/server";
-
 import { kickPlayer } from "@minecraft/server-admin";
 
 import { CommandManager } from "../../command.js";
@@ -39,12 +36,8 @@ CommandManager.registerCommand(
         name: "evict",
         description: "Kicks a player from the world",
         permissionLevel: CommandPermissionLevel.GameDirectors,
-        mandatoryParameters: [
-            { name: "players", type: CustomCommandParamType.PlayerSelector },
-        ],
-        optionalParameters: [
-            { name: "reason", type: CustomCommandParamType.String }
-        ]
+        mandatoryParameters: [{ name: "players", type: CustomCommandParamType.PlayerSelector }],
+        optionalParameters: [{ name: "reason", type: CustomCommandParamType.String }],
     },
     (origin, players: Player[], reason: string) => {
         if (players.length === 0) {
@@ -52,12 +45,11 @@ CommandManager.registerCommand(
         }
 
         for (const player of players) {
-            try { kickPlayer(player, reason) } catch { }
+            try {
+                kickPlayer(player, reason);
+            } catch {}
         }
 
-        return {
-            status: CustomCommandStatus.Success,
-            message: "Successfully kicked player(s)",
-        };
+        return { status: CustomCommandStatus.Success, message: "Successfully kicked player(s)" };
     }
 );
