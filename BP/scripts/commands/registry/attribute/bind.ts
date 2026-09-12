@@ -33,8 +33,13 @@ import { AttributeManager } from "../../../attributes/attribute.js";
 import { ATTRIBUTE_KEY } from "../../../constants/dynamicPropertyKeys.js";
 import { CommandManager } from "../../command.js";
 
+export enum AttributesEnum {
+    health = "health",
+    selectedHotbarSlot = "selectedHotbarSlot",
+}
+
 // TODO: automate this
-CommandManager.registerEnum("bind", ["health", "selectedHotbarSlot"]);
+CommandManager.registerEnum(ATTRIBUTE_KEY, ["health", "selectedHotbarSlot"]);
 
 CommandManager.registerCommand(
     {
@@ -42,7 +47,7 @@ CommandManager.registerCommand(
         description: "Bind an attribute to a score",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
-            { name: "bindtype", type: CustomCommandParamType.Enum, enumName: "bind" },
+            { name: "bindtype", type: CustomCommandParamType.Enum, enumName: ATTRIBUTE_KEY },
             { name: "scoreboardId", type: CustomCommandParamType.String },
         ],
     },
