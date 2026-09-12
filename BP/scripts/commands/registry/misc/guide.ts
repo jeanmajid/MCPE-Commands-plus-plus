@@ -35,7 +35,7 @@ import { CommandManager } from "../../command.js";
 const COMMAND_HELP_WINDOW = 7;
 const TOTAL_HELP_PAGES = Math.ceil(CommandManager.commands.length / COMMAND_HELP_WINDOW);
 
-const guideCache: string[] = [];
+const pageCache: string[] = [];
 
 CommandManager.registerCommand(
     {
@@ -52,8 +52,8 @@ CommandManager.registerCommand(
 
         page = clamp(page, 1, TOTAL_HELP_PAGES);
 
-        if (guideCache[page]) {
-            (origin.sourceEntity as Player).sendMessage(guideCache[page]);
+        if (pageCache[page]) {
+            (origin.sourceEntity as Player).sendMessage(pageCache[page]);
             return { status: CustomCommandStatus.Success };
         }
 
@@ -70,6 +70,7 @@ CommandManager.registerCommand(
         pageString +=
             "\n§2Tip: Use the <tab> key while typing a command to auto-complete the command or its arguments";
 
+        pageCache[page] = pageString;
         (origin.sourceEntity as Player).sendMessage(pageString);
         return { status: CustomCommandStatus.Success };
     }
