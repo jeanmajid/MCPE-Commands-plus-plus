@@ -26,8 +26,10 @@ import {
     CustomCommandStatus,
     CustomCommandParamType,
     Entity,
+    system,
 } from "@minecraft/server";
 
+import { clamp } from "../../../utils/clamp.js";
 import { CommandManager } from "../../command.js";
 
 CommandManager.registerCommand(
@@ -60,7 +62,10 @@ CommandManager.registerCommand(
                 continue;
             }
 
-            health.setCurrentValue(health.currentValue - amount);
+            const newValue = clamp(health.currentValue - amount, 0, health.effectiveMax);
+            system.run(() => {
+                health.setCurrentValue(newValue);
+            });
         }
         return { status: CustomCommandStatus.Success, message: "Successfully harmed entities" };
     }

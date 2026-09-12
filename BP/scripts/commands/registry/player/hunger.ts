@@ -26,8 +26,10 @@ import {
     CustomCommandStatus,
     CustomCommandParamType,
     Entity,
+    system,
 } from "@minecraft/server";
 
+import { clamp } from "../../../utils/clamp.js";
 import { CommandManager } from "../../command.js";
 import { VALUE_UPDATE_MODE_ENUM_KEY, ValueUpdateMode } from "../entity/health.js";
 
@@ -69,7 +71,10 @@ CommandManager.registerCommand(
                 case ValueUpdateMode.set:
                     newValue = value;
             }
-            hunger.setCurrentValue(newValue);
+            newValue = clamp(newValue, 0, hunger.effectiveMax);
+            system.run(() => {
+                hunger.setCurrentValue(newValue);
+            });
         }
 
         return {

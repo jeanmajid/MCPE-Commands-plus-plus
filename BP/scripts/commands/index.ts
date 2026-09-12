@@ -31,6 +31,7 @@ import "./registry/block/block.js";
 import "./registry/block/blockStates.js";
 import "./registry/block/blockStatesId.js";
 import "./registry/command/delay.js";
+import "./registry/command/scoreMath.js";
 import "./registry/debug/benchmarkEnd.js";
 import "./registry/debug/benchmarkStart.js";
 import "./registry/debug/biome.js";
