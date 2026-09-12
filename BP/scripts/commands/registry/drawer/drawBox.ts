@@ -29,6 +29,7 @@ import {
     Vector3,
 } from "@minecraft/server";
 
+import { getDimensionFromCommandOrigin } from "../../../utils/dimension.js";
 import { CommandManager } from "../../command.js";
 import { DrawManager } from "../../managers/drawManager.js";
 
@@ -47,7 +48,7 @@ CommandManager.registerCommand(
         ],
     },
     (
-        _,
+        origin,
         id: string,
         position: Vector3,
         boundX: Vector3,
@@ -55,7 +56,9 @@ CommandManager.registerCommand(
         boundZ: Vector3,
         scale: number
     ) => {
-        const box = new DebugBox(position);
+        const dimension = getDimensionFromCommandOrigin(origin);
+
+        const box = new DebugBox({ ...position, dimension });
         box.bound = { x: boundX.x, y: boundY.y, z: boundZ.z };
         box.scale = scale;
 

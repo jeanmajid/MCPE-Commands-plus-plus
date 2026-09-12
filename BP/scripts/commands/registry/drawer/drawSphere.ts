@@ -29,6 +29,7 @@ import {
     Vector3,
 } from "@minecraft/server";
 
+import { getDimensionFromCommandOrigin } from "../../../utils/dimension.js";
 import { CommandManager } from "../../command.js";
 import { DrawManager } from "../../managers/drawManager.js";
 
@@ -43,8 +44,10 @@ CommandManager.registerCommand(
             { name: "scale", type: CustomCommandParamType.Float },
         ],
     },
-    (_, id: string, position: Vector3, scale: number) => {
-        const sphere = new DebugSphere(position);
+    (origin, id: string, position: Vector3, scale: number) => {
+        const dimension = getDimensionFromCommandOrigin(origin);
+
+        const sphere = new DebugSphere({ ...position, dimension });
         sphere.scale = scale;
 
         DrawManager.addShape(id, sphere);

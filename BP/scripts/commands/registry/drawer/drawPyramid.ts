@@ -29,6 +29,7 @@ import {
     Vector3,
 } from "@minecraft/server";
 
+import { getDimensionFromCommandOrigin } from "../../../utils/dimension.js";
 import { CommandManager } from "../../command.js";
 import { DrawManager } from "../../managers/drawManager.js";
 
@@ -47,7 +48,7 @@ CommandManager.registerCommand(
         ],
     },
     (
-        _,
+        origin,
         id: string,
         position: Vector3,
         height: number,
@@ -55,7 +56,9 @@ CommandManager.registerCommand(
         depth: number,
         scale: number
     ) => {
-        const pyramid = new DebugPyramid(position);
+        const dimension = getDimensionFromCommandOrigin(origin);
+
+        const pyramid = new DebugPyramid({ ...position, dimension });
         pyramid.height = height;
         pyramid.width = width;
         pyramid.depth = depth;

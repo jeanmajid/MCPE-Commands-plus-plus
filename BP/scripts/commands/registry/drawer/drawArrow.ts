@@ -29,6 +29,7 @@ import {
     Vector3,
 } from "@minecraft/server";
 
+import { getDimensionFromCommandOrigin } from "../../../utils/dimension.js";
 import { CommandManager } from "../../command.js";
 import { DrawManager } from "../../managers/drawManager.js";
 
@@ -47,7 +48,7 @@ CommandManager.registerCommand(
         ],
     },
     (
-        _,
+        origin,
         id: string,
         startPos: Vector3,
         endPos: Vector3,
@@ -55,7 +56,9 @@ CommandManager.registerCommand(
         headRadius: number,
         headSegments: number
     ) => {
-        const arrow = new DebugArrow(startPos, endPos);
+        const dimension = getDimensionFromCommandOrigin(origin);
+
+        const arrow = new DebugArrow({ ...startPos, dimension }, endPos);
         arrow.headLength = headLength;
         arrow.headRadius = headRadius;
         arrow.headSegments = headSegments;

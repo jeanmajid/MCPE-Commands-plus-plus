@@ -29,6 +29,7 @@ import {
     Vector3,
 } from "@minecraft/server";
 
+import { getDimensionFromCommandOrigin } from "../../../utils/dimension.js";
 import { CommandManager } from "../../command.js";
 import { DrawManager } from "../../managers/drawManager.js";
 
@@ -43,8 +44,10 @@ CommandManager.registerCommand(
             { name: "endPos", type: CustomCommandParamType.Location },
         ],
     },
-    (_, id: string, startPos: Vector3, endPos: Vector3) => {
-        const line = new DebugLine(startPos, endPos);
+    (origin, id: string, startPos: Vector3, endPos: Vector3) => {
+        const dimension = getDimensionFromCommandOrigin(origin);
+
+        const line = new DebugLine({ ...startPos, dimension }, endPos);
         DrawManager.addShape(id, line);
 
         return { status: CustomCommandStatus.Success, message: "Line successfully added" };
