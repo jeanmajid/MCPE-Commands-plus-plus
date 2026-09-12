@@ -82,6 +82,8 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 
 /spawnplayer -- Spawns a player from the fake player module
 
+/sound -- new sound api stuff
+
 wiki
 listattributes get all + status (on off)
 setitemdata/readitemdata
