@@ -1,41 +1,20 @@
-/* SPDX-License-Identifier: GPL-3.0-or-later
- * ============================================================================
- * Commands Plus Plus
- * Copyright (C) 2024-2026 jeanmajid and contributors
- * https://github.com/jeanmajid/MCPE-Commands-plus-plus
- * ============================================================================
- *
- * This file is part of Commands Plus Plus.
- *
- * Commands Plus Plus is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Commands Plus Plus is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
- */
-
-type DurationReturn = { error: boolean; message: string } | number | string;
+export interface DurationReturn {
+    message?: string;
+    value?: number | null;
+}
 
 export function parseDurationString(durationString: string): DurationReturn {
     if (!durationString) {
-        return { error: true, message: "§cEingabe darf nicht leer sein" };
+        return { message: "§cInput cannot be empty" };
     }
 
-    if (durationString.startsWith("perma")) return "perma";
+    if (durationString.startsWith("perm")) {
+        return { value: null };
+    }
 
     const formatRegex = /^(\d+[ymdhYMDH]:)*\d+[ymdhYMDH]$/;
     if (!formatRegex.test(durationString)) {
-        return {
-            error: true,
-            message: '§cUngültiges Dauerformat. Verwenden Sie das Format wie "1y:2m:3d:4h"',
-        };
+        return { message: '§cInvalid duration format. Use the format like "1y:2m:3d:4h"' };
     }
 
     const durationArray = durationString.split(":");
@@ -46,7 +25,7 @@ export function parseDurationString(durationString: string): DurationReturn {
         const value = parseInt(timeUnit.slice(0, -1), 10);
 
         if (isNaN(value) || value < 0) {
-            return { error: true, message: `§cUngültiger Zahlenwert: ${timeUnit}` };
+            return { message: `§cInvalid numeric value: ${timeUnit}` };
         }
 
         switch (unit) {
@@ -63,18 +42,15 @@ export function parseDurationString(durationString: string): DurationReturn {
                 durationMs += value * 60 * 1000;
                 break;
             default:
-                return { error: true, message: `§cUngültige Zeiteinheit: ${unit}` };
+                return { message: `§cInvalid time unit: ${unit}` };
         }
     }
 
     const maxDuration = 100 * 365 * 24 * 60 * 60 * 1000;
     if (durationMs > maxDuration) {
-        return {
-            error: true,
-            message: "§cGesamtdauer überschreitet das maximal zulässige (100 Jahre)",
-        };
+        return { message: "§cTotal duration exceeds the maximum allowed (100 years)" };
     }
 
     const futureDate = new Date(Date.now() + durationMs);
-    return futureDate.valueOf();
+    return { value: futureDate.valueOf() };
 }
