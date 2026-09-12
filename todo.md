@@ -19,9 +19,9 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 
 /spawn -- alternative to the summon command with additional capabilities
 
-/score -- alternative for scoreboard with enhanced capabilities; focus on better operations like sqrt(), but also include base operations like +-\*/ without the need for fakeplayers; Better score random
+/score -- alternative for scoreboard with enhanced capabilities; include base operations like +-\*/ without the need for fakeplayers
 
-- Consider just taking in a single string containing the formula to allow for complex multi-operation calculations
+- [THIS IS A SEPARATE COMMAND CONFIRMED] Consider just taking in a single string containing the formula to allow for complex multi-operation calculations
 
 /fillshape -- loads a shape with provided dimensions
 /phil -- better fill with gradients, ticking area loading, replacing with gradient and this and that
