@@ -26,7 +26,9 @@ import { world } from "@minecraft/server";
 import { AttributeManager } from "./attributes/attribute.js";
 import "./attributes/index.js";
 import "./commands/index.js";
-import { initializeDimensions } from "./utils/dimension.js";
+import { initializeDimensions, registerCustomDimensions } from "./utils/dimension.js";
+
+registerCustomDimensions();
 
 world.afterEvents.worldLoad.subscribe(() => {
     initializeDimensions();

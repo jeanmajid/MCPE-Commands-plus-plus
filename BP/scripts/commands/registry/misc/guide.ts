@@ -29,7 +29,7 @@ import {
 } from "@minecraft/server";
 
 import { NAMESPACE } from "../../../constants/namespace.js";
-import { clamp } from "../../../utils/clamp.js";
+import { clamp } from "../../../utils/math.js";
 import { CommandManager } from "../../command.js";
 
 const COMMAND_HELP_WINDOW = 7;

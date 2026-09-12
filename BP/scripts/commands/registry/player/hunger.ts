@@ -29,7 +29,7 @@ import {
     system,
 } from "@minecraft/server";
 
-import { clamp } from "../../../utils/clamp.js";
+import { clamp } from "../../../utils/math.js";
 import { CommandManager } from "../../command.js";
 import { VALUE_UPDATE_MODE_ENUM_KEY, ValueUpdateMode } from "../entity/health.js";
 

@@ -23,46 +23,49 @@
 
 import {
     CommandPermissionLevel,
-    CustomCommandStatus,
     CustomCommandParamType,
-    world,
+    CustomCommandStatus,
+    Entity,
     system,
 } from "@minecraft/server";
 
-import { AttributeManager } from "../../../attributes/attribute.js";
-import { ATTRIBUTE_KEY } from "../../../constants/dynamicPropertyKeys.js";
+import { Dimensions } from "../../../constants/dimensions.js";
 import { CommandManager } from "../../command.js";
+
+CommandManager.registerEnum(
+    "dimension",
+    Object.keys({ ...Dimensions }).filter((d) => d !== "all")
+);
 
 CommandManager.registerCommand(
     {
-        name: "getattribute",
-        description: "One time getter for attributes",
+        name: "dimension",
+        description: "Teleport between dimensions",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
-            { name: "bindtype", type: CustomCommandParamType.Enum, enumName: ATTRIBUTE_KEY },
-            { name: "scoreboardId", type: CustomCommandParamType.String },
+            { name: "dimension", type: CustomCommandParamType.Enum, enumName: "dimension" },
         ],
+        optionalParameters: [{ name: "targets", type: CustomCommandParamType.EntitySelector }],
     },
-    (origin, attributeId: string, scoreboardId: string) => {
-        const attribute = AttributeManager.getAttribute(attributeId);
-        if (!attribute) {
-            return {
-                status: CustomCommandStatus.Failure,
-                message: `Attribute ${attributeId} does not exist`,
-            };
+    (origin, dimension: keyof typeof Dimensions, targets?: Entity[]) => {
+        const targetDimension = Dimensions[dimension];
+        if (!targetDimension || Array.isArray(targetDimension)) {
+            return { status: CustomCommandStatus.Failure, message: "Invalid dimension identifier" };
+        }
+
+        if (!targets && origin.sourceEntity) {
+            targets = [origin.sourceEntity];
+        }
+
+        if (!targets || targets.length === 0) {
+            return { status: CustomCommandStatus.Failure, message: "No targets match selector" };
         }
 
         system.run(() => {
-            const score =
-                world.scoreboard.getObjective(scoreboardId) ??
-                world.scoreboard.addObjective(scoreboardId);
-
-            attribute.setValues(score);
+            for (const target of targets) {
+                target.teleport(target.location, { dimension: targetDimension });
+            }
         });
-
-        return {
-            status: CustomCommandStatus.Success,
-            message: `Successfully binded ${attributeId} to score ${scoreboardId}`,
-        };
+        return { status: CustomCommandStatus.Success, message: `Successfully created explosion` };
     }
 );
