@@ -29,8 +29,6 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 
 /waypoint -- class of commands to handle locator bar waypoints
 
-[!] /dimension -- transport players between dimensions
-
 /givebutbetter -- give with extra parameters like nbt editing / lore, additional properties, enchants, whatever tha fak
 
 /damageitem -- modify an item durability by a positive or negative value
