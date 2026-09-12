@@ -52,6 +52,7 @@ import "./registry/drawer/drawText.js";
 import "./registry/drawer/drawVolume.js";
 import "./registry/drawer/getDrawCount.js";
 import "./registry/drawer/setDrawColor.js";
+import "./registry/drawer/setDrawTextColor.js";
 import "./registry/entity/entityCount.js";
 import "./registry/entity/fmbe.js";
 import "./registry/entity/harm.js";
