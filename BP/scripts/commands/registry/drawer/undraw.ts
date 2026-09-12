@@ -21,12 +21,10 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { DebugText } from "@minecraft/debug-utilities";
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
     CustomCommandParamType,
-    Vector3,
 } from "@minecraft/server";
 
 import { CommandManager } from "../../command.js";
@@ -34,37 +32,17 @@ import { DrawManager } from "../../managers/drawManager.js";
 
 CommandManager.registerCommand(
     {
-        name: "drawtext",
-        description: "Draws a text via the Debug Drawer module",
+        name: "undraw",
+        description: "Undraws a group of shapes under a given id, but keeps them in the manager",
         permissionLevel: CommandPermissionLevel.GameDirectors,
-        mandatoryParameters: [
-            { name: "id", type: CustomCommandParamType.String },
-            { name: "location", type: CustomCommandParamType.Location },
-            { name: "text", type: CustomCommandParamType.String },
-            { name: "useRotation", type: CustomCommandParamType.Boolean },
-            { name: "showThroughBlocks", type: CustomCommandParamType.Boolean },
-            { name: "backfaceVisible", type: CustomCommandParamType.Boolean },
-            { name: "textBackfaceVisible", type: CustomCommandParamType.Boolean },
-        ],
+        mandatoryParameters: [{ name: "id", type: CustomCommandParamType.String }],
     },
-    (
-        _,
-        id: string,
-        location: Vector3,
-        text: string,
-        useRotation: boolean,
-        showThroughBlocks: boolean,
-        backfaceVisible: boolean,
-        textBackfaceVisible: boolean
-    ) => {
-        const textShape = new DebugText(location, text);
-        textShape.useRotation = !useRotation;
-        textShape.backfaceVisible = !showThroughBlocks;
-        textShape.backfaceVisible = backfaceVisible;
-        textShape.textBackfaceVisible = textBackfaceVisible;
+    (_, id: string) => {
+        const result = DrawManager.undrawId(id);
 
-        DrawManager.addShape(id, textShape);
-
-        return { status: CustomCommandStatus.Success, message: `Text shape ${id} registered` };
+        return {
+            status: CustomCommandStatus.Success,
+            message: result ? "Shape successfully undrawn" : "Failed to undraw shape",
+        };
     }
 );

@@ -21,39 +21,21 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {
-    CommandPermissionLevel,
-    CustomCommandStatus,
-    CustomCommandParamType,
-} from "@minecraft/server";
+import { CommandPermissionLevel, CustomCommandStatus } from "@minecraft/server";
 
-import { getNormalizedRgba } from "../../../utils/color.js";
 import { CommandManager } from "../../command.js";
 import { DrawManager } from "../../managers/drawManager.js";
 
 CommandManager.registerCommand(
     {
-        name: "setdrawcolor",
-        description: "Sets the draw color",
+        name: "drawremoveall",
+        description: "Undraws and removes all shapes permanently",
         permissionLevel: CommandPermissionLevel.GameDirectors,
-        mandatoryParameters: [
-            { name: "shapeId", type: CustomCommandParamType.String },
-            { name: "colorRed", type: CustomCommandParamType.Integer },
-            { name: "colorGreen", type: CustomCommandParamType.Integer },
-            { name: "colorBlue", type: CustomCommandParamType.Integer },
-            { name: "alpha", type: CustomCommandParamType.Integer },
-        ],
+        mandatoryParameters: [],
     },
-    (_, shapeId, colorRed: number, colorGreen: number, colorBlue: number, alpha: number) => {
-        const result = DrawManager.setProperty(
-            shapeId,
-            "color",
-            getNormalizedRgba(colorRed, colorGreen, colorBlue, alpha)
-        );
+    (_) => {
+        DrawManager.removeAll();
 
-        return {
-            status: CustomCommandStatus.Success,
-            message: result ? "Box color successfully set" : "Failed to set box color",
-        };
+        return { status: CustomCommandStatus.Success, message: "All Shapes successfully removed" };
     }
 );
