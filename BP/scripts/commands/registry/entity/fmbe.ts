@@ -54,6 +54,10 @@ CommandManager.registerCommand(
         ],
     },
     (origin, targets: Entity[], fmbeType: FmbeTypes = FmbeTypes.standard) => {
+        if (targets.length === 0) {
+            return { status: CustomCommandStatus.Failure, message: "No targets match selector" };
+        }
+
         system.run(() => {
             for (const target of targets) {
                 target.runCommand(`function fmbe/${fmbeType}_setup`);

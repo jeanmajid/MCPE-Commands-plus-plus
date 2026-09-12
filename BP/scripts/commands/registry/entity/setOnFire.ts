@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import {
     CommandPermissionLevel,
     CustomCommandParamType,
@@ -34,7 +33,7 @@ import { CommandManager } from "../../command.js";
 
 CommandManager.registerCommand(
     {
-        name: "setonfire",
+        name: "ignite",
         description: "Sets the target entities on fire",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [{ name: "targets", type: CustomCommandParamType.EntitySelector }],
@@ -44,6 +43,10 @@ CommandManager.registerCommand(
         ],
     },
     (origin, targets: Entity[], timeSeconds: number = 3, useEffects: boolean = true) => {
+        if (targets.length === 0) {
+            return { status: CustomCommandStatus.Failure, message: "No targets match selector" };
+        }
+
         system.run(() => {
             for (const entity of targets) {
                 entity.setOnFire(timeSeconds, useEffects);

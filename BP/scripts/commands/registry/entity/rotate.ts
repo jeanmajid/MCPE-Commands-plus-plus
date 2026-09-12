@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
@@ -35,17 +34,21 @@ import { CommandManager } from "../../command.js";
 CommandManager.registerCommand(
     {
         name: "rotate",
-        description: "Rotates an entity",
+        description: "Modifies target entities rotation",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         optionalParameters: [
-            { name: "target", type: CustomCommandParamType.EntitySelector },
+            { name: "targets", type: CustomCommandParamType.EntitySelector },
             { name: "rotationX", type: CustomCommandParamType.Float },
             { name: "rotationY", type: CustomCommandParamType.Float },
         ],
     },
-    (origin, target: Entity[], rotationX: number, rotationY: number) => {
+    (origin, targets: Entity[], rotationX: number, rotationY: number) => {
+        if (targets.length === 0) {
+            return { status: CustomCommandStatus.Failure, message: "No targets match selector" };
+        }
+
         system.run(() => {
-            for (const entity of target) {
+            for (const entity of targets) {
                 entity.setRotation({ x: rotationX, y: rotationY });
             }
         });

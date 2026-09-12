@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 // IDEA: support entities, need to load spawn area manually tho
 
 import {
@@ -39,14 +38,15 @@ import { CommandManager } from "../../command.js";
 CommandManager.registerCommand(
     {
         name: "tpworldspawn",
-        description: "Teleports the target to the world spawn point",
+        description: "Teleports all targets to the world spawn point",
         permissionLevel: CommandPermissionLevel.GameDirectors,
 
-        optionalParameters: [{ name: "target", type: CustomCommandParamType.PlayerSelector }],
+        optionalParameters: [{ name: "targets", type: CustomCommandParamType.PlayerSelector }],
     },
     (origin, targets: Player[]) => {
-        if (!targets || targets.length === 0) {
-            const sourceEntity = origin.sourceEntity;
+        const sourceEntity = origin.sourceEntity;
+
+        if (!targets) {
             if (sourceEntity instanceof Player) {
                 system.run(() => {
                     teleportPlayersToWorldSpawn([sourceEntity]);
@@ -57,8 +57,11 @@ CommandManager.registerCommand(
                     message: "Sucessfully teleported entity",
                 };
             }
+            return { status: CustomCommandStatus.Failure, message: "Inavlid target" };
+        }
 
-            return { status: CustomCommandStatus.Failure, message: "No targets" };
+        if (targets.length === 0) {
+            return { status: CustomCommandStatus.Failure, message: "No targets match selector" };
         }
 
         system.run(() => {

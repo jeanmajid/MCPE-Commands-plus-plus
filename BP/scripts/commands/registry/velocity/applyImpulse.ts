@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
@@ -45,6 +44,10 @@ CommandManager.registerCommand(
         ],
     },
     (origin, targets: Entity[], x: number, y: number, z: number) => {
+        if (targets.length === 0) {
+            return { status: CustomCommandStatus.Failure, message: "No targets match selector" };
+        }
+
         system.run(() => {
             for (const entity of targets) {
                 entity.applyImpulse({ x, y, z });

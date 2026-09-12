@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
@@ -40,6 +39,10 @@ CommandManager.registerCommand(
         mandatoryParameters: [{ name: "targets", type: CustomCommandParamType.EntitySelector }],
     },
     (origin, targets: Entity[]) => {
+        if (targets.length === 0) {
+            return { status: CustomCommandStatus.Failure, message: "No targets match selector" };
+        }
+
         let amount = 0;
         system.run(() => {
             for (const entity of targets) {

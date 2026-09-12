@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
@@ -33,27 +32,35 @@ import {
 
 import { CommandManager } from "../../command.js";
 
+const SUCCESS = { status: CustomCommandStatus.Success, message: "Successfully vanished player" };
+
 CommandManager.registerCommand(
     {
         name: "vanish",
-        description:
-            "Go into spectator mode and optionally return to original position when exiting",
+        description: "Enter vanish mode and optionally return to original position when exiting",
         aliases: ["v"],
         permissionLevel: CommandPermissionLevel.GameDirectors,
-        optionalParameters: [{ name: "player", type: CustomCommandParamType.PlayerSelector }],
+        optionalParameters: [{ name: "players", type: CustomCommandParamType.PlayerSelector }],
     },
-    (origin, player: Player[]) => {
+    (origin, players: Player[]) => {
         const source = origin.sourceEntity;
-        if (!player && source instanceof Player) {
-            vanishPlayer(source);
-            return { status: CustomCommandStatus.Success };
+        if (!players) {
+            if (source instanceof Player) {
+                vanishPlayer(source);
+                return SUCCESS;
+            }
+            return { status: CustomCommandStatus.Failure, message: "Invalid target" };
         }
 
-        for (const target of player) {
+        if (players.length === 0) {
+            return { status: CustomCommandStatus.Failure, message: "No targets match selector" };
+        }
+
+        for (const target of players) {
             vanishPlayer(target);
         }
 
-        return { status: CustomCommandStatus.Success };
+        return SUCCESS;
     }
 );
 

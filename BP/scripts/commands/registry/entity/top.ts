@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
@@ -35,25 +34,37 @@ import { CommandManager } from "../../command.js";
 CommandManager.registerCommand(
     {
         name: "top",
-        description: "Teleports the target to the top most block at their position",
+        description: "Teleports the targets to the top most block at their position",
         permissionLevel: CommandPermissionLevel.GameDirectors,
 
         optionalParameters: [
-            { name: "target", type: CustomCommandParamType.EntitySelector },
+            { name: "targets", type: CustomCommandParamType.EntitySelector },
             { name: "minHeight", type: CustomCommandParamType.Float },
         ],
     },
     (origin, targets: Entity[], minHeight?: number) => {
-        system.run(() => {
-            if (!targets && origin.sourceEntity) {
-                teleportEntityToTop(origin.sourceEntity, minHeight);
-                return;
-            }
+        if (!targets && origin.sourceEntity) {
+            system.run(() => {
+                if (origin.sourceEntity?.isValid) {
+                    teleportEntityToTop(origin.sourceEntity, minHeight);
+                }
+            });
+            return {
+                status: CustomCommandStatus.Success,
+                message: "Sucessfully teleported entities",
+            };
+        }
 
+        if (targets.length === 0) {
+            return { status: CustomCommandStatus.Failure, message: "No targets match selector" };
+        }
+
+        system.run(() => {
             for (const target of targets) {
                 teleportEntityToTop(target, minHeight);
             }
         });
+
         return { status: CustomCommandStatus.Success, message: "Sucessfully teleported entities" };
     }
 );

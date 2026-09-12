@@ -37,16 +37,22 @@ import { teleportPlayersToWorldSpawn } from "./tpWorldSpawn.js";
 CommandManager.registerCommand(
     {
         name: "tpspawnpoint",
-        description: "Teleports the target to their spawnpoint",
+        description: "Teleports all targets to their spawnpoint",
         permissionLevel: CommandPermissionLevel.GameDirectors,
 
-        optionalParameters: [{ name: "target", type: CustomCommandParamType.PlayerSelector }],
+        optionalParameters: [{ name: "targets", type: CustomCommandParamType.PlayerSelector }],
     },
     (origin, targets: Player[]) => {
         const sourceEntity = origin.sourceEntity;
 
-        if (!targets && sourceEntity instanceof Player) {
-            targets = [sourceEntity];
+        if (!targets) {
+            if (sourceEntity instanceof Player) {
+                targets = [sourceEntity];
+            } else {
+                return { status: CustomCommandStatus.Failure, message: "Invalid targets" };
+            }
+        } else if (targets.length === 0) {
+            return { status: CustomCommandStatus.Failure, message: "No targets match selector" };
         }
 
         const nonSpawnPlayers: Player[] = [];

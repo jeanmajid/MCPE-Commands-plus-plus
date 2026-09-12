@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
@@ -34,30 +33,38 @@ import {
 
 import { CommandManager } from "../../command.js";
 
+const SUCCESS = { status: CustomCommandStatus.Success, message: "Successfully unvanished" };
+
 CommandManager.registerCommand(
     {
         name: "unvanish",
-        description:
-            "Go out of spectator mode and optionally return to original position when exiting",
+        description: "Exits vanish mode and optionally returns to original position",
         aliases: ["uv"],
         permissionLevel: CommandPermissionLevel.GameDirectors,
         optionalParameters: [
-            { name: "player", type: CustomCommandParamType.PlayerSelector },
+            { name: "players", type: CustomCommandParamType.PlayerSelector },
             { name: "tpBack", type: CustomCommandParamType.Boolean },
         ],
     },
-    (origin, player: Player[], tpBack: boolean) => {
+    (origin, players: Player[], tpBack: boolean) => {
         const source = origin.sourceEntity;
-        if (!player && source instanceof Player) {
-            unvanishPlayer(source, tpBack);
-            return { status: CustomCommandStatus.Success };
+        if (!players) {
+            if (source instanceof Player) {
+                unvanishPlayer(source, tpBack);
+                return SUCCESS;
+            }
+            return { status: CustomCommandStatus.Failure, message: "Invalid target" };
         }
 
-        for (const target of player) {
-            unvanishPlayer(target, tpBack);
+        if (players.length === 0) {
+            return { status: CustomCommandStatus.Failure, message: "No targets match selector" };
         }
 
-        return { status: CustomCommandStatus.Success };
+        for (const player of players) {
+            unvanishPlayer(player, tpBack);
+        }
+
+        return SUCCESS;
     }
 );
 

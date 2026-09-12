@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 // ${player.name} ${score.health}
 
 import {
@@ -46,6 +45,10 @@ CommandManager.registerCommand(
         ],
     },
     (origin, targets: Entity[], nameTag: string) => {
+        if (targets.length === 0) {
+            return { status: CustomCommandStatus.Failure, message: "No targets match selector" };
+        }
+
         system.run(() => {
             for (const entity of targets) {
                 try {
