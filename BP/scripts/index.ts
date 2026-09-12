@@ -26,12 +26,9 @@ import { world } from "@minecraft/server";
 import { AttributeManager } from "./attributes/attribute.js";
 import "./attributes/index.js";
 import "./commands/index.js";
-import { Dimensions } from "./constants/dimensions.js";
+import { initializeDimensions } from "./utils/dimension.js";
 
 world.afterEvents.worldLoad.subscribe(() => {
-    Dimensions.overworld = world.getDimension("overworld");
-    Dimensions.nether = world.getDimension("nether");
-    Dimensions.end = world.getDimension("the_end");
-    Dimensions.all = [Dimensions.overworld, Dimensions.nether, Dimensions.end];
+    initializeDimensions();
     AttributeManager.loadAttributesFromMemory();
 });
