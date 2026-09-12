@@ -29,6 +29,7 @@ import {
     system,
 } from "@minecraft/server";
 
+import { MIN_SIGNED_INT32, MAX_SIGNED_INT32 } from "../../../constants/unsignedInt32.js";
 import { getScoreboardObjective } from "../../../utils/getObjective.js";
 import { CommandManager } from "../../command.js";
 
@@ -48,6 +49,13 @@ CommandManager.registerCommand(
         ],
     },
     (origin, targets: Entity[], targetObjective: string, min: number, max: number) => {
+        if (min > max) {
+            return {
+                status: CustomCommandStatus.Failure,
+                message: "Maximum value must be greater than the minimum value",
+            };
+        }
+
         if (targets.length === 0) {
             return { status: CustomCommandStatus.Failure, message: "No targets match selector" };
         }
@@ -56,7 +64,10 @@ CommandManager.registerCommand(
             const objective = getScoreboardObjective(targetObjective);
 
             for (const target of targets) {
-                objective.setScore(target, randomSigned32BitInteger(min, max));
+                if (!target.isValid) {
+                    continue;
+                }
+                objective.setScore(target, randomSignedInt32(min, max));
             }
         });
 
@@ -67,14 +78,15 @@ CommandManager.registerCommand(
     }
 );
 
-function randomSigned32BitInteger(min?: number, max?: number): number {
+function randomSignedInt32(min?: number, max?: number): number {
     if (min === undefined) {
-        min = -2147438648;
+        min = MIN_SIGNED_INT32;
     }
 
     if (max === undefined) {
-        max = 2147438647;
+        max = MAX_SIGNED_INT32;
     }
 
-    return Math.floor(Math.random() * (max + Math.abs(min)) - max);
+    const range = max - min + 1;
+    return Math.floor(Math.random() * range + min);
 }
