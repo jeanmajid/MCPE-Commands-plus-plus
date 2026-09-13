@@ -104,19 +104,23 @@ Custom gamerules under the /config command
 - Attributes per entity /atribute <selector> <atribute>
 - /get/set attribute single time
 
-- Weather
-- Real world time
-- Ingame times
-- Coords, Velocity, FacingDirection
-- PlayerProperties (sneak, swim, level, xp, etc.)
-- tps
-- input
-- biome
+[!singular] Weather
+
+[!singular] Real world time
+[!singular] Ingame times
+
+[!objects] Coords, Velocity, FacingDirection
+[!players] PlayerProperties (sneak, swim, etc.)
+[!singular] tps
+
+[!players] input
+[!entities] biome
 
 ## Tags
 
-- Holding item typeid
-- Holding item name
+[!players] Holding item typeid
+
+[!players] Holding item name
 
 ## Mcfunctions
 
