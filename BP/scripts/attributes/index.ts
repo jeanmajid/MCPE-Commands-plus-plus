@@ -21,7 +21,21 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
+import "./registry/controlScheme.js";
+import "./registry/dimension.js";
+import "./registry/graphicsMode.js";
 import "./registry/health.js";
 import "./registry/hotbarSelectedSlot.js";
 import "./registry/hunger.js";
+import "./registry/inputKeyJump.js";
+import "./registry/inputKeySneak.js";
+import "./registry/inputMode.js";
+import "./registry/level.js";
+import "./registry/levelupXp.js";
+import "./registry/permissionLevel.js";
 import "./registry/ping.js";
+import "./registry/playerIsSneaking.js";
+import "./registry/saturation.js";
+import "./registry/scale.js";
+import "./registry/totalXp.js";
+import "./registry/xp.js";
