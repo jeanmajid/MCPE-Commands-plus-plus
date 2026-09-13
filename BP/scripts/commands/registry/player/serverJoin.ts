@@ -43,18 +43,18 @@ CommandManager.registerCommand(
             { name: "port", type: CustomCommandParamType.Integer },
         ],
     },
-    (origin, players: Player[], ip: string, port: number) => {
+    (_, players: Player[], ip: string, port: number) => {
         if (players.length === 0) {
             return { status: CustomCommandStatus.Failure, message: "No targets match selector " };
         }
 
-        for (const player of players) {
-            system.run(() => {
+        system.run(() => {
+            for (const player of players) {
                 try {
                     transferPlayer(player, { hostname: ip, port: port });
                 } catch {}
-            });
-        }
+            }
+        });
 
         return {
             status: CustomCommandStatus.Success,
