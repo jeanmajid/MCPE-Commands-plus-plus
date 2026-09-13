@@ -21,5 +21,11 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
+/**
+ * highest allowed number for scoreboards
+ */
 export const MAX_SIGNED_INT32 = 2147483647;
+/**
+ * lowest allowed number for scoreboards
+ */
 export const MIN_SIGNED_INT32 = -2147483648;
