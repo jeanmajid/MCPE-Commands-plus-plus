@@ -21,6 +21,31 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import "./registry/health.js";
-import "./registry/hotbarSelectedSlot.js";
-import "./registry/ping.js";
+import { ScoreboardObjective, system, world } from "@minecraft/server";
+
+import { AttributeManager, BaseAttribute } from "../attribute";
+
+class PingAttribute extends BaseAttribute {
+    public id = "ping";
+    public runId = -1;
+
+    public initialize(): void {
+        this.runId = system.runInterval(() => {
+            this.setValues(this.score);
+        }, 1);
+    }
+
+    public setValues(score: ScoreboardObjective): void {
+        for (const player of world.getAllPlayers()) {
+            const ping = player.getPing();
+
+            score.setScore(player, ping);
+        }
+    }
+
+    public cleanup(): void {
+        system.clearRun(this.runId);
+    }
+}
+
+AttributeManager.registerAttribute(new PingAttribute());
