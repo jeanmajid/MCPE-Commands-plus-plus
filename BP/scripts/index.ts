@@ -28,6 +28,7 @@ import "./attributes/index.js";
 import "./commands/index.js";
 import { initializeDimensions, registerCustomDimensions } from "./utils/dimension.js";
 
+AttributeManager.initialize();
 registerCustomDimensions();
 
 world.afterEvents.worldLoad.subscribe(() => {

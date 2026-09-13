@@ -21,9 +21,9 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import { ScoreboardObjective, world } from "@minecraft/server";
 
+import { CommandManager } from "../commands/command";
 import { Dimensions } from "../constants/dimensions";
 import { ATTRIBUTE_KEY } from "../constants/dynamicPropertyKeys";
 
@@ -47,14 +47,14 @@ export abstract class BaseAttribute {
 }
 
 export class AttributeManager {
-    public static attributes: BaseAttribute[] = [];
+    public static attributes: Record<string, BaseAttribute> = {};
 
     public static registerAttribute(attribute: BaseAttribute): void {
-        this.attributes.push(attribute);
+        this.attributes[attribute.id] = attribute;
     }
 
     public static getAttribute(id: string): BaseAttribute | undefined {
-        return this.attributes.find((attribute) => attribute.id === id);
+        return this.attributes[id];
     }
 
     public static loadAttributesFromMemory(): void {
@@ -82,5 +82,12 @@ export class AttributeManager {
             Dimensions.overworld.runCommand(`scoreboard players reset * ${scoreboardId}`);
             attribute.initialize();
         }
+    }
+
+    /**
+     * Only should be called once after all attributes are registered in the before world load enviroment
+     */
+    public static initialize(): void {
+        CommandManager.registerEnum(ATTRIBUTE_KEY, Object.keys(AttributeManager.attributes));
     }
 }

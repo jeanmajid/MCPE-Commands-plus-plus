@@ -33,16 +33,6 @@ import { AttributeManager } from "../../../attributes/attribute.js";
 import { ATTRIBUTE_KEY } from "../../../constants/dynamicPropertyKeys.js";
 import { CommandManager } from "../../command.js";
 
-export enum AttributesEnum {
-    health = "health",
-    selectedHotbarSlot = "selectedHotbarSlot",
-    ping = "ping",
-    hunger = "hunger",
-}
-
-// TODO: automate this
-CommandManager.registerEnum(ATTRIBUTE_KEY, Object.values(AttributesEnum));
-
 CommandManager.registerCommand(
     {
         name: "bind",
