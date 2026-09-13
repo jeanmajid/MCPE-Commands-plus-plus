@@ -78,6 +78,7 @@ import "./registry/misc/wiki.js";
 import "./registry/nameTag/nameTag.js";
 import "./registry/nameTag/resetNameTag.js";
 import "./registry/player/hunger.js";
+import "./registry/player/serverJoin.js";
 import "./registry/player/tpSpawnPoint.js";
 import "./registry/player/tpWorldSpawn.js";
 import "./registry/player/unvanish.js";
