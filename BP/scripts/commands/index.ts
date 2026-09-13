@@ -83,6 +83,8 @@ import "./registry/player/tpSpawnPoint.js";
 import "./registry/player/tpWorldSpawn.js";
 import "./registry/player/unvanish.js";
 import "./registry/player/vanish.js";
+import "./registry/player/warp.js";
+import "./registry/player/warpconfig.js";
 import "./registry/structure/structureList.js";
 import "./registry/tag/addTags.js";
 import "./registry/tag/removeTags.js";
