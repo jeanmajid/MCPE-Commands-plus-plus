@@ -5,8 +5,6 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
     - {@s.block_from_view_direction}
     - {@s.score.objective}
 
-[!PUSH] /transfer -- transfers player to a server with a port ( may be able to bind ports to names to )all easier
-
 /shootprojectile -- spawns a projectile (probs with velocity)
 
 [!] /pickup -- gives target an item from a drop
