@@ -21,21 +21,36 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import "./registry/controlScheme.js";
-import "./registry/dimension.js";
-import "./registry/graphicsMode.js";
-import "./registry/health.js";
-import "./registry/hotbarSelectedSlot.js";
-import "./registry/hunger.js";
-import "./registry/inputKeyJump.js";
-import "./registry/inputKeySneak.js";
-import "./registry/inputMode.js";
-import "./registry/isSneaking.js";
-import "./registry/level.js";
-import "./registry/levelupXp.js";
-import "./registry/permissionLevel.js";
-import "./registry/ping.js";
-import "./registry/saturation.js";
-import "./registry/scale.js";
-import "./registry/totalXp.js";
-import "./registry/xp.js";
+import { GraphicsMode, ScoreboardObjective, system, world } from "@minecraft/server";
+
+import { AttributeManager, BaseAttribute } from "../attribute";
+
+const graphicsModeIndex = {
+    [GraphicsMode.Simple]: 0,
+    [GraphicsMode.Fancy]: 1,
+    [GraphicsMode.Deferred]: 2,
+    [GraphicsMode.RayTraced]: 3,
+};
+
+class GraphicsModeAttribute extends BaseAttribute {
+    public id = "graphicsmode";
+    public runId = -1;
+
+    public initialize(): void {
+        this.runId = system.runInterval(() => {
+            this.setValues(this.score);
+        }, 1);
+    }
+
+    public setValues(score: ScoreboardObjective): void {
+        for (const player of world.getAllPlayers()) {
+            score.setScore(player, graphicsModeIndex[player.graphicsMode]);
+        }
+    }
+
+    public cleanup(): void {
+        system.clearRun(this.runId);
+    }
+}
+
+AttributeManager.registerAttribute(new GraphicsModeAttribute());

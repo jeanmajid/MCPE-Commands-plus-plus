@@ -73,6 +73,8 @@ import "./registry/entity/top.js";
 import "./registry/misc/credits.js";
 import "./registry/misc/gameRuleSetup.js";
 import "./registry/misc/guide.js";
+import "./registry/misc/rules.js";
+import "./registry/misc/ruleset.js";
 import "./registry/misc/wiki.js";
 import "./registry/nameTag/nameTag.js";
 import "./registry/nameTag/resetNameTag.js";

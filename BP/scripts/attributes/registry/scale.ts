@@ -21,21 +21,35 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import "./registry/controlScheme.js";
-import "./registry/dimension.js";
-import "./registry/graphicsMode.js";
-import "./registry/health.js";
-import "./registry/hotbarSelectedSlot.js";
-import "./registry/hunger.js";
-import "./registry/inputKeyJump.js";
-import "./registry/inputKeySneak.js";
-import "./registry/inputMode.js";
-import "./registry/isSneaking.js";
-import "./registry/level.js";
-import "./registry/levelupXp.js";
-import "./registry/permissionLevel.js";
-import "./registry/ping.js";
-import "./registry/saturation.js";
-import "./registry/scale.js";
-import "./registry/totalXp.js";
-import "./registry/xp.js";
+import { ScoreboardObjective, system } from "@minecraft/server";
+
+import { getAllEntities } from "../../utils/dimension";
+import { AttributeManager, BaseAttribute } from "../attribute";
+
+class ScaleAttribute extends BaseAttribute {
+    public id = "scale";
+    public runId = -1;
+
+    public initialize(): void {
+        this.runId = system.runInterval(() => {
+            this.setValues(this.score);
+        }, 1);
+    }
+
+    public setValues(score: ScoreboardObjective): void {
+        for (const entity of getAllEntities()) {
+            const scale = entity.getComponent("scale")?.value;
+            if (scale === undefined) {
+                return;
+            }
+
+            score.setScore(entity, scale);
+        }
+    }
+
+    public cleanup(): void {
+        system.clearRun(this.runId);
+    }
+}
+
+AttributeManager.registerAttribute(new ScaleAttribute());
