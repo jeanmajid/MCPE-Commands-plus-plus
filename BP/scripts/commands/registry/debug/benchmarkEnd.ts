@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import {
     CommandPermissionLevel,
     CustomCommandParamType,
@@ -64,7 +63,10 @@ CommandManager.registerCommand(
         const elapsedTime = Date.now() - start;
 
         const output = `[${startId}] Elapsed ${elapsedTime}ms`;
-        log(output, logType);
+        const result = log(output, logType);
+        if (!result) {
+            return { status: CustomCommandStatus.Failure, message: "Invalid log type" };
+        }
 
         if (!fakeplayer) {
             return { status: CustomCommandStatus.Success, message: output };
