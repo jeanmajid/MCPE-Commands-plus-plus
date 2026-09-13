@@ -67,9 +67,6 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 
 /config [rule] [value] -- custom gamerules handling; if no rule, query all; if no value, query the rule
 
-[!] /rules -- Allows non-operator players to view the world specific rules set by /rulesset; by default displays a message like "No defined rules for this world", or just doesnt log anything
-[!] /setrule <line: number> <rule: string> -- Allows operators to set world specific rules using a fixed string
-
 /permissions -- modify player permissions like block breaking and entity damaging and shitting and such
 /worldperms <player: target> [permission: enum(string)] [value: boolean] -- Modifies the permissions of target players to prevent interacting with objects in the world; no permission defaults to query all; no value defaults to query the permission; targetable gamerule style syntax (THIS IS THE SAME AS /permissions UPWARDS SO JUST REVIEW)
 
