@@ -37,10 +37,11 @@ export enum AttributesEnum {
     health = "health",
     selectedHotbarSlot = "selectedHotbarSlot",
     ping = "ping",
+    hunger = "hunger",
 }
 
 // TODO: automate this
-CommandManager.registerEnum(ATTRIBUTE_KEY, ["health", "selectedHotbarSlot", "ping"]);
+CommandManager.registerEnum(ATTRIBUTE_KEY, Object.values(AttributesEnum));
 
 CommandManager.registerCommand(
     {
