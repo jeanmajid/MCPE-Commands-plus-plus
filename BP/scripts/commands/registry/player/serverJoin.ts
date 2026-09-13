@@ -25,31 +25,40 @@ import {
     CommandPermissionLevel,
     CustomCommandStatus,
     CustomCommandParamType,
+    system,
     Player,
 } from "@minecraft/server";
-import { kickPlayer } from "@minecraft/server-admin";
+import { transferPlayer } from "@minecraft/server-admin";
 
 import { CommandManager } from "../../command.js";
 
 CommandManager.registerCommand(
     {
-        name: "evict",
-        description: "Kicks a player from the world",
+        name: "serverjoin",
+        description: "Transfers players to a server",
         permissionLevel: CommandPermissionLevel.GameDirectors,
-        mandatoryParameters: [{ name: "players", type: CustomCommandParamType.PlayerSelector }],
-        optionalParameters: [{ name: "reason", type: CustomCommandParamType.String }],
+        mandatoryParameters: [
+            { name: "players", type: CustomCommandParamType.PlayerSelector },
+            { name: "ip", type: CustomCommandParamType.String },
+            { name: "port", type: CustomCommandParamType.Integer },
+        ],
     },
-    (origin, players: Player[], reason: string) => {
+    (_, players: Player[], ip: string, port: number) => {
         if (players.length === 0) {
-            return { status: CustomCommandStatus.Failure, message: "No targets match selector" };
+            return { status: CustomCommandStatus.Failure, message: "No targets match selector " };
         }
 
-        for (const player of players) {
-            try {
-                kickPlayer(player, reason);
-            } catch {}
-        }
+        system.run(() => {
+            for (const player of players) {
+                try {
+                    transferPlayer(player, { hostname: ip, port: port });
+                } catch {}
+            }
+        });
 
-        return { status: CustomCommandStatus.Success, message: "Successfully kicked player(s)" };
+        return {
+            status: CustomCommandStatus.Success,
+            message: "Successfully transfered player(s)",
+        };
     }
 );

@@ -21,8 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-// TODO
-
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
@@ -35,17 +33,13 @@ import { CommandManager } from "../../command.js";
 
 CommandManager.registerCommand(
     {
-        name: "ban",
-        description: "Permanently bans a player from the world",
+        name: "masskick",
+        description: "Kicks players from the world supporting selectors",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [{ name: "players", type: CustomCommandParamType.PlayerSelector }],
         optionalParameters: [{ name: "reason", type: CustomCommandParamType.String }],
     },
     (origin, players: Player[], reason: string) => {
-        return {
-            status: CustomCommandStatus.Failure,
-            message: "Command currently not implemented!",
-        };
         if (players.length === 0) {
             return { status: CustomCommandStatus.Failure, message: "No targets match selector" };
         }

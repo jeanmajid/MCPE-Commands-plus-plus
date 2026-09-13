@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import {
     CommandPermissionLevel,
     CustomCommandParamType,
@@ -54,29 +53,35 @@ CommandManager.registerCommand(
         ],
     },
     (origin, logType: string, message: string) => {
-        log(message, logType);
-        return {
-            status: CustomCommandStatus.Success,
-            message: `Logged ${logType} message to the console`,
-        };
+        const result = log(message, logType);
+        if (result) {
+            return {
+                status: CustomCommandStatus.Success,
+                message: `Logged ${logType} message to the console`,
+            };
+        }
+
+        return { status: CustomCommandStatus.Failure, message: "Invalid log type" };
     }
 );
 
-export function log(message: string, logType: string): void {
+export function log(message: string, logType: string): boolean {
     switch (logType) {
         case LogTypes.none:
-            break;
+            return true;
         case LogTypes.info:
             console.info(message);
-            break;
+            return true;
         case LogTypes.warn:
             console.warn(message);
-            break;
+            return true;
         case LogTypes.error:
             console.error(message);
-            break;
+            return true;
         case LogTypes.chat:
             world.sendMessage(message);
-            break;
+            return true;
+        default:
+            return false;
     }
 }

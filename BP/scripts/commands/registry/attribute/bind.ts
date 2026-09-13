@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
@@ -37,10 +36,11 @@ import { CommandManager } from "../../command.js";
 export enum AttributesEnum {
     health = "health",
     selectedHotbarSlot = "selectedHotbarSlot",
+    ping = "ping",
 }
 
 // TODO: automate this
-CommandManager.registerEnum(ATTRIBUTE_KEY, ["health", "selectedHotbarSlot"]);
+CommandManager.registerEnum(ATTRIBUTE_KEY, ["health", "selectedHotbarSlot", "ping"]);
 
 CommandManager.registerCommand(
     {

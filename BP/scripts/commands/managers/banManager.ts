@@ -25,9 +25,10 @@ import { Player, world } from "@minecraft/server";
 import { kickPlayer } from "@minecraft/server-admin";
 
 import { BANNED_PLAYER_KEY } from "../../constants/dynamicPropertyKeys";
-import { DurationReturn, parseDurationString } from "../../utils/time";
+import { parseDurationString } from "../../utils/time";
 
 //! INCOMPLETE; NEEDS A LOG OF ALL PLAYERS WHO HAVE EVER BEEN IN THE WORLD AND THEIR IDs
+// TODO: ALL WIP
 
 interface BannedPlayerData {
     reason: string;
@@ -42,7 +43,7 @@ export class BanManager {
         player: Player,
         reason: string,
         duration: string
-    ): string | number | void {
+    ): string | number | null | void {
         const banStart = Date.now();
         const banEnd = parseDurationString(duration);
 

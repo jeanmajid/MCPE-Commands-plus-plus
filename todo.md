@@ -113,7 +113,6 @@ Custom gamerules under the /config command
 - Coords, Velocity, FacingDirection
 - PlayerProperties (sneak, swim, level, xp, etc.)
 - tps
-- ping
 - input
 - biome
 
