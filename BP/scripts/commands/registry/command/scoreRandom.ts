@@ -21,6 +21,7 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
+
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
@@ -30,7 +31,7 @@ import {
 } from "@minecraft/server";
 
 import { MIN_SIGNED_INT32, MAX_SIGNED_INT32 } from "../../../constants/unsignedInt32.js";
-import { getScoreboardObjective } from "../../../utils/getObjective.js";
+import { getScoreboardObjective } from "../../../utils/score.js";
 import { CommandManager } from "../../command.js";
 
 CommandManager.registerCommand(

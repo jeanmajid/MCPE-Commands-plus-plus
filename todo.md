@@ -5,70 +5,72 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
     - {@s.block_from_view_direction}
     - {@s.score.objective}
 
+[!PUSH] /transfer -- transfers player to a server with a port ( may be able to bind ports to names to )all easier
+
 /shootprojectile -- spawns a projectile (probs with velocity)
 
-/pickup -- gives target an item from a drop
+[!] /pickup -- gives target an item from a drop
 
-/container -- gives an item to a player from a speciic chest slot || /container <target> {vector} [slot_id]
+[!SLOTS] /container -- gives an item to a player from a speciic chest slot || /container <target> {vector} [slot_id]
 
 /spawnparticle -- spawns a particle with more parameters than the regular particle command; includes particle spawn radius, variable modification, etc.
 
 /spawn -- alternative to the summon command with additional capabilities
 
-/score -- alternative for scoreboard with enhanced capabilities; include base operations like +-\*/ without the need for fakeplayers
+/score -- alternative for scoreboard with enhanced capabilities; include base operations like +-\*/ without the need for fakeplayers; better score random for lists, intervals, exclusions, etc.
 
 - [THIS IS A SEPARATE COMMAND CONFIRMED] Consider just taking in a single string containing the formula to allow for complex multi-operation calculations
 
-/fillshape -- loads a shape with provided dimensions
-/phil -- better fill with gradients, ticking area loading, replacing with gradient and this and that
+[!WORLDEDITX] /fillshape -- loads a shape with provided dimensions
+[!WORLDEDITX] /phil -- better fill with gradients, ticking area loading, replacing with gradient and this and that
 
-/ui -- suit of commands to create and manage ui's
-/ui -- modalform, returned value can be used in the command with custom syntax to be decided
+[!] /ui -- suit of commands to create and manage ui's
+[!] /ui -- modalform, returned value can be used in the command with custom syntax to be decided
 
-/waypoint -- class of commands to handle locator bar waypoints
-
-[!] /dimension -- transport players between dimensions
+[!] /locator -- class of commands to handle locator bar waypoints
 
 /givebutbetter -- give with extra parameters like nbt editing / lore, additional properties, enchants, whatever tha fak
+[!SLOTS] /replaceitembutbetter -- same as above but with item slots rather than first priority
 
-/damageitem -- modify an item durability by a positive or negative value
-/setitemdurability -- set an item durability to a fixed value
-/enchantitem -- enchant an item in an entity's inventory
-/nameitem -- rename an item in an entity's inventory
-/nameitemraw -- same as nameitem but uses rawtext JSON formatting
-/moveitem -- move an item between slots in an entity's inventory
+[!SLOTS] /itemdurability <itemSlot> <set | add | remove> <value: number> -- modify an item durability
+[!SLOTS] /enchantitem <itemSlot> <enchantment> <level: number> -- enchant an item in an entity's inventory
+[!SLOTS] /nameitem <itemSlot> <name: string> -- rename an item in an entity's inventory
+[!RAWTEXT+SLOTS] /nameitemraw <itemSlot> <name: rawtext> -- same as nameitem but uses rawtext JSON formatting
+[!SLOTS] /moveitem <sourceSlot> <destinationSlot> <copy: boolean> -- move an item between slots in an entity's inventory
 
 [!] /phase -- teleport through the block in front of you
 
-/nametagraw -- same as /nametag but uses rawtext JSON formatting
+[!RAWTEXT] /nametagraw -- same as /nametag but uses rawtext JSON formatting
 
 /clientparticle -- spawns a particle only visible by a certain client
 /clientanimation -- animates a target only visible by a certain client
 
 [!] /gamerulesetup -- sets gamerules to world optimised default values (NEEDS CONFIRMATION!!!!!!)
 
-/lograw -- same as /log but uses rawtext JSON formatting
+[!RAWTEXT] /lograw -- same as /log but uses rawtext JSON formatting
 
-/ban -- permanently removes a player from the world (excluding the world owner)
-/unban -- removes a player from the ban list
+[!PLAYERS] /ban -- permanently removes a player from the world (excluding the world owner)
+[!PLAYERS] /unban -- removes a player from the ban list
+[!PLAYERS] /playerhistory <page> -- Produces a log of all players who have ever joined the world and a brief of some of their available data
+[!PLAYERS] /playerdata <player> -- Produces a more detailed log of a specific player's data
 
 /hitbox -- reveals the hitbox of the target
 
 /potion -- gives a potions with custom parameters
 
-/invulnerable -- makes an entity unable to be damaged by any source
+[!] /invulnerable -- makes an entity unable to be damaged by any source
 
-/helditems <target> [location] -- lists contents within the provided location in chat (if no location provided default to all held items)
+[!SLOTS] /viewcontents <target> [location] -- lists contents within the provided location in chat (if no location provided default to all held items)
 
-/warp -- tp to a warp id
-/addwarp -- add the warp with permissions
+[!] /warp -- tp to a warp id
+[!] /addwarp -- add the warp with permissions
 
 [!] /loadarea -- Alternative to /tickingarea using the Script API tickingArea module to allow for more total ticking areas & a different ticking system than the in-build command version; will need a class of commands to manage
 
 /config [rule] [value] -- custom gamerules handling; if no rule, query all; if no value, query the rule
 
-/rules -- Allows non-operator players to view the world specific rules set by /rulesset; by default displays a message like "No defined rules for this world", or just doesnt log anything
-/rulesset -- Allows operators to set world specific rules using a fixed string
+[!] /rules -- Allows non-operator players to view the world specific rules set by /rulesset; by default displays a message like "No defined rules for this world", or just doesnt log anything
+[!] /setrule <line: number> <rule: string> -- Allows operators to set world specific rules using a fixed string
 
 /permissions -- modify player permissions like block breaking and entity damaging and shitting and such
 /worldperms <player: target> [permission: enum(string)] [value: boolean] -- Modifies the permissions of target players to prevent interacting with objects in the world; no permission defaults to query all; no value defaults to query the permission; targetable gamerule style syntax (THIS IS THE SAME AS /permissions UPWARDS SO JUST REVIEW)
@@ -78,6 +80,11 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 /spawnplayer -- Spawns a player from the fake player module
 
 /sound -- new sound api stuff
+
+[PLAYERS] /tagoffline -- grants an offline player a tag
+[PLAYERS] /scoreoffline -- modifies the score of an offline player
+
+- include other offline commands
 
 wiki
 listattributes get all + status (on off)

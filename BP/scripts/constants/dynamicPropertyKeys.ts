@@ -21,4 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
+
 export const ATTRIBUTE_KEY = "attribute";
+export const BANNED_PLAYER_KEY = "bannedPlayer";

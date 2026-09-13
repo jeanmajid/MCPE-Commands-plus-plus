@@ -21,6 +21,7 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
+
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
@@ -30,6 +31,7 @@ import {
 } from "@minecraft/server";
 
 import { AttributeManager } from "../../../attributes/attribute.js";
+import { ATTRIBUTE_KEY } from "../../../constants/dynamicPropertyKeys.js";
 import { CommandManager } from "../../command.js";
 
 CommandManager.registerCommand(
@@ -38,7 +40,7 @@ CommandManager.registerCommand(
         description: "One time getter for attributes",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
-            { name: "bindtype", type: CustomCommandParamType.Enum, enumName: "bind" },
+            { name: "bindtype", type: CustomCommandParamType.Enum, enumName: ATTRIBUTE_KEY },
             { name: "scoreboardId", type: CustomCommandParamType.String },
         ],
     },

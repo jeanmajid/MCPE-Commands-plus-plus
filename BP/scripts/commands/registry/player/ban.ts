@@ -22,49 +22,35 @@
  */
 
 
-import { DebugBox } from "@minecraft/debug-utilities";
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
     CustomCommandParamType,
-    Vector3,
+    Player,
 } from "@minecraft/server";
+import { kickPlayer } from "@minecraft/server-admin";
 
-import { getDimensionFromCommandOrigin } from "../../../utils/dimension.js";
-import { Vector } from "../../../utils/vector.js";
 import { CommandManager } from "../../command.js";
-import { DrawManager } from "../../managers/drawManager.js";
 
 CommandManager.registerCommand(
     {
-        name: "drawvolume",
-        description: "Draws a box via the Debug Drawer module",
+        name: "ban",
+        description: "Permanently bans a player from the world",
         permissionLevel: CommandPermissionLevel.GameDirectors,
-        mandatoryParameters: [
-            { name: "id", type: CustomCommandParamType.String },
-            { name: "startPos", type: CustomCommandParamType.Location },
-            { name: "endPos", type: CustomCommandParamType.Location },
-        ],
+        mandatoryParameters: [{ name: "players", type: CustomCommandParamType.PlayerSelector }],
+        optionalParameters: [{ name: "reason", type: CustomCommandParamType.String }],
     },
-    (origin, id: string, startPos: Vector3, endPos: Vector3) => {
-        const dimension = getDimensionFromCommandOrigin(origin);
+    (origin, players: Player[], reason: string) => {
+        if (players.length === 0) {
+            return { status: CustomCommandStatus.Failure, message: "No targets match selector" };
+        }
 
-        const box = new DebugBox({ ...startPos, dimension });
+        for (const player of players) {
+            try {
+                kickPlayer(player, reason);
+            } catch {}
+        }
 
-        Vector.setSmallestAndBiggest(startPos, endPos);
-        const bound = Vector.subtract(endPos, startPos);
-
-        bound.x += 1;
-        bound.y += 1;
-        bound.z += 1;
-
-        startPos.x += bound.x / 2;
-        startPos.y += bound.y / 2;
-        startPos.z += bound.z / 2;
-
-        box.bound = startPos;
-
-        DrawManager.addShape(id, box);
-        return { status: CustomCommandStatus.Success, message: "Box successfully drawn" };
+        return { status: CustomCommandStatus.Success, message: "Successfully kicked player(s)" };
     }
 );

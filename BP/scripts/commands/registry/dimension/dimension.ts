@@ -22,49 +22,51 @@
  */
 
 
-import { DebugBox } from "@minecraft/debug-utilities";
 import {
     CommandPermissionLevel,
-    CustomCommandStatus,
     CustomCommandParamType,
-    Vector3,
+    CustomCommandStatus,
+    Entity,
+    system,
 } from "@minecraft/server";
 
-import { getDimensionFromCommandOrigin } from "../../../utils/dimension.js";
-import { Vector } from "../../../utils/vector.js";
+import { Dimensions } from "../../../constants/dimensions.js";
 import { CommandManager } from "../../command.js";
-import { DrawManager } from "../../managers/drawManager.js";
+
+CommandManager.registerEnum(
+    "dimension",
+    Object.keys({ ...Dimensions }).filter((d) => d !== "all")
+);
 
 CommandManager.registerCommand(
     {
-        name: "drawvolume",
-        description: "Draws a box via the Debug Drawer module",
+        name: "dimension",
+        description: "Teleport between dimensions",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
-            { name: "id", type: CustomCommandParamType.String },
-            { name: "startPos", type: CustomCommandParamType.Location },
-            { name: "endPos", type: CustomCommandParamType.Location },
+            { name: "dimension", type: CustomCommandParamType.Enum, enumName: "dimension" },
         ],
+        optionalParameters: [{ name: "targets", type: CustomCommandParamType.EntitySelector }],
     },
-    (origin, id: string, startPos: Vector3, endPos: Vector3) => {
-        const dimension = getDimensionFromCommandOrigin(origin);
+    (origin, dimension: keyof typeof Dimensions, targets?: Entity[]) => {
+        const targetDimension = Dimensions[dimension];
+        if (!targetDimension || Array.isArray(targetDimension)) {
+            return { status: CustomCommandStatus.Failure, message: "Invalid dimension identifier" };
+        }
 
-        const box = new DebugBox({ ...startPos, dimension });
+        if (!targets && origin.sourceEntity) {
+            targets = [origin.sourceEntity];
+        }
 
-        Vector.setSmallestAndBiggest(startPos, endPos);
-        const bound = Vector.subtract(endPos, startPos);
+        if (!targets || targets.length === 0) {
+            return { status: CustomCommandStatus.Failure, message: "No targets match selector" };
+        }
 
-        bound.x += 1;
-        bound.y += 1;
-        bound.z += 1;
-
-        startPos.x += bound.x / 2;
-        startPos.y += bound.y / 2;
-        startPos.z += bound.z / 2;
-
-        box.bound = startPos;
-
-        DrawManager.addShape(id, box);
-        return { status: CustomCommandStatus.Success, message: "Box successfully drawn" };
+        system.run(() => {
+            for (const target of targets) {
+                target.teleport(target.location, { dimension: targetDimension });
+            }
+        });
+        return { status: CustomCommandStatus.Success, message: `Successfully created explosion` };
     }
 );

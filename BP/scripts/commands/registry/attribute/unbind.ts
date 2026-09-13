@@ -40,7 +40,7 @@ CommandManager.registerCommand(
         description: "Unbind an attribute",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
-            { name: "bindtype", type: CustomCommandParamType.Enum, enumName: "bind" },
+            { name: "bindtype", type: CustomCommandParamType.Enum, enumName: ATTRIBUTE_KEY },
         ],
     },
     (origin, attributeId: string) => {

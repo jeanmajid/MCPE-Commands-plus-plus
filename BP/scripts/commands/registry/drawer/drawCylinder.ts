@@ -21,6 +21,7 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
+
 import { DebugCylinder } from "@minecraft/debug-utilities";
 import {
     CommandPermissionLevel,
@@ -29,8 +30,8 @@ import {
     Vector3,
 } from "@minecraft/server";
 
-import { clamp } from "../../../utils/clamp.js";
 import { getDimensionFromCommandOrigin } from "../../../utils/dimension.js";
+import { clamp } from "../../../utils/math.js";
 import { CommandManager } from "../../command.js";
 import { DrawManager } from "../../managers/drawManager.js";
 

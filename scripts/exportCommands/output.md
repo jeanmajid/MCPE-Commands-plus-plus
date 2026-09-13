@@ -1,5 +1,5 @@
 # Commands++ Commands
-## Total Amount of Commands: 65
+## Total Amount of Commands: 70
 
 
 ## attribute
@@ -68,6 +68,20 @@
 > 
 > `GameDirectors`
 
+> ### `/scoremath`
+> **Parameters:** `<targets: EntitySelector>` • `<targetObjective: String>` • `<operation: Enum>` • `[selectors: EntitySelector]` • `[objective: String]`
+> 
+> Performs a calculation with the selected operation between the scores of two targets
+> 
+> `GameDirectors`
+
+> ### `/scorerandom`
+> **Parameters:** `<targets: EntitySelector>` • `<targetObjective: String>` • `[min: Integer]` • `[max: Integer]`
+> 
+> Outputs a random score value to the target objective, optionally between a min and max value
+> 
+> `GameDirectors`
+
 
 
 ## debug
@@ -121,6 +135,13 @@
 
 
 ## dimension
+
+> ### `/dimension`
+> **Parameters:** `<dimension: Enum>` • `[targets: EntitySelector]`
+> 
+> Teleport between dimensions
+> 
+> `GameDirectors`
 
 > ### `/explode`
 > **Parameters:** `<location: Location>` • `[radius: Float]` • `[breaksBlocks: Boolean]` • `[causesFire: Boolean]` • `[allowUnderwater: Boolean]` • `[explosionSource: EntitySelector]`
@@ -394,6 +415,20 @@
 
 
 ## player
+
+> ### `/ban`
+> **Parameters:** `<players: PlayerSelector>` • `[reason: String]`
+> 
+> Permanently bans a player from the world
+> 
+> `GameDirectors`
+
+> ### `/evict`
+> **Parameters:** `<players: PlayerSelector>` • `[reason: String]`
+> 
+> Kicks a player from the world
+> 
+> `GameDirectors`
 
 > ### `/hunger`
 > **Parameters:** `<players: PlayerSelector>` • `<mode: Enum>` • `<value: Integer>`

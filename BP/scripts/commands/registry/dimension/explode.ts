@@ -21,6 +21,7 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
+
 import {
     CommandPermissionLevel,
     CustomCommandParamType,
@@ -30,8 +31,8 @@ import {
     Vector3,
 } from "@minecraft/server";
 
-import { clamp } from "../../../utils/clamp.js";
 import { getDimensionFromCommandOrigin } from "../../../utils/dimension.js";
+import { clamp } from "../../../utils/math.js";
 import { CommandManager } from "../../command.js";
 
 CommandManager.registerCommand(

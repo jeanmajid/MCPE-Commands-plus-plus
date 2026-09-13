@@ -21,6 +21,7 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
+
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
@@ -29,7 +30,7 @@ import {
     system,
 } from "@minecraft/server";
 
-import { clamp } from "../../../utils/clamp.js";
+import { clamp } from "../../../utils/math.js";
 import { CommandManager } from "../../command.js";
 
 CommandManager.registerCommand(

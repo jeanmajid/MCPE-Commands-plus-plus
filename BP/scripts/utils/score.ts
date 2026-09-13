@@ -21,17 +21,9 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Dimension } from "@minecraft/server";
 
-export const CUSTOM_DIMENSIONS = ["dimension1", "dimension2", "dimension3"];
+import { ScoreboardObjective, world } from "@minecraft/server";
 
-// TODO: this should have the custom dimensions aswell, but would love to do only iterate over the actual active ones, maybe dimension switch?
-export const Dimensions = {
-    overworld: undefined as unknown as Dimension,
-    nether: undefined as unknown as Dimension,
-    end: undefined as unknown as Dimension,
-    dimension1: undefined as unknown as Dimension,
-    dimension2: undefined as unknown as Dimension,
-    dimension3: undefined as unknown as Dimension,
-    all: undefined as unknown as Dimension[],
-};
+export function getScoreboardObjective(objective: string): ScoreboardObjective {
+    return world.scoreboard.getObjective(objective) ?? world.scoreboard.addObjective(objective);
+}
