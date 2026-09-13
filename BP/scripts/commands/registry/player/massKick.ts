@@ -33,8 +33,8 @@ import { CommandManager } from "../../command.js";
 
 CommandManager.registerCommand(
     {
-        name: "evict",
-        description: "Kicks a player from the world",
+        name: "masskick",
+        description: "Kicks players from the world supporting selectors",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [{ name: "players", type: CustomCommandParamType.PlayerSelector }],
         optionalParameters: [{ name: "reason", type: CustomCommandParamType.String }],
