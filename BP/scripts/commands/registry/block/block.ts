@@ -21,12 +21,13 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
     system,
     CustomCommandParamType,
+    BlockType,
+    BlockTypes,
 } from "@minecraft/server";
 
 import { Vector } from "../../../utils/vector.js";
@@ -40,7 +41,7 @@ CommandManager.registerCommand(
         permissionLevel: CommandPermissionLevel.Admin,
         optionalParameters: [{ name: "blockType", type: CustomCommandParamType.BlockType }],
     },
-    (origin, blockType: string = "minecraft:glass") => {
+    (origin, blockType: BlockType = BlockTypes.get("minecraft:glass")!) => {
         if (!origin.sourceEntity) {
             return;
         }
@@ -51,7 +52,7 @@ CommandManager.registerCommand(
         });
         return {
             status: CustomCommandStatus.Success,
-            message: `${blockType} placed successfully at ${Vector.toStringFloored(location)}`,
+            message: `${blockType.id} placed successfully at ${Vector.toStringFloored(location)}`,
         };
     }
 );
