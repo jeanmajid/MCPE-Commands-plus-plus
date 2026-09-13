@@ -30,8 +30,8 @@ import {
 
 import { AttributeManager, BaseAttribute } from "../attribute";
 
-class PlayerIsSneakingAttribute extends BaseAttribute {
-    public id = "playerissneaking";
+class IsSneakingAttribute extends BaseAttribute {
+    public id = "issneaking";
     public startEvent?: (arg0: EntityStartSneakingAfterEvent) => void;
     public stopEvent?: (arg0: EntityStopSneakingAfterEvent) => void;
 
@@ -65,4 +65,4 @@ class PlayerIsSneakingAttribute extends BaseAttribute {
     }
 }
 
-AttributeManager.registerAttribute(new PlayerIsSneakingAttribute());
+AttributeManager.registerAttribute(new IsSneakingAttribute());
