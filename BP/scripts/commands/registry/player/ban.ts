@@ -21,6 +21,7 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
+// TODO
 
 import {
     CommandPermissionLevel,
@@ -41,6 +42,10 @@ CommandManager.registerCommand(
         optionalParameters: [{ name: "reason", type: CustomCommandParamType.String }],
     },
     (origin, players: Player[], reason: string) => {
+        return {
+            status: CustomCommandStatus.Failure,
+            message: "Command currently not implemented!",
+        };
         if (players.length === 0) {
             return { status: CustomCommandStatus.Failure, message: "No targets match selector" };
         }
