@@ -23,6 +23,8 @@
 
 import { Dimension } from "@minecraft/server";
 
+import { NAMESPACE } from "./namespace";
+
 export const CUSTOM_DIMENSIONS = ["dimension1", "dimension2", "dimension3"];
 
 // TODO: this should have the custom dimensions aswell, but would love to do only iterate over the actual active ones, maybe dimension switch?
@@ -35,3 +37,12 @@ export const Dimensions = {
     dimension3: undefined as unknown as Dimension,
     all: undefined as unknown as Dimension[],
 };
+
+export enum DimensionIds {
+    overworld = "overworld",
+    nether = "nether",
+    end = "end",
+    dimension1 = NAMESPACE + "dimension1",
+    dimension2 = NAMESPACE + "dimension2",
+    dimension3 = NAMESPACE + "dimension3",
+}
