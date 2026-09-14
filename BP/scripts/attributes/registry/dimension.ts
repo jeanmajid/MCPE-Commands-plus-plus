@@ -23,16 +23,16 @@
 
 import { PlayerDimensionChangeAfterEvent, ScoreboardObjective, world } from "@minecraft/server";
 
-import { Dimensions } from "../../constants/dimensions";
+import { DimensionIds } from "../../constants/dimensions";
 import { AttributeManager, BaseAttribute } from "../attribute";
 
-const dimensionIndex = {
-    [Dimensions.overworld.id]: 0,
-    [Dimensions.nether.id]: 1,
-    [Dimensions.end.id]: 2,
-    [Dimensions.dimension1.id]: 3,
-    [Dimensions.dimension2.id]: 4,
-    [Dimensions.dimension3.id]: 5,
+const dimensionIndex: Record<string, number> = {
+    [DimensionIds.overworld]: 0,
+    [DimensionIds.nether]: 1,
+    [DimensionIds.end]: 2,
+    [DimensionIds.dimension1]: 3,
+    [DimensionIds.dimension2]: 4,
+    [DimensionIds.dimension3]: 5,
 };
 
 class DimensionAttribute extends BaseAttribute {
