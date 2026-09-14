@@ -1,1 +1,1 @@
-# Welcome to the Commands++ Wiki
+# Welcome to The Commands++ Wiki
