@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://squidfunk.github.io/mkdocs-material/schema.json
+site_name: Commands++ Documentation
+repo_url: https://github.com/jeanmajid/MCPE-Commands-plus-plus
+theme:
+    features:
+        - navigation.tabs
+    name: material
+    palette:
+        - scheme: slate
+          toggle:
+              icon: material/brightness-7
+              name: Switch to light mode
+          primary: black
+          accent: indigo
+
+        - scheme: default
+          toggle:
+              icon: material/brightness-4
+              name: Switch to dark mode
+nav:
+    - Getting Started: gettingStarted/index.md
+    - Commands: commands/index.md
+    - Attributes: attributes/index.md
+    - Game Rules: gameRules/index.md
+    - Contributing: contributing/index.md
