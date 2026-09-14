@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import { DebugBox } from "@minecraft/debug-utilities";
 import {
     CommandPermissionLevel,
@@ -46,23 +45,22 @@ CommandManager.registerCommand(
             { name: "endPos", type: CustomCommandParamType.Location },
         ],
     },
-    (origin, id: string, startPos: Vector3, endPos: Vector3) => {
+    (origin, id: string, from: Vector3, to: Vector3) => {
         const dimension = getDimensionFromCommandOrigin(origin);
 
-        const box = new DebugBox({ ...startPos, dimension });
+        Vector.setSmallestAndBiggest(from, to);
 
-        Vector.setSmallestAndBiggest(startPos, endPos);
-        const bound = Vector.subtract(endPos, startPos);
-
+        const bound = Vector.subtract(to, from);
         bound.x += 1;
         bound.y += 1;
         bound.z += 1;
 
-        startPos.x += bound.x / 2;
-        startPos.y += bound.y / 2;
-        startPos.z += bound.z / 2;
+        from.x += bound.x / 2;
+        from.y += bound.y / 2;
+        from.z += bound.z / 2;
 
-        box.bound = startPos;
+        const box = new DebugBox({ ...from, dimension });
+        box.bound = bound;
 
         DrawManager.addShape(id, box);
         return { status: CustomCommandStatus.Success, message: "Box successfully drawn" };

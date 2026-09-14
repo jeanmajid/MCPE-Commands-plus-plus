@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import { CommandPermissionLevel, CustomCommandStatus } from "@minecraft/server";
 
 import { CommandManager } from "../../command.js";
@@ -33,7 +32,7 @@ CommandManager.registerCommand(
         description: "Display how many shapes are currently drawn",
         permissionLevel: CommandPermissionLevel.GameDirectors,
     },
-    (_) => {
+    () => {
         return {
             status: CustomCommandStatus.Success,
             message: `There is currently ${DrawManager.shapeCount} shapes stored in the manager`,
