@@ -2,6 +2,8 @@
 site_name: Commands++ Documentation
 repo_url: https://github.com/jeanmajid/MCPE-Commands-plus-plus
 theme:
+    logo: logo.png
+    favicon: logo.png
     features:
         - navigation.tabs
     name: material
@@ -23,3 +25,5 @@ nav:
     - Attributes: attributes/index.md
     - Game Rules: gameRules/index.md
     - Contributing: contributing/index.md
+extra_css:
+    - css/extra.css
