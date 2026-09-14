@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=https://squidfunk.github.io/mkdocs-material/schema.json
-site_name: Commands++ Documentation
+site_name: Commands++ Wiki
 repo_url: https://github.com/jeanmajid/MCPE-Commands-plus-plus
 theme:
     logo: logo.png
