@@ -1,12 +1,12 @@
-<div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center">
-    <div>
-        <h1 style="margin-left: 20px">Commands Plus Plus</h1>
-        <h4 style="margin-left: 20px">Minecraft Bedrock Command Extension Addon</h4>
-    </div>
-    <img src="BP/pack_icon.png" width="150" style="margin-right: 40px"/>
-</div>
+<img src="./BP/pack_icon.png" width="150" align="right">
 
-<!-- I don't like this header that much -->
+<div>
+	<div style="font-size: 2em; font-weight: bold;">
+		Commands Plus Plus
+	</div>
+	<hr style="width: 250px; margin-left: 0;">
+	<div>Minecraft Bedrock Command Extension Addon</div>
+</div>
 
 <br>
 
@@ -31,8 +31,8 @@ This is not an official Minecraft product. It is not approved by or associated w
 This project is licensed under [GPL](https://github.com/jeanmajid/MCPE-Commands-plus-plus/blob/main/LICENSE).
 
 <div align="center">
-    <h2>Contributors</h2>
-  <a href="https://github.com/jeanmajid/MCPE-Commands-plus-plus/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=jeanmajid/MCPE-Commands-plus-plus" />
-  </a>
+	<h2>Contributors</h2>
+	<a href="https://github.com/jeanmajid/MCPE-Commands-plus-plus/graphs/contributors">
+		<img src="https://contrib.rocks/image?repo=jeanmajid/MCPE-Commands-plus-plus" />
+	</a>
 </div>
