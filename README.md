@@ -1,11 +1,10 @@
 <img src="./BP/pack_icon.png" width="150" align="right">
 
 <div>
-	<div style="font-size: 2em; font-weight: bold;">
+	<h1>
 		Commands Plus Plus
-	</div>
-	<hr style="width: 250px; margin-left: 0;">
-	<div>Minecraft Bedrock Command Extension Addon</div>
+	</h1>
+	<h4>Minecraft Bedrock Command Extension Addon</h4>
 </div>
 
 <br>
