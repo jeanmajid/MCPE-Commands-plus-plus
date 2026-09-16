@@ -1,17 +1,17 @@
-# Commands Plus Plus Documentation
+# Commands Plus Plus Wiki
 
 Running on mkdocs Material version 1.6.1
 
 # Setup
 
 ```sh
-pip install mkdocs-material
+pip install mkdocs-material mkdocs-git-revision-date-localized-plugin mkdocs-git-committers-plugin-2
 ```
 
 # Running locally
 
 ```sh
-pip install mkdocs-material
+mkdocs serve
 ```
 
 # Deploying

@@ -1,6 +1,15 @@
 # yaml-language-server: $schema=https://squidfunk.github.io/mkdocs-material/schema.json
 site_name: Commands++ Wiki
 repo_url: https://github.com/jeanmajid/MCPE-Commands-plus-plus
+repo_name: jeanmajid/MCPE-Commands-plus-plus
+plugins:
+    - search
+    - git-revision-date-localized:
+          enable_creation_date: true
+    - git-committers:
+          repository: jeanmajid/MCPE-Commands-plus-plus
+          branch: main
+          docs_path: wiki/docs/
 theme:
     logo: logo.png
     favicon: logo.png
