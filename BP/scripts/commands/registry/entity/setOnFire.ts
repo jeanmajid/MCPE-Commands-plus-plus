@@ -33,7 +33,7 @@ import { CommandManager } from "../../command.js";
 
 CommandManager.registerCommand(
     {
-        name: "setOnFire",
+        name: "setonfire",
         description: "Sets the target entities on fire",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [{ name: "targets", type: CustomCommandParamType.EntitySelector }],

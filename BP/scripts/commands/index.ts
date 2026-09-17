@@ -24,9 +24,9 @@
 import "./command.js";
 
 // TODO: Automate this
-import "./registry/attribute/bind.js";
+import "./registry/attribute/bindAttribute.js";
 import "./registry/attribute/getAttribute.js";
-import "./registry/attribute/unbind.js";
+import "./registry/attribute/unbindAttribute.js";
 import "./registry/block/block.js";
 import "./registry/block/blockStates.js";
 import "./registry/block/blockStatesId.js";

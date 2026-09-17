@@ -35,7 +35,7 @@ import { CommandManager } from "../../command.js";
 
 CommandManager.registerCommand(
     {
-        name: "bind",
+        name: "bindattribute",
         description: "Bind an attribute to a score",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
