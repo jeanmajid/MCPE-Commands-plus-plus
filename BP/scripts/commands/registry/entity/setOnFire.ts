@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import {
     CommandPermissionLevel,
     CustomCommandParamType,
@@ -34,7 +33,7 @@ import { CommandManager } from "../../command.js";
 
 CommandManager.registerCommand(
     {
-        name: "ignite",
+        name: "setOnFire",
         description: "Sets the target entities on fire",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [{ name: "targets", type: CustomCommandParamType.EntitySelector }],
