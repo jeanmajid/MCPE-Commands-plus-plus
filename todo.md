@@ -4,6 +4,7 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 - valid keys:
     - {@s.block_from_view_direction}
     - {@s.score.objective}
+    - {var.VARIABLENAME}
 
 /shootprojectile -- spawns a projectile (probs with velocity)
 
@@ -79,15 +80,22 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 [PLAYERS] /tagoffline -- grants an offline player a tag
 [PLAYERS] /scoreoffline -- modifies the score of an offline player
 
+/var - Float, Objects (stuff like Vector3 with x,y,z), Arrays (possibly)
+/var[DATAYPE] -- Helpers
+
+/unburn
+
+- Old Commands++ ideas
+- Custom language based on /run syntax
+- Injecting code into all events that script api has
+- Making custom functions
+
 - include other offline commands
 
-wiki
-listattributes get all + status (on off)
-setitemdata/readitemdata
-attributes should only be event based, anything that would require a runInterval, should just be triggered via command block as a custom command and not a attribute
-get/set redstone power of block (maybe more similar block methods like this)
-Document tooling setup
-event system, run commands on certain events like og commands++, allowing command users to crazily optimise their works
+- listattributes get all + status (on off)
+- setitemdata/readitemdata
+- get/set redstone power of block (maybe more similar block methods like this)
+- event system, run commands on certain events like og commands++, allowing command users to crazily optimise their works
 
 ## Gamerules
 
@@ -125,3 +133,8 @@ Custom gamerules under the /config command
 ## Mcfunctions
 
 -
+
+## Wiki
+
+- Autogenerate all the commands pages headers, including name, description and the syntax, the rest will be human written
+- Document tooling setup
