@@ -23,7 +23,7 @@ const licenseText = `/* SPDX-License-Identifier: GPL-3.0-or-later
  *
  * You should have received a copy of the GNU General Public License
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
- */`
+ */`;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -33,7 +33,7 @@ const jervPackagesPath = join("../../BP");
 recursiveReadFolder(jervPackagesPath);
 
 /**
- * @param {import("node:fs").PathLike} folderPath 
+ * @param {import("node:fs").PathLike} folderPath
  * @returns {void}
  */
 function recursiveReadFolder(folderPath) {
@@ -43,7 +43,7 @@ function recursiveReadFolder(folderPath) {
 }
 
 /**
- * @param {import("node:fs").PathLike} path 
+ * @param {import("node:fs").PathLike} path
  * @returns {void}
  */
 function recursiveRead(path) {
@@ -57,11 +57,16 @@ function recursiveRead(path) {
 processFile("../../app/src/main.cpp");
 
 /**
- * @param {import("node:fs").PathLike} path 
+ * @param {import("node:fs").PathLike} path
  * @returns {void}
  */
 function processFile(path) {
-    if (!path.endsWith(".json") && !path.endsWith(".ts") && !path.endsWith(".js") && !path.endsWith(".")) {
+    if (
+        !path.endsWith(".json") &&
+        !path.endsWith(".ts") &&
+        !path.endsWith(".js") &&
+        !path.endsWith(".")
+    ) {
         return;
     }
 
@@ -75,7 +80,7 @@ function processFile(path) {
 }
 
 /**
- * @param {string} fileContents 
+ * @param {string} fileContents
  * @returns {string}
  */
 function cleanOldLicenseText(fileContents) {

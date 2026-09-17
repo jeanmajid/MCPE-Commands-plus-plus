@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 // optionalParameters: [
 //     { name: "rotation", type: CustomCommandParamType.Location },
 //     { name: "colorRed", type: CustomCommandParamType.Integer },
