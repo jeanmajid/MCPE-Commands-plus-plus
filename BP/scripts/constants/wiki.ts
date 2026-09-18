@@ -21,4 +21,4 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-export const WIKI_LINK = "www.http://ipgrabber.com";
+export const WIKI_LINK = "https://jeanmajid.github.io/MCPE-Commands-plus-plus";
