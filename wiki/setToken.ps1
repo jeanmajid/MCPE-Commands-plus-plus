@@ -1,0 +1,1 @@
+$env:MKDOCS_GIT_COMMITTERS_APIKEY = (Get-Content .\.token -Raw).Trim()

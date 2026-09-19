@@ -2,5 +2,6 @@ node_modules
 package-lock.json
 pnpm-lock.yaml
 dist
-site
-.cache
+wiki/site
+wiki/.cache
+wiki/.token
