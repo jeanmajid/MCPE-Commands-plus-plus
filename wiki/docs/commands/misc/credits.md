@@ -1,0 +1,10 @@
+<!-- AUTO GENERATED DO NOT TOUCH ANYTHING UNDERNEATH -->
+
+> ### `/credits`
+> 
+> 
+> Provides an output message in chat containing the credits for Commands++
+> 
+> `Everyone`
+
+<!-- AUTO GENERATED DO NOT TOUCH ANYTHING ABOVE -->

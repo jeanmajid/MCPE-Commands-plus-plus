@@ -1,9 +1,12 @@
 # yaml-language-server: $schema=https://squidfunk.github.io/mkdocs-material/schema.json
 site_name: Commands++ Wiki
+site_url: https://jeanmajid.github.io/MCPE-Commands-plus-plus/
 repo_url: https://github.com/jeanmajid/MCPE-Commands-plus-plus
 repo_name: jeanmajid/MCPE-Commands-plus-plus
 plugins:
     - search
+    - awesome-nav:
+          filename: .nav.yml
     - git-revision-date-localized:
           enable_creation_date: true
     - git-committers:
@@ -28,11 +31,5 @@ theme:
           toggle:
               icon: material/brightness-4
               name: Switch to dark mode
-nav:
-    - Getting Started: gettingStarted/index.md
-    - Commands: commands/index.md
-    - Attributes: attributes/index.md
-    - Game Rules: gameRules/index.md
-    - Contributing: contributing/index.md
 extra_css:
     - css/extra.css
