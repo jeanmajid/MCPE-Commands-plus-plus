@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { basename, dirname, join } from "node:path";
 
-import ts from "typescript";
+import { parse } from "@yuku-parser/wasm";
 
 interface Parameter {
     name: string;
@@ -18,7 +18,7 @@ interface CommandData {
 }
 
 const outputStrings = new Map<string, string>();
-let commandCount = 0;
+const commandCount = 0;
 
 const COMMANDS_FOLDER_PATH = "../../BP/scripts/commands";
 const REGISTRY_PATH = join(COMMANDS_FOLDER_PATH, "/registry");
@@ -39,98 +39,97 @@ function recursiveRead(directoryPath: string): void {
 
 function processFile(filePath: string): void {
     const currentDirname = basename(dirname(filePath));
-    let currentOutputString = outputStrings.get(currentDirname) ?? "";
+    const currentOutputString = outputStrings.get(currentDirname) ?? "";
     const fileContents = readFileSync(filePath, "utf-8");
 
-    let commandObject: ts.ObjectLiteralExpression | undefined;
-    const sourceFile = ts.createSourceFile(
-        filePath,
-        fileContents,
-        ts.ScriptTarget.Latest,
-        true,
-        ts.ScriptKind.TS
-    );
+    const { program, comments, diagnostics } = parse(fileContents, { lang: "ts" });
 
-    function visit(node: ts.Node): void {
-        if (
-            ts.isCallExpression(node) &&
-            ts.isPropertyAccessExpression(node.expression) &&
-            node.expression.expression.getText(sourceFile) === "CommandManager" &&
-            node.expression.name.text === "registerCommand"
-        ) {
-            const firstArgument = node.arguments[0];
-
-            if (firstArgument && ts.isObjectLiteralExpression(firstArgument)) {
-                commandObject = firstArgument;
-            }
-        }
-
-        ts.forEachChild(node, visit);
-    }
-
-    visit(sourceFile);
-
-    if (!commandObject) {
-        return;
-    }
-
-    const commandData: Record<string, unknown> = {};
-
-    for (const property of commandObject.properties) {
-        if (!ts.isPropertyAssignment(property)) {
+    for (const token of program.body) {
+        if (token.type !== "ExpressionStatement" || token.expression.type !== "CallExpression") {
             continue;
         }
 
-        const key = property.name.getText(sourceFile).replace(/^['"]|['"]$/g, "");
-        commandData[key] = readExpression(property.initializer, sourceFile);
-    }
-
-    const command = commandData as unknown as CommandData;
-    let parameters = "";
-
-    if (command.mandatoryParameters) {
-        parameters += command.mandatoryParameters
-            .map(
-                (parameter) =>
-                    `\`<${parameter.name}: ${parameter.type.replace("CustomCommandParamType.", "")}>\``
-            )
-            .join(" • ");
-    }
-
-    if (command.optionalParameters) {
-        if (command.mandatoryParameters) {
-            parameters += " • ";
+        const { callee } = token.expression;
+        if (
+            callee.type !== "MemberExpression" ||
+            callee.object.type !== "Identifier" ||
+            callee.property.type !== "Identifier"
+        ) {
+            continue;
         }
-        parameters += command.optionalParameters
-            .map(
-                (parameter) =>
-                    `\`[${parameter.name}: ${parameter.type.replace("CustomCommandParamType.", "")}]\``
-            )
-            .join(" • ");
-    }
 
-    let commandWithoutName = "\n";
+        const className = callee.object.name;
+        const methodName = callee.property.name;
 
-    if (parameters) {
-        commandWithoutName += "> **Parameters:** " + parameters + "\n";
-    }
+        const commandInfoToken = token.expression.arguments[0];
+        if (
+            className !== "CommandManager" ||
+            methodName !== "registerCommand" ||
+            commandInfoToken.type !== "ObjectExpression"
+        ) {
+            continue;
+        }
 
-    commandWithoutName += "> \n";
-    commandWithoutName += `> ${command.description}\n`;
-    commandWithoutName += "> \n";
-    commandWithoutName += `> \`${command.permissionLevel.replace("CommandPermissionLevel.", "")}\``;
+        for (const propertyToken of commandInfoToken.properties) {
+            if (propertyToken.type !== "Property") {
+                continue;
+            }
 
-    currentOutputString += `> ### \`/${command.name}\`${commandWithoutName}\n\n`;
-    ++commandCount;
-
-    if (command.aliases) {
-        for (const alias of command.aliases) {
-            currentOutputString += `> ### \`/${alias}\`${commandWithoutName} • *Alias of \`/${command.name}\`*\n\n`;
-            ++commandCount;
+            console.log(propertyToken.key);
+            console.log(propertyToken.value);
         }
     }
 
-    outputStrings.set(currentDirname, currentOutputString);
+    return;
+
+    // const commandData: Record<string, unknown> = {};
+
+    // const command = commandData as unknown as CommandData;
+    // let parameters = "";
+
+    // if (command.mandatoryParameters) {
+    //     parameters += command.mandatoryParameters
+    //         .map(
+    //             (parameter) =>
+    //                 `\`<${parameter.name}: ${parameter.type.replace("CustomCommandParamType.", "")}>\``
+    //         )
+    //         .join(" • ");
+    // }
+
+    // if (command.optionalParameters) {
+    //     if (command.mandatoryParameters) {
+    //         parameters += " • ";
+    //     }
+    //     parameters += command.optionalParameters
+    //         .map(
+    //             (parameter) =>
+    //                 `\`[${parameter.name}: ${parameter.type.replace("CustomCommandParamType.", "")}]\``
+    //         )
+    //         .join(" • ");
+    // }
+
+    // let commandWithoutName = "\n";
+
+    // if (parameters) {
+    //     commandWithoutName += "> **Parameters:** " + parameters + "\n";
+    // }
+
+    // commandWithoutName += "> \n";
+    // commandWithoutName += `> ${command.description}\n`;
+    // commandWithoutName += "> \n";
+    // commandWithoutName += `> \`${command.permissionLevel.replace("CommandPermissionLevel.", "")}\``;
+
+    // currentOutputString += `> ### \`/${command.name}\`${commandWithoutName}\n\n`;
+    // ++commandCount;
+
+    // if (command.aliases) {
+    //     for (const alias of command.aliases) {
+    //         currentOutputString += `> ### \`/${alias}\`${commandWithoutName} • *Alias of \`/${command.name}\`*\n\n`;
+    //         ++commandCount;
+    //     }
+    // }
+
+    // outputStrings.set(currentDirname, currentOutputString);
 }
 
 let outputString = "# Commands++ Commands\n";
@@ -141,38 +140,3 @@ for (const [key, value] of outputStrings.entries()) {
 }
 
 writeFileSync("./output.md", outputString);
-
-function readExpression(node: ts.Node, sourceFile: ts.SourceFile): unknown {
-    if (ts.isStringLiteral(node) || ts.isNumericLiteral(node)) {
-        return node.text;
-    }
-
-    if (node.kind === ts.SyntaxKind.TrueKeyword) {
-        return true;
-    }
-
-    if (node.kind === ts.SyntaxKind.FalseKeyword) {
-        return false;
-    }
-
-    if (ts.isArrayLiteralExpression(node)) {
-        return node.elements.map((element) => readExpression(element, sourceFile));
-    }
-
-    if (ts.isObjectLiteralExpression(node)) {
-        const object: Record<string, unknown> = {};
-
-        for (const property of node.properties) {
-            if (!ts.isPropertyAssignment(property)) {
-                continue;
-            }
-
-            const key = property.name.getText(sourceFile);
-            object[key] = readExpression(property.initializer, sourceFile);
-        }
-
-        return object;
-    }
-
-    return node.getText(sourceFile);
-}
