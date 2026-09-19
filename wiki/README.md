@@ -5,7 +5,7 @@ Running on mkdocs Material version 1.6.1
 # Setup
 
 ```sh
-
+pip install mkdocs-material mkdocs-git-revision-date-localized-plugin mkdocs-git-committers-plugin-2 mkdocs-awesome-nav
 ```
 
 # Running locally
@@ -15,8 +15,6 @@ Running on mkdocs Material version 1.6.1
 ```sh
 mkdocs serve -f mkdocs.debug.yml
 ```
-
-## Full build
 
 ```sh
 mkdocs serve

@@ -226,8 +226,8 @@ function readObjectExpression(objectExpression: ObjectExpression): object {
     return returnObject;
 }
 
-let outputString = "# Commands++ Commands\n";
-outputString += `## Total Amount of Commands: ${commandCount}\n`;
+// let outputString = "# Commands++ Commands\n";
+// outputString += `## Total Amount of Commands: ${commandCount}\n`;
 
 for (const [category, commands] of Object.entries(outPutCommands)) {
     const categoryPath = join(WIKI_COMMAND_FOLDER_PATH, category);
