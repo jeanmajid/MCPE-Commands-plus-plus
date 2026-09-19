@@ -1,7 +1,27 @@
 import { readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { basename, dirname, join } from "node:path";
 
-import { parse } from "@yuku-parser/wasm";
+import { Expression, ObjectExpression, parse, PropertyKey } from "@yuku-parser/wasm";
+
+const ENUM_CONVERSION: Record<string, Record<string, string>> = {
+    CommandPermissionLevel: {
+        Any: "Everyone",
+        GameDirectors: "Operators + Command Blocks",
+        Admin: "Operator",
+    },
+    CustomCommandParamType: {
+        Enum: "Enum",
+        String: "String",
+        BlockType: "Block",
+        Location: "Location",
+        Integer: "Integer",
+        EntitySelector: "Entity",
+        Float: "Float",
+        Boolean: "Boolean",
+        PlayerSelector: "Player",
+        ItemType: "Item",
+    },
+};
 
 interface Parameter {
     name: string;
@@ -18,7 +38,7 @@ interface CommandData {
 }
 
 const outputStrings = new Map<string, string>();
-const commandCount = 0;
+let commandCount = 0;
 
 const COMMANDS_FOLDER_PATH = "../../BP/scripts/commands";
 const REGISTRY_PATH = join(COMMANDS_FOLDER_PATH, "/registry");
@@ -39,10 +59,12 @@ function recursiveRead(directoryPath: string): void {
 
 function processFile(filePath: string): void {
     const currentDirname = basename(dirname(filePath));
-    const currentOutputString = outputStrings.get(currentDirname) ?? "";
+    let currentOutputString = outputStrings.get(currentDirname) ?? "";
     const fileContents = readFileSync(filePath, "utf-8");
 
-    const { program, comments, diagnostics } = parse(fileContents, { lang: "ts" });
+    const { program } = parse(fileContents, { lang: "ts" });
+
+    let commandData: CommandData | null = null;
 
     for (const token of program.body) {
         if (token.type !== "ExpressionStatement" || token.expression.type !== "CallExpression") {
@@ -70,66 +92,120 @@ function processFile(filePath: string): void {
             continue;
         }
 
-        for (const propertyToken of commandInfoToken.properties) {
-            if (propertyToken.type !== "Property") {
-                continue;
-            }
+        commandData = readObjectExpression(commandInfoToken) as CommandData;
+    }
 
-            console.log(propertyToken.key);
-            console.log(propertyToken.value);
+    if (!commandData) {
+        throw new Error("Failed to parse file: " + filePath);
+    }
+
+    let parameters = "";
+
+    if (commandData.mandatoryParameters) {
+        parameters += commandData.mandatoryParameters
+            .map(
+                (parameter) =>
+                    `\`<${parameter.name}: ${parameter.type.replace("CustomCommandParamType.", "")}>\``
+            )
+            .join(" • ");
+    }
+
+    if (commandData.optionalParameters) {
+        if (commandData.mandatoryParameters) {
+            parameters += " • ";
+        }
+        parameters += commandData.optionalParameters
+            .map(
+                (parameter) =>
+                    `\`[${parameter.name}: ${parameter.type.replace("CustomCommandParamType.", "")}]\``
+            )
+            .join(" • ");
+    }
+
+    let commandWithoutName = "\n";
+
+    if (parameters) {
+        commandWithoutName += "> **Parameters:** " + parameters + "\n";
+    }
+
+    commandWithoutName += "> \n";
+    commandWithoutName += `> ${commandData.description}\n`;
+    commandWithoutName += "> \n";
+    commandWithoutName += `> \`${commandData.permissionLevel.replace("CommandPermissionLevel.", "")}\``;
+
+    currentOutputString += `> ### \`/${commandData.name}\`${commandWithoutName}\n\n`;
+    ++commandCount;
+
+    if (commandData.aliases) {
+        for (const alias of commandData.aliases) {
+            currentOutputString += `> ### \`/${alias}\`${commandWithoutName} • *Alias of \`/${commandData.name}\`*\n\n`;
+            ++commandCount;
         }
     }
 
-    return;
+    outputStrings.set(currentDirname, currentOutputString);
+}
 
-    // const commandData: Record<string, unknown> = {};
+function readObjectExpression(objectExpression: ObjectExpression): object {
+    // oxlint-disable-next-line typescript/no-explicit-any
+    const returnObject: Record<string, any> = {};
 
-    // const command = commandData as unknown as CommandData;
-    // let parameters = "";
+    for (const propertyToken of objectExpression.properties) {
+        if (propertyToken.type !== "Property") {
+            throw new Error("unexpected property type, please implement SpreadElement");
+        }
 
-    // if (command.mandatoryParameters) {
-    //     parameters += command.mandatoryParameters
-    //         .map(
-    //             (parameter) =>
-    //                 `\`<${parameter.name}: ${parameter.type.replace("CustomCommandParamType.", "")}>\``
-    //         )
-    //         .join(" • ");
-    // }
+        const key = getKey(propertyToken.key);
+        const value = getValue(propertyToken.value);
 
-    // if (command.optionalParameters) {
-    //     if (command.mandatoryParameters) {
-    //         parameters += " • ";
-    //     }
-    //     parameters += command.optionalParameters
-    //         .map(
-    //             (parameter) =>
-    //                 `\`[${parameter.name}: ${parameter.type.replace("CustomCommandParamType.", "")}]\``
-    //         )
-    //         .join(" • ");
-    // }
+        returnObject[key] = value;
+    }
 
-    // let commandWithoutName = "\n";
+    return returnObject;
+}
 
-    // if (parameters) {
-    //     commandWithoutName += "> **Parameters:** " + parameters + "\n";
-    // }
+function getKey(key: PropertyKey): string {
+    if (key.type !== "Identifier") {
+        throw new Error("unexpected key type, we only support strings");
+    }
 
-    // commandWithoutName += "> \n";
-    // commandWithoutName += `> ${command.description}\n`;
-    // commandWithoutName += "> \n";
-    // commandWithoutName += `> \`${command.permissionLevel.replace("CommandPermissionLevel.", "")}\``;
+    return key.name;
+}
 
-    // currentOutputString += `> ### \`/${command.name}\`${commandWithoutName}\n\n`;
-    // ++commandCount;
+// oxlint-disable-next-line typescript/no-explicit-any
+function getValue(value: Expression): any {
+    switch (value.type) {
+        case "Literal": {
+            return value.value as string;
+        }
+        case "MemberExpression": {
+            if (value.object.type !== "Identifier" || value.property.type !== "Identifier") {
+                throw new Error("unexpected member expression");
+            }
 
-    // if (command.aliases) {
-    //     for (const alias of command.aliases) {
-    //         currentOutputString += `> ### \`/${alias}\`${commandWithoutName} • *Alias of \`/${command.name}\`*\n\n`;
-    //         ++commandCount;
-    //     }
-    // }
+            const name = ENUM_CONVERSION[value.object.name]?.[value.property.name];
+            if (!name) {
+                throw new Error(
+                    `unhandled enum conversion: ${value.object.name}.${value.property.name}`
+                );
+            }
 
-    // outputStrings.set(currentDirname, currentOutputString);
+            return name;
+        }
+        case "ArrayExpression": {
+            // idk if this is actually type safe, but time will tell
+            return value.elements.map((v) => getValue(v as Expression));
+        }
+        case "ObjectExpression": {
+            return readObjectExpression(value);
+        }
+        case "Identifier": {
+            return value.name;
+        }
+        default:
+            console.debug(value);
+            throw new Error("Unhandled value type: " + value.type);
+    }
 }
 
 let outputString = "# Commands++ Commands\n";

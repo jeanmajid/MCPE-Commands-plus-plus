@@ -1,569 +1,555 @@
 # Commands++ Commands
+## Total Amount of Commands: 73
 
-## Total Amount of Commands: 70
 
 ## attribute
 
-> ### `/bind`
->
+> ### `/bindattribute`
 > **Parameters:** `<bindtype: Enum>` • `<scoreboardId: String>`
->
+> 
 > Bind an attribute to a score
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/getattribute`
->
 > **Parameters:** `<bindtype: Enum>` • `<scoreboardId: String>`
->
+> 
 > One time getter for attributes
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
-> ### `/unbind`
->
+> ### `/unbindattribute`
 > **Parameters:** `<bindtype: Enum>`
->
+> 
 > Unbind an attribute
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
+
+
 
 ## block
 
 > ### `/block`
->
-> **Parameters:** `[blockType: BlockType]`
->
+> **Parameters:** `[blockType: Block]`
+> 
 > Places a block at the current position
->
-> `Admin`
+> 
+> `Operator`
 
 > ### `/b`
->
-> **Parameters:** `[blockType: BlockType]`
->
+> **Parameters:** `[blockType: Block]`
+> 
 > Places a block at the current position
->
-> `Admin` • _Alias of `/block`_
+> 
+> `Operator` • *Alias of `/block`*
 
 > ### `/blockstates`
->
 > **Parameters:** `[position: Location]`
->
+> 
 > Lists all block states for either the block being viewed or the block at the specified position
->
-> `Admin`
+> 
+> `Operator`
 
 > ### `/blockstatesid`
->
-> **Parameters:** `<blockId: BlockType>`
->
+> **Parameters:** `<blockId: Block>`
+> 
 > Lists all default block state values for the provided block
->
-> `Admin`
+> 
+> `Operator`
+
+
 
 ## command
 
 > ### `/delay`
->
 > **Parameters:** `<id: String>` • `<delayInTicks: Integer>` • `<command: String>`
->
+> 
 > Delays the execution of a command
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/scoremath`
->
-> **Parameters:** `<targets: EntitySelector>` • `<targetObjective: String>` • `<operation: Enum>` • `[selectors: EntitySelector]` • `[objective: String]`
->
+> **Parameters:** `<targets: Entity>` • `<targetObjective: String>` • `<operation: Enum>` • `[selectors: Entity]` • `[objective: String]`
+> 
 > Performs a calculation with the selected operation between the scores of two targets
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/scorerandom`
->
-> **Parameters:** `<targets: EntitySelector>` • `<targetObjective: String>` • `[min: Integer]` • `[max: Integer]`
->
+> **Parameters:** `<targets: Entity>` • `<targetObjective: String>` • `[min: Integer]` • `[max: Integer]`
+> 
 > Outputs a random score value to the target objective, optionally between a min and max value
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
+
+
 
 ## debug
 
 > ### `/benchmarkend`
->
 > **Parameters:** `<startId: String>` • `[logType: Enum]` • `[fakeplayer: String]` • `[objective: String]`
->
+> 
 > Logs and saves the time since the benchmark started in milliseconds
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/benchmarkstart`
->
 > **Parameters:** `<id: String>`
->
+> 
 > Creates a time checkpoint used to find the time commands have taken to run using /benchmarkend
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/biome`
->
 > **Parameters:** `[biomeData: Enum]`
->
+> 
 > Outputs the data for the biome based on the position of the executor
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/log`
->
 > **Parameters:** `<logType: Enum>` • `<message: String>`
->
+> 
 > Logs a message to the content log console if enabled in the user's Creator settings
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/seed`
->
+> 
 > Returns a message to the executor containing the world seed
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/test`
->
+> 
 > Provides an output message in chat if the command has ran successfully
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/t`
->
+> 
 > Provides an output message in chat if the command has ran successfully
->
-> `GameDirectors` • _Alias of `/test`_
+> 
+> `Operators + Command Blocks` • *Alias of `/test`*
+
+
 
 ## dimension
 
 > ### `/dimension`
->
-> **Parameters:** `<dimension: Enum>` • `[targets: EntitySelector]`
->
+> **Parameters:** `<dimension: Enum>` • `[targets: Entity]`
+> 
 > Teleport between dimensions
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/explode`
->
-> **Parameters:** `<location: Location>` • `[radius: Float]` • `[breaksBlocks: Boolean]` • `[causesFire: Boolean]` • `[allowUnderwater: Boolean]` • `[explosionSource: EntitySelector]`
->
+> **Parameters:** `<location: Location>` • `[radius: Float]` • `[breaksBlocks: Boolean]` • `[causesFire: Boolean]` • `[allowUnderwater: Boolean]` • `[explosionSource: Entity]`
+> 
 > Creates an explosion at the target position with the provided parameters
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
+
+
 
 ## drawer
 
 > ### `/draw`
->
 > **Parameters:** `<id: String>`
->
+> 
 > Draws a group of shapes under a given id
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/drawarrow`
->
 > **Parameters:** `<id: String>` • `<startPos: Location>` • `<endPos: Location>` • `<headLength: Float>` • `<headRadius: Float>` • `<headSegments: Integer>`
->
+> 
 > Draws a arrow via the Debug Drawer module
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/drawbox`
->
 > **Parameters:** `<id: String>` • `<position: Location>` • `<bound: Location>` • `<scale: Float>`
->
+> 
 > Draws a box via the Debug Drawer module
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/drawcircle`
->
 > **Parameters:** `<id: String>` • `<position: Location>` • `<scale: Float>`
->
+> 
 > Draws a circle via the Debug Drawer module
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/drawcone`
->
 > **Parameters:** `<id: String>` • `<position: Location>` • `<height: Float>` • `<radii: Float>` • `<scale: Float>`
->
+> 
 > Draws a cone via the Debug Drawer module
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/drawcylinder`
->
 > **Parameters:** `<id: String>` • `<position: Location>` • `<height: Float>` • `<radiiBottom: Float>` • `<radiiTop: Float>` • `<scale: Float>` • `<numSegments: Integer>`
->
+> 
 > Draws a cylinder via the Debug Drawer module
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/drawellipsoid`
->
 > **Parameters:** `<id: String>` • `<position: Location>` • `<radii: Float>` • `<scale: Float>` • `<segmentsPerAxis: Integer>`
->
+> 
 > Draws a ellipsoid via the Debug Drawer module
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/drawline`
->
 > **Parameters:** `<id: String>` • `<startPos: Location>` • `<endPos: Location>`
->
+> 
 > Add a line
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/drawpyramid`
->
 > **Parameters:** `<id: String>` • `<position: Location>` • `<height: Float>` • `<width: Float>` • `<depth: Float>` • `<scale: Float>`
->
+> 
 > Draws a pyramid via the Debug Drawer module
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/drawremove`
->
 > **Parameters:** `<id: String>`
->
+> 
 > Undraws and removes a group of shapes permanently
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/drawremoveall`
->
+> 
 > Undraws and removes all shapes permanently
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/drawsphere`
->
 > **Parameters:** `<id: String>` • `<position: Location>` • `<scale: Float>`
->
+> 
 > Draws a sphere via the Debug Drawer module
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/drawtext`
->
 > **Parameters:** `<id: String>` • `<location: Location>` • `<text: String>` • `<useRotation: Boolean>` • `<showThroughBlocks: Boolean>` • `<backfaceVisible: Boolean>` • `<textBackfaceVisible: Boolean>`
->
+> 
 > Draws a text via the Debug Drawer module
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/drawvolume`
->
 > **Parameters:** `<id: String>` • `<startPos: Location>` • `<endPos: Location>`
->
+> 
 > Draws a box via the Debug Drawer module
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/getdrawcount`
->
+> 
 > Display how many shapes are currently drawn
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/setdrawcolor`
->
 > **Parameters:** `<shapeId: String>` • `<colorRed: Integer>` • `<colorGreen: Integer>` • `<colorBlue: Integer>` • `<alpha: Integer>`
->
+> 
 > Sets the draw color
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/setdrawtextbackgroundcolor`
->
 > **Parameters:** `<shapeId: String>` • `<colorRed: Integer>` • `<colorGreen: Integer>` • `<colorBlue: Integer>` • `<alpha: Integer>`
->
+> 
 > Sets the draw color for text
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/undraw`
->
 > **Parameters:** `<id: String>`
->
+> 
 > Undraws a group of shapes under a given id, but keeps them in the manager
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/undrawall`
->
+> 
 > Undraws all shapes, but keeps the groups in the manager
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
+
+
 
 ## entity
 
 > ### `/entitycount`
->
-> **Parameters:** `<targets: EntitySelector>` • `<fakeplayer: String>` • `<objective: String>`
->
+> **Parameters:** `<targets: Entity>` • `<fakeplayer: String>` • `<objective: String>`
+> 
 > Returns the count of all loaded targets to a fakeplayer's scoreboard objective
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/fmbe`
->
-> **Parameters:** `<entities: EntitySelector>` • `[fmbeType: Enum]`
->
+> **Parameters:** `<entities: Entity>` • `[fmbeType: Enum]`
+> 
 > Animates targets (fox) to appear as a full block when holding a three dimensional block item
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/harm`
->
-> **Parameters:** `[target: PlayerSelector]` • `[value: Integer]`
->
+> **Parameters:** `[target: Player]` • `[value: Integer]`
+> 
 > Decreases all targets current health value by an amount
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/heal`
->
-> **Parameters:** `[target: PlayerSelector]` • `[value: Integer]`
->
+> **Parameters:** `[target: Player]` • `[value: Integer]`
+> 
 > Heals the target by a value
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/health`
->
-> **Parameters:** `<target: PlayerSelector>` • `<mode: Enum>` • `<value: Integer>`
->
+> **Parameters:** `<target: Player>` • `<mode: Enum>` • `<value: Integer>`
+> 
 > Modifies all targets health based on the mode and value
->
-> `GameDirectors`
-
-> ### `/ignite`
->
-> **Parameters:** `<targets: EntitySelector>` • `[timeSeconds: Float]` • `[useEffects: Boolean]`
->
-> Sets the target entities on fire
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/remove`
->
-> **Parameters:** `<targets: EntitySelector>`
->
+> **Parameters:** `<targets: Entity>`
+> 
 > Removes entites from the world
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/rotate`
->
-> **Parameters:** `[targets: EntitySelector]` • `[rotationX: Float]` • `[rotationY: Float]`
->
+> **Parameters:** `[targets: Entity]` • `[rotationX: Float]` • `[rotationY: Float]`
+> 
 > Modifies target entities rotation
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
+
+> ### `/setonfire`
+> **Parameters:** `<targets: Entity>` • `[timeSeconds: Float]` • `[useEffects: Boolean]`
+> 
+> Sets the target entities on fire
+> 
+> `Operators + Command Blocks`
 
 > ### `/spawnitem`
->
-> **Parameters:** `<item: ItemType>` • `<location: Location>` • `[quantity: Integer]`
->
+> **Parameters:** `<item: Item>` • `<location: Location>` • `[quantity: Integer]`
+> 
 > Summons an item entity
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/top`
->
-> **Parameters:** `[targets: EntitySelector]` • `[minHeight: Float]`
->
+> **Parameters:** `[targets: Entity]` • `[minHeight: Float]`
+> 
 > Teleports the targets to the top most block at their position
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
+
+
 
 ## misc
 
 > ### `/credits`
->
+> 
 > Provides an output message in chat containing the credits for Commands++
->
-> `Any`
+> 
+> `Everyone`
 
 > ### `/gamerulesetup`
->
+> 
 > Sets most gamerules to game-ready optimised values
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/guide`
->
 > **Parameters:** `[page: Integer]`
->
+> 
 > Lists in chat all new commands added by Commands++
->
-> `Admin`
+> 
+> `Operator`
 
 > ### `/listcommands`
->
 > **Parameters:** `[page: Integer]`
->
+> 
 > Lists in chat all new commands added by Commands++
->
-> `Admin` • _Alias of `/guide`_
+> 
+> `Operator` • *Alias of `/guide`*
+
+> ### `/rules`
+> **Parameters:** `[line: Integer]`
+> 
+> Outputs to chat the world specific rules
+> 
+> `Everyone`
+
+> ### `/ruleset`
+> **Parameters:** `<line: Integer>` • `[rule: String]`
+> 
+> Sets the world specific rules that can be viewed by any player using /rules
+> 
+> `Operators + Command Blocks`
 
 > ### `/wiki`
->
+> 
 > Provides a link in chat to the wiki page of Commands++
->
-> `Admin`
+> 
+> `Operator`
+
+
 
 ## nameTag
 
 > ### `/nametag`
->
-> **Parameters:** `<targets: EntitySelector>` • `<nametag: String>`
->
+> **Parameters:** `<targets: Entity>` • `<nametag: String>`
+> 
 > Set nametag of entities
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/resetnametag`
->
-> **Parameters:** `<targets: EntitySelector>`
->
+> **Parameters:** `<targets: Entity>`
+> 
 > Reset the nametag for players
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
+
+
 
 ## player
 
 > ### `/ban`
->
-> **Parameters:** `<players: PlayerSelector>` • `[reason: String]`
->
+> **Parameters:** `<players: Player>` • `[reason: String]`
+> 
 > Permanently bans a player from the world
->
-> `GameDirectors`
-
-> ### `/evict`
->
-> **Parameters:** `<players: PlayerSelector>` • `[reason: String]`
->
-> Kicks a player from the world
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/hunger`
->
-> **Parameters:** `<players: PlayerSelector>` • `<mode: Enum>` • `<value: Integer>`
->
+> **Parameters:** `<players: Player>` • `<mode: Enum>` • `<value: Integer>`
+> 
 > Modifies all target players hunger based on the mode and value
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
+
+> ### `/masskick`
+> **Parameters:** `<players: Player>` • `[reason: String]`
+> 
+> Kicks players from the world supporting selectors
+> 
+> `Operators + Command Blocks`
+
+> ### `/serverjoin`
+> **Parameters:** `<players: Player>` • `<ip: String>` • `<port: Integer>`
+> 
+> Transfers players to a server
+> 
+> `Operators + Command Blocks`
 
 > ### `/tpspawnpoint`
->
-> **Parameters:** `[targets: PlayerSelector]`
->
+> **Parameters:** `[targets: Player]`
+> 
 > Teleports all targets to their spawnpoint
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/tpworldspawn`
->
-> **Parameters:** `[targets: PlayerSelector]`
->
+> **Parameters:** `[targets: Player]`
+> 
 > Teleports all targets to the world spawn point
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/unvanish`
->
-> **Parameters:** `[players: PlayerSelector]` • `[tpBack: Boolean]`
->
+> **Parameters:** `[players: Player]` • `[tpBack: Boolean]`
+> 
 > Exits vanish mode and optionally returns to original position
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/uv`
->
-> **Parameters:** `[players: PlayerSelector]` • `[tpBack: Boolean]`
->
+> **Parameters:** `[players: Player]` • `[tpBack: Boolean]`
+> 
 > Exits vanish mode and optionally returns to original position
->
-> `GameDirectors` • _Alias of `/unvanish`_
+> 
+> `Operators + Command Blocks` • *Alias of `/unvanish`*
 
 > ### `/vanish`
->
-> **Parameters:** `[players: PlayerSelector]`
->
+> **Parameters:** `[players: Player]`
+> 
 > Enter vanish mode and optionally return to original position when exiting
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/v`
->
-> **Parameters:** `[players: PlayerSelector]`
->
+> **Parameters:** `[players: Player]`
+> 
 > Enter vanish mode and optionally return to original position when exiting
->
-> `GameDirectors` • _Alias of `/vanish`_
+> 
+> `Operators + Command Blocks` • *Alias of `/vanish`*
+
+
 
 ## structure
 
 > ### `/structurelist`
->
+> 
 > list all the structures on the world
->
-> `Admin`
+> 
+> `Operator`
+
+
 
 ## tag
 
 > ### `/addtags`
->
-> **Parameters:** `<targets: EntitySelector>` • `<tags: String>`
->
+> **Parameters:** `<targets: Entity>` • `<tags: String>`
+> 
 > Adds an array of provided tags to the targets
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/removetags`
->
-> **Parameters:** `<targets: EntitySelector>` • `[tags: String]`
->
+> **Parameters:** `<targets: Entity>` • `[tags: String]`
+> 
 > Removes an array of provided tags from the targets
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
+
+
 
 ## velocity
 
 > ### `/applyimpulse`
->
-> **Parameters:** `<targets: EntitySelector>` • `<x: Float>` • `<y: Float>` • `<z: Float>`
->
+> **Parameters:** `<targets: Entity>` • `<x: Float>` • `<y: Float>` • `<z: Float>`
+> 
 > Applies an impulse to the selected entities
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/applyknockback`
->
-> **Parameters:** `<targets: EntitySelector>` • `<x: Float>` • `<y: Float>` • `<z: Float>`
->
+> **Parameters:** `<targets: Entity>` • `<x: Float>` • `<y: Float>` • `<z: Float>`
+> 
 > Applies knockback to the selected entities
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
 
 > ### `/clearvelocity`
->
-> **Parameters:** `<targets: EntitySelector>`
->
+> **Parameters:** `<targets: Entity>`
+> 
 > Clears target entities velocity
->
-> `GameDirectors`
+> 
+> `Operators + Command Blocks`
+
