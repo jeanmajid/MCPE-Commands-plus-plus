@@ -43,6 +43,8 @@ let commandCount = 0;
 const COMMANDS_FOLDER_PATH = "../../BP/scripts/commands";
 const REGISTRY_PATH = join(COMMANDS_FOLDER_PATH, "/registry");
 
+const now = performance.now();
+
 recursiveRead(REGISTRY_PATH);
 
 function recursiveRead(directoryPath: string): void {
@@ -92,7 +94,7 @@ function processFile(filePath: string): void {
             continue;
         }
 
-        commandData = readObjectExpression(commandInfoToken) as CommandData;
+        commandData = getValue(commandInfoToken) as CommandData;
     }
 
     if (!commandData) {
@@ -146,24 +148,6 @@ function processFile(filePath: string): void {
     outputStrings.set(currentDirname, currentOutputString);
 }
 
-function readObjectExpression(objectExpression: ObjectExpression): object {
-    // oxlint-disable-next-line typescript/no-explicit-any
-    const returnObject: Record<string, any> = {};
-
-    for (const propertyToken of objectExpression.properties) {
-        if (propertyToken.type !== "Property") {
-            throw new Error("unexpected property type, please implement SpreadElement");
-        }
-
-        const key = getKey(propertyToken.key);
-        const value = getValue(propertyToken.value);
-
-        returnObject[key] = value;
-    }
-
-    return returnObject;
-}
-
 function getKey(key: PropertyKey): string {
     if (key.type !== "Identifier") {
         throw new Error("unexpected key type, we only support strings");
@@ -208,6 +192,24 @@ function getValue(value: Expression): any {
     }
 }
 
+function readObjectExpression(objectExpression: ObjectExpression): object {
+    // oxlint-disable-next-line typescript/no-explicit-any
+    const returnObject: Record<string, any> = {};
+
+    for (const propertyToken of objectExpression.properties) {
+        if (propertyToken.type !== "Property") {
+            throw new Error("unexpected property type, please implement SpreadElement");
+        }
+
+        const key = getKey(propertyToken.key);
+        const value = getValue(propertyToken.value);
+
+        returnObject[key] = value;
+    }
+
+    return returnObject;
+}
+
 let outputString = "# Commands++ Commands\n";
 outputString += `## Total Amount of Commands: ${commandCount}\n`;
 
@@ -216,3 +218,4 @@ for (const [key, value] of outputStrings.entries()) {
 }
 
 writeFileSync("./output.md", outputString);
+console.log(`Succesfully generated command data in ${performance.now() - now}ms`);
