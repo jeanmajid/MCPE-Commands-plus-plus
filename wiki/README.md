@@ -16,6 +16,8 @@ pip install mkdocs-material mkdocs-git-revision-date-localized-plugin mkdocs-git
 mkdocs serve -f mkdocs.debug.yml
 ```
 
+## Full Build
+
 ```sh
 mkdocs serve
 ```
