@@ -84,6 +84,7 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 /var[DATAYPE] -- Helpers
 
 /unburn
+/team
 
 - Old Commands++ ideas
 - Custom language based on /run syntax
