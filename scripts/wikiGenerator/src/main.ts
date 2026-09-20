@@ -26,6 +26,8 @@ import { basename, dirname, join } from "node:path";
 
 import { Expression, ObjectExpression, parse, PropertyKey } from "@yuku-parser/wasm";
 
+import { TSParser } from "./parsers/TSParser.js";
+
 const COMMANDS_FOLDER_PATH = "../../BP/scripts/commands";
 const REGISTRY_PATH = join(COMMANDS_FOLDER_PATH, "/registry");
 
@@ -79,6 +81,7 @@ type CommandOut = Record<CommandCategory, Record<CommandName, CommandDocsString>
 
 const outPutCommands: CommandOut = {};
 let commandCount = 0;
+let aliasCount = 0;
 
 recursiveRead(REGISTRY_PATH);
 
@@ -103,39 +106,19 @@ function processFile(filePath: string): void {
     const currentOutputCategory = outPutCommands[currentDirname];
 
     const fileContents = readFileSync(filePath, "utf-8");
-    const { program } = parse(fileContents, { lang: "ts" });
+    const tsParser = new TSParser(fileContents);
 
-    let commandData: CommandData | null = null;
-
-    for (const token of program.body) {
-        if (token.type !== "ExpressionStatement" || token.expression.type !== "CallExpression") {
-            continue;
-        }
-
-        const { callee } = token.expression;
-        if (
-            callee.type !== "MemberExpression" ||
-            callee.object.type !== "Identifier" ||
-            callee.property.type !== "Identifier"
-        ) {
-            continue;
-        }
-
-        const className = callee.object.name;
-        const methodName = callee.property.name;
-
-        const commandInfoToken = token.expression.arguments[0];
-        if (
-            className !== "CommandManager" ||
-            methodName !== "registerCommand" ||
-            commandInfoToken.type !== "ObjectExpression"
-        ) {
-            continue;
-        }
-
-        commandData = getValue(commandInfoToken) as CommandData;
+    const registerCommandCall = tsParser.findClassMethodCall("CommandManager", "registerCommand");
+    if (!registerCommandCall) {
+        throw new Error("Command token not found in file: " + filePath);
     }
 
+    const commandInfoObject = registerCommandCall.expression.arguments[0];
+    if (commandInfoObject.type !== "ObjectExpression") {
+        throw new Error("Command info should be and object: " + filePath);
+    }
+
+    const commandData: CommandData | null = getValue(commandInfoObject);
     if (!commandData) {
         throw new Error("Failed to parse file: " + filePath);
     }
@@ -182,6 +165,7 @@ function processFile(filePath: string): void {
 
     if (commandData.aliases) {
         currentOutPutCommand += `\n\n> _Aliases: ${commandData.aliases.map((a) => "/" + a).join(" • ")}_`;
+        aliasCount += commandData.aliases.length;
     }
 
     currentOutputCategory[commandKey] = currentOutPutCommand;
