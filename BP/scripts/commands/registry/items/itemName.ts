@@ -30,6 +30,7 @@ import {
     EquipmentSlot,
     EntityInventoryComponent,
     EntityEnderInventoryComponent,
+    system,
 } from "@minecraft/server";
 
 import { CommandManager } from "../../command.js";
@@ -37,27 +38,38 @@ import { CommandManager } from "../../command.js";
 const ITEM_LOCATIONS_ENUM_KEY = "itemLocationsEnum";
 type ItemLocationResolver = (entity: Entity, index: number) => ContainerSlot | string | undefined;
 
+// TODO START LOCALISING THESE COMMON UTILITIES LIKE RAWTEXT PARSING, SLOT RESOLVING, MATH RESOLVING, ETC. TO THEIR OWN FILES IN A FOLDER
 const ItemLocations: Record<string, ItemLocationResolver> = {
     "slot.weapon.mainhand": (entity: Entity, _index: number): ContainerSlot | undefined =>
         entity.getComponent("equippable")?.getEquipmentSlot(EquipmentSlot.Mainhand),
+
     "slot.weapon.offhand": (entity: Entity, _index: number): ContainerSlot | undefined =>
         entity.getComponent("equippable")?.getEquipmentSlot(EquipmentSlot.Offhand),
+
     "slot.armor.head": (entity: Entity, _index: number): ContainerSlot | undefined =>
         entity.getComponent("equippable")?.getEquipmentSlot(EquipmentSlot.Head),
+
     "slot.armor.body": (entity: Entity, _index: number): ContainerSlot | undefined =>
         entity.getComponent("equippable")?.getEquipmentSlot(EquipmentSlot.Body),
+
     "slot.armor.chest": (entity: Entity, _index: number): ContainerSlot | undefined =>
         entity.getComponent("equippable")?.getEquipmentSlot(EquipmentSlot.Chest),
+
     "slot.armor.legs": (entity: Entity, _index: number): ContainerSlot | undefined =>
         entity.getComponent("equippable")?.getEquipmentSlot(EquipmentSlot.Legs),
+
     "slot.armor.feet": (entity: Entity, _index: number): ContainerSlot | undefined =>
         entity.getComponent("equippable")?.getEquipmentSlot(EquipmentSlot.Feet),
+
     "slot.inventory": (entity: Entity, index: number): ContainerSlot | string | undefined =>
         getSizeableContainerSlot("inventory", entity, index),
+
     "slot.chest": (entity: Entity, index: number): ContainerSlot | string | undefined =>
         getSizeableContainerSlot("inventory", entity, index),
+
     "slot.enderchest": (entity: Entity, index: number): ContainerSlot | string | undefined =>
         getSizeableContainerSlot("minecraft:ender_chest", entity, index),
+
     "slot.hotbar": (entity: Entity, index: number): ContainerSlot | string | undefined => {
         if (index > 8 || index < 0) {
             return "Index must be between 0 and 8";
@@ -65,6 +77,7 @@ const ItemLocations: Record<string, ItemLocationResolver> = {
 
         return entity.getComponent("inventory")?.container.getSlot(index);
     },
+
     // "slot.cursor": (entity: Entity, _: number): ContainerSlot | undefined => entity.getComponent("minecraft:cursor_inventory")?.,
 };
 
@@ -83,39 +96,47 @@ CommandManager.registerCommand(
         ],
     },
     (origin, targets: Entity[], slot: string, index: number, name: string) => {
-        if (targets.length === 0) {
-            return { status: CustomCommandStatus.Failure, message: "No targets match selector" };
-        }
-
         if (!(slot in ItemLocations)) {
             return { status: CustomCommandStatus.Failure, message: "Invalid item slot" };
         }
 
-        const itemLocationResult = ItemLocations[slot](targets[0], index);
+        if (targets.length === 0) {
+            return { status: CustomCommandStatus.Failure, message: "No targets match selector" };
+        }
 
-        if (itemLocationResult === undefined) {
+        for (const target of targets) {
+            const itemLocationResult = ItemLocations[slot](target, index);
+
+            if (itemLocationResult === undefined) {
+                return {
+                    status: CustomCommandStatus.Failure,
+                    message: "Cannot access item location on this entity",
+                };
+            }
+
+            if (typeof itemLocationResult === "string") {
+                return { status: CustomCommandStatus.Failure, message: itemLocationResult };
+            }
+
+            const item = itemLocationResult.getItem();
+
+            if (!item) {
+                return {
+                    status: CustomCommandStatus.Failure,
+                    message: "No item found at the slot",
+                };
+            }
+
+            system.run(() => {
+                item.nameTag = name;
+                itemLocationResult.setItem(item);
+            });
+
             return {
-                status: CustomCommandStatus.Failure,
-                message: "Cannot access item location on this entity",
+                status: CustomCommandStatus.Success,
+                message: "Successfully renamed item at slot",
             };
         }
-
-        if (typeof itemLocationResult === "string") {
-            return { status: CustomCommandStatus.Failure, message: itemLocationResult };
-        }
-
-        const item = itemLocationResult.getItem();
-
-        if (!item) {
-            return { status: CustomCommandStatus.Failure, message: "No item found at the slot" };
-        }
-
-        item.nameTag = name;
-
-        return {
-            status: CustomCommandStatus.Success,
-            message: "Successfully renamed item at slot",
-        };
     }
 );
 

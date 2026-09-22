@@ -70,7 +70,7 @@ import "./registry/entity/rotate.js";
 import "./registry/entity/setOnFire.js";
 import "./registry/entity/spawnItem.js";
 import "./registry/entity/top.js";
-import "./registry/items/itemname.js";
+import "./registry/items/itemName.js";
 import "./registry/misc/credits.js";
 import "./registry/misc/gameRuleSetup.js";
 import "./registry/misc/guide.js";
