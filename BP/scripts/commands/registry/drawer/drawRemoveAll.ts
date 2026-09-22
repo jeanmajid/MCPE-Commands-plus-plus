@@ -33,7 +33,7 @@ CommandManager.registerCommand(
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [],
     },
-    (_) => {
+    () => {
         DrawManager.removeAll();
 
         return { status: CustomCommandStatus.Success, message: "All Shapes successfully removed" };

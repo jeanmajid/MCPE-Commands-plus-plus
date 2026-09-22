@@ -23,8 +23,8 @@
 
 import { EntityHealthChangedAfterEvent, ScoreboardObjective, world } from "@minecraft/server";
 
-import { getAllEntities } from "../../utils/dimension";
-import { AttributeManager, BaseAttribute } from "../attribute";
+import { getAllEntities } from "../../utils/dimension.js";
+import { AttributeManager, BaseAttribute } from "../attribute.js";
 
 class HealthAttribute extends BaseAttribute {
     public id = "health";

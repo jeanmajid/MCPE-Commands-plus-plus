@@ -23,7 +23,7 @@
 
 import { Dimension } from "@minecraft/server";
 
-import { NAMESPACE } from "./namespace";
+import { NAMESPACE } from "./namespace.js";
 
 export const CUSTOM_DIMENSIONS = ["dimension1", "dimension2", "dimension3"];
 

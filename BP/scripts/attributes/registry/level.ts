@@ -23,7 +23,7 @@
 
 import { ScoreboardObjective, system, world } from "@minecraft/server";
 
-import { AttributeManager, BaseAttribute } from "../attribute";
+import { AttributeManager, BaseAttribute } from "../attribute.js";
 
 class LevelAttribute extends BaseAttribute {
     public id = "level";
