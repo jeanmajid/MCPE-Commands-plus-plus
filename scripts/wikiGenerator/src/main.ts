@@ -24,7 +24,7 @@
 import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { basename, dirname, join } from "node:path";
 
-import { Expression, ObjectExpression, parse, PropertyKey } from "@yuku-parser/wasm";
+import { Expression, ObjectExpression, PropertyKey } from "@yuku-parser/wasm";
 
 import { TSParser } from "./parsers/TSParser.js";
 
@@ -155,16 +155,16 @@ function processFile(filePath: string): void {
         commandWithoutName += "> **Parameters:** " + parameters + "\n";
     }
 
-    commandWithoutName += "> \n";
+    commandWithoutName += ">\n";
     commandWithoutName += `> ${commandData.description}\n`;
-    commandWithoutName += "> \n";
+    commandWithoutName += ">\n";
     commandWithoutName += `> \`${commandData.permissionLevel.replace("CommandPermissionLevel.", "")}\``;
 
-    currentOutPutCommand += `> ### \`/${commandData.name}\`\n> ${commandWithoutName}`;
+    currentOutPutCommand += `> ### \`/${commandData.name}\`\n>${commandWithoutName}`;
     ++commandCount;
 
     if (commandData.aliases) {
-        currentOutPutCommand += `\n\n> _Aliases: ${commandData.aliases.map((a) => "/" + a).join(" • ")}_`;
+        currentOutPutCommand += `\n>\n> _Aliases: ${commandData.aliases.map((a) => "/" + a).join(" • ")}_`;
         aliasCount += commandData.aliases.length;
     }
 
