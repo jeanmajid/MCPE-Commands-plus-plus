@@ -86,6 +86,12 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 /unburn
 /team
 
+/inventory -- saves and loads inventory presets
+
+/guidecommand <command> -- provides information about a specific command
+
+/clearbutbetter -- allows clearing of specific locations and potentially ranges like hotbar 0 -> hotbar 5
+
 - Old Commands++ ideas
 - Custom language based on /run syntax
 - Injecting code into all events that script api has
