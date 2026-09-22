@@ -86,6 +86,8 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 /unburn
 /team
 
+/tame <target> <source> -- causes a source entity to tame a target entity
+
 /inventory -- saves and loads inventory presets
 
 /guidecommand <command> -- provides information about a specific command
