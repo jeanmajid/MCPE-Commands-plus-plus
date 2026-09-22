@@ -23,7 +23,7 @@
 
 import { ScoreboardObjective, system, world } from "@minecraft/server";
 
-import { AttributeManager, BaseAttribute } from "../attribute";
+import { AttributeManager, BaseAttribute } from "../attribute.js";
 
 class HungerAttribute extends BaseAttribute {
     public id = "hunger";

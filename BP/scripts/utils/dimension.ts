@@ -30,8 +30,8 @@ import {
     world,
 } from "@minecraft/server";
 
-import { CUSTOM_DIMENSIONS, Dimensions } from "../constants/dimensions";
-import { NAMESPACE } from "../constants/namespace";
+import { CUSTOM_DIMENSIONS, Dimensions } from "../constants/dimensions.js";
+import { NAMESPACE } from "../constants/namespace.js";
 
 export function registerCustomDimensions(): void {
     const event = system.beforeEvents.startup.subscribe((data) => {

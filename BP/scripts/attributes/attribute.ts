@@ -23,9 +23,9 @@
 
 import { ScoreboardObjective, world } from "@minecraft/server";
 
-import { CommandManager } from "../commands/command";
-import { Dimensions } from "../constants/dimensions";
-import { ATTRIBUTE_KEY } from "../constants/dynamicPropertyKeys";
+import { CommandManager } from "../commands/command.js";
+import { Dimensions } from "../constants/dimensions.js";
+import { ATTRIBUTE_KEY } from "../constants/dynamicPropertyKeys.js";
 
 export abstract class BaseAttribute {
     public abstract id: string;

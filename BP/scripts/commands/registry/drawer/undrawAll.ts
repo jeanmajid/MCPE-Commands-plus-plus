@@ -32,7 +32,7 @@ CommandManager.registerCommand(
         description: "Undraws all shapes, but keeps the groups in the manager",
         permissionLevel: CommandPermissionLevel.GameDirectors,
     },
-    (_) => {
+    () => {
         DrawManager.undrawAll();
 
         return { status: CustomCommandStatus.Success, message: "All Shapes successfully undrawn" };

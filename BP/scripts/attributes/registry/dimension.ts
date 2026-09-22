@@ -23,8 +23,8 @@
 
 import { PlayerDimensionChangeAfterEvent, ScoreboardObjective, world } from "@minecraft/server";
 
-import { DimensionIds } from "../../constants/dimensions";
-import { AttributeManager, BaseAttribute } from "../attribute";
+import { DimensionIds } from "../../constants/dimensions.js";
+import { AttributeManager, BaseAttribute } from "../attribute.js";
 
 const dimensionIndex: Record<string, number> = {
     [DimensionIds.overworld]: 0,

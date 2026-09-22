@@ -23,7 +23,7 @@
 
 import { ControlScheme, ScoreboardObjective, system, world } from "@minecraft/server";
 
-import { AttributeManager, BaseAttribute } from "../attribute";
+import { AttributeManager, BaseAttribute } from "../attribute.js";
 
 const controlSchemeIndex = {
     [ControlScheme.CameraRelative]: 0,

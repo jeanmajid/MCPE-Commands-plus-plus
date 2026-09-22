@@ -23,7 +23,7 @@
 
 import { GraphicsMode, ScoreboardObjective, system, world } from "@minecraft/server";
 
-import { AttributeManager, BaseAttribute } from "../attribute";
+import { AttributeManager, BaseAttribute } from "../attribute.js";
 
 const graphicsModeIndex = {
     [GraphicsMode.Simple]: 0,

@@ -29,7 +29,7 @@ import {
     world,
 } from "@minecraft/server";
 
-import { AttributeManager, BaseAttribute } from "../attribute";
+import { AttributeManager, BaseAttribute } from "../attribute.js";
 
 class InputKeySneakAttribute extends BaseAttribute {
     public id = "inputkeysneak";

@@ -28,7 +28,7 @@ import {
     world,
 } from "@minecraft/server";
 
-import { AttributeManager, BaseAttribute } from "../attribute";
+import { AttributeManager, BaseAttribute } from "../attribute.js";
 
 class IsSneakingAttribute extends BaseAttribute {
     public id = "issneaking";

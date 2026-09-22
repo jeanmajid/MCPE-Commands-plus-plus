@@ -23,8 +23,8 @@
 
 import { ScoreboardObjective, system } from "@minecraft/server";
 
-import { getAllEntities } from "../../utils/dimension";
-import { AttributeManager, BaseAttribute } from "../attribute";
+import { getAllEntities } from "../../utils/dimension.js";
+import { AttributeManager, BaseAttribute } from "../attribute.js";
 
 class ScaleAttribute extends BaseAttribute {
     public id = "scale";

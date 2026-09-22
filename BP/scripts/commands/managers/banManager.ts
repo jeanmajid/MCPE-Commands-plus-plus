@@ -24,8 +24,8 @@
 import { Player, world } from "@minecraft/server";
 import { kickPlayer } from "@minecraft/server-admin";
 
-import { BANNED_PLAYER_KEY } from "../../constants/dynamicPropertyKeys";
-import { parseDurationString } from "../../utils/time";
+import { BANNED_PLAYER_KEY } from "../../constants/dynamicPropertyKeys.js";
+import { parseDurationString } from "../../utils/time.js";
 
 //! INCOMPLETE; NEEDS A LOG OF ALL PLAYERS WHO HAVE EVER BEEN IN THE WORLD AND THEIR IDs
 // TODO: ALL WIP
@@ -83,6 +83,6 @@ export class BanManager {
     }
 
     public static bannedPlayersList(): void {
-        const dynamicProperties = world.getDynamicPropertyIds();
+        
     }
 }

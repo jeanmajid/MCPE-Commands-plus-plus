@@ -27,7 +27,7 @@ import {
     world,
 } from "@minecraft/server";
 
-import { AttributeManager, BaseAttribute } from "../attribute";
+import { AttributeManager, BaseAttribute } from "../attribute.js";
 
 class HotbarSelectedSlotAttribute extends BaseAttribute {
     public id = "selectedHotbarSlot";

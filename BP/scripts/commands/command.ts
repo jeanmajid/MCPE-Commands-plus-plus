@@ -30,7 +30,7 @@ import {
     system,
 } from "@minecraft/server";
 
-import { NAMESPACE } from "../constants/namespace";
+import { NAMESPACE } from "../constants/namespace.js";
 
 type CustomCommandCallback = (
     origin: CustomCommandOrigin,

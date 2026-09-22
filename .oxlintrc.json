@@ -5,6 +5,7 @@
     "rules": {
         "import/first": "error",
         "import/no-namespace": "error",
+        "import/extensions": ["warn", "ignorePackages"],
         "typescript/prefer-ts-expect-error": "error",
         "no-await-in-loop": "off",
         "eqeqeq": "warn",
