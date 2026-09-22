@@ -95,7 +95,7 @@ CommandManager.registerCommand(
             { name: "name", type: CustomCommandParamType.String },
         ],
     },
-    (origin, targets: Entity[], slot: string, index: number, name: string) => {
+    (_, targets: Entity[], slot: string, index: number, name: string) => {
         if (!(slot in ItemLocations)) {
             return { status: CustomCommandStatus.Failure, message: "Invalid item slot" };
         }
@@ -105,6 +105,7 @@ CommandManager.registerCommand(
         }
 
         for (const target of targets) {
+            // TODO MAKE THIS ALL A FUNCTION TO MAKE REUSING A PIECE OF BEAUTIFUL CAKE
             const itemLocationResult = ItemLocations[slot](target, index);
 
             if (itemLocationResult === undefined) {
