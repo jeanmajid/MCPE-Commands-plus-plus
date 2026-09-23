@@ -116,8 +116,8 @@ CommandManager.register(
                 return destinationItemSlotResult;
             }
 
-            commandSuccess = true;
             moveItemAtSlot(sourceItemSlotResult, destinationItemSlotResult, moveMode, replaceItem);
+            commandSuccess = true;
         }
 
         if (!commandSuccess) {

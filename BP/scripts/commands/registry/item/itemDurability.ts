@@ -84,8 +84,8 @@ CommandManager.register(
                 continue;
             }
 
-            commandSuccess = true;
             updateItemDurabilityAtSlot(item, itemSlotResult, mode, amount);
+            commandSuccess = true;
         }
 
         if (!commandSuccess) {

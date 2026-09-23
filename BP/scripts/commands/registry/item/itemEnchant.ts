@@ -75,8 +75,8 @@ CommandManager.register(
                 continue;
             }
 
-            commandSuccess = true;
             enchantItemAtSlot(item, itemSlotResult, enchant, level);
+            commandSuccess = true;
         }
 
         if (!commandSuccess) {

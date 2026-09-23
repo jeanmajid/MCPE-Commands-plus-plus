@@ -141,8 +141,8 @@ CommandManager.register(
                 continue;
             }
 
-            commandSuccess = true;
             renameItemAtSlot(item, itemSlotResult, name);
+            commandSuccess = true;
         }
 
         if (!commandSuccess) {
