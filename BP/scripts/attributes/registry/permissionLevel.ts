@@ -26,7 +26,7 @@ import { ScoreboardObjective, system, world } from "@minecraft/server";
 import { AttributeManager, BaseAttribute } from "../attribute.js";
 
 class PermissionLevelAttribute extends BaseAttribute {
-    public id = "permissionlevel";
+    public id = "permissionLevel";
     public runId = -1;
 
     public initialize(): void {

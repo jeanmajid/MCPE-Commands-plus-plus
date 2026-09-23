@@ -33,7 +33,7 @@ const graphicsModeIndex = {
 };
 
 class GraphicsModeAttribute extends BaseAttribute {
-    public id = "graphicsmode";
+    public id = "graphicsMode";
     public runId = -1;
 
     public initialize(): void {

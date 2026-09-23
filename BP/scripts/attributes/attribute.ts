@@ -50,6 +50,9 @@ export class AttributeManager {
     public static attributes: Record<string, BaseAttribute> = {};
 
     public static registerAttribute(attribute: BaseAttribute): void {
+        if (this.getAttribute(attribute.id)) {
+            console.error("Duplicate attribute registered: " + attribute.id);
+        }
         this.attributes[attribute.id] = attribute;
     }
 
