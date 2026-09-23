@@ -37,7 +37,7 @@ import { ITEM_LOCATIONS_ENUM_KEY, ItemLocations } from "./itemName.js";
 CommandManager.registerCommand(
     {
         name: "itemname",
-        description: "Renames the item at the provided location within an entity's inventory",
+        description: "Enchants the item at the provided location within an entity's inventory",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
             { name: "targets", type: CustomCommandParamType.PlayerSelector },

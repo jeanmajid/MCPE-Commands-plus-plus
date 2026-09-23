@@ -46,7 +46,8 @@ CommandManager.registerEnum(ITEM_MOVE_MODE_ENUM_KEY, Object.values(ItemMoveMode)
 CommandManager.registerCommand(
     {
         name: "itemdurability",
-        description: "Renames the item at the provided location within an entity's inventory",
+        description:
+            "Moves an item from one provided location within an entity's inventory to another",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
             { name: "targets", type: CustomCommandParamType.PlayerSelector },

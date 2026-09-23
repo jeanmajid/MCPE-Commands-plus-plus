@@ -38,7 +38,8 @@ import { ITEM_LOCATIONS_ENUM_KEY, ItemLocations } from "./itemName.js";
 CommandManager.registerCommand(
     {
         name: "itemdurability",
-        description: "Renames the item at the provided location within an entity's inventory",
+        description:
+            "Modifies the durability of the item at the provided location within an entity's inventory",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
             { name: "targets", type: CustomCommandParamType.PlayerSelector },
