@@ -31,7 +31,7 @@ import {
 
 import { CommandManager } from "../../command.js";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "setonfire",
         description: "Sets the target entities on fire",

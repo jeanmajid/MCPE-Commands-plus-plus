@@ -34,7 +34,7 @@ import {
 
 import { CommandManager } from "../../command.js";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "nametag",
         description: "Set nametag of entities",

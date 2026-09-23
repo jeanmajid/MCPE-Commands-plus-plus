@@ -31,7 +31,7 @@ import {
 
 import { CommandManager } from "../../command.js";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "addtags",
         description: "Adds an array of provided tags to the targets",

@@ -46,4 +46,4 @@ class LevelupXpAttribute extends BaseAttribute {
     }
 }
 
-AttributeManager.registerAttribute(new LevelupXpAttribute());
+AttributeManager.register(new LevelupXpAttribute());

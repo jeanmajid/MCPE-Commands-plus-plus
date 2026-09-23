@@ -32,7 +32,7 @@ import { getNormalizedRgba } from "../../../utils/color.js";
 import { CommandManager } from "../../command.js";
 import { DrawManager } from "../../managers/drawManager.js";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "setdrawtextbackgroundcolor",
         description: "Sets the draw color for text",

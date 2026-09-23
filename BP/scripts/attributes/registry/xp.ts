@@ -46,4 +46,4 @@ class XpAttribute extends BaseAttribute {
     }
 }
 
-AttributeManager.registerAttribute(new XpAttribute());
+AttributeManager.register(new XpAttribute());

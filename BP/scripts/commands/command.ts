@@ -54,13 +54,14 @@ export class CommandManager {
     public static commands: Command[] = [];
     public static enums: CommandEnum[] = [];
 
-    public static registerCommand(
+    public static register(
         customCommand: CommandData,
         commandCallback: CustomCommandCallback
     ): void {
         CommandManager.commands.push({ data: customCommand, callback: commandCallback });
     }
 
+    // TODO: enums get their own home... the place where they belong
     public static registerEnum(name: string, values: string[]): void {
         this.enums.push({ name, values });
     }

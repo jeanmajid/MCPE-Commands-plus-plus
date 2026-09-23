@@ -31,7 +31,7 @@ import {
 
 import { CommandManager } from "../../command.js";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "top",
         description: "Teleports the targets to the top most block at their position",

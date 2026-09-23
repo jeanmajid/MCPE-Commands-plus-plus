@@ -34,7 +34,7 @@ import { getDimensionFromCommandOrigin } from "../../../utils/dimension.js";
 import { clamp } from "../../../utils/math.js";
 import { CommandManager } from "../../command.js";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "explode",
         description: "Creates an explosion at the target position with the provided parameters",

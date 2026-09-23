@@ -43,7 +43,7 @@ export enum ItemMoveMode {
 
 CommandManager.registerEnum(ITEM_MOVE_MODE_ENUM_KEY, Object.values(ItemMoveMode));
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "itemmove",
         description: "Moves an item from one provided slot within an entity's inventory to another",

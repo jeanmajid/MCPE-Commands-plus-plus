@@ -21,29 +21,39 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {
-    CommandPermissionLevel,
-    CustomCommandParamType,
-    CustomCommandStatus,
-} from "@minecraft/server";
+export abstract class BaseGameRule<T> {
+    public abstract id: string;
+    public abstract value: T;
 
-import { CommandManager } from "../../command.js";
+    /**
+     * Gets called when the gamerule is enabled
+     */
+    public abstract activation(): void;
 
-export const benchmark_data: Record<string, number> = {};
+    /**
+     * Gets called when the gamerule is enabled
+     */
+    public abstract deactivation(): void;
 
-CommandManager.register(
-    {
-        name: "benchmarkstart",
-        description:
-            "Creates a time checkpoint used to find the time commands have taken to run using /benchmarkend",
-        permissionLevel: CommandPermissionLevel.GameDirectors,
-        mandatoryParameters: [{ name: "id", type: CustomCommandParamType.String }],
-    },
-    (_, id: string) => {
-        benchmark_data[id] = Date.now();
-        return {
-            status: CustomCommandStatus.Success,
-            message: `Began benchmark with the ID "${id}"`,
-        };
+    /**
+     * Turns an gamerule input string into the actual value to work with
+     */
+    public abstract getValue(input: string): T;
+}
+
+export class GameRuleManager {
+    public static gameRules: Record<string, BaseGameRule<unknown>> = {};
+
+    public static register(gameRule: BaseGameRule<unknown>): void {
+        if (this.get(gameRule.id)) {
+            console.error("Duplicate gamerule registered: " + gameRule.id);
+        }
+        this.gameRules[gameRule.id] = gameRule;
     }
-);
+
+    public static get(id: string): BaseGameRule<unknown> | undefined {
+        return this.gameRules[id];
+    }
+
+    public static loadGameRulesFromMemory(): void {}
+}

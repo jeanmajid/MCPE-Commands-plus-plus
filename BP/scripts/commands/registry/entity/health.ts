@@ -42,7 +42,7 @@ export const VALUE_UPDATE_MODE_ENUM_KEY = "valueUpdateMode";
 
 CommandManager.registerEnum(VALUE_UPDATE_MODE_ENUM_KEY, Object.values(ValueUpdateMode));
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "health",
         description: "Modifies all targets health based on the mode and value",

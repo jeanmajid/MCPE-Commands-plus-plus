@@ -34,7 +34,7 @@ import { CommandManager } from "../../command.js";
 
 const SUCCESS = { status: CustomCommandStatus.Success, message: "Successfully vanished player" };
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "vanish",
         description: "Enter vanish mode and optionally return to original position when exiting",

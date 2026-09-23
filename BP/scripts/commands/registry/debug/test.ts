@@ -25,7 +25,7 @@ import { CommandPermissionLevel, CustomCommandStatus, world } from "@minecraft/s
 
 import { CommandManager } from "../../command.js";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "test",
         aliases: ["t"],

@@ -31,7 +31,7 @@ import {
 
 import { CommandManager } from "../../command.js";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "applyknockback",
         description: "Applies knockback to the selected entities",

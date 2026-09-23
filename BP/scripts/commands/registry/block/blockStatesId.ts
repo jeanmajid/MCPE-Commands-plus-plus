@@ -32,7 +32,7 @@ import {
 
 import { CommandManager } from "../../command.js";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "blockstatesid",
         description: "Lists all default block state values for the provided block",

@@ -54,4 +54,4 @@ class HotbarSelectedSlotAttribute extends BaseAttribute {
     }
 }
 
-AttributeManager.registerAttribute(new HotbarSelectedSlotAttribute());
+AttributeManager.register(new HotbarSelectedSlotAttribute());

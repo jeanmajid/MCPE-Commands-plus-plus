@@ -48,4 +48,4 @@ class PingAttribute extends BaseAttribute {
     }
 }
 
-AttributeManager.registerAttribute(new PingAttribute());
+AttributeManager.register(new PingAttribute());

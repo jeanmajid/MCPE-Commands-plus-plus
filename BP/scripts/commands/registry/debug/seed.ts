@@ -31,7 +31,7 @@ import {
 
 import { CommandManager } from "../../command.js";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "seed",
         description: "Returns a message to the executor containing the world seed",

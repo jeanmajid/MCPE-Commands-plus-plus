@@ -42,7 +42,7 @@ export enum BlockItemLocations {
 
 CommandManager.registerEnum(BLOCK_ITEM_LOCATIONS_ENUM_KEY, Object.values(BlockItemLocations));
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "blockitemname",
         description: "Renames the item at the provided slot within a container",

@@ -32,7 +32,7 @@ import {
 
 import { CommandManager } from "../../command.js";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "resetnametag",
         description: "Reset the nametag for players",

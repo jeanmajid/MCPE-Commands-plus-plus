@@ -35,7 +35,7 @@ const WORLD_RULES_KEY = "worldRules";
 
 export const rulesCache = "";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "rules",
         description: "Outputs to chat the world specific rules",

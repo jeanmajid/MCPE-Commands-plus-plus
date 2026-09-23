@@ -33,7 +33,7 @@ import { AttributeManager } from "../../../attributes/attribute.js";
 import { ATTRIBUTE_KEY } from "../../../constants/dynamicPropertyKeys.js";
 import { CommandManager } from "../../command.js";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "bindattribute",
         description: "Bind an attribute to a score",
@@ -44,7 +44,7 @@ CommandManager.registerCommand(
         ],
     },
     (origin, attributeId: string, scoreboardId: string) => {
-        const attribute = AttributeManager.getAttribute(attributeId);
+        const attribute = AttributeManager.get(attributeId);
         if (!attribute) {
             return {
                 status: CustomCommandStatus.Failure,

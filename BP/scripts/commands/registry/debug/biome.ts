@@ -39,7 +39,7 @@ enum BiomeData {
 
 CommandManager.registerEnum(BIOME_DATA_ENUM_KEY, Object.values(BiomeData));
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "biome",
         description: "Outputs the data for the biome based on the position of the executor",

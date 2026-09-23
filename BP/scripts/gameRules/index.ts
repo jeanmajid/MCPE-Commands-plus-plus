@@ -21,29 +21,4 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {
-    CommandPermissionLevel,
-    CustomCommandParamType,
-    CustomCommandStatus,
-} from "@minecraft/server";
-
-import { CommandManager } from "../../command.js";
-
-export const benchmark_data: Record<string, number> = {};
-
-CommandManager.register(
-    {
-        name: "benchmarkstart",
-        description:
-            "Creates a time checkpoint used to find the time commands have taken to run using /benchmarkend",
-        permissionLevel: CommandPermissionLevel.GameDirectors,
-        mandatoryParameters: [{ name: "id", type: CustomCommandParamType.String }],
-    },
-    (_, id: string) => {
-        benchmark_data[id] = Date.now();
-        return {
-            status: CustomCommandStatus.Success,
-            message: `Began benchmark with the ID "${id}"`,
-        };
-    }
-);
+const IAmNotEmptyPleaseShutUp = 25;

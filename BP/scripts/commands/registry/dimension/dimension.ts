@@ -37,7 +37,7 @@ CommandManager.registerEnum(
     Object.keys({ ...Dimensions }).filter((d) => d !== "all")
 );
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "dimension",
         description: "Teleport between dimensions",

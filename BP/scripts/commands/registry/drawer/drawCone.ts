@@ -33,7 +33,7 @@ import { getDimensionFromCommandOrigin } from "../../../utils/dimension.js";
 import { CommandManager } from "../../command.js";
 import { DrawManager } from "../../managers/drawManager.js";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "drawcone",
         description: "Draws a cone via the Debug Drawer module",

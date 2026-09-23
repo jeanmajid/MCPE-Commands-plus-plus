@@ -32,7 +32,7 @@ import { transferPlayer } from "@minecraft/server-admin";
 
 import { CommandManager } from "../../command.js";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "serverjoin",
         description: "Transfers players to a server",

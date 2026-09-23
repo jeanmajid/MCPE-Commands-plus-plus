@@ -87,7 +87,7 @@ const SUCCESS = {
     message: "Successfully updated targets scores",
 };
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "scoremath",
         description:

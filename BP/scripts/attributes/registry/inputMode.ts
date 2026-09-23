@@ -64,4 +64,4 @@ class InputModeAttribute extends BaseAttribute {
     }
 }
 
-AttributeManager.registerAttribute(new InputModeAttribute());
+AttributeManager.register(new InputModeAttribute());

@@ -48,4 +48,4 @@ class SaturationAttribute extends BaseAttribute {
     }
 }
 
-AttributeManager.registerAttribute(new SaturationAttribute());
+AttributeManager.register(new SaturationAttribute());

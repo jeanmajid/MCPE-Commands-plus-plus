@@ -41,7 +41,7 @@ export enum LogTypes {
 
 CommandManager.registerEnum(LOG_TYPE_ENUM_KEY, Object.values(LogTypes));
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "log",
         description:

@@ -59,4 +59,4 @@ class InputKeyJumpAttribute extends BaseAttribute {
     }
 }
 
-AttributeManager.registerAttribute(new InputKeyJumpAttribute());
+AttributeManager.register(new InputKeyJumpAttribute());

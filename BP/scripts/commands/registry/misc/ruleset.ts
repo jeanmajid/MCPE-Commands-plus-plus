@@ -34,7 +34,7 @@ import { RulesCache } from "./rules.js";
 const WORLD_RULES_KEY = "worldRules";
 
 // TODO add <add | remove | set> enum?
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "ruleset",
         description: "Sets the world specific rules that can be viewed by any player using /rules",

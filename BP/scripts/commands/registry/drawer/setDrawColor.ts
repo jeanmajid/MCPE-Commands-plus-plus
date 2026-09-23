@@ -31,7 +31,7 @@ import { getNormalizedRgba } from "../../../utils/color.js";
 import { CommandManager } from "../../command.js";
 import { DrawManager } from "../../managers/drawManager.js";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "setdrawcolor",
         description: "Sets the draw color",

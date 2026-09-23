@@ -32,7 +32,7 @@ import {
 import { OPTIMISED_GAMERULE_SETUP } from "../../../constants/optimisedGameRules.js";
 import { CommandManager } from "../../command.js";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "gamerulesetup",
         description: "Sets most gamerules to game-ready optimised values",

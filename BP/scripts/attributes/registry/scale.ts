@@ -52,4 +52,4 @@ class ScaleAttribute extends BaseAttribute {
     }
 }
 
-AttributeManager.registerAttribute(new ScaleAttribute());
+AttributeManager.register(new ScaleAttribute());

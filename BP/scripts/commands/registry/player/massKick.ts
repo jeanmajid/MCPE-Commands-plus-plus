@@ -31,7 +31,7 @@ import { kickPlayer } from "@minecraft/server-admin";
 
 import { CommandManager } from "../../command.js";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "masskick",
         description: "Kicks players from the world supporting selectors",

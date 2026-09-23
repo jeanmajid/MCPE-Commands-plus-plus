@@ -35,7 +35,7 @@ import { CommandManager } from "../../command.js";
 
 const SUCCESS = { status: CustomCommandStatus.Success, message: "Successfully unvanished" };
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "unvanish",
         description: "Exits vanish mode and optionally returns to original position",

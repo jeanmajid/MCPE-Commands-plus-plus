@@ -34,7 +34,7 @@ import { clamp } from "../../../utils/math.js";
 import { CommandManager } from "../../command.js";
 import { DrawManager } from "../../managers/drawManager.js";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "drawcylinder",
         description: "Draws a cylinder via the Debug Drawer module",

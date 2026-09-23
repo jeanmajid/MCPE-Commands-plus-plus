@@ -28,7 +28,7 @@ import { CommandManager } from "../../command.js";
 
 let creditsString = "";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "credits",
         description: "Provides an output message in chat containing the credits for Commands++",

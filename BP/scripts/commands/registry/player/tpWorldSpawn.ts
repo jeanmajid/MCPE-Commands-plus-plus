@@ -35,7 +35,7 @@ import {
 import { Dimensions } from "../../../constants/dimensions.js";
 import { CommandManager } from "../../command.js";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "tpworldspawn",
         description: "Teleports all targets to the world spawn point",

@@ -55,4 +55,4 @@ class ControlSchemeAttribute extends BaseAttribute {
     }
 }
 
-AttributeManager.registerAttribute(new ControlSchemeAttribute());
+AttributeManager.register(new ControlSchemeAttribute());

@@ -26,7 +26,7 @@ import { CommandPermissionLevel, CustomCommandStatus, Player } from "@minecraft/
 import { WIKI_LINK } from "../../../constants/wiki.js";
 import { CommandManager } from "../../command.js";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "wiki",
         description: "Provides a link in chat to the wiki page of Commands++",

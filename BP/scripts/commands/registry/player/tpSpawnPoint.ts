@@ -34,7 +34,7 @@ import {
 import { CommandManager } from "../../command.js";
 import { teleportPlayersToWorldSpawn } from "./tpWorldSpawn.js";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "tpspawnpoint",
         description: "Teleports all targets to their spawnpoint",

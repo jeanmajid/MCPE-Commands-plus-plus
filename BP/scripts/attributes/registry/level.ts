@@ -46,4 +46,4 @@ class LevelAttribute extends BaseAttribute {
     }
 }
 
-AttributeManager.registerAttribute(new LevelAttribute());
+AttributeManager.register(new LevelAttribute());

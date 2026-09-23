@@ -48,4 +48,4 @@ class HungerAttribute extends BaseAttribute {
     }
 }
 
-AttributeManager.registerAttribute(new HungerAttribute());
+AttributeManager.register(new HungerAttribute());

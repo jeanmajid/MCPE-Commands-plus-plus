@@ -33,7 +33,7 @@ import { CommandManager } from "../../command.js";
 
 const ranCommands: Map<string, string> = new Map();
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "delay",
         description: "Delays the execution of a command",

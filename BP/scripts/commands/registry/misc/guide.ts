@@ -37,7 +37,7 @@ const TOTAL_HELP_PAGES = Math.ceil(CommandManager.commands.length / COMMAND_HELP
 
 const pageCache: string[] = [];
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "guide",
         aliases: ["listcommands"],

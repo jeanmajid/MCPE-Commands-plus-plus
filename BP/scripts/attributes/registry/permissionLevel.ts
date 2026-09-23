@@ -46,4 +46,4 @@ class PermissionLevelAttribute extends BaseAttribute {
     }
 }
 
-AttributeManager.registerAttribute(new PermissionLevelAttribute());
+AttributeManager.register(new PermissionLevelAttribute());

@@ -36,7 +36,7 @@ import { CommandManager } from "../../command.js";
 import { VALUE_UPDATE_MODE_ENUM_KEY, ValueUpdateMode } from "../entity/health.js";
 import { ITEM_LOCATIONS_ENUM_KEY, ItemLocations } from "./itemName.js";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "itemdurability",
         description:

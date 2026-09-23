@@ -33,7 +33,7 @@ import {
 import { Vector } from "../../../utils/vector.js";
 import { CommandManager } from "../../command.js";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "blockstates",
         description:

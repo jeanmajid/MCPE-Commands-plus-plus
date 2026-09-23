@@ -30,7 +30,7 @@ import {
 import { CommandManager } from "../../command.js";
 import { DrawManager } from "../../managers/drawManager.js";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "drawremove",
         description: "Undraws and removes a group of shapes permanently",

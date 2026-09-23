@@ -33,7 +33,7 @@ import { CommandManager } from "../../command.js";
 import { BLOCK_ITEM_LOCATIONS_ENUM_KEY, getBlockContainerSlot } from "./blockItemName.js";
 import { enchantItemAtSlot } from "./itemEnchant.js";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "blockitemenchant",
         description: "Enchants the item at the provided slot within a container",

@@ -34,7 +34,7 @@ import { CommandManager } from "../../command.js";
 import { BLOCK_ITEM_LOCATIONS_ENUM_KEY, BlockItemLocations } from "./blockItemName.js";
 import { ITEM_MOVE_MODE_ENUM_KEY, ItemMoveMode, moveItemAtSlot } from "./itemMove.js";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "blockitemmmove",
         description: "Moves an item from one provided slot within a container to another",

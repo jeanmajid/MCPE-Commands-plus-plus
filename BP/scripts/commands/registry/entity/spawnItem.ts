@@ -35,7 +35,7 @@ import { getDimensionFromCommandOrigin } from "../../../utils/dimension.js";
 import { clamp } from "../../../utils/math.js";
 import { CommandManager } from "../../command.js";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "spawnitem",
         description: "Summons an item entity",

@@ -54,4 +54,4 @@ class HealthAttribute extends BaseAttribute {
     }
 }
 
-AttributeManager.registerAttribute(new HealthAttribute());
+AttributeManager.register(new HealthAttribute());

@@ -33,7 +33,7 @@ import { getDimensionFromCommandOrigin } from "../../../utils/dimension.js";
 import { CommandManager } from "../../command.js";
 import { DrawManager } from "../../managers/drawManager.js";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "drawellipsoid", // please change da faking name or smt
         description: "Draws a ellipsoid via the Debug Drawer module",

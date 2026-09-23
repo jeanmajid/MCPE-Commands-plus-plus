@@ -103,7 +103,7 @@ export const ItemLocations: Record<string, ItemLocationResolver> = {
 
 CommandManager.registerEnum(ITEM_LOCATIONS_ENUM_KEY, Object.keys(ItemLocations));
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "itemname",
         description: "Renames the item at the provided slot within an entity's inventory",

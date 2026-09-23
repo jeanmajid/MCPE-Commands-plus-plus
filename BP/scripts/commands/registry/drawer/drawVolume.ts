@@ -34,7 +34,7 @@ import { Vector } from "../../../utils/vector.js";
 import { CommandManager } from "../../command.js";
 import { DrawManager } from "../../managers/drawManager.js";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "drawvolume",
         description: "Draws a box via the Debug Drawer module",

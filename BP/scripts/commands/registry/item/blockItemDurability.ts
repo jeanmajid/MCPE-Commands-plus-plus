@@ -34,7 +34,7 @@ import { VALUE_UPDATE_MODE_ENUM_KEY, ValueUpdateMode } from "../entity/health.js
 import { BLOCK_ITEM_LOCATIONS_ENUM_KEY, getBlockContainerSlot } from "./blockItemName.js";
 import { updateItemDurabilityAtSlot } from "./itemDurability.js";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "blockitemdurability",
         description: "Modifies the durability of the item at the provided slot within a container",

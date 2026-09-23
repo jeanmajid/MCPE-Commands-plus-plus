@@ -33,7 +33,7 @@ import { CommandManager } from "../../command.js";
 import { benchmark_data } from "./benchmarkStart.js";
 import { LOG_TYPE_ENUM_KEY, LogTypes, log } from "./log.js";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "benchmarkend",
         description: "Logs and saves the time since the benchmark started in milliseconds",

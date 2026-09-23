@@ -65,4 +65,4 @@ class IsSneakingAttribute extends BaseAttribute {
     }
 }
 
-AttributeManager.registerAttribute(new IsSneakingAttribute());
+AttributeManager.register(new IsSneakingAttribute());

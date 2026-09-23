@@ -35,7 +35,7 @@ import {
 import { CommandManager } from "../../command.js";
 import { ITEM_LOCATIONS_ENUM_KEY, ItemLocations } from "./itemName.js";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "itemenchant",
         description: "Enchants the item at the provided slot within an entity's inventory",

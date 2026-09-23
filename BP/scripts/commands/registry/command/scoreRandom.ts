@@ -33,7 +33,7 @@ import { MIN_SIGNED_INT32, MAX_SIGNED_INT32 } from "../../../constants/integer.j
 import { getScoreboardObjective } from "../../../utils/score.js";
 import { CommandManager } from "../../command.js";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "scorerandom",
         description:

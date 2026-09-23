@@ -31,7 +31,6 @@ export abstract class BaseAttribute {
     public abstract id: string;
     public isBinded: boolean = false;
     public score!: ScoreboardObjective;
-    public selector?: string;
     /**
      * Function to initiate all your events or runIntervals
      */
@@ -49,14 +48,14 @@ export abstract class BaseAttribute {
 export class AttributeManager {
     public static attributes: Record<string, BaseAttribute> = {};
 
-    public static registerAttribute(attribute: BaseAttribute): void {
-        if (this.getAttribute(attribute.id)) {
+    public static register(attribute: BaseAttribute): void {
+        if (this.get(attribute.id)) {
             console.error("Duplicate attribute registered: " + attribute.id);
         }
         this.attributes[attribute.id] = attribute;
     }
 
-    public static getAttribute(id: string): BaseAttribute | undefined {
+    public static get(id: string): BaseAttribute | undefined {
         return this.attributes[id];
     }
 
@@ -67,7 +66,7 @@ export class AttributeManager {
             }
 
             const attributeId = propertyId.replace(ATTRIBUTE_KEY, "");
-            const attribute = this.getAttribute(attributeId);
+            const attribute = this.get(attributeId);
             if (!attribute) {
                 console.warn(
                     `ERROR: cannot find attribute ${attributeId}, which is found in storage... Deleting`

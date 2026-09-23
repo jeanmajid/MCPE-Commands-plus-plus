@@ -30,7 +30,7 @@ import {
 import { CommandManager } from "../../command.js";
 import { DrawManager } from "../../managers/drawManager.js";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "undraw",
         description: "Undraws a group of shapes under a given id, but keeps them in the manager",

@@ -42,7 +42,7 @@ enum FmbeTypes {
 
 CommandManager.registerEnum(FMBE_TYPE_ENUM_KEY, Object.values(FmbeTypes));
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "fmbe",
         description:

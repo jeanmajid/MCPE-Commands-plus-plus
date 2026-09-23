@@ -60,4 +60,4 @@ class DimensionAttribute extends BaseAttribute {
     }
 }
 
-AttributeManager.registerAttribute(new DimensionAttribute());
+AttributeManager.register(new DimensionAttribute());

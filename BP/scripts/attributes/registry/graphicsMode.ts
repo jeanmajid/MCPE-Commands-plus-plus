@@ -53,4 +53,4 @@ class GraphicsModeAttribute extends BaseAttribute {
     }
 }
 
-AttributeManager.registerAttribute(new GraphicsModeAttribute());
+AttributeManager.register(new GraphicsModeAttribute());

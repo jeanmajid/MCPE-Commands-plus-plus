@@ -59,4 +59,4 @@ class InputKeySneakAttribute extends BaseAttribute {
     }
 }
 
-AttributeManager.registerAttribute(new InputKeySneakAttribute());
+AttributeManager.register(new InputKeySneakAttribute());

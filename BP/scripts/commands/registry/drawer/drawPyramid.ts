@@ -33,7 +33,7 @@ import { getDimensionFromCommandOrigin } from "../../../utils/dimension.js";
 import { CommandManager } from "../../command.js";
 import { DrawManager } from "../../managers/drawManager.js";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "drawpyramid",
         description: "Draws a pyramid via the Debug Drawer module",

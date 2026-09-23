@@ -26,7 +26,7 @@ import { CommandPermissionLevel, CustomCommandStatus } from "@minecraft/server";
 import { CommandManager } from "../../command.js";
 import { DrawManager } from "../../managers/drawManager.js";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "drawremoveall",
         description: "Undraws and removes all shapes permanently",

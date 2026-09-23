@@ -46,4 +46,4 @@ class TotalXpAttribute extends BaseAttribute {
     }
 }
 
-AttributeManager.registerAttribute(new TotalXpAttribute());
+AttributeManager.register(new TotalXpAttribute());

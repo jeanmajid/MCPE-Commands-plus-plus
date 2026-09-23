@@ -32,7 +32,7 @@ import {
 import { clamp } from "../../../utils/math.js";
 import { CommandManager } from "../../command.js";
 
-CommandManager.registerCommand(
+CommandManager.register(
     {
         name: "harm",
         description: "Decreases all targets current health value by an amount",
