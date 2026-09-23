@@ -53,7 +53,7 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 
 [!] /invulnerable -- makes an entity unable to be damaged by any source
 
-[!SLOTS] /viewcontents <target> [location] -- lists contents within the provided location in chat (if no location provided default to all held items)
+[!SLOTS] /viewcontents <target> [slotLocation] [slotIndex] -- lists contents within the provided location in chat (if no location provided default to all held items | if no index provided default to all held items in location)
 
 [!] /warp -- tp to a warp id
 [!] /addwarp -- add the warp with permissions
