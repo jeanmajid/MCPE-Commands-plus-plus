@@ -55,7 +55,8 @@ CommandManager.register(
         ],
     },
     (_, targets: Entity[], mode: ValueUpdateMode, slot: string, index: number, amount: number) => {
-        if (!ItemLocations[slot]) {
+        const itemSlot = ItemLocations[slot];
+        if (!itemSlot) {
             return { status: CustomCommandStatus.Failure, message: "Invalid item slot" };
         }
 
@@ -68,10 +69,8 @@ CommandManager.register(
         }
 
         let commandSuccess = false;
-
         for (const target of targets) {
-            const itemSlotResult = ItemLocations[slot](target, index);
-
+            const itemSlotResult = itemSlot(target, index);
             if (itemSlotResult === undefined) {
                 continue;
             }
@@ -81,13 +80,11 @@ CommandManager.register(
             }
 
             const item = itemSlotResult.getItem();
-
             if (!item) {
                 continue;
             }
 
             commandSuccess = true;
-
             updateItemDurabilityAtSlot(item, itemSlotResult, mode, amount);
         }
 

@@ -49,7 +49,8 @@ CommandManager.register(
         optionalParameters: [{ name: "level", type: CustomCommandParamType.Integer }],
     },
     (_, targets: Entity[], slot: string, index: number, enchant: string, level: number = 1) => {
-        if (!ItemLocations[slot]) {
+        const itemSlot = ItemLocations[slot];
+        if (!itemSlot) {
             return { status: CustomCommandStatus.Failure, message: "Invalid item slot" };
         }
 
@@ -58,9 +59,8 @@ CommandManager.register(
         }
 
         let commandSuccess = false;
-
         for (const target of targets) {
-            const itemSlotResult = ItemLocations[slot](target, index);
+            const itemSlotResult = itemSlot(target, index);
 
             if (itemSlotResult === undefined) {
                 continue;
@@ -71,13 +71,11 @@ CommandManager.register(
             }
 
             const item = itemSlotResult.getItem();
-
             if (!item) {
                 continue;
             }
 
             commandSuccess = true;
-
             enchantItemAtSlot(item, itemSlotResult, enchant, level);
         }
 

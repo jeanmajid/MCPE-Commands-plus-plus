@@ -78,11 +78,13 @@ CommandManager.register(
         moveMode: ItemMoveMode = ItemMoveMode.move,
         replaceItem: boolean = true
     ) => {
-        if (!ItemLocations[sourceSlot]) {
+        const sourceItemSlot = ItemLocations[sourceSlot];
+        if (!sourceItemSlot) {
             return { status: CustomCommandStatus.Failure, message: "Invalid source item slot" };
         }
 
-        if (!ItemLocations[destinationSlot]) {
+        const destinationItemSlot = ItemLocations[destinationSlot];
+        if (!destinationItemSlot) {
             return {
                 status: CustomCommandStatus.Failure,
                 message: "Invalid destination item slot",
@@ -97,27 +99,24 @@ CommandManager.register(
             return { status: CustomCommandStatus.Failure, message: "No targets match selector" };
         }
 
-        const commandSuccess = false;
-
+        let commandSuccess = false;
         for (const target of targets) {
-            const sourceItemSlotResult = ItemLocations[sourceSlot](target, sourceIndex);
-            const destinationItemSlotResult = ItemLocations[destinationSlot](
-                target,
-                destinationIndex
-            );
-
-            if (sourceItemSlotResult === undefined || destinationItemSlotResult === undefined) {
+            const sourceItemSlotResult = sourceItemSlot(target, sourceIndex);
+            if (sourceItemSlotResult === undefined) {
                 continue;
+            }
+            const destinationItemSlotResult = destinationItemSlot(target, destinationIndex);
+            if (destinationItemSlotResult === undefined) {
             }
 
             if (!(sourceItemSlotResult instanceof ContainerSlot)) {
                 return sourceItemSlotResult;
             }
-
             if (!(destinationItemSlotResult instanceof ContainerSlot)) {
                 return destinationItemSlotResult;
             }
 
+            commandSuccess = true;
             moveItemAtSlot(sourceItemSlotResult, destinationItemSlotResult, moveMode, replaceItem);
         }
 
