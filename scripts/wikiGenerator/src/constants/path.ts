@@ -21,4 +21,11 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import "./generators/command.js";
+import { join } from "path";
+
+export const COMMANDS_FOLDER_PATH = "../../BP/scripts/commands";
+export const COMMAND_REGISTRY_PATH = join(COMMANDS_FOLDER_PATH, "/registry");
+
+export const WIKI_PATH = "../../wiki";
+export const WIKI_DOCS_PATH = join(WIKI_PATH, "docs");
+export const WIKI_COMMAND_FOLDER_PATH = join(WIKI_DOCS_PATH, "commands");

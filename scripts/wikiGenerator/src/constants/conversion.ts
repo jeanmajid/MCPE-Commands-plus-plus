@@ -21,4 +21,22 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import "./generators/command.js";
+export const ENUM_CONVERSION: Record<string, Record<string, string>> = {
+    CommandPermissionLevel: {
+        Any: "Everyone",
+        GameDirectors: "Operators and Command Blocks",
+        Admin: "Operator",
+    },
+    CustomCommandParamType: {
+        Enum: "Enum",
+        String: "String",
+        BlockType: "Block",
+        Location: "Location",
+        Integer: "Integer",
+        EntitySelector: "Entity",
+        Float: "Float",
+        Boolean: "Boolean",
+        PlayerSelector: "Player",
+        ItemType: "Item",
+    },
+};
