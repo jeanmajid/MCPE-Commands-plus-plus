@@ -10,8 +10,6 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 
 [!] /pickup -- gives target an item from a drop
 
-[!SLOTS] /container -- gives an item to a player from a speciic chest slot || /container <target> {vector} [slot_id]
-
 /spawnparticle -- spawns a particle with more parameters than the regular particle command; includes particle spawn radius, variable modification, etc.
 
 /spawn -- alternative to the summon command with additional capabilities
