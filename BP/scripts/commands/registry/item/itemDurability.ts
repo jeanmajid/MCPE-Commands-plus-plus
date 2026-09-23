@@ -28,6 +28,7 @@ import {
     ContainerSlot,
     Entity,
     system,
+    ItemStack,
 } from "@minecraft/server";
 
 import { clamp } from "../../../utils/math.js";
@@ -39,32 +40,34 @@ CommandManager.registerCommand(
     {
         name: "itemdurability",
         description:
-            "Modifies the durability of the item at the provided location within an entity's inventory",
+            "Modifies the durability of the item at the provided slot within an entity's inventory",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
             { name: "targets", type: CustomCommandParamType.PlayerSelector },
-            { name: "slot", type: CustomCommandParamType.Enum, enumName: ITEM_LOCATIONS_ENUM_KEY },
-            { name: "index", type: CustomCommandParamType.Integer },
             {
                 name: "mode",
                 type: CustomCommandParamType.Enum,
                 enumName: VALUE_UPDATE_MODE_ENUM_KEY,
             },
+            { name: "slot", type: CustomCommandParamType.Enum, enumName: ITEM_LOCATIONS_ENUM_KEY },
+            { name: "index", type: CustomCommandParamType.Integer },
             { name: "value", type: CustomCommandParamType.Integer },
         ],
     },
-    (_, targets: Entity[], slot: string, index: number, mode: ValueUpdateMode, amount: number) => {
-        if (!(slot in ItemLocations)) {
+    (_, targets: Entity[], mode: ValueUpdateMode, slot: string, index: number, amount: number) => {
+        if (!ItemLocations[slot]) {
             return { status: CustomCommandStatus.Failure, message: "Invalid item slot" };
         }
 
-        if (!(mode in Object.values(ValueUpdateMode))) {
+        if (!ValueUpdateMode[mode]) {
             return { status: CustomCommandStatus.Failure, message: "Invalid value update mode" };
         }
 
         if (targets.length === 0) {
             return { status: CustomCommandStatus.Failure, message: "No targets match selector" };
         }
+
+        let commandSuccess = false;
 
         for (const target of targets) {
             const itemSlotResult = ItemLocations[slot](target, index);
@@ -83,41 +86,51 @@ CommandManager.registerCommand(
                 continue;
             }
 
-            system.run(() => {
-                const durability = item.getComponent("minecraft:durability");
-                if (durability === undefined) {
-                    return;
-                }
+            commandSuccess = true;
 
-                switch (mode) {
-                    case ValueUpdateMode.set:
-                        durability.damage = clamp(amount, 0, durability.maxDurability);
-                        break;
+            updateItemDurabilityAtSlot(item, itemSlotResult, mode, amount);
+        }
 
-                    case ValueUpdateMode.add:
-                        durability.damage = clamp(
-                            durability.damage + amount,
-                            0,
-                            durability.maxDurability
-                        );
-                        break;
-
-                    case ValueUpdateMode.remove:
-                        durability.damage = clamp(
-                            durability.damage - amount,
-                            0,
-                            durability.maxDurability
-                        );
-                        break;
-                }
-
-                itemSlotResult.setItem(item);
-            });
+        if (!commandSuccess) {
+            return {
+                status: CustomCommandStatus.Failure,
+                message: "Failed to modify durability of item at slot",
+            };
         }
 
         return {
             status: CustomCommandStatus.Success,
-            message: "Successfully enchanted item at slot",
+            message: "Successfully modified durability of item at slot",
         };
     }
 );
+
+export function updateItemDurabilityAtSlot(
+    item: ItemStack,
+    itemSlot: ContainerSlot,
+    mode: ValueUpdateMode,
+    amount: number
+): void {
+    system.run(() => {
+        const durability = item.getComponent("minecraft:durability");
+        if (durability === undefined) {
+            return;
+        }
+
+        switch (mode) {
+            case ValueUpdateMode.set:
+                durability.damage = clamp(amount, 0, durability.maxDurability);
+                break;
+
+            case ValueUpdateMode.add:
+                durability.damage = clamp(durability.damage + amount, 0, durability.maxDurability);
+                break;
+
+            case ValueUpdateMode.remove:
+                durability.damage = clamp(durability.damage - amount, 0, durability.maxDurability);
+                break;
+        }
+
+        itemSlot.setItem(item);
+    });
+}
