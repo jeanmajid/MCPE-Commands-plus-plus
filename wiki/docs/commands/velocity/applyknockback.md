@@ -1,11 +1,15 @@
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING UNDERNEATH -->
 
-> ### `/applyknockback`
->
-> **Parameters:** `<targets: Entity>` • `<x: Float>` • `<y: Float>` • `<z: Float>`
->
-> Applies knockback to the selected entities
->
-> `Operators and Command Blocks`
+Applies knockback to the selected entities
+
+### Syntax:
+
+```
+/applyknockback <targets: Entity>,<x: Float>,<y: Float>,<z: Float>
+```
+
+### Permission:
+
+Operators and Command Blocks
 
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING ABOVE -->

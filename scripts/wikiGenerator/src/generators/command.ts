@@ -43,6 +43,11 @@ interface CommandData {
     aliases?: string[];
 }
 
+const enum CommandParameterType {
+    mandatory,
+    optional,
+}
+
 type CommandCategory = string;
 type CommandName = string;
 type CommandDocsString = string;
@@ -85,45 +90,76 @@ function processFile(filePath: string): void {
     const commandKey = commandData.name;
     let currentOutPutCommand = currentOutputCategory[commandKey] ?? "";
 
-    let parameters = "";
+    const parameters: { type: CommandParameterType; string: string }[] = [];
 
     if (commandData.mandatoryParameters) {
-        parameters += commandData.mandatoryParameters
-            .map(
-                (parameter) =>
-                    `\`<${parameter.name}: ${parameter.type.replace("CustomCommandParamType.", "")}>\``
-            )
-            .join(" • ");
+        parameters.push(
+            ...commandData.mandatoryParameters.map((parameter) => {
+                return {
+                    type: CommandParameterType.mandatory,
+                    string: `<${parameter.name}: ${parameter.type}>`,
+                };
+            })
+        );
     }
 
     if (commandData.optionalParameters) {
-        if (commandData.mandatoryParameters) {
-            parameters += " • ";
-        }
-        parameters += commandData.optionalParameters
-            .map(
-                (parameter) =>
-                    `\`[${parameter.name}: ${parameter.type.replace("CustomCommandParamType.", "")}]\``
-            )
-            .join(" • ");
+        parameters.push(
+            ...commandData.optionalParameters.map((parameter) => {
+                return {
+                    type: CommandParameterType.optional,
+                    string: `[${parameter.name}: ${parameter.type}]`,
+                };
+            })
+        );
     }
 
-    let commandWithoutName = "\n";
+    const aliases = commandData.aliases
+        ? `
 
-    if (parameters) {
-        commandWithoutName += "> **Parameters:** " + parameters + "\n";
-    }
+### Aliases:
 
-    commandWithoutName += ">\n";
-    commandWithoutName += `> ${commandData.description}\n`;
-    commandWithoutName += ">\n";
-    commandWithoutName += `> \`${commandData.permissionLevel.replace("CommandPermissionLevel.", "")}\``;
+${commandData.aliases.map((a) => `\`/${a}\``).join(", ")}`
+        : "";
 
-    currentOutPutCommand += `> ### \`/${commandData.name}\`\n>${commandWithoutName}`;
+    currentOutPutCommand += `${commandData.description}
+
+### Syntax:
+
+\`\`\`
+/${commandData.name}${parameters.length !== 0 ? " " : ""}${parameters.map((p) => p.string)}
+\`\`\`${aliases}
+
+### Permission:
+
+${commandData.permissionLevel}`;
+
+    // # SetOnFire
+    //
+    // Sets the target entities on fire.
+
+    // ### Syntax:
+
+    // ```js
+    // /setonfire <targets: Entity> [timeSeconds: Float] [useEffects: Boolean]
+    // ```
+
+    // Valid aliases: `/ignite`, `/fire`
+
+    // ### Definitions:
+
+    // - **`<targets: Entity>`** — This field is required. Blahblahblah.
+
+    // - **`[timeSeconds: Float]`** — This field is optional. Blahblahblah.
+
+    // - **`[useEffects: Boolean]`** — This field is optional. Blahblahblah.
+
+    // ### Permission:
+
+    // Operators and command blocks.
+
     ++commandCount;
-
     if (commandData.aliases) {
-        currentOutPutCommand += `\n>\n> _Aliases: ${commandData.aliases.map((a) => "/" + a).join(" • ")}_`;
         aliasCount += commandData.aliases.length;
     }
 

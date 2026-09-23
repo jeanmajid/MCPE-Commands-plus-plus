@@ -1,11 +1,15 @@
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING UNDERNEATH -->
 
-> ### `/dimension`
->
-> **Parameters:** `<dimension: Enum>` • `[targets: Entity]`
->
-> Teleport between dimensions
->
-> `Operators and Command Blocks`
+Teleport between dimensions
+
+### Syntax:
+
+```
+/dimension <dimension: Enum>,[targets: Entity]
+```
+
+### Permission:
+
+Operators and Command Blocks
 
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING ABOVE -->

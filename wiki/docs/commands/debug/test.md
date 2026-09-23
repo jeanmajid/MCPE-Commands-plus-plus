@@ -1,12 +1,19 @@
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING UNDERNEATH -->
 
-> ### `/test`
->
->
-> Provides an output message in chat if the command has ran successfully
->
-> `Operators and Command Blocks`
->
-> _Aliases: /t_
+Provides an output message in chat if the command has ran successfully
+
+### Syntax:
+
+```
+/test
+```
+
+### Aliases:
+
+`/t`
+
+### Permission:
+
+Operators and Command Blocks
 
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING ABOVE -->

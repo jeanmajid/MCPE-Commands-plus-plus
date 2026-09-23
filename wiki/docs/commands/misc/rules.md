@@ -1,11 +1,15 @@
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING UNDERNEATH -->
 
-> ### `/rules`
->
-> **Parameters:** `[line: Integer]`
->
-> Outputs to chat the world specific rules
->
-> `Everyone`
+Outputs to chat the world specific rules
+
+### Syntax:
+
+```
+/rules [line: Integer]
+```
+
+### Permission:
+
+Everyone
 
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING ABOVE -->

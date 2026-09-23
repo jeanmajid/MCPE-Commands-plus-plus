@@ -1,11 +1,15 @@
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING UNDERNEATH -->
 
-> ### `/setdrawcolor`
->
-> **Parameters:** `<shapeId: String>` • `<colorRed: Integer>` • `<colorGreen: Integer>` • `<colorBlue: Integer>` • `<alpha: Integer>`
->
-> Sets the draw color
->
-> `Operators and Command Blocks`
+Sets the draw color
+
+### Syntax:
+
+```
+/setdrawcolor <shapeId: String>,<colorRed: Integer>,<colorGreen: Integer>,<colorBlue: Integer>,<alpha: Integer>
+```
+
+### Permission:
+
+Operators and Command Blocks
 
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING ABOVE -->

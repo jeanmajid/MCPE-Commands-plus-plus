@@ -1,11 +1,15 @@
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING UNDERNEATH -->
 
-> ### `/addtags`
->
-> **Parameters:** `<targets: Entity>` • `<tags: String>`
->
-> Adds an array of provided tags to the targets
->
-> `Operators and Command Blocks`
+Adds an array of provided tags to the targets
+
+### Syntax:
+
+```
+/addtags <targets: Entity>,<tags: String>
+```
+
+### Permission:
+
+Operators and Command Blocks
 
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING ABOVE -->

@@ -1,13 +1,19 @@
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING UNDERNEATH -->
 
-> ### `/guide`
->
-> **Parameters:** `[page: Integer]`
->
-> Lists in chat all new commands added by Commands++
->
-> `Operator`
->
-> _Aliases: /listcommands_
+Lists in chat all new commands added by Commands++
+
+### Syntax:
+
+```
+/guide [page: Integer]
+```
+
+### Aliases:
+
+`/listcommands`
+
+### Permission:
+
+Operator
 
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING ABOVE -->

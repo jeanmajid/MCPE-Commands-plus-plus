@@ -1,11 +1,15 @@
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING UNDERNEATH -->
 
-> ### `/tpspawnpoint`
->
-> **Parameters:** `[targets: Player]`
->
-> Teleports all targets to their spawnpoint
->
-> `Operators and Command Blocks`
+Teleports all targets to their spawnpoint
+
+### Syntax:
+
+```
+/tpspawnpoint [targets: Player]
+```
+
+### Permission:
+
+Operators and Command Blocks
 
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING ABOVE -->
