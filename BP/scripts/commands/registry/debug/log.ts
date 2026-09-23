@@ -24,6 +24,7 @@
 import {
     CommandPermissionLevel,
     CustomCommandParamType,
+    CustomCommandResult,
     CustomCommandStatus,
     world,
 } from "@minecraft/server";
@@ -39,7 +40,14 @@ export enum LogTypes {
     none = "none",
 }
 
+export const LOG_PRIVACY_ENUM_KEY = "logPrivacyEnum";
+export enum LogPrivacy {
+    public = "public",
+    private = "private",
+}
+
 CommandManager.registerEnum(LOG_TYPE_ENUM_KEY, Object.values(LogTypes));
+CommandManager.registerEnum(LOG_PRIVACY_ENUM_KEY, Object.values(LogPrivacy));
 
 CommandManager.register(
     {
@@ -49,39 +57,48 @@ CommandManager.register(
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
             { name: "logType", type: CustomCommandParamType.Enum, enumName: LOG_TYPE_ENUM_KEY },
+            { name: "logPrivacy", type: CustomCommandParamType.Enum },
             { name: "message", type: CustomCommandParamType.String },
         ],
     },
-    (origin, logType: string, message: string) => {
-        const result = log(message, logType);
-        if (result) {
-            return {
-                status: CustomCommandStatus.Success,
-                message: `Logged ${logType} message to the console`,
-            };
-        }
-
-        return { status: CustomCommandStatus.Failure, message: "Invalid log type" };
+    (origin, logType: LogTypes, logPrivacy: LogPrivacy, message: string) => {
+        return log(message, logType, logPrivacy);
     }
 );
 
-export function log(message: string, logType: string): boolean {
+const SUCCESSFUL_LOG_OUTPUT = {
+    status: CustomCommandStatus.Success,
+    message: `Logged message to the console`,
+};
+
+export function log(
+    message: string,
+    logType: string,
+    logPrivacy: string = LogPrivacy.public
+): CustomCommandResult {
+    if (logPrivacy) {
+        return {
+            status: CustomCommandStatus.Success,
+            message: "Logs are private; enable with </config showPrivateLogs true>",
+        };
+    }
+
     switch (logType) {
         case LogTypes.none:
-            return true;
+            return SUCCESSFUL_LOG_OUTPUT;
         case LogTypes.info:
             console.info(message);
-            return true;
+            return SUCCESSFUL_LOG_OUTPUT;
         case LogTypes.warn:
             console.warn(message);
-            return true;
+            return SUCCESSFUL_LOG_OUTPUT;
         case LogTypes.error:
             console.error(message);
-            return true;
+            return SUCCESSFUL_LOG_OUTPUT;
         case LogTypes.chat:
             world.sendMessage(message);
-            return true;
+            return SUCCESSFUL_LOG_OUTPUT;
         default:
-            return false;
+            return { status: CustomCommandStatus.Failure, message: "Invalid log type" };
     }
 }

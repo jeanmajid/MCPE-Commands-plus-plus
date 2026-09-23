@@ -31,7 +31,7 @@ import {
 
 import { CommandManager } from "../../command.js";
 import { benchmark_data } from "./benchmarkStart.js";
-import { LOG_TYPE_ENUM_KEY, LogTypes, log } from "./log.js";
+import { LOG_TYPE_ENUM_KEY, LogPrivacy, LogTypes, log } from "./log.js";
 
 CommandManager.register(
     {
@@ -48,7 +48,8 @@ CommandManager.register(
     (
         origin,
         startId: string,
-        logType: string = LogTypes.info,
+        logType: LogTypes = LogTypes.info,
+        logPrivacy: LogPrivacy,
         fakeplayer: string,
         objective: string
     ) => {
@@ -63,9 +64,9 @@ CommandManager.register(
         const elapsedTime = Date.now() - start;
 
         const output = `[${startId}] Elapsed ${elapsedTime}ms`;
-        const result = log(output, logType);
-        if (!result) {
-            return { status: CustomCommandStatus.Failure, message: "Invalid log type" };
+        const result = log(output, logType, logPrivacy);
+        if (result.status === CustomCommandStatus.Failure) {
+            return result;
         }
 
         if (!fakeplayer) {
