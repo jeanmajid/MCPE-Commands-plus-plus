@@ -31,15 +31,19 @@ import {
     EntityInventoryComponent,
     EntityEnderInventoryComponent,
     system,
+    CustomCommandResult,
 } from "@minecraft/server";
 
 import { CommandManager } from "../../command.js";
 
-const ITEM_LOCATIONS_ENUM_KEY = "itemLocationsEnum";
-type ItemLocationResolver = (entity: Entity, index: number) => ContainerSlot | string | undefined;
+type ItemLocationResolver = (
+    entity: Entity,
+    index: number
+) => ContainerSlot | CustomCommandResult | undefined;
+export const ITEM_LOCATIONS_ENUM_KEY = "itemLocationsEnum";
 
 // TODO START LOCALISING THESE COMMON UTILITIES LIKE RAWTEXT PARSING, SLOT RESOLVING, MATH RESOLVING, ETC. TO THEIR OWN FILES IN A FOLDER
-const ItemLocations: Record<string, ItemLocationResolver> = {
+export const ItemLocations: Record<string, ItemLocationResolver> = {
     "slot.weapon.mainhand": (entity: Entity, _index: number): ContainerSlot | undefined =>
         entity.getComponent("equippable")?.getEquipmentSlot(EquipmentSlot.Mainhand),
 
@@ -61,18 +65,33 @@ const ItemLocations: Record<string, ItemLocationResolver> = {
     "slot.armor.feet": (entity: Entity, _index: number): ContainerSlot | undefined =>
         entity.getComponent("equippable")?.getEquipmentSlot(EquipmentSlot.Feet),
 
-    "slot.inventory": (entity: Entity, index: number): ContainerSlot | string | undefined =>
+    "slot.inventory": (
+        entity: Entity,
+        index: number
+    ): ContainerSlot | CustomCommandResult | undefined =>
         getSizeableContainerSlot("inventory", entity, index),
 
-    "slot.chest": (entity: Entity, index: number): ContainerSlot | string | undefined =>
+    "slot.chest": (
+        entity: Entity,
+        index: number
+    ): ContainerSlot | CustomCommandResult | undefined =>
         getSizeableContainerSlot("inventory", entity, index),
 
-    "slot.enderchest": (entity: Entity, index: number): ContainerSlot | string | undefined =>
+    "slot.enderchest": (
+        entity: Entity,
+        index: number
+    ): ContainerSlot | CustomCommandResult | undefined =>
         getSizeableContainerSlot("minecraft:ender_chest", entity, index),
 
-    "slot.hotbar": (entity: Entity, index: number): ContainerSlot | string | undefined => {
+    "slot.hotbar": (
+        entity: Entity,
+        index: number
+    ): ContainerSlot | CustomCommandResult | undefined => {
         if (index > 8 || index < 0) {
-            return "Index must be between 0 and 8";
+            return {
+                status: CustomCommandStatus.Failure,
+                message: "Index must be between 0 and 8",
+            };
         }
 
         return entity.getComponent("inventory")?.container.getSlot(index);
@@ -105,39 +124,32 @@ CommandManager.registerCommand(
         }
 
         for (const target of targets) {
-            // TODO MAKE THIS ALL A FUNCTION TO MAKE REUSING A PIECE OF BEAUTIFUL CAKE
-            const itemLocationResult = ItemLocations[slot](target, index);
+            const itemSlotResult = ItemLocations[slot](target, index);
 
-            if (itemLocationResult === undefined) {
-                return {
-                    status: CustomCommandStatus.Failure,
-                    message: "Cannot access item location on this entity",
-                };
+            if (itemSlotResult === undefined) {
+                continue;
             }
 
-            if (typeof itemLocationResult === "string") {
-                return { status: CustomCommandStatus.Failure, message: itemLocationResult };
+            if (!(itemSlotResult instanceof ContainerSlot)) {
+                return itemSlotResult;
             }
 
-            const item = itemLocationResult.getItem();
+            const item = itemSlotResult.getItem();
 
             if (!item) {
-                return {
-                    status: CustomCommandStatus.Failure,
-                    message: "No item found at the slot",
-                };
+                continue;
             }
 
             system.run(() => {
                 item.nameTag = name;
-                itemLocationResult.setItem(item);
+                itemSlotResult.setItem(item);
             });
-
-            return {
-                status: CustomCommandStatus.Success,
-                message: "Successfully renamed item at slot",
-            };
         }
+
+        return {
+            status: CustomCommandStatus.Success,
+            message: "Successfully renamed item at slot",
+        };
     }
 );
 
@@ -145,16 +157,22 @@ function getSizeableContainerSlot(
     containerId: string,
     entity: Entity,
     index: number
-): ContainerSlot | string | undefined {
+): ContainerSlot | CustomCommandResult | undefined {
     const container = (
         entity.getComponent(containerId) as EntityInventoryComponent | EntityEnderInventoryComponent
     )?.container;
     if (!container) {
-        return "The target entity does not have this type of inventory";
+        return {
+            status: CustomCommandStatus.Failure,
+            message: "The target entity does not have this type of inventory",
+        };
     }
 
     if (index > container.size || index < 0) {
-        return "Index must be between 0 and " + container.size;
+        return {
+            status: CustomCommandStatus.Failure,
+            message: "Index must be between 0 and " + container.size,
+        };
     }
 
     return container.getSlot(index);
