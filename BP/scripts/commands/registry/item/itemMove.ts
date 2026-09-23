@@ -28,16 +28,16 @@ import {
     ContainerSlot,
     Entity,
     system,
+    ItemStack,
 } from "@minecraft/server";
 
 import { CommandManager } from "../../command.js";
 import { ITEM_LOCATIONS_ENUM_KEY, ItemLocations } from "./itemName.js";
 
-const ITEM_MOVE_MODE_ENUM_KEY = "itemMoveMode";
-enum ItemMoveMode {
+export const ITEM_MOVE_MODE_ENUM_KEY = "itemMoveMode";
+export enum ItemMoveMode {
     swap = "swap",
     copy = "copy",
-    keep = "keep",
     move = "move",
 }
 
@@ -45,9 +45,8 @@ CommandManager.registerEnum(ITEM_MOVE_MODE_ENUM_KEY, Object.values(ItemMoveMode)
 
 CommandManager.registerCommand(
     {
-        name: "itemdurability",
-        description:
-            "Moves an item from one provided location within an entity's inventory to another",
+        name: "itemmove",
+        description: "Moves an item from one provided slot within an entity's inventory to another",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
             { name: "targets", type: CustomCommandParamType.PlayerSelector },
@@ -66,6 +65,7 @@ CommandManager.registerCommand(
                 type: CustomCommandParamType.Enum,
                 enumName: ITEM_MOVE_MODE_ENUM_KEY,
             },
+            { name: "replaceItem", type: CustomCommandParamType.Boolean },
         ],
     },
     (
@@ -75,19 +75,29 @@ CommandManager.registerCommand(
         sourceIndex: number,
         destinationSlot: string,
         destinationIndex: number,
-        moveMode: ItemMoveMode = ItemMoveMode.move
+        moveMode: ItemMoveMode = ItemMoveMode.move,
+        replaceItem: boolean = true
     ) => {
-        if (!(sourceSlot in ItemLocations)) {
-            return { status: CustomCommandStatus.Failure, message: "Invalid item slot" };
+        if (!ItemLocations[sourceSlot]) {
+            return { status: CustomCommandStatus.Failure, message: "Invalid source item slot" };
         }
 
-        if (!(moveMode in ItemMoveMode)) {
+        if (!ItemLocations[destinationSlot]) {
+            return {
+                status: CustomCommandStatus.Failure,
+                message: "Invalid destination item slot",
+            };
+        }
+
+        if (!ItemMoveMode[moveMode]) {
             return { status: CustomCommandStatus.Failure, message: "Invalid item move mode" };
         }
 
         if (targets.length === 0) {
             return { status: CustomCommandStatus.Failure, message: "No targets match selector" };
         }
+
+        const commandSuccess = false;
 
         for (const target of targets) {
             const sourceItemSlotResult = ItemLocations[sourceSlot](target, sourceIndex);
@@ -108,41 +118,57 @@ CommandManager.registerCommand(
                 return destinationItemSlotResult;
             }
 
-            const sourceItem = sourceItemSlotResult.getItem();
-
-            system.run(() => {
-                switch (moveMode) {
-                    case ItemMoveMode.move:
-                        sourceItemSlotResult.setItem(undefined);
-                        destinationItemSlotResult.setItem(sourceItem);
-                        break;
-
-                    case ItemMoveMode.swap: {
-                        const destinationItem = destinationItemSlotResult.getItem();
-
-                        sourceItemSlotResult.setItem(destinationItem);
-                        destinationItemSlotResult.setItem(sourceItem);
-                        break;
-                    }
-
-                    case ItemMoveMode.copy:
-                        destinationItemSlotResult.setItem(sourceItem);
-                        break;
-
-                    case ItemMoveMode.keep: {
-                        const destinationItem = destinationItemSlotResult.getItem();
-                        if (destinationItem !== undefined) {
-                            break;
-                        }
-
-                        sourceItemSlotResult.setItem(undefined);
-                        destinationItemSlotResult.setItem(sourceItem);
-                        break;
-                    }
-                }
-            });
+            moveItemAtSlot(sourceItemSlotResult, destinationItemSlotResult, moveMode, replaceItem);
         }
 
-        return { status: CustomCommandStatus.Success, message: "Successfully moved item to slot" };
+        if (!commandSuccess) {
+            return {
+                status: CustomCommandStatus.Failure,
+                message: "Failed to move item between slots",
+            };
+        }
+
+        return {
+            status: CustomCommandStatus.Success,
+            message: "Successfully moved item between slots",
+        };
     }
 );
+
+//* Could optimise this by evaluating the switch once before the for loop
+export function moveItemAtSlot(
+    sourceItemSlot: ContainerSlot,
+    destinationItemSlot: ContainerSlot,
+    moveMode: ItemMoveMode,
+    replaceItem: boolean
+): void {
+    system.run(() => {
+        const sourceItem = sourceItemSlot.getItem();
+        let destinationItem: undefined | null | ItemStack = null;
+
+        if (moveMode === ItemMoveMode.swap) {
+            destinationItem = destinationItemSlot.getItem();
+
+            sourceItemSlot.setItem(destinationItem);
+            destinationItemSlot.setItem(sourceItem);
+            return;
+        }
+
+        if (!replaceItem) {
+            destinationItem = destinationItemSlot.getItem();
+
+            if (destinationItem) {
+                return;
+            }
+        }
+
+        if (moveMode === ItemMoveMode.move) {
+            sourceItemSlot.setItem(undefined);
+            destinationItemSlot.setItem(sourceItem);
+            return;
+        }
+
+        //? Copy
+        destinationItemSlot.setItem(sourceItem);
+    });
+}
