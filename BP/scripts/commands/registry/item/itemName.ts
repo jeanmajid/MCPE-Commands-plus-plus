@@ -32,6 +32,7 @@ import {
     EntityEnderInventoryComponent,
     system,
     CustomCommandResult,
+    ItemStack,
 } from "@minecraft/server";
 
 import { CommandManager } from "../../command.js";
@@ -69,7 +70,7 @@ export const ItemLocations: Record<string, ItemLocationResolver> = {
         entity: Entity,
         index: number
     ): ContainerSlot | CustomCommandResult | undefined =>
-        getSizeableContainerSlot("inventory", entity, index),
+        getSizeableContainerSlot("inventory", entity, index, 9),
 
     "slot.chest": (
         entity: Entity,
@@ -105,7 +106,7 @@ CommandManager.registerEnum(ITEM_LOCATIONS_ENUM_KEY, Object.keys(ItemLocations))
 CommandManager.registerCommand(
     {
         name: "itemname",
-        description: "Renames the item at the provided location within an entity's inventory",
+        description: "Renames the item at the provided slot within an entity's inventory",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
             { name: "targets", type: CustomCommandParamType.PlayerSelector },
@@ -115,13 +116,15 @@ CommandManager.registerCommand(
         ],
     },
     (_, targets: Entity[], slot: string, index: number, name: string) => {
-        if (!(slot in ItemLocations)) {
+        if (!ItemLocations[slot]) {
             return { status: CustomCommandStatus.Failure, message: "Invalid item slot" };
         }
 
         if (targets.length === 0) {
             return { status: CustomCommandStatus.Failure, message: "No targets match selector" };
         }
+
+        let commandSuccess = false;
 
         for (const target of targets) {
             const itemSlotResult = ItemLocations[slot](target, index);
@@ -140,10 +143,16 @@ CommandManager.registerCommand(
                 continue;
             }
 
-            system.run(() => {
-                item.nameTag = name;
-                itemSlotResult.setItem(item);
-            });
+            commandSuccess = true;
+
+            renameItemAtSlot(item, itemSlotResult, name);
+        }
+
+        if (!commandSuccess) {
+            return {
+                status: CustomCommandStatus.Failure,
+                message: "Failed to rename item at slot",
+            };
         }
 
         return {
@@ -156,7 +165,8 @@ CommandManager.registerCommand(
 function getSizeableContainerSlot(
     containerId: string,
     entity: Entity,
-    index: number
+    index: number,
+    offset: number = 0
 ): ContainerSlot | CustomCommandResult | undefined {
     const container = (
         entity.getComponent(containerId) as EntityInventoryComponent | EntityEnderInventoryComponent
@@ -168,12 +178,21 @@ function getSizeableContainerSlot(
         };
     }
 
-    if (index > container.size || index < 0) {
+    const containerSize = container.size - offset - 1;
+
+    if (index > containerSize || index < 0) {
         return {
             status: CustomCommandStatus.Failure,
-            message: "Index must be between 0 and " + container.size,
+            message: "Index must be between 0 and " + containerSize,
         };
     }
 
-    return container.getSlot(index);
+    return container.getSlot(index + offset);
+}
+
+export function renameItemAtSlot(item: ItemStack, itemSlot: ContainerSlot, name: string): void {
+    system.run(() => {
+        item.nameTag = name;
+        itemSlot.setItem(item);
+    });
 }
