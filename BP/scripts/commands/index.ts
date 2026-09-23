@@ -74,6 +74,8 @@ import "./registry/item/blockItemDurability.js";
 import "./registry/item/blockItemEnchant.js";
 import "./registry/item/blockItemMove.js";
 import "./registry/item/blockItemName.js";
+import "./registry/item/containerInsert.js";
+import "./registry/item/containerTake.js";
 import "./registry/item/itemDurability.js";
 import "./registry/item/itemEnchant.js";
 import "./registry/item/itemMove.js";
