@@ -21,4 +21,17 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import "./generators/command.js";
+import { readdirSync, statSync } from "node:fs";
+import { join } from "node:path";
+
+export function recursiveRead(directoryPath: string, action: (path: string) => void): void {
+    for (const filePath of readdirSync(directoryPath)) {
+        const finalPath = join(directoryPath, filePath);
+
+        if (statSync(finalPath).isDirectory()) {
+            recursiveRead(finalPath, action);
+        } else {
+            action(finalPath);
+        }
+    }
+}

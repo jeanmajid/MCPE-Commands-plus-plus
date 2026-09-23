@@ -28,9 +28,11 @@ const licenseText = `/* SPDX-License-Identifier: GPL-3.0-or-later
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const jervPackagesPath = join("../../BP");
+const commandsPPPath = "../../BP";
+const commandsPPPathWikiGenerator = "../wikiGenerator/src";
 
-recursiveReadFolder(jervPackagesPath);
+recursiveReadFolder(commandsPPPath);
+recursiveReadFolder(commandsPPPathWikiGenerator);
 
 /**
  * @param {import("node:fs").PathLike} folderPath
