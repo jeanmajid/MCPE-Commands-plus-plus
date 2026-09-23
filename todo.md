@@ -31,11 +31,7 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 /givebutbetter -- give with extra parameters like nbt editing / lore, additional properties, enchants, whatever tha fak
 [!SLOTS] /replaceitembutbetter -- same as above but with item slots rather than first priority
 
-[!SLOTS] /itemdurability <itemSlot> <set | add | remove> <value: number> -- modify an item durability
-[!SLOTS] /enchantitem <itemSlot> <enchantment> <level: number> -- enchant an item in an entity's inventory
-[!SLOTS] /nameitem <itemSlot> <name: string> -- rename an item in an entity's inventory
 [!RAWTEXT+SLOTS] /nameitemraw <itemSlot> <name: rawtext> -- same as nameitem but uses rawtext JSON formatting
-[!SLOTS] /moveitem <sourceSlot> <destinationSlot> <copy: boolean> -- move an item between slots in an entity's inventory
 
 [!] /phase -- teleport through the block in front of you
 
