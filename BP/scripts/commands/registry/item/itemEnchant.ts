@@ -29,6 +29,7 @@ import {
     Entity,
     system,
     EnchantmentType,
+    ItemStack,
 } from "@minecraft/server";
 
 import { CommandManager } from "../../command.js";
@@ -36,8 +37,8 @@ import { ITEM_LOCATIONS_ENUM_KEY, ItemLocations } from "./itemName.js";
 
 CommandManager.registerCommand(
     {
-        name: "itemname",
-        description: "Enchants the item at the provided location within an entity's inventory",
+        name: "itemenchant",
+        description: "Enchants the item at the provided slot within an entity's inventory",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
             { name: "targets", type: CustomCommandParamType.PlayerSelector },
@@ -47,14 +48,16 @@ CommandManager.registerCommand(
         ],
         optionalParameters: [{ name: "level", type: CustomCommandParamType.Integer }],
     },
-    (_, targets: Entity[], slot: string, index: number, enchant: string, level: number) => {
-        if (!(slot in ItemLocations)) {
+    (_, targets: Entity[], slot: string, index: number, enchant: string, level: number = 1) => {
+        if (!ItemLocations[slot]) {
             return { status: CustomCommandStatus.Failure, message: "Invalid item slot" };
         }
 
         if (targets.length === 0) {
             return { status: CustomCommandStatus.Failure, message: "No targets match selector" };
         }
+
+        let commandSuccess = false;
 
         for (const target of targets) {
             const itemSlotResult = ItemLocations[slot](target, index);
@@ -73,17 +76,16 @@ CommandManager.registerCommand(
                 continue;
             }
 
-            system.run(() => {
-                try {
-                    item.getComponent("minecraft:enchantable")?.addEnchantment({
-                        type: new EnchantmentType(enchant),
-                        level: level,
-                    });
-                } catch {
-                    return;
-                }
-                itemSlotResult.setItem(item);
-            });
+            commandSuccess = true;
+
+            enchantItemAtSlot(item, itemSlotResult, enchant, level);
+        }
+
+        if (!commandSuccess) {
+            return {
+                status: CustomCommandStatus.Failure,
+                message: "Failed to enchant item at slot",
+            };
         }
 
         return {
@@ -92,3 +94,22 @@ CommandManager.registerCommand(
         };
     }
 );
+
+export function enchantItemAtSlot(
+    item: ItemStack,
+    itemSlot: ContainerSlot,
+    enchant: string,
+    level: number
+): void {
+    system.run(() => {
+        try {
+            item.getComponent("minecraft:enchantable")?.addEnchantment({
+                type: new EnchantmentType(enchant),
+                level: level,
+            });
+        } catch {
+            return;
+        }
+        itemSlot.setItem(item);
+    });
+}
