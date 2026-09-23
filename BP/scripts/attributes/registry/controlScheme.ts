@@ -34,7 +34,7 @@ const controlSchemeIndex = {
 };
 
 class ControlSchemeAttribute extends BaseAttribute {
-    public id = "controlscheme";
+    public id = "controlScheme";
     public runId = -1;
 
     public initialize(): void {

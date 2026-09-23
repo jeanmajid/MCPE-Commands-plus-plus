@@ -1,11 +1,15 @@
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING UNDERNEATH -->
 
-> ### `/drawremove`
->
-> **Parameters:** `<id: String>`
->
-> Undraws and removes a group of shapes permanently
->
-> `Operators and Command Blocks`
+Undraws and removes a group of shapes permanently
+
+### Syntax:
+
+```
+/drawremove <id: String>
+```
+
+### Permission:
+
+Operators and Command Blocks
 
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING ABOVE -->

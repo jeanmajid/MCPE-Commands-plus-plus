@@ -1,11 +1,15 @@
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING UNDERNEATH -->
 
-> ### `/delay`
->
-> **Parameters:** `<id: String>` • `<delayInTicks: Integer>` • `<command: String>`
->
-> Delays the execution of a command
->
-> `Operators and Command Blocks`
+Delays the execution of a command
+
+### Syntax:
+
+```
+/delay <id: String>,<delayInTicks: Integer>,<command: String>
+```
+
+### Permission:
+
+Operators and Command Blocks
 
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING ABOVE -->

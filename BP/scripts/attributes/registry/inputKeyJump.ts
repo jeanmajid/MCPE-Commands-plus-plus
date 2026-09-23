@@ -32,7 +32,7 @@ import {
 import { AttributeManager, BaseAttribute } from "../attribute.js";
 
 class InputKeyJumpAttribute extends BaseAttribute {
-    public id = "inputkeyjump";
+    public id = "inputKeyJump";
     public event?: (arg0: PlayerButtonInputAfterEvent) => void;
 
     public initialize(): void {

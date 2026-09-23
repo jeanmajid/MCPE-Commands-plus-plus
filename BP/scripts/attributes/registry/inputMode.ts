@@ -38,7 +38,7 @@ const inputModeIndex = {
 };
 
 class InputModeAttribute extends BaseAttribute {
-    public id = "inputmode";
+    public id = "inputMode";
     public event?: (arg0: PlayerInputModeChangeAfterEvent) => void;
 
     public initialize(): void {

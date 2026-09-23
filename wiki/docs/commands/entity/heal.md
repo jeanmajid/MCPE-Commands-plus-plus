@@ -1,11 +1,15 @@
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING UNDERNEATH -->
 
-> ### `/heal`
->
-> **Parameters:** `[target: Player]` • `[value: Integer]`
->
-> Heals the target by a value
->
-> `Operators and Command Blocks`
+Heals the target by a value
+
+### Syntax:
+
+```
+/heal [target: Player],[value: Integer]
+```
+
+### Permission:
+
+Operators and Command Blocks
 
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING ABOVE -->

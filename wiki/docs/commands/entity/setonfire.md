@@ -1,11 +1,15 @@
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING UNDERNEATH -->
 
-> ### `/setonfire`
->
-> **Parameters:** `<targets: Entity>` • `[timeSeconds: Float]` • `[useEffects: Boolean]`
->
-> Sets the target entities on fire
->
-> `Operators and Command Blocks`
+Sets the target entities on fire
+
+### Syntax:
+
+```
+/setonfire <targets: Entity>,[timeSeconds: Float],[useEffects: Boolean]
+```
+
+### Permission:
+
+Operators and Command Blocks
 
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING ABOVE -->

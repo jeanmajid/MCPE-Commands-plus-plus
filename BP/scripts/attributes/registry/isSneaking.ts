@@ -31,7 +31,7 @@ import {
 import { AttributeManager, BaseAttribute } from "../attribute.js";
 
 class IsSneakingAttribute extends BaseAttribute {
-    public id = "issneaking";
+    public id = "isSneaking";
     public startEvent?: (arg0: EntityStartSneakingAfterEvent) => void;
     public stopEvent?: (arg0: EntityStopSneakingAfterEvent) => void;
 

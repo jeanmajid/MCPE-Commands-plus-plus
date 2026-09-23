@@ -1,11 +1,15 @@
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING UNDERNEATH -->
 
-> ### `/clearvelocity`
->
-> **Parameters:** `<targets: Entity>`
->
-> Clears target entities velocity
->
-> `Operators and Command Blocks`
+Clears target entities velocity
+
+### Syntax:
+
+```
+/clearvelocity <targets: Entity>
+```
+
+### Permission:
+
+Operators and Command Blocks
 
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING ABOVE -->

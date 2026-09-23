@@ -1,11 +1,15 @@
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING UNDERNEATH -->
 
-> ### `/removetags`
->
-> **Parameters:** `<targets: Entity>` • `[tags: String]`
->
-> Removes an array of provided tags from the targets
->
-> `Operators and Command Blocks`
+Removes an array of provided tags from the targets
+
+### Syntax:
+
+```
+/removetags <targets: Entity>,[tags: String]
+```
+
+### Permission:
+
+Operators and Command Blocks
 
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING ABOVE -->

@@ -1,11 +1,15 @@
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING UNDERNEATH -->
 
-> ### `/draw`
->
-> **Parameters:** `<id: String>`
->
-> Draws a group of shapes under a given id
->
-> `Operators and Command Blocks`
+Draws a group of shapes under a given id
+
+### Syntax:
+
+```
+/draw <id: String>
+```
+
+### Permission:
+
+Operators and Command Blocks
 
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING ABOVE -->

@@ -71,7 +71,12 @@ system.beforeEvents.startup.subscribe(({ customCommandRegistry }) => {
         if (!commandEnum.name.startsWith(NAMESPACE)) {
             commandEnum.name = NAMESPACE + commandEnum.name;
         }
-        customCommandRegistry.registerEnum(commandEnum.name, commandEnum.values);
+
+        try {
+            customCommandRegistry.registerEnum(commandEnum.name, commandEnum.values);
+        } catch (err) {
+            console.error(`Failed to register enum ${commandEnum.name}\nError: ${err}`);
+        }
     }
 
     for (const command of CommandManager.commands) {
@@ -87,7 +92,11 @@ system.beforeEvents.startup.subscribe(({ customCommandRegistry }) => {
             processParams(command.data.optionalParameters);
         }
 
-        customCommandRegistry.registerCommand(command.data, command.callback);
+        try {
+            customCommandRegistry.registerCommand(command.data, command.callback);
+        } catch (err) {
+            console.error(`Failed to register command ${command.data.name}\nError: ${err}`);
+        }
 
         if (command.data.aliases) {
             const originalName = command.data.name;
@@ -99,7 +108,11 @@ system.beforeEvents.startup.subscribe(({ customCommandRegistry }) => {
 
                 command.data.name = alias;
 
-                customCommandRegistry.registerCommand(command.data, command.callback);
+                try {
+                    customCommandRegistry.registerCommand(command.data, command.callback);
+                } catch (err) {
+                    console.error(`Failed to register alias ${command.data.name}\nError: ${err}`);
+                }
             }
 
             command.data.name = originalName;

@@ -36,7 +36,7 @@ const dimensionIndex: Record<string, number> = {
 };
 
 class DimensionAttribute extends BaseAttribute {
-    public id = "permissionlevel";
+    public id = "dimension";
     public event?: (arg0: PlayerDimensionChangeAfterEvent) => void;
 
     public initialize(): void {

@@ -1,11 +1,15 @@
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING UNDERNEATH -->
 
-> ### `/spawnitem`
->
-> **Parameters:** `<item: Item>` • `<location: Location>` • `[quantity: Integer]`
->
-> Summons an item entity
->
-> `Operators and Command Blocks`
+Summons an item entity
+
+### Syntax:
+
+```
+/spawnitem <item: Item>,<location: Location>,[quantity: Integer]
+```
+
+### Permission:
+
+Operators and Command Blocks
 
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING ABOVE -->

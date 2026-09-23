@@ -32,7 +32,7 @@ import {
 import { AttributeManager, BaseAttribute } from "../attribute.js";
 
 class InputKeySneakAttribute extends BaseAttribute {
-    public id = "inputkeysneak";
+    public id = "inputKeySneak";
     public event?: (arg0: PlayerButtonInputAfterEvent) => void;
 
     public initialize(): void {
