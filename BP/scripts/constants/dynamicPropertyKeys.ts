@@ -22,4 +22,4 @@
  */
 
 export const ATTRIBUTE_KEY = "attribute";
-export const BANNED_PLAYER_KEY = "bannedPlayer";
+export const FUNCTIONS_KEY = "function";
