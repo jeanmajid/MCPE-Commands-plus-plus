@@ -32,13 +32,8 @@ import {
 import { Dimensions } from "../../constants/dimensions.js";
 import { FUNCTIONS_KEY } from "../../constants/dynamicPropertyKeys.js";
 
-const DELETE_FUNCTION_SUCCESS_OUTPUT = {
-    status: CustomCommandStatus.Success,
-    message: "Successfully deleted function",
-};
-
 export class FunctionsManager {
-    public static cache: Record<string, string[]> = {};
+    public static cache: Map<string, string[]> = new Map();
 
     /**
      * Handles the building of the function -- setting commands at lines & doing initial cleanup / parenting logic
@@ -48,7 +43,6 @@ export class FunctionsManager {
         const func = JSON.parse(world.getDynamicProperty(propertyKey) as string) ?? [];
 
         func[line] = this.cleanCommandSyntax(command);
-
         world.setDynamicProperty(propertyKey);
     }
 
@@ -56,11 +50,7 @@ export class FunctionsManager {
      * Pushes function data to memory for faster access times when next called after first use in a session
      */
     public static pushToCache(id: string, func: string[]): void {
-        if (!this.cache[id]) {
-            return;
-        }
-
-        this.cache[id] = func;
+        this.cache.set(id, func);
     }
 
     /**
@@ -68,12 +58,7 @@ export class FunctionsManager {
      * @returns Functon data (an array of commands to run sequentially), or undefind if no function is found in memory
      */
     public static loadFromCache(id: string): string[] | undefined {
-        const func = this.cache[id];
-        if (!func) {
-            return;
-        }
-
-        return func;
+        return this.cache.get(id);
     }
 
     /**
@@ -82,7 +67,6 @@ export class FunctionsManager {
      */
     public static runFunction(origin: CustomCommandOrigin, id: string): CustomCommandResult {
         let func = this.loadFromCache(id);
-
         if (!func) {
             func = JSON.parse(world.getDynamicProperty(FUNCTIONS_KEY + id) as string);
             if (!func) {
@@ -112,16 +96,13 @@ export class FunctionsManager {
      */
     public static deleteFunction(id: string): CustomCommandResult {
         const propertyKey = FUNCTIONS_KEY + id;
-
-        if (this.cache[id]) {
-            delete this.cache[id];
-            world.setDynamicProperty(propertyKey, undefined);
-            return DELETE_FUNCTION_SUCCESS_OUTPUT;
-        }
-
         if (world.getDynamicProperty(propertyKey)) {
             world.setDynamicProperty(propertyKey, undefined);
-            return DELETE_FUNCTION_SUCCESS_OUTPUT;
+            this.cache.delete(id);
+            return {
+                status: CustomCommandStatus.Success,
+                message: "Successfully deleted function",
+            };
         }
 
         return { status: CustomCommandStatus.Failure, message: "Function does not exist" };
