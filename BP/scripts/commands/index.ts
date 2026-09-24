@@ -80,6 +80,7 @@ import "./registry/item/itemDurability.js";
 import "./registry/item/itemEnchant.js";
 import "./registry/item/itemMove.js";
 import "./registry/item/itemName.js";
+import "./registry/misc/config.js";
 import "./registry/misc/credits.js";
 import "./registry/misc/gameRuleSetup.js";
 import "./registry/misc/guide.js";

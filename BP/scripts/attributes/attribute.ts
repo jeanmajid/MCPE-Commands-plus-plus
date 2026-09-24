@@ -65,7 +65,7 @@ export class AttributeManager {
                 continue;
             }
 
-            const attributeId = propertyId.replace(ATTRIBUTE_KEY, "");
+            const attributeId = propertyId.substring(ATTRIBUTE_KEY.length);
             const attribute = this.get(attributeId);
             if (!attribute) {
                 console.warn(

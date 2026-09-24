@@ -26,12 +26,16 @@ import { world } from "@minecraft/server";
 import { AttributeManager } from "./attributes/attribute.js";
 import "./attributes/index.js";
 import "./commands/index.js";
+import { GameRuleManager } from "./gameRules/gameRule.js";
+import "./gameRules/index.js";
 import { initializeDimensions, registerCustomDimensions } from "./utils/dimension.js";
 
 AttributeManager.initialize();
+GameRuleManager.initialize();
 registerCustomDimensions();
 
 world.afterEvents.worldLoad.subscribe(() => {
     initializeDimensions();
     AttributeManager.loadAttributesFromMemory();
+    GameRuleManager.loadGameRulesFromMemory();
 });

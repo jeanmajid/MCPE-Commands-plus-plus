@@ -21,6 +21,15 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-export const ATTRIBUTE_KEY = "attribute";
-export const FUNCTIONS_KEY = "function";
-export const GAMERULE_KEY = "gamerule";
+import { BaseGameRule, GameRuleManager } from "../gameRule.js";
+
+class DebugHitboxes extends BaseGameRule<boolean> {
+    public id: string = "debugHitboxes";
+    public value: boolean = false;
+
+    public onValueUpdate(): void {
+        console.log(this.value);
+    }
+}
+
+GameRuleManager.register(new DebugHitboxes());
