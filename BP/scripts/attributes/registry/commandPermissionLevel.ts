@@ -21,5 +21,29 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-// TODO: Automate this
-import "./registry/debugHitboxes.js";
+import { ScoreboardObjective, system, world } from "@minecraft/server";
+
+import { AttributeManager, BaseAttribute } from "../attribute.js";
+
+class CommandPermissionLevelAttribute extends BaseAttribute {
+    public id = "commandPermissionLevel";
+    public runId = -1;
+
+    public initialize(): void {
+        this.runId = system.runInterval(() => {
+            this.setValues(this.score);
+        }, 1);
+    }
+
+    public setValues(score: ScoreboardObjective): void {
+        for (const player of world.getAllPlayers()) {
+            score.setScore(player, player.commandPermissionLevel);
+        }
+    }
+
+    public cleanup(): void {
+        system.clearRun(this.runId);
+    }
+}
+
+AttributeManager.register(new CommandPermissionLevelAttribute());
