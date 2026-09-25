@@ -5,7 +5,7 @@ Draws a text via the Debug Drawer module
 ### Syntax:
 
 ```
-/drawtext <id: String>,<location: Location>,<text: String>,<useRotation: Boolean>,<showThroughBlocks: Boolean>,<backfaceVisible: Boolean>,<textBackfaceVisible: Boolean>
+/drawtext <id: String> <location: Location> <text: String> <useRotation: Boolean> <showThroughBlocks: Boolean> <backfaceVisible: Boolean> <textBackfaceVisible: Boolean>
 ```
 
 ### Permission:

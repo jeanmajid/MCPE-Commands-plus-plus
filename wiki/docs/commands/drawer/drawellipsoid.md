@@ -5,7 +5,7 @@ Draws a ellipsoid via the Debug Drawer module
 ### Syntax:
 
 ```
-/drawellipsoid <id: String>,<position: Location>,<radii: Float>,<scale: Float>,<segmentsPerAxis: Integer>
+/drawellipsoid <id: String> <position: Location> <radii: Float> <scale: Float> <segmentsPerAxis: Integer>
 ```
 
 ### Permission:

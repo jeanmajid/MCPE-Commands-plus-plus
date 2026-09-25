@@ -1,11 +1,11 @@
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING UNDERNEATH -->
 
-Logs and saves the time since the benchmark started in milliseconds
+Enchants the item at the provided slot within an entity's inventory
 
 ### Syntax:
 
 ```
-/benchmarkend <startId: String> [logType: Enum] [fakeplayer: String] [objective: String]
+/itemenchant <targets: Player> <slot: Enum> <index: Integer> <enchant: String> [level: Integer]
 ```
 
 ### Permission:

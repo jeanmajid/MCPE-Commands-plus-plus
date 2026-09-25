@@ -1,11 +1,11 @@
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING UNDERNEATH -->
 
-Logs and saves the time since the benchmark started in milliseconds
+Get or set commands++ gamerules
 
 ### Syntax:
 
 ```
-/benchmarkend <startId: String> [logType: Enum] [fakeplayer: String] [objective: String]
+/config <gamerule: Enum> [value: String]
 ```
 
 ### Permission:

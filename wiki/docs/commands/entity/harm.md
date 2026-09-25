@@ -5,7 +5,7 @@ Decreases all targets current health value by an amount
 ### Syntax:
 
 ```
-/harm [target: Player],[value: Integer]
+/harm [target: Player] [value: Integer]
 ```
 
 ### Permission:

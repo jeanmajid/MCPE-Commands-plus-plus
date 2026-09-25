@@ -5,7 +5,7 @@ Summons an item entity
 ### Syntax:
 
 ```
-/spawnitem <item: Item>,<location: Location>,[quantity: Integer]
+/spawnitem <item: Item> <location: Location> [quantity: Integer]
 ```
 
 ### Permission:

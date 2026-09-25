@@ -5,7 +5,7 @@ Sets the draw color
 ### Syntax:
 
 ```
-/setdrawcolor <shapeId: String>,<colorRed: Integer>,<colorGreen: Integer>,<colorBlue: Integer>,<alpha: Integer>
+/setdrawcolor <shapeId: String> <colorRed: Integer> <colorGreen: Integer> <colorBlue: Integer> <alpha: Integer>
 ```
 
 ### Permission:

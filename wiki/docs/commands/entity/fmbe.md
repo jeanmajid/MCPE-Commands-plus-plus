@@ -5,7 +5,7 @@ Animates targets (fox) to appear as a full block when holding a three dimensiona
 ### Syntax:
 
 ```
-/fmbe <entities: Entity>,[fmbeType: Enum]
+/fmbe <entities: Entity> [fmbeType: Enum]
 ```
 
 ### Permission:

@@ -5,7 +5,7 @@ Draws a pyramid via the Debug Drawer module
 ### Syntax:
 
 ```
-/drawpyramid <id: String>,<position: Location>,<height: Float>,<width: Float>,<depth: Float>,<scale: Float>
+/drawpyramid <id: String> <position: Location> <height: Float> <width: Float> <depth: Float> <scale: Float>
 ```
 
 ### Permission:

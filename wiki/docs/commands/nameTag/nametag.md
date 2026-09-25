@@ -5,7 +5,7 @@ Set nametag of entities
 ### Syntax:
 
 ```
-/nametag <targets: Entity>,<nametag: String>
+/nametag <targets: Entity> <nametag: String>
 ```
 
 ### Permission:

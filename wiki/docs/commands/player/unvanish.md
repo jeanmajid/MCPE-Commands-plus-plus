@@ -5,7 +5,7 @@ Exits vanish mode and optionally returns to original position
 ### Syntax:
 
 ```
-/unvanish [players: Player],[tpBack: Boolean]
+/unvanish [players: Player] [tpBack: Boolean]
 ```
 
 ### Aliases:

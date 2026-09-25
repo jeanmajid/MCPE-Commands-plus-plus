@@ -5,7 +5,7 @@ Transfers players to a server
 ### Syntax:
 
 ```
-/serverjoin <players: Player>,<ip: String>,<port: Integer>
+/serverjoin <players: Player> <ip: String> <port: Integer>
 ```
 
 ### Permission:

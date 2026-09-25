@@ -5,7 +5,7 @@ Teleport between dimensions
 ### Syntax:
 
 ```
-/dimension <dimension: Enum>,[targets: Entity]
+/dimension <dimension: Enum> [targets: Entity]
 ```
 
 ### Permission:

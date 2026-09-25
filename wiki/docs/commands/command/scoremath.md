@@ -5,7 +5,7 @@ Performs a calculation with the selected operation between the scores of two tar
 ### Syntax:
 
 ```
-/scoremath <targets: Entity>,<targetObjective: String>,<operation: Enum>,[selectors: Entity],[objective: String]
+/scoremath <targets: Entity> <targetObjective: String> <operation: Enum> [selectors: Entity] [objective: String]
 ```
 
 ### Permission:

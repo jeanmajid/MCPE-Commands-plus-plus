@@ -28,7 +28,7 @@ class DebugHitboxes extends BaseGameRule<boolean> {
     public value: boolean = false;
 
     public onValueUpdate(): void {
-        console.log(this.value);
+        // console.log(this.value);
     }
 }
 

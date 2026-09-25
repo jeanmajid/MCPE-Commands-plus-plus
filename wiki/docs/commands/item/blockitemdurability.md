@@ -1,11 +1,11 @@
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING UNDERNEATH -->
 
-Logs and saves the time since the benchmark started in milliseconds
+Modifies the durability of the item at the provided slot within a container
 
 ### Syntax:
 
 ```
-/benchmarkend <startId: String> [logType: Enum] [fakeplayer: String] [objective: String]
+/blockitemdurability <mode: Enum> <location: Location> <slot: Enum> <index: Integer> <amount: Integer>
 ```
 
 ### Permission:

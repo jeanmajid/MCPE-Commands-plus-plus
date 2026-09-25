@@ -5,7 +5,7 @@ Teleports the targets to the top most block at their position
 ### Syntax:
 
 ```
-/top [targets: Entity],[minHeight: Float]
+/top [targets: Entity] [minHeight: Float]
 ```
 
 ### Permission:

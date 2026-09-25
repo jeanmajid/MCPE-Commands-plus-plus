@@ -5,7 +5,7 @@ Applies an impulse to the selected entities
 ### Syntax:
 
 ```
-/applyimpulse <targets: Entity>,<x: Float>,<y: Float>,<z: Float>
+/applyimpulse <targets: Entity> <x: Float> <y: Float> <z: Float>
 ```
 
 ### Permission:

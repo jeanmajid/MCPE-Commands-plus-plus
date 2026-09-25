@@ -5,7 +5,7 @@ Creates an explosion at the target position with the provided parameters
 ### Syntax:
 
 ```
-/explode <location: Location>,[radius: Float],[breaksBlocks: Boolean],[causesFire: Boolean],[allowUnderwater: Boolean],[explosionSource: Entity]
+/explode <location: Location> [radius: Float] [breaksBlocks: Boolean] [causesFire: Boolean] [allowUnderwater: Boolean] [explosionSource: Entity]
 ```
 
 ### Permission:

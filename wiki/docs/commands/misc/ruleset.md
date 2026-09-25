@@ -5,7 +5,7 @@ Sets the world specific rules that can be viewed by any player using /rules
 ### Syntax:
 
 ```
-/ruleset <line: Integer>,[rule: String]
+/ruleset <line: Integer> [rule: String]
 ```
 
 ### Permission:

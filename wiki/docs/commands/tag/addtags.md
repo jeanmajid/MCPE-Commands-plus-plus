@@ -5,7 +5,7 @@ Adds an array of provided tags to the targets
 ### Syntax:
 
 ```
-/addtags <targets: Entity>,<tags: String>
+/addtags <targets: Entity> <tags: String>
 ```
 
 ### Permission:

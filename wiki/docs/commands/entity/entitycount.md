@@ -5,7 +5,7 @@ Returns the count of all loaded targets to a fakeplayer's scoreboard objective
 ### Syntax:
 
 ```
-/entitycount <targets: Entity>,<fakeplayer: String>,<objective: String>
+/entitycount <targets: Entity> <fakeplayer: String> <objective: String>
 ```
 
 ### Permission:

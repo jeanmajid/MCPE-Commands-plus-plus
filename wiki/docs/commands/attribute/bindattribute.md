@@ -5,7 +5,7 @@ Bind an attribute to a score
 ### Syntax:
 
 ```
-/bindattribute <bindtype: Enum>,<scoreboardId: String>
+/bindattribute <bindtype: Enum> <scoreboardId: String>
 ```
 
 ### Permission:

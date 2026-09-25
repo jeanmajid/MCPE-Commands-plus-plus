@@ -5,7 +5,7 @@ Add a line
 ### Syntax:
 
 ```
-/drawline <id: String>,<startPos: Location>,<endPos: Location>
+/drawline <id: String> <startPos: Location> <endPos: Location>
 ```
 
 ### Permission:
