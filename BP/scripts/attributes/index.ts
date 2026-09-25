@@ -22,7 +22,6 @@
  */
 
 // TODO: Automate this
-import "./registry/asdawdawdad.js";
 import "./registry/commandPermissionLevel.js";
 import "./registry/controlScheme.js";
 import "./registry/dimension.js";
@@ -35,6 +34,7 @@ import "./registry/inputKeySneak.js";
 import "./registry/inputMode.js";
 import "./registry/isSneaking.js";
 import "./registry/level.js";
+import "./registry/levelUpXp.js";
 import "./registry/permissionLevel.js";
 import "./registry/ping.js";
 import "./registry/saturation.js";
