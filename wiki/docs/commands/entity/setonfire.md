@@ -5,7 +5,7 @@ Sets the target entities on fire
 ### Syntax:
 
 ```
-/setonfire <targets: Entity>,[timeSeconds: Float],[useEffects: Boolean]
+/setonfire <targets: Entity> [timeSeconds: Float] [useEffects: Boolean]
 ```
 
 ### Permission:

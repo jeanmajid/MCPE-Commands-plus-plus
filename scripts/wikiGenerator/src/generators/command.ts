@@ -72,7 +72,7 @@ function processFile(filePath: string): void {
     const fileContents = readFileSync(filePath, "utf-8");
     const tsParser = new TSParser(fileContents);
 
-    const registerCommandCall = tsParser.findClassMethodCall("CommandManager", "registerCommand");
+    const registerCommandCall = tsParser.findClassMethodCall("CommandManager", "register");
     if (!registerCommandCall) {
         throw new Error("Command token not found in file: " + filePath);
     }
@@ -127,7 +127,7 @@ ${commandData.aliases.map((a) => `\`/${a}\``).join(", ")}`
 ### Syntax:
 
 \`\`\`
-/${commandData.name}${parameters.length !== 0 ? " " : ""}${parameters.map((p) => p.string)}
+/${commandData.name}${parameters.length !== 0 ? " " : ""}${parameters.map((p) => p.string).join(" ")}
 \`\`\`${aliases}
 
 ### Permission:

@@ -1,11 +1,11 @@
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING UNDERNEATH -->
 
-Logs and saves the time since the benchmark started in milliseconds
+Renames the item at the provided slot within a container
 
 ### Syntax:
 
 ```
-/benchmarkend <startId: String> [logType: Enum] [fakeplayer: String] [objective: String]
+/blockitemname <location: Location> <slot: Enum> <index: Integer> <name: String>
 ```
 
 ### Permission:

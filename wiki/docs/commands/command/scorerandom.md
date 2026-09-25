@@ -5,7 +5,7 @@ Outputs a random score value to the target objective, optionally between a min a
 ### Syntax:
 
 ```
-/scorerandom <targets: Entity>,<targetObjective: String>,[min: Integer],[max: Integer]
+/scorerandom <targets: Entity> <targetObjective: String> [min: Integer] [max: Integer]
 ```
 
 ### Permission:

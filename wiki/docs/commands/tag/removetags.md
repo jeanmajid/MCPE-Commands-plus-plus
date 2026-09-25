@@ -5,7 +5,7 @@ Removes an array of provided tags from the targets
 ### Syntax:
 
 ```
-/removetags <targets: Entity>,[tags: String]
+/removetags <targets: Entity> [tags: String]
 ```
 
 ### Permission:

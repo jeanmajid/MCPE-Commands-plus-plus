@@ -5,7 +5,7 @@ Heals the target by a value
 ### Syntax:
 
 ```
-/heal [target: Player],[value: Integer]
+/heal [target: Player] [value: Integer]
 ```
 
 ### Permission:

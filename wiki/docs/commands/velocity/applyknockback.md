@@ -5,7 +5,7 @@ Applies knockback to the selected entities
 ### Syntax:
 
 ```
-/applyknockback <targets: Entity>,<x: Float>,<y: Float>,<z: Float>
+/applyknockback <targets: Entity> <x: Float> <y: Float> <z: Float>
 ```
 
 ### Permission:

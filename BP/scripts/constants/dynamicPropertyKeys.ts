@@ -23,3 +23,4 @@
 
 export const ATTRIBUTE_KEY = "attribute";
 export const FUNCTIONS_KEY = "function";
+export const GAMERULE_KEY = "gamerule";

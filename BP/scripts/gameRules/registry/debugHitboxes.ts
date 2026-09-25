@@ -21,5 +21,15 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-// TODO: Automate this
-import "./registry/debugHitboxes.js";
+import { BaseGameRule, GameRuleManager } from "../gameRule.js";
+
+class DebugHitboxes extends BaseGameRule<boolean> {
+    public id: string = "debugHitboxes";
+    public value: boolean = false;
+
+    public onValueUpdate(): void {
+        // console.log(this.value);
+    }
+}
+
+GameRuleManager.register(new DebugHitboxes());

@@ -5,7 +5,7 @@ One time getter for attributes
 ### Syntax:
 
 ```
-/getattribute <bindtype: Enum>,<scoreboardId: String>
+/getattribute <bindtype: Enum> <scoreboardId: String>
 ```
 
 ### Permission:

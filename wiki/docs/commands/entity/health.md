@@ -5,7 +5,7 @@ Modifies all targets health based on the mode and value
 ### Syntax:
 
 ```
-/health <target: Player>,<mode: Enum>,<value: Integer>
+/health <target: Player> <mode: Enum> <value: Integer>
 ```
 
 ### Permission:

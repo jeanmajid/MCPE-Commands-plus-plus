@@ -5,7 +5,7 @@ Kicks players from the world supporting selectors
 ### Syntax:
 
 ```
-/masskick <players: Player>,[reason: String]
+/masskick <players: Player> [reason: String]
 ```
 
 ### Permission:

@@ -5,7 +5,7 @@ Draws a box via the Debug Drawer module
 ### Syntax:
 
 ```
-/drawvolume <id: String>,<startPos: Location>,<endPos: Location>
+/drawvolume <id: String> <startPos: Location> <endPos: Location>
 ```
 
 ### Permission:

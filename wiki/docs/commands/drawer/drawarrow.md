@@ -5,7 +5,7 @@ Draws a arrow via the Debug Drawer module
 ### Syntax:
 
 ```
-/drawarrow <id: String>,<startPos: Location>,<endPos: Location>,<headLength: Float>,<headRadius: Float>,<headSegments: Integer>
+/drawarrow <id: String> <startPos: Location> <endPos: Location> <headLength: Float> <headRadius: Float> <headSegments: Integer>
 ```
 
 ### Permission:

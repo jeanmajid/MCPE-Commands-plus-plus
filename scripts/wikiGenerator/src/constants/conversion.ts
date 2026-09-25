@@ -38,5 +38,6 @@ export const ENUM_CONVERSION: Record<string, Record<string, string>> = {
         Boolean: "Boolean",
         PlayerSelector: "Player",
         ItemType: "Item",
+        EntityType: "EntityType",
     },
 };

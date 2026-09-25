@@ -27,6 +27,8 @@ import { CommandManager } from "../commands/command.js";
 import { Dimensions } from "../constants/dimensions.js";
 import { ATTRIBUTE_KEY } from "../constants/dynamicPropertyKeys.js";
 
+// TODO: Clear all scores on join, so score doesn't fill up
+
 export abstract class BaseAttribute {
     public abstract id: string;
     public isBinded: boolean = false;
@@ -65,7 +67,7 @@ export class AttributeManager {
                 continue;
             }
 
-            const attributeId = propertyId.replace(ATTRIBUTE_KEY, "");
+            const attributeId = propertyId.substring(ATTRIBUTE_KEY.length);
             const attribute = this.get(attributeId);
             if (!attribute) {
                 console.warn(

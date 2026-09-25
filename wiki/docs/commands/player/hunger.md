@@ -5,7 +5,7 @@ Modifies all target players hunger based on the mode and value
 ### Syntax:
 
 ```
-/hunger <players: Player>,<mode: Enum>,<value: Integer>
+/hunger <players: Player> <mode: Enum> <value: Integer>
 ```
 
 ### Permission:

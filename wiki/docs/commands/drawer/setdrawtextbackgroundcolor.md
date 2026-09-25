@@ -5,7 +5,7 @@ Sets the draw color for text
 ### Syntax:
 
 ```
-/setdrawtextbackgroundcolor <shapeId: String>,<colorRed: Integer>,<colorGreen: Integer>,<colorBlue: Integer>,<alpha: Integer>
+/setdrawtextbackgroundcolor <shapeId: String> <colorRed: Integer> <colorGreen: Integer> <colorBlue: Integer> <alpha: Integer>
 ```
 
 ### Permission:

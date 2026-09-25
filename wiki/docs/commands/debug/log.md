@@ -5,7 +5,7 @@ Logs a message to the content log console if enabled in the user's Creator setti
 ### Syntax:
 
 ```
-/log <logType: Enum>,<message: String>
+/log <logType: Enum> <logPrivacy: Enum> <message: String>
 ```
 
 ### Permission:

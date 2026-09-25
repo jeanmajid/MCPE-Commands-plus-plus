@@ -42,7 +42,7 @@ CommandManager.register(
         mandatoryParameters: [
             {
                 name: "mode",
-                type: CustomCommandParamType.EntityType,
+                type: CustomCommandParamType.Enum,
                 enumName: VALUE_UPDATE_MODE_ENUM_KEY,
             },
             { name: "location", type: CustomCommandParamType.Location },

@@ -5,7 +5,7 @@ Modifies target entities rotation
 ### Syntax:
 
 ```
-/rotate [targets: Entity],[rotationX: Float],[rotationY: Float]
+/rotate [targets: Entity] [rotationX: Float] [rotationY: Float]
 ```
 
 ### Permission:

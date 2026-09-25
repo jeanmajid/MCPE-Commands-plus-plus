@@ -5,7 +5,7 @@ Delays the execution of a command
 ### Syntax:
 
 ```
-/delay <id: String>,<delayInTicks: Integer>,<command: String>
+/delay <id: String> <delayInTicks: Integer> <command: String>
 ```
 
 ### Permission:

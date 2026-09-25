@@ -5,7 +5,7 @@ Draws a circle via the Debug Drawer module
 ### Syntax:
 
 ```
-/drawcircle <id: String>,<position: Location>,<scale: Float>
+/drawcircle <id: String> <position: Location> <scale: Float>
 ```
 
 ### Permission:
