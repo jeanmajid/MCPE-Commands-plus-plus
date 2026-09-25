@@ -61,6 +61,7 @@ import "./registry/drawer/setDrawTextBackgroundColor.js";
 import "./registry/drawer/undraw.js";
 import "./registry/drawer/undrawAll.js";
 import "./registry/entity/entityCount.js";
+import "./registry/entity/extinguish.js";
 import "./registry/entity/fmbe.js";
 import "./registry/entity/harm.js";
 import "./registry/entity/heal.js";
