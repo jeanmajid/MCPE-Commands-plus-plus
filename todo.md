@@ -77,7 +77,6 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 /var - Float, Objects (stuff like Vector3 with x,y,z), Arrays (possibly)
 /var[DATAYPE] -- Helpers
 
-/extinguish
 /team
 
 /tame <target> <source> -- causes a source entity to tame a target entity
