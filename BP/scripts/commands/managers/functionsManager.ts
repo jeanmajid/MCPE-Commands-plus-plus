@@ -32,62 +32,69 @@ import {
 import { Dimensions } from "../../constants/dimensions.js";
 import { FUNCTIONS_KEY } from "../../constants/dynamicPropertyKeys.js";
 
+const FUNCTION_INSERT_SUCCESS_OUTPUT = "Successfully inserted command into function at line ";
+const FUNCTION_POP_SUCCESS_OUTPUT = "Successfully removed command from function at line ";
+
 export class FunctionsManager {
     public static cache: Map<string, string[]> = new Map();
 
     /**
-     * Handles the building of the function -- setting commands at lines & doing initial cleanup / parenting logic
-     */
-    public static build(id: string, line: number, command: string): void {
-        const propertyKey = FUNCTIONS_KEY + id;
-        const func = JSON.parse(world.getDynamicProperty(propertyKey) as string) ?? [];
-
-        func[line] = this.cleanCommandSyntax(command);
-        world.setDynamicProperty(propertyKey);
-    }
-
-    /**
-     * Pushes function data to memory for faster access times when next called after first use in a session
-     */
-    public static pushToCache(id: string, func: string[]): void {
-        this.cache.set(id, func);
-    }
-
-    /**
-     * Loads function data from the cache if available for faster retrieval
-     * @returns Functon data (an array of commands to run sequentially), or undefind if no function is found in memory
-     */
-    public static loadFromCache(id: string): string[] | undefined {
-        return this.cache.get(id);
-    }
-
-    /**
-     * Runs the function line-by-line from the command origin
+     * Inserts or replaces the command at the provided line within a function
+     *
+     * Appends to a new line at the end of the function when the 'line' parameter is undefined
      * @returns The command result (success-state) of whether or not the function was able to run successfully
      */
-    public static runFunction(origin: CustomCommandOrigin, id: string): CustomCommandResult {
-        let func = this.loadFromCache(id);
-        if (!func) {
-            func = JSON.parse(world.getDynamicProperty(FUNCTIONS_KEY + id) as string);
-            if (!func) {
-                return { status: CustomCommandStatus.Failure, message: "Function not found" };
-            }
+    public static insertCommand(id: string, command: string, line?: number): CustomCommandResult {
+        const propertyKey = FUNCTIONS_KEY + id;
+        const func = this.loadFunctionFromDisk(propertyKey);
+
+        const cleanCommand = this.cleanCommandSyntax(command);
+        if (line === undefined) {
+            func.push(cleanCommand);
+            this.writeFunctionToDisk(propertyKey, func);
+            return {
+                status: CustomCommandStatus.Success,
+                message: FUNCTION_INSERT_SUCCESS_OUTPUT + func.length,
+            };
         }
 
-        const source =
-            origin.sourceBlock?.dimension ??
-            origin.sourceEntity ??
-            origin.initiator ??
-            Dimensions.overworld;
+        func[line - 1] = cleanCommand;
+        this.writeFunctionToDisk(propertyKey, func);
+        return {
+            status: CustomCommandStatus.Success,
+            message: FUNCTION_INSERT_SUCCESS_OUTPUT + line,
+        };
+    }
 
-        system.run(() => {
-            for (const command of func) {
-                source.runCommand(command);
-            }
-        });
+    /**
+     * Delete the command at the provided line within a function
+     *
+     * Defaults to the last command line of the function when the 'line' parameter is undefined
+     * @returns The command result (success-state) of whether or not the function was able to run successfully
+     */
+    public static popCommand(id: string, line?: number): CustomCommandResult {
+        const propertyKey = FUNCTIONS_KEY + id;
+        let func: string[] | undefined = this.loadFunctionFromDisk(propertyKey);
 
-        this.pushToCache(id, func);
-        return { status: CustomCommandStatus.Success, message: "Successfully ran function" };
+        if (line === undefined) {
+            const funcLength = func.length;
+            func.pop();
+
+            this.writeFunctionToDisk(propertyKey, func);
+            return {
+                status: CustomCommandStatus.Success,
+                message: FUNCTION_POP_SUCCESS_OUTPUT + funcLength,
+            };
+        }
+
+        delete func[line - 1];
+
+        if (func.length === 0) {
+            func = undefined;
+        }
+
+        this.writeFunctionToDisk(propertyKey, func);
+        return { status: CustomCommandStatus.Success, message: FUNCTION_POP_SUCCESS_OUTPUT + line };
     }
 
     /**
@@ -106,6 +113,104 @@ export class FunctionsManager {
         }
 
         return { status: CustomCommandStatus.Failure, message: "Function does not exist" };
+    }
+
+    /**
+     * Lists all functions saved to the disk
+     * @returns The command result (success-state) of whether or not the function was able to run successfully
+     */
+    public static listFunctions(): string {
+        const functionsList = [];
+
+        for (const propertyId of world.getDynamicPropertyIds()) {
+            if (!propertyId.startsWith(FUNCTIONS_KEY)) {
+                continue;
+            }
+
+            functionsList.push(propertyId.replace(FUNCTIONS_KEY, ""));
+        }
+
+        return functionsList.join("\n");
+    }
+
+    /**
+     * Lists all functions saved to the disk
+     * @returns The command result (success-state) of whether or not the function was able to run successfully
+     */
+    public static listFunctionData(id: string): string {
+        const func = this.loadFunctionFromDisk(id);
+        const commandsListIndexed = [];
+        const maxLineLengthDigits = String(commandsListIndexed.length).length;
+
+        for (let i = 0; i < func.length; ++i) {
+            const linePrefix = String(i + 1).padStart(maxLineLengthDigits, " ");
+            commandsListIndexed.push(`§8${linePrefix} §f${func[i]}`);
+        }
+
+        return commandsListIndexed.join("\n");
+    }
+
+    /**
+     * Runs the function line-by-line from the command origin
+     * @returns The command result (success-state) of whether or not the function was able to run successfully
+     */
+    public static runFunction(origin: CustomCommandOrigin, id: string): CustomCommandResult {
+        let func = this.loadFromCache(id);
+        if (!func) {
+            func = this.loadFunctionFromDisk(id);
+            if (!func) {
+                return { status: CustomCommandStatus.Failure, message: "Function not found" };
+            }
+        }
+
+        const source =
+            origin.sourceBlock?.dimension ??
+            origin.sourceEntity ??
+            origin.initiator ??
+            Dimensions.overworld;
+
+        system.run(() => {
+            for (const command of func) {
+                // TODO add </sequenceabort> command to early exit mid-way through a function call
+                source.runCommand(command);
+            }
+        });
+
+        this.pushToCache(id, func);
+        return { status: CustomCommandStatus.Success, message: "Successfully ran function" };
+    }
+
+    /**
+     * Loads the function data from dynamic properties stored on the world as an array
+     * @returns The array of commands within the function
+     */
+    public static loadFunctionFromDisk(id: string): string[] {
+        return (JSON.parse(world.getDynamicProperty(id) as string) as string[]) ?? [];
+    }
+
+    /**
+     * Writes the function data to dynamic properties stored on the world as a string
+     */
+    public static writeFunctionToDisk(
+        propertyKey: string,
+        functionData: string[] | undefined
+    ): void {
+        world.setDynamicProperty(propertyKey, JSON.stringify(functionData));
+    }
+
+    /**
+     * Pushes function data to memory for faster access times when next called after first use in a session
+     */
+    public static pushToCache(id: string, func: string[]): void {
+        this.cache.set(id, func);
+    }
+
+    /**
+     * Loads function data from the cache if available for faster retrieval
+     * @returns Functon data (an array of commands to run sequentially), or undefind if no function is found in memory
+     */
+    public static loadFromCache(id: string): string[] | undefined {
+        return this.cache.get(id);
     }
 
     /**
