@@ -23,7 +23,6 @@
 
 import { world } from "@minecraft/server";
 
-import { CommandManager } from "../commands/command.js";
 import { GAMERULE_KEY } from "../constants/dynamicPropertyKeys.js";
 import { EnumManager } from "../enums/enum.js";
 
