@@ -25,7 +25,7 @@ import { ScoreboardObjective, system, world } from "@minecraft/server";
 
 import { AttributeManager, BaseAttribute } from "../attribute.js";
 
-class LevelupXpAttribute extends BaseAttribute {
+class LevelUpXpAttribute extends BaseAttribute {
     public id = "levelUpXp";
     public runId = -1;
 
@@ -46,4 +46,4 @@ class LevelupXpAttribute extends BaseAttribute {
     }
 }
 
-AttributeManager.register(new LevelupXpAttribute());
+AttributeManager.register(new LevelUpXpAttribute());
