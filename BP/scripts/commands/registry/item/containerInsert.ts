@@ -30,15 +30,18 @@ import {
     ContainerSlot,
 } from "@minecraft/server";
 
+import { BLOCK_ITEM_LOCATIONS_ENUM_KEY } from "../../../enums/registry/blockItemLocation.js";
+import { ItemLocations } from "../../../enums/registry/itemLocations.js";
+import { ITEM_MOVE_MODE_ENUM_KEY, ItemMoveMode } from "../../../enums/registry/itemMoveMode.js";
 import { CommandManager } from "../../command.js";
-import { BLOCK_ITEM_LOCATIONS_ENUM_KEY, getBlockContainerSlot } from "./blockItemName.js";
-import { ITEM_MOVE_MODE_ENUM_KEY, ItemMoveMode, moveItemAtSlot } from "./itemMove.js";
-import { ItemLocations } from "./itemName.js";
+import { getBlockContainerSlot } from "./blockItemName.js";
+import { moveItemAtSlot } from "./itemMove.js";
 
 CommandManager.register(
     {
-        name: "containertake",
-        description: "Moves an item from one provided slot within a container to another",
+        name: "containerinsert",
+        description:
+            "Move an item from a slot within an entity's inventory to a slot within a block container",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
             { name: "sourceEntity", type: CustomCommandParamType.EntitySelector },
