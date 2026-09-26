@@ -25,6 +25,7 @@ import { world } from "@minecraft/server";
 
 import { CommandManager } from "../commands/command.js";
 import { GAMERULE_KEY } from "../constants/dynamicPropertyKeys.js";
+import { EnumManager } from "../enums/enum.js";
 
 type TypeOfTypes =
     | "string"
@@ -102,11 +103,11 @@ export class GameRuleManager {
             case "boolean":
                 if (string === "true") {
                     return true;
-                } else if (string === "false") {
-                    return false;
-                } else {
-                    return null;
                 }
+                if (string === "false") {
+                    return false;
+                }
+                return null;
             default:
                 console.error("Trying to access unsupported GameRule Type: " + valueType);
                 return null;
@@ -117,6 +118,6 @@ export class GameRuleManager {
      * Only should be called once after all game rules are registered in the before world load enviroment
      */
     public static initialize(): void {
-        CommandManager.registerEnum(GAMERULE_KEY, Object.keys(GameRuleManager.gameRules));
+        EnumManager.register(GAMERULE_KEY, Object.keys(GameRuleManager.gameRules));
     }
 }

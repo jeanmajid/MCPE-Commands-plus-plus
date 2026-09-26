@@ -21,22 +21,35 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { world } from "@minecraft/server";
+import { system } from "@minecraft/server";
 
-import { AttributeManager } from "./attributes/attribute.js";
-import "./attributes/index.js";
-import "./commands/index.js";
-import "./enums/index.js";
-import { GameRuleManager } from "./gameRules/gameRule.js";
-import "./gameRules/index.js";
-import { initializeDimensions, registerCustomDimensions } from "./utils/dimension.js";
+import { NAMESPACE } from "../constants/namespace.js";
 
-AttributeManager.initialize();
-GameRuleManager.initialize();
-registerCustomDimensions();
+interface CommandEnum {
+    name: string;
+    values: string[];
+}
 
-world.afterEvents.worldLoad.subscribe(() => {
-    initializeDimensions();
-    AttributeManager.loadAttributesFromMemory();
-    GameRuleManager.loadGameRulesFromMemory();
+export class EnumManager {
+    public static enums: CommandEnum[] = [];
+
+    public static register(name: string, values: string[]): void {
+        this.enums.push({ name, values });
+    }
+}
+
+const event = system.beforeEvents.startup.subscribe(({ customCommandRegistry }) => {
+    for (const commandEnum of EnumManager.enums) {
+        if (!commandEnum.name.startsWith(NAMESPACE)) {
+            commandEnum.name = NAMESPACE + commandEnum.name;
+        }
+
+        try {
+            customCommandRegistry.registerEnum(commandEnum.name, commandEnum.values);
+        } catch (err) {
+            console.error(`Failed to register enum ${commandEnum.name}\nError: ${err}`);
+        }
+    }
+
+    system.beforeEvents.startup.unsubscribe(event);
 });

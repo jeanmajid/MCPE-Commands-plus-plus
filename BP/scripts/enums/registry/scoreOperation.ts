@@ -21,22 +21,52 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { world } from "@minecraft/server";
+import { EnumManager } from "../enum.js";
 
-import { AttributeManager } from "./attributes/attribute.js";
-import "./attributes/index.js";
-import "./commands/index.js";
-import "./enums/index.js";
-import { GameRuleManager } from "./gameRules/gameRule.js";
-import "./gameRules/index.js";
-import { initializeDimensions, registerCustomDimensions } from "./utils/dimension.js";
+export const SCORE_OPERATION_ENUM_KEY = "scoreOperationEnum";
+export enum ScoreOperation {
+    equals = "equals",
+    add = "add",
+    subtract = "subtract",
+    multiply = "multiply",
+    divide = "divide",
+    modulo = "modulo",
+    min = "min",
+    max = "max",
+    swap = "swap",
+    sqrt = "sqrt",
+    cbrt = "cbrt",
+    root = "root",
+    abs = "abs",
+    acosh = "acosh",
+    acos = "acos",
+    cos = "cos",
+    asinh = "asinh",
+    asin = "asin",
+    sin = "sin",
+    atan2 = "atan2",
+    atanh = "atanh",
+    atan = "atan",
+    tan = "tan",
+    exp = "exp",
+    expm1 = "expm1",
+    clz32 = "clz32",
+    hypot = "hypot",
+    imul = "imul",
+    log = "log",
+    log10 = "log10",
+    log1p = "log1p",
+    log2 = "log2",
+    pow = "pow",
+    toFixed = "tofixed",
+    sign = "sign",
+    and = "and",
+    or = "or",
+    xor = "xor",
+    not = "not",
+    leftShift = "<<",
+    rightShift = ">>>",
+    signedRightShift = ">>",
+}
 
-AttributeManager.initialize();
-GameRuleManager.initialize();
-registerCustomDimensions();
-
-world.afterEvents.worldLoad.subscribe(() => {
-    initializeDimensions();
-    AttributeManager.loadAttributesFromMemory();
-    GameRuleManager.loadGameRulesFromMemory();
-});
+EnumManager.register(SCORE_OPERATION_ENUM_KEY, Object.values(ScoreOperation));

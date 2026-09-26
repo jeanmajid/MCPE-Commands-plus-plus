@@ -29,9 +29,11 @@ import {
     world,
 } from "@minecraft/server";
 
+import { LogPrivacy } from "../../../enums/registry/logPrivacy.js";
+import { LOG_TYPE_ENUM_KEY, LogType } from "../../../enums/registry/logType.js";
 import { CommandManager } from "../../command.js";
 import { benchmark_data } from "./benchmarkStart.js";
-import { LOG_TYPE_ENUM_KEY, LogPrivacy, LogTypes, log } from "./log.js";
+import { log } from "./log.js";
 
 CommandManager.register(
     {
@@ -48,7 +50,7 @@ CommandManager.register(
     (
         origin,
         startId: string,
-        logType: LogTypes = LogTypes.info,
+        logType: LogType = LogType.info,
         logPrivacy: LogPrivacy,
         fakeplayer: string,
         objective: string

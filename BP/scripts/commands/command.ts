@@ -60,26 +60,9 @@ export class CommandManager {
     ): void {
         CommandManager.commands.push({ data: customCommand, callback: commandCallback });
     }
-
-    // TODO: enums get their own home... the place where they belong
-    public static registerEnum(name: string, values: string[]): void {
-        this.enums.push({ name, values });
-    }
 }
 
-system.beforeEvents.startup.subscribe(({ customCommandRegistry }) => {
-    for (const commandEnum of CommandManager.enums) {
-        if (!commandEnum.name.startsWith(NAMESPACE)) {
-            commandEnum.name = NAMESPACE + commandEnum.name;
-        }
-
-        try {
-            customCommandRegistry.registerEnum(commandEnum.name, commandEnum.values);
-        } catch (err) {
-            console.error(`Failed to register enum ${commandEnum.name}\nError: ${err}`);
-        }
-    }
-
+const event = system.beforeEvents.startup.subscribe(({ customCommandRegistry }) => {
     for (const command of CommandManager.commands) {
         if (!command.data.name.startsWith(NAMESPACE)) {
             command.data.name = NAMESPACE + command.data.name;
@@ -119,6 +102,8 @@ system.beforeEvents.startup.subscribe(({ customCommandRegistry }) => {
             command.data.name = originalName;
         }
     }
+
+    system.beforeEvents.startup.unsubscribe(event);
 });
 
 function processParams(params: CustomCommandParameter[]): void {

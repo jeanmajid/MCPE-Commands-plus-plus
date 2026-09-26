@@ -29,8 +29,9 @@ import {
     ContainerSlot,
 } from "@minecraft/server";
 
+import { BLOCK_ITEM_LOCATIONS_ENUM_KEY } from "../../../enums/registry/blockItemLocation.js";
 import { CommandManager } from "../../command.js";
-import { BLOCK_ITEM_LOCATIONS_ENUM_KEY, getBlockContainerSlot } from "./blockItemName.js";
+import { getBlockContainerSlot } from "./blockItemName.js";
 import { enchantItemAtSlot } from "./itemEnchant.js";
 
 CommandManager.register(

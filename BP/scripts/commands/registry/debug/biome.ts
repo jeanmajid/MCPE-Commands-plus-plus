@@ -28,16 +28,8 @@ import {
     CustomCommandStatus,
 } from "@minecraft/server";
 
+import { BIOME_DATA_ENUM_KEY, BiomeData } from "../../../enums/registry/biomeData.js";
 import { CommandManager } from "../../command.js";
-
-const BIOME_DATA_ENUM_KEY = "biomeDataEnum";
-enum BiomeData {
-    all = "all",
-    tags = "tags",
-    id = "id",
-}
-
-CommandManager.registerEnum(BIOME_DATA_ENUM_KEY, Object.values(BiomeData));
 
 CommandManager.register(
     {

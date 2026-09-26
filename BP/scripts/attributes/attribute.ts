@@ -23,9 +23,9 @@
 
 import { ScoreboardObjective, world } from "@minecraft/server";
 
-import { CommandManager } from "../commands/command.js";
 import { Dimensions } from "../constants/dimensions.js";
 import { ATTRIBUTE_KEY } from "../constants/dynamicPropertyKeys.js";
+import { EnumManager } from "../enums/enum.js";
 
 // TODO: Clear all scores on join, so score doesn't fill up
 
@@ -92,6 +92,6 @@ export class AttributeManager {
      * Only should be called once after all attributes are registered in the before world load enviroment
      */
     public static initialize(): void {
-        CommandManager.registerEnum(ATTRIBUTE_KEY, Object.keys(AttributeManager.attributes));
+        EnumManager.register(ATTRIBUTE_KEY, Object.keys(AttributeManager.attributes));
     }
 }

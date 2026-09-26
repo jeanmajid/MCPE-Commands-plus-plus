@@ -29,18 +29,8 @@ import {
     Entity,
 } from "@minecraft/server";
 
+import { FMBE_TYPE_ENUM_KEY, FmbeType } from "../../../enums/registry/fmbeType.js";
 import { CommandManager } from "../../command.js";
-
-export const FMBE_TYPE_ENUM_KEY = "fmbeTypeEnum";
-enum FmbeTypes {
-    standard = "standard",
-    simple = "simple",
-    advanced2d = "advanced_2d",
-    advanced3d = "advanced_3d",
-    advancedItems = "advanced_items",
-}
-
-CommandManager.registerEnum(FMBE_TYPE_ENUM_KEY, Object.values(FmbeTypes));
 
 CommandManager.register(
     {
@@ -53,7 +43,7 @@ CommandManager.register(
             { name: "fmbeType", type: CustomCommandParamType.Enum, enumName: FMBE_TYPE_ENUM_KEY },
         ],
     },
-    (origin, targets: Entity[], fmbeType: FmbeTypes = FmbeTypes.standard) => {
+    (origin, targets: Entity[], fmbeType: FmbeType = FmbeType.standard) => {
         if (targets.length === 0) {
             return { status: CustomCommandStatus.Failure, message: "No targets match selector" };
         }

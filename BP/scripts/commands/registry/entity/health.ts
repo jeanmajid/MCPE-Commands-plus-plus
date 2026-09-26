@@ -29,18 +29,12 @@ import {
     system,
 } from "@minecraft/server";
 
+import {
+    VALUE_UPDATE_MODE_ENUM_KEY,
+    ValueUpdateMode,
+} from "../../../enums/registry/valueUpdateMode.js";
 import { clamp } from "../../../utils/math.js";
 import { CommandManager } from "../../command.js";
-
-export enum ValueUpdateMode {
-    add = "add",
-    remove = "remove",
-    set = "set",
-}
-
-export const VALUE_UPDATE_MODE_ENUM_KEY = "valueUpdateMode";
-
-CommandManager.registerEnum(VALUE_UPDATE_MODE_ENUM_KEY, Object.values(ValueUpdateMode));
 
 CommandManager.register(
     {

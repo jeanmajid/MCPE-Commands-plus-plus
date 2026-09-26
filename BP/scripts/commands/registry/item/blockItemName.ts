@@ -31,16 +31,13 @@ import {
     ContainerSlot,
 } from "@minecraft/server";
 
+import {
+    BLOCK_ITEM_LOCATIONS_ENUM_KEY,
+    BlockItemLocations,
+} from "../../../enums/registry/blockItemLocation.js";
 import { getDimensionFromCommandOrigin } from "../../../utils/dimension.js";
 import { CommandManager } from "../../command.js";
 import { renameItemAtSlot } from "./itemName.js";
-
-export const BLOCK_ITEM_LOCATIONS_ENUM_KEY = "blockItemLocationsEnum";
-export enum BlockItemLocations {
-    slotContainer = "slot.container",
-}
-
-CommandManager.registerEnum(BLOCK_ITEM_LOCATIONS_ENUM_KEY, Object.values(BlockItemLocations));
 
 CommandManager.register(
     {

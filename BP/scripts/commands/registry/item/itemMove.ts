@@ -31,17 +31,9 @@ import {
     ItemStack,
 } from "@minecraft/server";
 
+import { ITEM_LOCATIONS_ENUM_KEY, ItemLocations } from "../../../enums/registry/itemLocations.js";
+import { ITEM_MOVE_MODE_ENUM_KEY, ItemMoveMode } from "../../../enums/registry/itemMoveMode.js";
 import { CommandManager } from "../../command.js";
-import { ITEM_LOCATIONS_ENUM_KEY, ItemLocations } from "./itemName.js";
-
-export const ITEM_MOVE_MODE_ENUM_KEY = "itemMoveMode";
-export enum ItemMoveMode {
-    swap = "swap",
-    copy = "copy",
-    move = "move",
-}
-
-CommandManager.registerEnum(ITEM_MOVE_MODE_ENUM_KEY, Object.values(ItemMoveMode));
 
 CommandManager.register(
     {

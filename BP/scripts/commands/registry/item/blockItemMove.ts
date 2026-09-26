@@ -28,11 +28,15 @@ import {
     Vector3,
 } from "@minecraft/server";
 
+import {
+    BLOCK_ITEM_LOCATIONS_ENUM_KEY,
+    BlockItemLocations,
+} from "../../../enums/registry/blockItemLocation.js";
+import { ITEM_MOVE_MODE_ENUM_KEY, ItemMoveMode } from "../../../enums/registry/itemMoveMode.js";
 import { getDimensionFromCommandOrigin } from "../../../utils/dimension.js";
 import { numberInRange } from "../../../utils/number.js";
 import { CommandManager } from "../../command.js";
-import { BLOCK_ITEM_LOCATIONS_ENUM_KEY, BlockItemLocations } from "./blockItemName.js";
-import { ITEM_MOVE_MODE_ENUM_KEY, ItemMoveMode, moveItemAtSlot } from "./itemMove.js";
+import { moveItemAtSlot } from "./itemMove.js";
 
 CommandManager.register(
     {

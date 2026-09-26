@@ -21,22 +21,16 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { world } from "@minecraft/server";
+import "./enum.js";
 
-import { AttributeManager } from "./attributes/attribute.js";
-import "./attributes/index.js";
-import "./commands/index.js";
-import "./enums/index.js";
-import { GameRuleManager } from "./gameRules/gameRule.js";
-import "./gameRules/index.js";
-import { initializeDimensions, registerCustomDimensions } from "./utils/dimension.js";
-
-AttributeManager.initialize();
-GameRuleManager.initialize();
-registerCustomDimensions();
-
-world.afterEvents.worldLoad.subscribe(() => {
-    initializeDimensions();
-    AttributeManager.loadAttributesFromMemory();
-    GameRuleManager.loadGameRulesFromMemory();
-});
+// TODO: Automate this
+import "./registry/biomeData.js";
+import "./registry/blockItemLocation.js";
+import "./registry/dimension.js";
+import "./registry/fmbeType.js";
+import "./registry/itemLocations.js";
+import "./registry/itemMoveMode.js";
+import "./registry/logPrivacy.js";
+import "./registry/logType.js";
+import "./registry/scoreOperation.js";
+import "./registry/valueUpdateMode.js";

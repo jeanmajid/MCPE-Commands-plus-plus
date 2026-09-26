@@ -30,12 +30,8 @@ import {
 } from "@minecraft/server";
 
 import { Dimensions } from "../../../constants/dimensions.js";
+import { DIMENSION_ENUM_KEY } from "../../../enums/registry/dimension.js";
 import { CommandManager } from "../../command.js";
-
-CommandManager.registerEnum(
-    "dimension",
-    Object.keys({ ...Dimensions }).filter((d) => d !== "all")
-);
 
 CommandManager.register(
     {
@@ -43,7 +39,7 @@ CommandManager.register(
         description: "Teleport between dimensions",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
-            { name: "dimension", type: CustomCommandParamType.Enum, enumName: "dimension" },
+            { name: "dimension", type: CustomCommandParamType.Enum, enumName: DIMENSION_ENUM_KEY },
         ],
         optionalParameters: [{ name: "targets", type: CustomCommandParamType.EntitySelector }],
     },

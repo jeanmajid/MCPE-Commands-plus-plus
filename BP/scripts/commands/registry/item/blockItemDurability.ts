@@ -29,9 +29,13 @@ import {
     ContainerSlot,
 } from "@minecraft/server";
 
+import { BLOCK_ITEM_LOCATIONS_ENUM_KEY } from "../../../enums/registry/blockItemLocation.js";
+import {
+    VALUE_UPDATE_MODE_ENUM_KEY,
+    ValueUpdateMode,
+} from "../../../enums/registry/valueUpdateMode.js";
 import { CommandManager } from "../../command.js";
-import { VALUE_UPDATE_MODE_ENUM_KEY, ValueUpdateMode } from "../entity/health.js";
-import { BLOCK_ITEM_LOCATIONS_ENUM_KEY, getBlockContainerSlot } from "./blockItemName.js";
+import { getBlockContainerSlot } from "./blockItemName.js";
 import { updateItemDurabilityAtSlot } from "./itemDurability.js";
 
 CommandManager.register(

@@ -31,10 +31,13 @@ import {
     ItemStack,
 } from "@minecraft/server";
 
+import { ITEM_LOCATIONS_ENUM_KEY, ItemLocations } from "../../../enums/registry/itemLocations.js";
+import {
+    VALUE_UPDATE_MODE_ENUM_KEY,
+    ValueUpdateMode,
+} from "../../../enums/registry/valueUpdateMode.js";
 import { clamp } from "../../../utils/math.js";
 import { CommandManager } from "../../command.js";
-import { VALUE_UPDATE_MODE_ENUM_KEY, ValueUpdateMode } from "../entity/health.js";
-import { ITEM_LOCATIONS_ENUM_KEY, ItemLocations } from "./itemName.js";
 
 CommandManager.register(
     {

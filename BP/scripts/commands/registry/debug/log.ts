@@ -29,25 +29,9 @@ import {
     world,
 } from "@minecraft/server";
 
+import { LOG_PRIVACY_ENUM_KEY, LogPrivacy } from "../../../enums/registry/logPrivacy.js";
+import { LOG_TYPE_ENUM_KEY, LogType } from "../../../enums/registry/logType.js";
 import { CommandManager } from "../../command.js";
-
-export const LOG_TYPE_ENUM_KEY = "logTypeEnum";
-export enum LogTypes {
-    info = "info",
-    warn = "warn",
-    error = "error",
-    chat = "chat",
-    none = "none",
-}
-
-export const LOG_PRIVACY_ENUM_KEY = "logPrivacyEnum";
-export enum LogPrivacy {
-    public = "public",
-    private = "private",
-}
-
-CommandManager.registerEnum(LOG_TYPE_ENUM_KEY, Object.values(LogTypes));
-CommandManager.registerEnum(LOG_PRIVACY_ENUM_KEY, Object.values(LogPrivacy));
 
 CommandManager.register(
     {
@@ -57,11 +41,15 @@ CommandManager.register(
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
             { name: "logType", type: CustomCommandParamType.Enum, enumName: LOG_TYPE_ENUM_KEY },
-            { name: "logPrivacy", type: CustomCommandParamType.Enum },
+            {
+                name: "logPrivacy",
+                type: CustomCommandParamType.Enum,
+                enumName: LOG_PRIVACY_ENUM_KEY,
+            },
             { name: "message", type: CustomCommandParamType.String },
         ],
     },
-    (origin, logType: LogTypes, logPrivacy: LogPrivacy, message: string) => {
+    (origin, logType: LogType, logPrivacy: LogPrivacy, message: string) => {
         return log(message, logType, logPrivacy);
     }
 );
@@ -84,18 +72,18 @@ export function log(
     }
 
     switch (logType) {
-        case LogTypes.none:
+        case LogType.none:
             return SUCCESSFUL_LOG_OUTPUT;
-        case LogTypes.info:
+        case LogType.info:
             console.info(message);
             return SUCCESSFUL_LOG_OUTPUT;
-        case LogTypes.warn:
+        case LogType.warn:
             console.warn(message);
             return SUCCESSFUL_LOG_OUTPUT;
-        case LogTypes.error:
+        case LogType.error:
             console.error(message);
             return SUCCESSFUL_LOG_OUTPUT;
-        case LogTypes.chat:
+        case LogType.chat:
             world.sendMessage(message);
             return SUCCESSFUL_LOG_OUTPUT;
         default:
