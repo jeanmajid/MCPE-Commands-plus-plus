@@ -54,7 +54,6 @@ type CommandDocsString = string;
 type CommandOut = Record<CommandCategory, Record<CommandName, CommandDocsString>>;
 
 const outPutCommands: CommandOut = {};
-let commandCount = 0;
 let aliasCount = 0;
 
 const now = performance.now();
@@ -158,7 +157,7 @@ ${commandData.permissionLevel}`;
 
     // Operators and command blocks.
 
-    ++commandCount;
+    //++commandCount;
     if (commandData.aliases) {
         aliasCount += commandData.aliases.length;
     }
