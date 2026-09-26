@@ -63,12 +63,7 @@ processFile("../../app/src/main.cpp");
  * @returns {void}
  */
 function processFile(path) {
-    if (
-        !path.endsWith(".json") &&
-        !path.endsWith(".ts") &&
-        !path.endsWith(".js") &&
-        !path.endsWith(".")
-    ) {
+    if (!path.endsWith(".json") && !path.endsWith(".ts") && !path.endsWith(".js")) {
         return;
     }
 
