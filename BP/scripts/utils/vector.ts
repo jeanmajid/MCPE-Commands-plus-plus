@@ -21,9 +21,18 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Vector3 } from "@minecraft/server";
+import { Vector2, Vector3 } from "@minecraft/server";
 
 export class Vector {
+    private constructor() {}
+    public static equal(vector1: Vector3, vector2: Vector3): boolean {
+        return vector1.x === vector2.x && vector1.y === vector2.y && vector1.z === vector2.z;
+    }
+
+    public static equalXY(vector1: Vector2, vector2: Vector2): boolean {
+        return vector1.x === vector2.x && vector1.y === vector2.y;
+    }
+
     public static add(vector1: Vector3, vector2: Vector3): Vector3 {
         return { x: vector1.x + vector2.x, y: vector1.y + vector2.y, z: vector1.z + vector2.z };
     }
@@ -78,7 +87,9 @@ export class Vector {
     public static toString(vector: Vector3): string {
         return `${vector.x}, ${vector.y}, ${vector.z}`;
     }
-
+    public static toCommandsString(vector: Vector3): string {
+        return `${vector.x} ${vector.y} ${vector.z}`;
+    }
     public static toStringFloored(vector: Vector3): string {
         return `${Math.floor(vector.x)}, ${Math.floor(vector.y)}, ${Math.floor(vector.z)}`;
     }

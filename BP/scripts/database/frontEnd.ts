@@ -30,13 +30,13 @@ interface UnknownMap {
 type StringForced<T> = T extends string ? T : never;
 export abstract class DatabaseFrontEnd<M = UnknownMap> {
     public static create<T extends UnknownMap>(
-        this: new (mid: DatabaseMiddleEnd) => DatabaseFrontEnd<T>,
+        this: new (mid: DatabaseMiddleEnd) => DatabaseFrontEnd<UnknownMap>,
         options: { namespace: string; target: DatabaseBackEnd; large?: boolean }
     ): DatabaseFrontEnd<T> {
         const middle = options.large
             ? new LargeDatabaseMiddleEnd(options.target, options.namespace)
             : new FastDatabaseMiddleEnd(options.target, options.namespace);
-        return new this(middle);
+        return new this(middle) as unknown as DatabaseFrontEnd<T>;
     }
 
     public readonly middle_end: DatabaseMiddleEnd;
