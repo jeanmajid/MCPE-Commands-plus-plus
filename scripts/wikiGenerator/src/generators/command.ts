@@ -21,12 +21,13 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { readFileSync, existsSync, mkdirSync } from "node:fs";
+import { existsSync } from "node:fs";
+import { mkdir, readFile } from "node:fs/promises";
 import { basename, dirname, join } from "node:path";
 
 import { COMMAND_REGISTRY_PATH, WIKI_COMMAND_FOLDER_PATH } from "../constants/path.js";
 import { TSParser } from "../parsers/TSParser.js";
-import { recursiveRead } from "../utils/file.js";
+import { recursiveReadDir } from "../utils/file.js";
 import { writeToDocsFile } from "../utils/wiki.js";
 
 interface Parameter {
@@ -58,9 +59,14 @@ let aliasCount = 0;
 
 const now = performance.now();
 
-recursiveRead(COMMAND_REGISTRY_PATH, processFile);
-
-function processFile(filePath: string): void {
+{
+    const tasks: Promise<void>[] = [];
+    for await (const path of recursiveReadDir(COMMAND_REGISTRY_PATH)) {
+        tasks.push(processFile(path));
+    }
+    await Promise.all(tasks);
+}
+async function processFile(filePath: string): Promise<void> {
     const currentDirname = basename(dirname(filePath));
 
     if (!outPutCommands[currentDirname]) {
@@ -68,7 +74,7 @@ function processFile(filePath: string): void {
     }
     const currentOutputCategory = outPutCommands[currentDirname];
 
-    const fileContents = readFileSync(filePath, "utf-8");
+    const fileContents = await readFile(filePath, "utf-8");
     const tsParser = new TSParser(fileContents);
 
     const registerCommandCall = tsParser.findClassMethodCall("CommandManager", "register");
@@ -133,30 +139,6 @@ ${commandData.aliases.map((a) => `\`/${a}\``).join(", ")}`
 
 ${commandData.permissionLevel}`;
 
-    // # SetOnFire
-    //
-    // Sets the target entities on fire.
-
-    // ### Syntax:
-
-    // ```js
-    // /setonfire <targets: Entity> [timeSeconds: Float] [useEffects: Boolean]
-    // ```
-
-    // Valid aliases: `/ignite`, `/fire`
-
-    // ### Definitions:
-
-    // - **`<targets: Entity>`** — This field is required. Blahblahblah.
-
-    // - **`[timeSeconds: Float]`** — This field is optional. Blahblahblah.
-
-    // - **`[useEffects: Boolean]`** — This field is optional. Blahblahblah.
-
-    // ### Permission:
-
-    // Operators and command blocks.
-
     //++commandCount;
     if (commandData.aliases) {
         aliasCount += commandData.aliases.length;
@@ -171,14 +153,17 @@ ${commandData.permissionLevel}`;
 for (const [category, commands] of Object.entries(outPutCommands)) {
     const categoryPath = join(WIKI_COMMAND_FOLDER_PATH, category);
     if (!existsSync(categoryPath)) {
-        mkdirSync(categoryPath);
+        await mkdir(categoryPath);
     }
 
+    const tasks: Promise<void>[] = [];
     for (const [commandName, commandOut] of Object.entries(commands)) {
         const commandPath = join(categoryPath, commandName);
 
-        writeToDocsFile(commandPath, commandOut);
+        tasks.push(writeToDocsFile(commandPath, commandOut));
     }
+
+    await Promise.all(tasks);
 }
 
 console.log(`Succesfully generated command data in ${performance.now() - now}ms`);

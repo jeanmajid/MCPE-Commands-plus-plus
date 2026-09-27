@@ -29,7 +29,7 @@ import {
     Expression,
     ObjectExpression,
     PropertyKey,
-} from "@yuku-parser/wasm";
+} from "yuku-parser";
 
 import { ENUM_CONVERSION } from "../constants/conversion.js";
 

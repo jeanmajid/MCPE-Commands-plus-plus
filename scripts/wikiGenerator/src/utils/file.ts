@@ -21,17 +21,15 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { readdirSync, statSync } from "node:fs";
+import { readdir } from "node:fs/promises";
 import { join } from "node:path";
 
-export function recursiveRead(directoryPath: string, action: (path: string) => void): void {
-    for (const filePath of readdirSync(directoryPath)) {
-        const finalPath = join(directoryPath, filePath);
-
-        if (statSync(finalPath).isDirectory()) {
-            recursiveRead(finalPath, action);
-        } else {
-            action(finalPath);
+export async function* recursiveReadDir(base: string): AsyncGenerator<string> {
+    for (const filePath of await readdir(base, { recursive: true, withFileTypes: true })) {
+        if (filePath.isDirectory()) {
+            continue;
         }
+
+        yield join(filePath.parentPath, filePath.name);
     }
 }
