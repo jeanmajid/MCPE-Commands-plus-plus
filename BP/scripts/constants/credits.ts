@@ -29,6 +29,6 @@ interface Credit {
 export const CREDITS: Credit[] = [
     { role: "owner", names: ["jeanmajid"] },
     { role: "developers", names: ["MaxedOut4826"] },
-    { role: "contributors", names: ["conmaster2112", "mareczek1113", "nikitschen"] },
+    { role: "contributors", names: ["conmaster2112", "nikitschen", "mareczek1113"] },
     { role: "quality assurance", names: [] },
 ];
