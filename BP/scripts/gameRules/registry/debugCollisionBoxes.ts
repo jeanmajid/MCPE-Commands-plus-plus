@@ -44,6 +44,7 @@ class DebugCollisionBoxesGameRule extends BaseGameRule<boolean> {
 
     private enable(): void {
         // TODO: Use events pleeaaaseee, im lazy
+        // Also undraw the shapes
         this.runId = system.runInterval(() => {
             for (const entity of getAllEntities()) {
                 this.drawHitbox(entity);
