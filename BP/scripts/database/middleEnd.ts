@@ -90,7 +90,6 @@ export class LargeDatabaseMiddleEnd extends DatabaseMiddleEnd {
         void iterator.next(); // Skip this one we already got it from metadata
         for (const chunk_key of iterator) {
             const raw = this.backend.getDynamicProperty(chunk_key);
-            console.log("chunk:", raw);
             if (typeof raw !== "string") {
                 return null;
             }

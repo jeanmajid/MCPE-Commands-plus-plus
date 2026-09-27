@@ -26,8 +26,8 @@ import { EnumManager } from "../enum.js";
 export const LIQUIDTYPE_ENUM_KEY = "liquidType";
 
 export enum LiquidType {
-	water = "water",
-	lava = "lava"
+    water = "water",
+    lava = "lava",
 }
 
 EnumManager.register(LIQUIDTYPE_ENUM_KEY, Object.values(LiquidType));

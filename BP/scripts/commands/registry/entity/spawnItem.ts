@@ -29,12 +29,10 @@ import {
     ItemStack,
     ItemType,
     system,
-    world,
 } from "@minecraft/server";
 
 import { getDimensionFromCommandOrigin } from "../../../utils/dimension.js";
 import { clamp } from "../../../utils/math.js";
-import { Vector } from "../../../utils/vector.js";
 import { CommandManager } from "../../command.js";
 
 CommandManager.register(
@@ -64,8 +62,3 @@ CommandManager.register(
         };
     }
 );
-
-world.afterEvents.entitySpawn.subscribe((e) => {
-    console.log(e.entity.id);
-    console.log(Vector.toString(e.entity.location));
-});

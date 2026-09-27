@@ -23,6 +23,7 @@
 
 import { Vector2, Vector3 } from "@minecraft/server";
 
+const { floor } = Math;
 export class Vector {
     private constructor() {}
     public static equal(vector1: Vector3, vector2: Vector3): boolean {
@@ -39,6 +40,10 @@ export class Vector {
 
     public static subtract(vector1: Vector3, vector2: Vector3): Vector3 {
         return { x: vector1.x - vector2.x, y: vector1.y - vector2.y, z: vector1.z - vector2.z };
+    }
+
+    public static floor(vector1: Vector3): Vector3 {
+        return { x: floor(vector1.x), y: floor(vector1.y), z: floor(vector1.z) };
     }
 
     public static multiply(vector: Vector3, scalar: number): Vector3 {
@@ -77,6 +82,13 @@ export class Vector {
         return Vector.add(location, Vector.multiply(direction, distance));
     }
 
+    public static powerDistance(vector1: Vector3, vector2: Vector3): number {
+        const dx = vector2.x - vector1.x;
+        const dy = vector2.y - vector1.y;
+        const dz = vector2.z - vector1.z;
+        return dx * dx + dy * dy + dz * dz;
+    }
+
     public static distance(vector1: Vector3, vector2: Vector3): number {
         const dx = vector2.x - vector1.x;
         const dy = vector2.y - vector1.y;
@@ -84,6 +96,9 @@ export class Vector {
         return Math.sqrt(dx * dx + dy * dy + dz * dz);
     }
 
+    public static toStringFlooredHash(vector: Vector3): string {
+        return `${floor(vector.x)}${floor(vector.y)}${floor(vector.z)}`;
+    }
     public static toString(vector: Vector3): string {
         return `${vector.x}, ${vector.y}, ${vector.z}`;
     }
@@ -91,7 +106,7 @@ export class Vector {
         return `${vector.x} ${vector.y} ${vector.z}`;
     }
     public static toStringFloored(vector: Vector3): string {
-        return `${Math.floor(vector.x)}, ${Math.floor(vector.y)}, ${Math.floor(vector.z)}`;
+        return `${floor(vector.x)}, ${floor(vector.y)}, ${floor(vector.z)}`;
     }
 
     public static setSmallestAndBiggest(smaller: Vector3, bigger: Vector3): void {

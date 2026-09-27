@@ -30,6 +30,7 @@ import "./registry/dimension.js";
 import "./registry/fmbeType.js";
 import "./registry/itemLocations.js";
 import "./registry/itemMoveMode.js";
+import "./registry/liquidType.js";
 import "./registry/logPrivacy.js";
 import "./registry/logType.js";
 import "./registry/scoreOperation.js";
