@@ -45,6 +45,9 @@ export abstract class BaseGameRule<T> {
 
     /**
      * Gets called when the gamerule value is changed and on startup
+     *
+     * OnValueUpdate will only be called, when the value actually changes.
+     * So true to true will not trigger it, while true to false will
      */
     public abstract onValueUpdate(): void;
 }

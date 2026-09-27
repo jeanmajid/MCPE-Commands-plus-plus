@@ -21,15 +21,14 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { BaseGameRule, GameRuleManager } from "../gameRule.js";
+import { DebugBox } from "@minecraft/debug-utilities";
+import "@minecraft/server";
 
-class DebugHitboxes extends BaseGameRule<boolean> {
-    public id: string = "debugHitboxes";
-    public value: boolean = false;
-
-    public onValueUpdate(): void {
-        // console.log(this.value);
+declare module "@minecraft/server" {
+    interface Entity {
+        /**
+         * Shape used for the debugCollisionBoxes gamerule
+         */
+        collisionBoxShape: DebugBox;
     }
 }
-
-GameRuleManager.register(new DebugHitboxes());
