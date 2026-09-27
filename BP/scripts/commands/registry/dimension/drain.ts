@@ -22,29 +22,71 @@
  */
 
 import {
-    CommandPermissionLevel,
-    CustomCommandParamType,
-    CustomCommandStatus,
-    system,
+	BlockVolume,
+	CommandPermissionLevel,
+	CustomCommandOrigin,
+	CustomCommandParamType,
+	CustomCommandStatus, Dimension,
+	system,
+	Vector3,
 } from "@minecraft/server";
 
 import { CommandManager } from "../../command.js";
-import { LIQUIDTYPE_ENUM_KEY } from "../../../enums/registry/liquidType.js";
+import { LiquidType, LIQUIDTYPE_ENUM_KEY} from "../../../enums/registry/liquidType.js";
 
-CommandManager.register(
-    {
+function isInSphere(center: Vector3, position: Vector3, radius: number): boolean {
+	const dx: number = position.x - center.x;
+	const dy: number = position.y - center.y;
+	const dz: number = position.z - center.z;
+
+	return dx * dx + dy * dy + dz * dz > radius * radius;
+}
+
+CommandManager.register({
         name: "drain",
         description: "Drains either lava or water around the player with a radius.",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
             { name: "liquidType", type: CustomCommandParamType.Enum, enumName: LIQUIDTYPE_ENUM_KEY },
-        ]
+        ],
+		optionalParameters: [
+			{ name: "radius", type: CustomCommandParamType.Integer },
+		]
     },
-    (origin) => {
+    (origin: CustomCommandOrigin, liquidType: LiquidType, radius: number = 5) => {
+		const dimension: Dimension = origin.sourceEntity.dimension;
+		
+		const center: Vector3 = origin.sourceEntity.location
+		const min = {x: center.x - radius, y: center.y - radius, z: center.z - radius}
+		const max = {x: center.x + radius, y: center.y + radius, z: center.z + radius}
+		
+		const volume = new BlockVolume(min, max)
+		
         system.run(() => {
-			return {status: CustomCommandStatus.Success, message: "Test test"};
+			for (const location of volume.getBlockLocationIterator()) {
+				if (!dimension.isChunkLoaded(location)) continue
+				if (!isInSphere(center, location, radius)) continue
+				
+				const block = dimension.getBlock(location);
+				
+				switch (liquidType) {
+					case LiquidType.lava:
+						if (block?.typeId === "minecraft:lava") {
+							block.setType("minecraft:air");
+						}
+						
+						break
+					
+					case LiquidType.water:
+						if (block?.typeId === "minecraft:water") {
+							block.setType("minecraft:air");
+						}
+						
+						break
+				}
+			}
         });
 		
-        return { status: CustomCommandStatus.Success, message: `Successfully created explosion` };
+        return { status: CustomCommandStatus.Success, message: `Successfully drained ${liquidType.toString()} in a ${radius.toString()} block radius.` };
     }
 );
