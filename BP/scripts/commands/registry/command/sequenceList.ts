@@ -36,6 +36,7 @@ import { FMResult, FUNCTION_MANAGER } from "../../managers/functionsManager.js";
 CommandManager.register(
     {
         name: "sequencelist",
+        aliases: ["seqlist"],
         description:
             "Lists available sequences or commands in specific sequence matching provided name",
         permissionLevel: CommandPermissionLevel.GameDirectors,

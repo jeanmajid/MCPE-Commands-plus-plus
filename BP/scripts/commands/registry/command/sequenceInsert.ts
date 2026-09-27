@@ -10,6 +10,7 @@ import { FMResult, FUNCTION_MANAGER } from "../../managers/functionsManager.js";
 CommandManager.register(
     {
         name: "sequenceinsert",
+        aliases: ["seqinsert"],
         description: "Inserts new commands to the sequences at specified line",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [

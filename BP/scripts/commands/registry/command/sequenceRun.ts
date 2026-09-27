@@ -26,20 +26,19 @@ import {
     CustomCommandStatus,
     CustomCommandParamType,
     system,
-    Vector3,
-    Vector2,
     Dimension,
     Entity,
 } from "@minecraft/server";
 
 import { Dimensions } from "../../../constants/dimensions.js";
-import { Vector } from "../../../utils/vector.js";
 import { CommandManager } from "../../command.js";
 import { FMResult, FUNCTION_MANAGER } from "../../managers/functionsManager.js";
+import { getIsRunning, setIsRunning } from "./sequenceAbort.js";
 
 CommandManager.register(
     {
         name: "sequencerun",
+        aliases: ["seqrun"],
         description: "Runs a sequence matching specified name",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [{ name: "sequenceName", type: CustomCommandParamType.String }],
@@ -65,16 +64,6 @@ CommandManager.register(
                 message: "Unexpected bug, report this issue to github repository",
             };
         }
-
-        const location: Vector3 | null =
-            origin.sourceEntity?.location ??
-            origin.sourceBlock?.location ??
-            origin.initiator?.location ??
-            null;
-
-        const rotation: Vector2 | null =
-            origin.sourceEntity?.getRotation() ?? origin.initiator?.getRotation() ?? null;
-
         const dimension: Dimension | null =
             origin.sourceEntity?.dimension ??
             origin.sourceBlock?.dimension ??
@@ -83,45 +72,16 @@ CommandManager.register(
 
         const target: Dimension | Entity | null = origin.sourceEntity ?? origin.initiator ?? null;
 
-        // TODO: Jean the Guy Who Knows should help here
-        // should return the execute offset right? or am i doing something wrong?
-        // please jean help me
-        console.log("at: " + Vector.toString(location!));
         const commands = data.data;
         system.run(() => {
-            let execute = false;
-            let options = "";
-            if (!target) {
-                execute = true;
-                options += ` positioned ${Vector.toCommandsString(location ?? { x: 0, y: 0, z: 0 })}`;
-            } else {
-                if (dimension && dimension !== target.dimension) {
-                    execute = true;
-                    options += ` in ${dimension.id}`;
-                }
-
-                if (location && !Vector.equal(target.location, location)) {
-                    execute = true;
-                    options += ` positioned ${Vector.toCommandsString(location ?? { x: 0, y: 0, z: 0 })}`;
-                }
-
-                if (rotation && !Vector.equalXY(target.getRotation(), rotation)) {
-                    execute = true;
-                    options += ` rotated ${rotation.x} ${rotation.y}`;
-                }
-            }
-
-            let prefix = "";
-            if (execute) {
-                prefix = "execute" + options + " run ";
-            }
-
             const src = target ?? dimension ?? Dimensions.overworld;
 
+            setIsRunning(true);
             for (const command of commands) {
-                src.runCommand(prefix + command);
-                console.log("running: " + prefix + command);
+                if (!getIsRunning()) break;
+                src.runCommand(command);
             }
+            setIsRunning(false);
         });
 
         return {

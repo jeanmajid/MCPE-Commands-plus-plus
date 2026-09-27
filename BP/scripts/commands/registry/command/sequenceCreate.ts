@@ -10,6 +10,7 @@ import { FMResult, FUNCTION_MANAGER } from "../../managers/functionsManager.js";
 CommandManager.register(
     {
         name: "sequencecreate",
+        aliases: ["seqcreate"],
         description: "Creates new sequence",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [{ name: "sequenceName", type: CustomCommandParamType.String }],
