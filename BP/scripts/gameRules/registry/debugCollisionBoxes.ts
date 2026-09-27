@@ -33,6 +33,7 @@ class DebugCollisionBoxesGameRule extends BaseGameRule<boolean> {
     public value: boolean = false;
 
     private runId = -1;
+    private drawnShapes: Map<string, DebugBox> = new Map();
 
     public onValueUpdate(): void {
         if (this.value) {
@@ -53,17 +54,23 @@ class DebugCollisionBoxesGameRule extends BaseGameRule<boolean> {
     }
 
     private disable(): void {
-        if (this.runId !== -1) {
-            system.clearRun(this.runId);
-            this.runId = -1;
-        }
-    }
-
-    private drawHitbox(entity: Entity): void {
-        if (entity.collisionBoxShape) {
+        if (this.runId === -1) {
             return;
         }
 
+        for (const [_entityId, shape] of this.drawnShapes) {
+            shape.remove();
+        }
+
+        this.drawnShapes.clear();
+        system.clearRun(this.runId);
+        this.runId = -1;
+    }
+
+    private drawHitbox(entity: Entity): void {
+        if (this.drawnShapes.has(entity.id)) {
+            return;
+        }
         const aabb = entity.getAABB();
 
         const box = new DebugBox({ x: 0, y: aabb.extent.y, z: 0, dimension: entity.dimension });
@@ -71,6 +78,7 @@ class DebugCollisionBoxesGameRule extends BaseGameRule<boolean> {
         box.bound = Vector.multiply(aabb.extent, 2);
 
         entity.collisionBoxShape = box;
+        this.drawnShapes.set(entity.id, box);
         debugDrawer.addShape(box);
     }
 }

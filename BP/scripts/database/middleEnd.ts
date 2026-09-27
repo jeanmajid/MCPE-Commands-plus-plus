@@ -31,10 +31,12 @@ export abstract class DatabaseMiddleEnd {
     public constructor(backend: DatabaseBackEnd, namespace: string) {
         this.backend = backend;
         this.namespace = namespace;
-        if (namespace.includes("\\"))
+        if (namespace.includes("\\")) {
             throw new SyntaxError("Backslash is not allowed inside a namespace identifier");
-        if (namespace.length > 32)
+        }
+        if (namespace.length > 32) {
             throw new SyntaxError("Namespace length is limited to 32 characters");
+        }
     }
     protected root(): string {
         return `\\??\\${this.namespace.padEnd(32, "\\")}\\`;
@@ -164,14 +166,17 @@ export class FastDatabaseMiddleEnd extends DatabaseMiddleEnd {
 
     public get(key: string): string | null {
         const data = this.backend.getDynamicProperty(this.resolve(key));
-        if (typeof data !== "string") return null;
+        if (typeof data !== "string") {
+            return null;
+        }
 
         return data;
     }
 
     public set(key: string, value: string): void {
-        if (value.length >= MAX_CHUNK_SIZE)
+        if (value.length >= MAX_CHUNK_SIZE) {
             throw new ReferenceError("database: Max value sizes exceed.");
+        }
 
         const raw = this.resolve(key);
         this.backend.setDynamicProperty(raw, value);

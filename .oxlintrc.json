@@ -76,6 +76,7 @@
         "oxc/number-arg-out-of-range": "warn",
         "oxc/only-used-in-recursion": "warn",
         "oxc/uninvoked-array-callback": "warn",
+        "curly": "warn",
         "typescript/no-meaningless-void-operator": "off",
         "typescript/no-duplicate-enum-values": "warn",
         "typescript/no-extra-non-null-assertion": "warn",

@@ -78,7 +78,9 @@ CommandManager.register(
 
             setIsRunning(true);
             for (const command of commands) {
-                if (!getIsRunning()) break;
+                if (!getIsRunning()) {
+                    break;
+                }
                 src.runCommand(command);
             }
             setIsRunning(false);
