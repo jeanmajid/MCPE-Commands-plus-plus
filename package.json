@@ -7,7 +7,7 @@
     "bugs": {
         "url": "https://github.com/jeanmajid/MCPE-Commands-plus-plus/issues"
     },
-    "license": "GNU3",
+    "license": "GPL-3.0",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/jeanmajid/MCPE-Commands-plus-plus.git"

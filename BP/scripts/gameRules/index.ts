@@ -24,4 +24,4 @@
 import "./gameRule.js";
 
 // TODO: Automate this
-import "./registry/debugHitboxes.js";
+import "./registry/debugCollisionBoxes.js";
