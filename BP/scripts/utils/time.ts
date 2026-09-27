@@ -21,6 +21,7 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
+
 export interface DurationReturn {
     message?: string;
     value?: number | null;

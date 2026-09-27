@@ -21,6 +21,7 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
+
 import { system } from "@minecraft/server";
 
 import { NAMESPACE } from "../constants/namespace.js";

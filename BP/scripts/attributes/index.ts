@@ -21,6 +21,7 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
+
 // TODO: Automate this
 import "./registry/commandPermissionLevel.js";
 import "./registry/controlScheme.js";

@@ -21,6 +21,7 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
+
 import { EnumManager } from "../enum.js";
 
 export const BLOCK_ITEM_LOCATIONS_ENUM_KEY = "blockItemLocationsEnum";

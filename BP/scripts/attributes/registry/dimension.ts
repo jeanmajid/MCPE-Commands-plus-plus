@@ -21,6 +21,7 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
+
 import { PlayerDimensionChangeAfterEvent, ScoreboardObjective, world } from "@minecraft/server";
 
 import { DimensionIds } from "../../constants/dimensions.js";
