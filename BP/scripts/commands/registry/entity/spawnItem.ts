@@ -29,10 +29,12 @@ import {
     ItemStack,
     ItemType,
     system,
+    world,
 } from "@minecraft/server";
 
 import { getDimensionFromCommandOrigin } from "../../../utils/dimension.js";
 import { clamp } from "../../../utils/math.js";
+import { Vector } from "../../../utils/vector.js";
 import { CommandManager } from "../../command.js";
 
 CommandManager.register(
@@ -48,20 +50,12 @@ CommandManager.register(
     },
     (origin, item: ItemType, location: Vector3, quantity: number = 1) => {
         const dimension = getDimensionFromCommandOrigin(origin);
-
         quantity = clamp(quantity, 1, 255);
 
         const itemStack = new ItemStack(item, quantity);
 
         system.run(() => {
-            try {
-                dimension.spawnItem(itemStack, location);
-            } catch {
-                return {
-                    status: CustomCommandStatus.Failure,
-                    message: "Cannot spawn item outside of the world",
-                };
-            }
+            dimension.spawnItem(itemStack, location);
         });
 
         return {
@@ -70,3 +64,8 @@ CommandManager.register(
         };
     }
 );
+
+world.afterEvents.entitySpawn.subscribe((e) => {
+    console.log(e.entity.id);
+    console.log(Vector.toString(e.entity.location));
+});
