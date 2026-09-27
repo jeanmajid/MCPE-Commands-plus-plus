@@ -12,6 +12,6 @@
     },
     "dependencies": {
         "@types/node": "^26.2.0",
-        "@yuku-parser/wasm": "^0.10.2"
+        "yuku-parser": "^0.11.0"
     }
 }
