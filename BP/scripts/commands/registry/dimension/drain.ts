@@ -22,12 +22,12 @@
  */
 
 import {
+	Block,
 	BlockVolume,
 	CommandPermissionLevel,
 	CustomCommandOrigin,
 	CustomCommandParamType,
-	CustomCommandStatus, Dimension,
-	system,
+	CustomCommandStatus, Dimension, system,
 	Vector3,
 } from "@minecraft/server";
 
@@ -39,7 +39,7 @@ function isInSphere(center: Vector3, position: Vector3, radius: number): boolean
 	const dy: number = position.y - center.y;
 	const dz: number = position.z - center.z;
 
-	return dx * dx + dy * dy + dz * dz > radius * radius;
+	return dx * dx + dy * dy + dz * dz <= radius * radius;
 }
 
 CommandManager.register({
@@ -53,40 +53,44 @@ CommandManager.register({
 			{ name: "radius", type: CustomCommandParamType.Integer },
 		]
     },
-    (origin: CustomCommandOrigin, liquidType: LiquidType, radius: number = 5) => {
+	(origin: CustomCommandOrigin, liquidType: LiquidType, radius: number = 5) => {
+		if (origin.sourceEntity == null) return { status: CustomCommandStatus.Failure, message: "Command origin must be an entity." }
+		if (radius > 10) return { status: CustomCommandStatus.Failure, message: `Radius is too big (${radius} > 10).` };
+
 		const dimension: Dimension = origin.sourceEntity.dimension;
+		const playerPos: Vector3 = origin.sourceEntity.location;
+
+		const center: Vector3 = {x: Math.floor(playerPos.x), y: Math.floor(playerPos.y), z: Math.floor(playerPos.z),};
+		const min = {x: center.x - radius, y: center.y - radius, z: center.z - radius};
+		const max = {x: center.x + radius, y: center.y + radius, z: center.z + radius};
+		const volume = new BlockVolume(min, max);
 		
-		const center: Vector3 = origin.sourceEntity.location
-		const min = {x: center.x - radius, y: center.y - radius, z: center.z - radius}
-		const max = {x: center.x + radius, y: center.y + radius, z: center.z + radius}
-		
-		const volume = new BlockVolume(min, max)
-		
-        system.run(() => {
+		system.run(() => {
 			for (const location of volume.getBlockLocationIterator()) {
-				if (!dimension.isChunkLoaded(location)) continue
-				if (!isInSphere(center, location, radius)) continue
-				
-				const block = dimension.getBlock(location);
-				
+				if (!isInSphere(center, location, radius)) continue;
+				if (!dimension.isChunkLoaded(location)) continue;
+
+				const block: Block = dimension.getBlock(location);
+				if (block == null) continue;
+
 				switch (liquidType) {
 					case LiquidType.lava:
-						if (block?.typeId === "minecraft:lava") {
+						if (block.typeId === "minecraft:lava" || block.typeId === "minecraft:flowing_lava") {
 							block.setType("minecraft:air");
 						}
-						
-						break
-					
+
+						break;
+
 					case LiquidType.water:
-						if (block?.typeId === "minecraft:water") {
+						if (block.typeId === "minecraft:water" || block.typeId === "minecraft:flowing_water") {
 							block.setType("minecraft:air");
 						}
-						
-						break
+
+						break;
 				}
 			}
-        });
-		
-        return { status: CustomCommandStatus.Success, message: `Successfully drained ${liquidType.toString()} in a ${radius.toString()} block radius.` };
-    }
+		})
+
+		return {status: CustomCommandStatus.Success, message: `Successfully drained ${liquidType} in a ${radius} block radius.`};
+	}
 );
