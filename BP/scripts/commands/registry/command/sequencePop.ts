@@ -24,34 +24,23 @@
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
-    system,
     CustomCommandParamType,
-    Entity,
 } from "@minecraft/server";
 
 import { CommandManager } from "../../command.js";
 
+const COMMAND_FUNCTIONS: Map<string, string[]> = new Map();
+
 CommandManager.register(
     {
-        name: "clearvelocity",
-        description: "Clears target entities velocity",
+        name: "sequencepop",
+        aliases: ["seqpop"],
+        description: "",
         permissionLevel: CommandPermissionLevel.GameDirectors,
-        mandatoryParameters: [{ name: "targets", type: CustomCommandParamType.EntitySelector }],
+        mandatoryParameters: [{ name: "functionName", type: CustomCommandParamType.String }],
+        optionalParameters: [{ name: "index", type: CustomCommandParamType.Integer }],
     },
-    (origin, targets: Entity[]) => {
-        if (targets.length === 0) {
-            return { status: CustomCommandStatus.Failure, message: "No targets match selector" };
-        }
-
-        system.run(() => {
-            for (const entity of targets) {
-                try {
-                    entity.clearVelocity();
-                } catch {
-                    // skip
-                }
-            }
-        });
-        return { status: CustomCommandStatus.Success, message: "Successfully cleared velocity" };
+    (origin, functionName: string, index: number) => {
+        return { status: CustomCommandStatus.Success, message: "Command scheduled to run" };
     }
 );

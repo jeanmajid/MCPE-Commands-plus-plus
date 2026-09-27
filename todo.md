@@ -1,3 +1,23 @@
+### Sequence - set
+
+/sequencepop <function: string> [index: number] --> Removes the command at line index in a function, or the last command in the function if the index is undefined
+/seqpop
+
+/sequencerun <function: string> --> Runs all commands in a function line by line
+/seqrun
+
+/sequenceinsert <function: string> <command: string> [index: number] --> Inserts a command at line index in a function, or pushes to the end of the commands list if the index is undefiend
+/seqins
+
+/sequencelist [function: string] --> Lists all commands in a function, or or function IDs if function is undefined
+/seqlst
+
+/sequencedelete <function: string> --> Deletes the whole provided function
+/seqdel
+
+/sequenceabort --> Stops parsing the function at this point when ran by sequencerun (early return)
+/seqabt
+
 /run "execute as @a at @s run give @s diamond {score.selector}"
 selector could something like {“score”:{“name”:”@s”,”objective”:”example”}}
 
