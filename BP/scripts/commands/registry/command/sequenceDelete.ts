@@ -9,19 +9,19 @@ import { FMResult, FUNCTION_MANAGER } from "../../managers/functionsManager.js";
 
 CommandManager.register(
     {
-        name: "sequencecreate",
-        description: "Creates new sequence",
+        name: "sequencedelete",
+        description: "Deletes specified sequence",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [{ name: "sequenceName", type: CustomCommandParamType.String }],
     },
     (origin, sequenceName: string) => {
-        const status = FUNCTION_MANAGER.createC(sequenceName);
+        const status = FUNCTION_MANAGER.deleteC(sequenceName);
 
         switch (status) {
             case FMResult.Success:
                 return {
                     status: CustomCommandStatus.Success,
-                    message: "Successfully created <sequence>/" + sequenceName,
+                    message: "Successfully deleted <sequence>/" + sequenceName,
                 };
 
             case FMResult.InvalidName:
@@ -30,10 +30,10 @@ CommandManager.register(
                     message: "Sequence name contains invalid characters",
                 };
 
-            case FMResult.NameCollision:
+            case FMResult.NotFound:
                 return {
                     status: CustomCommandStatus.Failure,
-                    message: "Sequence with this name already exists, <sequence>/" + sequenceName,
+                    message: "Sequence with this name doesn't exists, <sequence>/" + sequenceName,
                 };
         }
 

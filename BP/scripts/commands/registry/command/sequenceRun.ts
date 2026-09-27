@@ -40,7 +40,7 @@ import { FMResult, FUNCTION_MANAGER } from "../../managers/functionsManager.js";
 CommandManager.register(
     {
         name: "sequencerun",
-        description: "",
+        description: "Runs a sequence matching specified name",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [{ name: "sequenceName", type: CustomCommandParamType.String }],
     },
@@ -83,6 +83,7 @@ CommandManager.register(
 
         const target: Dimension | Entity | null = origin.sourceEntity ?? origin.initiator ?? null;
 
+        // TODO: Jean the Guy Who Knows should help here
         // should return the execute offset right? or am i doing something wrong?
         // please jean help me
         console.log("at: " + Vector.toString(location!));

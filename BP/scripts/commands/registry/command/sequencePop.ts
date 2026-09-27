@@ -33,7 +33,7 @@ import { FMResult, FUNCTION_MANAGER } from "../../managers/functionsManager.js";
 CommandManager.register(
     {
         name: "sequencepop",
-        description: "",
+        description: "Pops or removed specific line from a sequence of commands",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [{ name: "sequenceName", type: CustomCommandParamType.String }],
         optionalParameters: [{ name: "line", type: CustomCommandParamType.Integer }],

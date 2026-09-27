@@ -34,6 +34,7 @@ import "./registry/command/delay.js";
 import "./registry/command/scoreMath.js";
 import "./registry/command/scoreRandom.js";
 import "./registry/command/sequenceCreate.js";
+import "./registry/command/sequenceDelete.js";
 import "./registry/command/sequenceInsert.js";
 import "./registry/command/sequenceList.js";
 import "./registry/command/sequencePop.js";
