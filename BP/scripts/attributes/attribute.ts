@@ -31,7 +31,7 @@ import { EnumManager } from "../enums/enum.js";
 
 export abstract class BaseAttribute {
     public abstract id: string;
-    public isBinded: boolean = false;
+    public isBinded: boolean = false; //isBound
     public score!: ScoreboardObjective;
     /**
      * Function to initiate all your events or runIntervals

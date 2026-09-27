@@ -52,6 +52,6 @@ CommandManager.register(
                 }
             }
         });
-        return { status: CustomCommandStatus.Success, message: "Sucessfully cleared velocity" };
+        return { status: CustomCommandStatus.Success, message: "Successfully cleared velocity" };
     }
 );

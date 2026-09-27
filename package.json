@@ -7,21 +7,20 @@
     "bugs": {
         "url": "https://github.com/jeanmajid/MCPE-Commands-plus-plus/issues"
     },
-    "license": "ISC",
-    "author": "",
+    "license": "GNU3",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/jeanmajid/MCPE-Commands-plus-plus.git"
     },
     "type": "module",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
     "dependencies": {
         "@minecraft/debug-utilities": "1.0.0-beta.1.26.52-stable",
         "@minecraft/server": "2.11.0-beta.1.26.52-stable",
         "@minecraft/server-admin": "1.0.0-beta.1.26.52-stable",
-        "@minecraft/server-ui": "2.3.0-beta.1.26.52-stable",
+        "@minecraft/server-ui": "2.3.0-beta.1.26.52-stable"
+    },
+    "devDependencies": {
+        "@jeanmajid/mcpe-tool": "^1.0.13",
         "oxfmt": "^0.56.0",
         "oxlint": "^1.71.0"
     }
