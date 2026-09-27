@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 export const ENUM_CONVERSION: Record<string, Record<string, string>> = {
     CommandPermissionLevel: {
         Any: "Everyone",

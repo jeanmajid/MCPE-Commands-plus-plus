@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import { CommandPermissionLevel, CustomCommandStatus, Player } from "@minecraft/server";
 
 import { CREDITS } from "../../../constants/credits.js";

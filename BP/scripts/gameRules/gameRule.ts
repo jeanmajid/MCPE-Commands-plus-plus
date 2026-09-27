@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import { world } from "@minecraft/server";
 
 import { GAMERULE_KEY } from "../constants/dynamicPropertyKeys.js";

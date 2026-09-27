@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import { BaseGameRule, GameRuleManager } from "../gameRule.js";
 
 class DebugHitboxes extends BaseGameRule<boolean> {

@@ -21,5 +21,4 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 export const NAMESPACE = "jeanmajid:";

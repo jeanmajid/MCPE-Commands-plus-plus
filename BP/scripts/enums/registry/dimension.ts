@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import { Dimensions } from "../../constants/dimensions.js";
 import { EnumManager } from "../enum.js";
 

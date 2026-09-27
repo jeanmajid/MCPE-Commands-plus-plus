@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import { RGB, RGBA } from "@minecraft/server";
 
 export function getNormalizedRgb(red: number, green: number, blue: number): RGB {

@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import { EnumManager } from "../enum.js";
 
 export const LOG_PRIVACY_ENUM_KEY = "logPrivacyEnum";

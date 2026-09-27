@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import { EnumManager } from "../enum.js";
 
 export const BIOME_DATA_ENUM_KEY = "biomeDataEnum";

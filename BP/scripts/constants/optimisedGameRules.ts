@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import { GameRule, PlayerWaypointsMode } from "@minecraft/server";
 
 export const OPTIMISED_GAMERULE_SETUP = [

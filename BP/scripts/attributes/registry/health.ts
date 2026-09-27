@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import { EntityHealthChangedAfterEvent, ScoreboardObjective, world } from "@minecraft/server";
 
 import { getAllEntities } from "../../utils/dimension.js";

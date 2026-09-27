@@ -21,7 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-
 import { join } from "path";
 
 export const COMMANDS_FOLDER_PATH = "../../BP/scripts/commands";
