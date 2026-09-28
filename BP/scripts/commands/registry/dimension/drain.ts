@@ -21,6 +21,11 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
+// TODO: Target location, default to origin location
+// TODO: Get rid of the logging
+// TODO: Needs some refactoring
+// TODO: Waterlogged blocks need to be unwaterlogged
+
 import {
     Block,
     BlockPermutation,
@@ -58,10 +63,10 @@ CommandManager.register(
         waterLogged: boolean = false,
         fill: BlockType = BlockTypes.get("minecraft:air")!
     ) => {
-        if (radius > 128) {
+        if (radius > 128 || radius < 1) {
             return {
                 status: CustomCommandStatus.Failure,
-                message: `Radius is too big (${radius} > 128).`,
+                message: "Radius has to be in the range of 1 to 128",
             };
         }
 
@@ -75,30 +80,33 @@ CommandManager.register(
                 message: `Player doesn't stands in liquid`,
             };
         }
+
         function* process(): Generator<void, void, void> {
             const chunks: Map<string, Vector3[]> = new Map();
             let blocks = 0;
             let lastTick = system.currentTick >> 4;
             const filter = new Set([entry!.permutation, entry!.type]);
+
             for (const block of fluidMarshal(
-                (_): boolean =>
-                    filter.has(_.type) ||
-                    filter.has(_.permutation) ||
-                    (waterLogged && (_.isWaterlogged || _.typeId === "minecraft:bubble_column")),
+                (b): boolean =>
+                    filter.has(b.type) ||
+                    filter.has(b.permutation) ||
+                    (waterLogged && (b.isWaterlogged || b.typeId === "minecraft:bubble_column")),
                 entry!,
                 radius ?? 64
             )) {
-                const chunk_location = Vector.floor(Vector.multiply(block, 1 / 16));
+                const chunkLocation = Vector.floor(Vector.multiply(block, 1 / 16));
                 // We want to sort them by Y level
-                const chunk_id = `${chunk_location.y.toString(16).padStart(4, "0")}${chunk_location.x.toString(16).padStart(4, "0")}${chunk_location.z.toString(16).padStart(4, "0")}`;
+                const chunkId = `${chunkLocation.y.toString(16).padStart(4, "0")}${chunkLocation.x.toString(16).padStart(4, "0")}${chunkLocation.z.toString(16).padStart(4, "0")}`;
 
-                let list = chunks.get(chunk_id) ?? null;
+                let list = chunks.get(chunkId) ?? null;
                 if (!list) {
-                    chunks.set(chunk_id, (list = []));
+                    chunks.set(chunkId, (list = []));
                 }
 
                 yield void list.push(block.location);
-                blocks++;
+                ++blocks;
+
                 if (lastTick !== system.currentTick >> 4) {
                     lastTick = system.currentTick >> 4;
                     world.sendMessage("§hCalculating effected blocks: " + blocks);
@@ -110,11 +118,14 @@ CommandManager.register(
             for (const chunk_keys of Array.from(chunks.keys()).sort()) {
                 const chunk = chunks.get(chunk_keys)!;
                 const raw = new ListBlockVolume(chunk);
-                if (waterLogged) {
-                    // somehow waterlogged items do not removed the logged flag
-                    yield void dimension.fillBlocks(raw, bedrock);
-                }
-                yield void dimension.fillBlocks(raw, fill);
+                try {
+                    if (waterLogged) {
+                        // somehow waterlogged items do not removed the logged flag
+                        yield void dimension.fillBlocks(raw, bedrock);
+                    }
+
+                    yield void dimension.fillBlocks(raw, fill);
+                } catch {}
             }
         }
 
