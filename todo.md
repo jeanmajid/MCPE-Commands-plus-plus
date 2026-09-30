@@ -109,6 +109,19 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 
 /clearbutbetter -- allows clearing of specific locations and potentially ranges like hotbar 0 -> hotbar 5
 
+ADD SOME VANILLA COMMAND SHORTHANDS:
+
+- /day OR /d --> /time set day
+- /night OR /n --> /time set night
+- /wc --> /weather clear
+- /gma --> /gamemode adventure
+- /gmc --> /gamemode creative
+- /gms --> /gamemode survival
+- /gmsp --> /gamemode spectator (may be able to avoid this because its basically /v vanish)
+- /clr OR /cl --> /clear
+- /rld OR /r --> /reload (if able to though i dont think u can run this with scripts)
+-
+
 - Old Commands++ ideas
 - Custom language based on /run syntax
 - Injecting code into all events that script api has
