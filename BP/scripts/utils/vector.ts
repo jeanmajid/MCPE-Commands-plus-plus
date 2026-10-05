@@ -23,7 +23,6 @@
 
 import { Vector2, Vector3 } from "@minecraft/server";
 
-const { floor } = Math;
 export class Vector {
     private constructor() {}
     public static equal(vector1: Vector3, vector2: Vector3): boolean {
@@ -43,7 +42,7 @@ export class Vector {
     }
 
     public static floor(vector1: Vector3): Vector3 {
-        return { x: floor(vector1.x), y: floor(vector1.y), z: floor(vector1.z) };
+        return { x: Math.floor(vector1.x), y: Math.floor(vector1.y), z: Math.floor(vector1.z) };
     }
 
     public static multiply(vector: Vector3, scalar: number): Vector3 {
@@ -97,7 +96,7 @@ export class Vector {
     }
 
     public static toStringFlooredHash(vector: Vector3): string {
-        return `${floor(vector.x)}${floor(vector.y)}${floor(vector.z)}`;
+        return `${Math.floor(vector.x)}${Math.floor(vector.y)}${Math.floor(vector.z)}`;
     }
     public static toString(vector: Vector3): string {
         return `${vector.x}, ${vector.y}, ${vector.z}`;
@@ -106,7 +105,7 @@ export class Vector {
         return `${vector.x} ${vector.y} ${vector.z}`;
     }
     public static toStringFloored(vector: Vector3): string {
-        return `${floor(vector.x)}, ${floor(vector.y)}, ${floor(vector.z)}`;
+        return `${Math.floor(vector.x)}, ${Math.floor(vector.y)}, ${Math.floor(vector.z)}`;
     }
 
     public static setSmallestAndBiggest(smaller: Vector3, bigger: Vector3): void {
