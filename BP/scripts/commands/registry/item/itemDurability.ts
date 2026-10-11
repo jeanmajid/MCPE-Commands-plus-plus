@@ -118,15 +118,15 @@ export function updateItemDurabilityAtSlot(
         }
 
         switch (mode) {
-            case ValueUpdateMode.Set:
+            case ValueUpdateMode.set:
                 durability.damage = clamp(amount, 0, durability.maxDurability);
                 break;
 
-            case ValueUpdateMode.Add:
+            case ValueUpdateMode.add:
                 durability.damage = clamp(durability.damage + amount, 0, durability.maxDurability);
                 break;
 
-            case ValueUpdateMode.Remove:
+            case ValueUpdateMode.remove:
                 durability.damage = clamp(durability.damage - amount, 0, durability.maxDurability);
                 break;
         }
