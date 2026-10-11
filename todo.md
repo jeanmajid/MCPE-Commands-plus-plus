@@ -109,6 +109,12 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 
 /clearbutbetter -- allows clearing of specific locations and potentially ranges like hotbar 0 -> hotbar 5
 
+/repeat <count: integer> <command: string> -- repeats a command x amount of times; may also have a 'delay' param
+
+/intervalrun <id: string> <interval: integer> <command: string> -- begins an interval running every x amount of ticks until reload (maybe has an option to make persistent through reloads?); may become a runjob if the interval is 0, or runjob's may be a separate command
+
+/intervalstop <id: string> -- stops a run interval
+
 ADD SOME VANILLA COMMAND SHORTHANDS:
 
 - /day OR /d --> /time set day
