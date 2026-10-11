@@ -27,6 +27,7 @@ import "./enum.js";
 import "./registry/biomeData.js";
 import "./registry/blockItemLocation.js";
 import "./registry/dimension.js";
+import "./registry/enchantment.js";
 import "./registry/fmbeType.js";
 import "./registry/itemLocations.js";
 import "./registry/itemMoveMode.js";

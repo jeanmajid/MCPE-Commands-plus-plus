@@ -32,6 +32,7 @@ import {
     ItemStack,
 } from "@minecraft/server";
 
+import { ENCHANTMENT_ENUM_KEY } from "../../../enums/registry/enchantment.js";
 import { ITEM_LOCATIONS_ENUM_KEY, ItemLocations } from "../../../enums/registry/itemLocations.js";
 import { CommandManager } from "../../command.js";
 
@@ -44,7 +45,7 @@ CommandManager.register(
             { name: "targets", type: CustomCommandParamType.PlayerSelector },
             { name: "slot", type: CustomCommandParamType.Enum, enumName: ITEM_LOCATIONS_ENUM_KEY },
             { name: "index", type: CustomCommandParamType.Integer },
-            { name: "enchant", type: CustomCommandParamType.String },
+            { name: "enchant", type: CustomCommandParamType.Enum, enumName: ENCHANTMENT_ENUM_KEY },
         ],
         optionalParameters: [{ name: "level", type: CustomCommandParamType.Integer }],
     },

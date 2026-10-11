@@ -30,6 +30,7 @@ import {
 } from "@minecraft/server";
 
 import { BLOCK_ITEM_LOCATIONS_ENUM_KEY } from "../../../enums/registry/blockItemLocation.js";
+import { ENCHANTMENT_ENUM_KEY } from "../../../enums/registry/enchantment.js";
 import { CommandManager } from "../../command.js";
 import { getBlockContainerSlot } from "./blockItemName.js";
 import { enchantItemAtSlot } from "./itemEnchant.js";
@@ -47,7 +48,7 @@ CommandManager.register(
                 enumName: BLOCK_ITEM_LOCATIONS_ENUM_KEY,
             },
             { name: "index", type: CustomCommandParamType.Integer },
-            { name: "enchant", type: CustomCommandParamType.String },
+            { name: "enchant", type: CustomCommandParamType.Enum, enumName: ENCHANTMENT_ENUM_KEY },
         ],
         optionalParameters: [{ name: "level", type: CustomCommandParamType.Integer }],
     },
