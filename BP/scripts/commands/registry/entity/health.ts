@@ -51,7 +51,7 @@ CommandManager.register(
             { name: "value", type: CustomCommandParamType.Integer },
         ],
     },
-    (origin, targets: Entity[], valueUpdateMode: ValueUpdateMode, value: number) => {
+    (_, targets: Entity[], valueUpdateMode: ValueUpdateMode, value: number) => {
         if (targets.length === 0) {
             return { status: CustomCommandStatus.Failure, message: "No targets match selector" };
         }

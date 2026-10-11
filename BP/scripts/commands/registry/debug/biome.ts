@@ -40,7 +40,7 @@ CommandManager.register(
             { name: "biomeData", type: CustomCommandParamType.Enum, enumName: BIOME_DATA_ENUM_KEY },
         ],
     },
-    (origin, biomeData: BiomeData = BiomeData.id) => {
+    (origin, biomeData: BiomeData = BiomeData.Id) => {
         const source = origin.sourceEntity ?? origin.sourceBlock ?? origin.initiator;
         if (!source || !source.dimension.isChunkLoaded(source.location)) {
             return {
@@ -50,10 +50,10 @@ CommandManager.register(
         }
 
         const biome = source.dimension.getBiome(source.location);
-        if (biomeData === BiomeData.id) {
+        if (biomeData === BiomeData.Id) {
             return { status: CustomCommandStatus.Success, message: `§aBiome: §r${biome.id}` };
         }
-        if (biomeData === BiomeData.tags) {
+        if (biomeData === BiomeData.Tags) {
             return {
                 status: CustomCommandStatus.Success,
                 message: `§aTags: §r${getBiomeTags(biome)}`,

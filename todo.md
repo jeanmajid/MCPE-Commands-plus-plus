@@ -115,7 +115,10 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 
 /intervalstop <id: string> -- stops a run interval
 
-/tpbiome -- teleports to the specified biome; like /locate, just with the tp
+/tptobiome -- teleports to the specified biome; like /locate biome, just with the tp
+/tptostructure -- teleports to the specified structure; like /locate structure, just with the tp
+
+- UPDATE /removetags and /addtags to be `/tags <target> <add | remove> [tags]`
 
 ADD SOME VANILLA COMMAND SHORTHANDS:
 

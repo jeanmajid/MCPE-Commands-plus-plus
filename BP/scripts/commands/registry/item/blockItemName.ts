@@ -82,7 +82,7 @@ export function getBlockContainerSlot(
     slot: string,
     index: number
 ): CustomCommandResult | ContainerSlot {
-    if (slot !== BlockItemLocations.slotContainer) {
+    if (slot !== BlockItemLocations.SlotContainer) {
         return { status: CustomCommandStatus.Failure, message: "Invalid container slot location" };
     }
 

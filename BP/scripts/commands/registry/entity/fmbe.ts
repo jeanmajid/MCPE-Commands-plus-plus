@@ -43,7 +43,7 @@ CommandManager.register(
             { name: "fmbeType", type: CustomCommandParamType.Enum, enumName: FMBE_TYPE_ENUM_KEY },
         ],
     },
-    (origin, targets: Entity[], fmbeType: FmbeType = FmbeType.standard) => {
+    (origin, targets: Entity[], fmbeType: FmbeType = FmbeType.Standard) => {
         if (targets.length === 0) {
             return { status: CustomCommandStatus.Failure, message: "No targets match selector" };
         }

@@ -62,7 +62,7 @@ const SUCCESSFUL_LOG_OUTPUT = {
 export function log(
     message: string,
     logType: string,
-    logPrivacy: string = LogPrivacy.public
+    logPrivacy: string = LogPrivacy.Public
 ): CustomCommandResult {
     if (logPrivacy) {
         return {
@@ -72,18 +72,18 @@ export function log(
     }
 
     switch (logType) {
-        case LogType.none:
+        case LogType.None:
             return SUCCESSFUL_LOG_OUTPUT;
-        case LogType.info:
+        case LogType.Info:
             console.info(message);
             return SUCCESSFUL_LOG_OUTPUT;
-        case LogType.warn:
+        case LogType.Warn:
             console.warn(message);
             return SUCCESSFUL_LOG_OUTPUT;
-        case LogType.error:
+        case LogType.Error:
             console.error(message);
             return SUCCESSFUL_LOG_OUTPUT;
-        case LogType.chat:
+        case LogType.Chat:
             world.sendMessage(message);
             return SUCCESSFUL_LOG_OUTPUT;
         default:

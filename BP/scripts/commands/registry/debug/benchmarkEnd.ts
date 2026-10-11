@@ -50,7 +50,7 @@ CommandManager.register(
     (
         origin,
         startId: string,
-        logType: LogType = LogType.info,
+        logType: LogType = LogType.Info,
         logPrivacy: LogPrivacy,
         fakeplayer: string,
         objective: string

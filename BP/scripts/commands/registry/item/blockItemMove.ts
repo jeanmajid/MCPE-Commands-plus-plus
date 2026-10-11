@@ -77,13 +77,13 @@ CommandManager.register(
         moveMode: ItemMoveMode,
         replaceItem: boolean
     ) => {
-        if (sourceSlot !== BlockItemLocations.slotContainer) {
+        if (sourceSlot !== BlockItemLocations.SlotContainer) {
             return {
                 status: CustomCommandStatus.Failure,
                 message: "Invalid source container slot location",
             };
         }
-        if (destinationSlot !== BlockItemLocations.slotContainer) {
+        if (destinationSlot !== BlockItemLocations.SlotContainer) {
             return {
                 status: CustomCommandStatus.Failure,
                 message: "Invalid destination container slot location",

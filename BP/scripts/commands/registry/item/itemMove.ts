@@ -67,7 +67,7 @@ CommandManager.register(
         sourceIndex: number,
         destinationSlot: string,
         destinationIndex: number,
-        moveMode: ItemMoveMode = ItemMoveMode.move,
+        moveMode: ItemMoveMode = ItemMoveMode.Move,
         replaceItem: boolean = true
     ) => {
         const sourceItemSlot = ItemLocations[sourceSlot];
@@ -137,7 +137,7 @@ export function moveItemAtSlot(
         const sourceItem = sourceItemSlot.getItem();
         let destinationItem: undefined | null | ItemStack = null;
 
-        if (moveMode === ItemMoveMode.swap) {
+        if (moveMode === ItemMoveMode.Swap) {
             destinationItem = destinationItemSlot.getItem();
 
             sourceItemSlot.setItem(destinationItem);
@@ -153,7 +153,7 @@ export function moveItemAtSlot(
             }
         }
 
-        if (moveMode === ItemMoveMode.move) {
+        if (moveMode === ItemMoveMode.Move) {
             sourceItemSlot.setItem(undefined);
             destinationItemSlot.setItem(sourceItem);
             return;

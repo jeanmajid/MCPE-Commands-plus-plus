@@ -25,11 +25,11 @@ import { EnumManager } from "../enum.js";
 
 export const LOG_TYPE_ENUM_KEY = "logTypeEnum";
 export enum LogType {
-    info = "info",
-    warn = "warn",
-    error = "error",
-    chat = "chat",
-    none = "none",
+    Info = "info",
+    Warn = "warn",
+    Error = "error",
+    Chat = "chat",
+    None = "none",
 }
 
 EnumManager.register(LOG_TYPE_ENUM_KEY, Object.values(LogType));
