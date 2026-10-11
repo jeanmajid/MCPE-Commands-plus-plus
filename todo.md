@@ -115,6 +115,8 @@ selector could something like {“score”:{“name”:”@s”,”objective”:
 
 /intervalstop <id: string> -- stops a run interval
 
+/tpbiome -- teleports to the specified biome; like /locate, just with the tp
+
 ADD SOME VANILLA COMMAND SHORTHANDS:
 
 - /day OR /d --> /time set day
