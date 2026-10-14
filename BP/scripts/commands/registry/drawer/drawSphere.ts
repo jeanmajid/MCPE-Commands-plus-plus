@@ -51,6 +51,9 @@ CommandManager.register(
         sphere.scale = scale;
 
         DrawManager.addShape(id, sphere);
-        return { status: CustomCommandStatus.Success, message: "Sphere successfully drawn" };
+        return {
+            status: CustomCommandStatus.Success,
+            message: `Sphere added to the drawing group "${id}"`,
+        };
     }
 );

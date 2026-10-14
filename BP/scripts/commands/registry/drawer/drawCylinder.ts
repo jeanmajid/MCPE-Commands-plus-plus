@@ -68,6 +68,9 @@ CommandManager.register(
         cylinder.numSegments = clamp(numSegments, 3, 128);
 
         DrawManager.addShape(id, cylinder);
-        return { status: CustomCommandStatus.Success, message: "Cylinder successfully drawn" };
+        return {
+            status: CustomCommandStatus.Success,
+            message: `Cylinder added to the drawing group "${id}"`,
+        };
     }
 );

@@ -50,6 +50,9 @@ CommandManager.register(
         const line = new DebugLine({ ...startPos, dimension }, endPos);
         DrawManager.addShape(id, line);
 
-        return { status: CustomCommandStatus.Success, message: "Line successfully added" };
+        return {
+            status: CustomCommandStatus.Success,
+            message: `Line added to the drawing group "${id}"`,
+        };
     }
 );

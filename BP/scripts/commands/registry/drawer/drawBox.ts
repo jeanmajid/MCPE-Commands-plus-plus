@@ -53,6 +53,9 @@ CommandManager.register(
         box.scale = scale;
 
         DrawManager.addShape(id, box);
-        return { status: CustomCommandStatus.Success, message: "Box successfully drawn" };
+        return {
+            status: CustomCommandStatus.Success,
+            message: `Box added to the drawing group "${id}"`,
+        };
     }
 );

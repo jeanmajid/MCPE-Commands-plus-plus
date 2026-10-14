@@ -51,6 +51,9 @@ CommandManager.register(
         circle.scale = scale;
 
         DrawManager.addShape(id, circle);
-        return { status: CustomCommandStatus.Success, message: "Circle successfully drawn" };
+        return {
+            status: CustomCommandStatus.Success,
+            message: `Circle added to the drawing group "${id}"`,
+        };
     }
 );

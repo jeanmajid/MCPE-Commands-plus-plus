@@ -63,6 +63,9 @@ CommandManager.register(
         box.bound = bound;
 
         DrawManager.addShape(id, box);
-        return { status: CustomCommandStatus.Success, message: "Box successfully drawn" };
+        return {
+            status: CustomCommandStatus.Success,
+            message: `Volume added to the drawing group "${id}"`,
+        };
     }
 );

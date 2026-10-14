@@ -65,6 +65,9 @@ CommandManager.register(
         pyramid.scale = scale;
 
         DrawManager.addShape(id, pyramid);
-        return { status: CustomCommandStatus.Success, message: "Pyramid successfully drawn" };
+        return {
+            status: CustomCommandStatus.Success,
+            message: `Pyramid added to the drawing group "${id}"`,
+        };
     }
 );

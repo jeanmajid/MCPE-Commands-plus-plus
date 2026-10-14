@@ -68,6 +68,9 @@ CommandManager.register(
 
         DrawManager.addShape(id, textShape);
 
-        return { status: CustomCommandStatus.Success, message: `Text shape ${id} registered` };
+        return {
+            status: CustomCommandStatus.Success,
+            message: `Text added to the drawing group "${id}"`,
+        };
     }
 );

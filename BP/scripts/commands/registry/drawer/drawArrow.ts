@@ -64,6 +64,9 @@ CommandManager.register(
         arrow.headSegments = headSegments;
 
         DrawManager.addShape(id, arrow);
-        return { status: CustomCommandStatus.Success, message: "Arrow successfully drawn" };
+        return {
+            status: CustomCommandStatus.Success,
+            message: `Arrow added to the drawing group "${id}"`,
+        };
     }
 );

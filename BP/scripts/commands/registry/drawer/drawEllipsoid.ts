@@ -62,6 +62,9 @@ CommandManager.register(
         ellipsoid.segmentsPerAxis = segmentsPerAxis;
 
         DrawManager.addShape(id, ellipsoid);
-        return { status: CustomCommandStatus.Success, message: "ellipsoid successfully drawn" };
+        return {
+            status: CustomCommandStatus.Success,
+            message: `Ellipsoid added to the drawing group "${id}"`,
+        };
     }
 );

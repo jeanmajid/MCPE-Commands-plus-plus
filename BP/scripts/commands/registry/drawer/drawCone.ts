@@ -55,6 +55,9 @@ CommandManager.register(
         cone.scale = scale;
 
         DrawManager.addShape(id, cone);
-        return { status: CustomCommandStatus.Success, message: "Cone successfully drawn" };
+        return {
+            status: CustomCommandStatus.Success,
+            message: `Cone added to the drawing group "${id}"`,
+        };
     }
 );
