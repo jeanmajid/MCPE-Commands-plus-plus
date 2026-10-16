@@ -5,7 +5,7 @@ Enchants the item at the provided slot within a container
 ### Syntax:
 
 ```
-/blockitemenchant <location: Location> <slot: Enum> <index: Integer> <enchant: String> [level: Integer]
+/blockitemenchant <location: Location> <slot: Enum> <index: Integer> <enchant: Enum> [level: Integer]
 ```
 
 ### Permission:
