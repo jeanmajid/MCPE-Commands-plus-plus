@@ -5,11 +5,11 @@ Drains either lava or water around the player with a radius.
 ### Syntax:
 
 ```
-/drain <liquidType: Enum> [radius: int]
+/drain [radius: Integer] [includeWaterLogged: Boolean] [fill: Block]
 ```
 
 ### Permission:
 
-Operators
+Operators and Command Blocks
 
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING ABOVE -->

@@ -5,7 +5,7 @@ Enchants the item at the provided slot within an entity's inventory
 ### Syntax:
 
 ```
-/itemenchant <targets: Player> <slot: Enum> <index: Integer> <enchant: String> [level: Integer]
+/itemenchant <targets: Player> <slot: Enum> <index: Integer> <enchant: Enum> [level: Integer]
 ```
 
 ### Permission:
