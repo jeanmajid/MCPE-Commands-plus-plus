@@ -46,7 +46,7 @@ CommandManager.register(
     },
     (origin, id: string, delayInTicks: number, command: string) => {
         if (ranCommands.has(id)) {
-            return { status: CustomCommandStatus.Failure, message: "Id already running" };
+            return { status: CustomCommandStatus.Failure, message: "ID already running" };
         }
         ranCommands.set(id, command);
 
