@@ -40,7 +40,7 @@ import { moveItemAtSlot } from "./itemMove.js";
 
 CommandManager.register(
     {
-        name: "blockitemmmove",
+        name: "blockitemmove",
         description: "Moves an item from one provided slot within a container to another",
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
