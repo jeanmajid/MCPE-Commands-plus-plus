@@ -17,6 +17,10 @@ Commands++ is a Minecraft Bedrock addon that extends the capabilities of vanilla
 
 Read more about the commands on our [wiki](https://jeanmajid.github.io/MCPE-Commands-plus-plus/) (Currently a WIP)
 
+## TODO
+
+The todo is under the [Issues](https://github.com/jeanmajid/MCBE-Commands-plus-plus/issues), categorized by **New Feature** and/or **Change** and what exactly it is, so either **Command**, **Attribute**, **Gamerule**, **Wiki** or **Documentation**
+
 ## Contributing
 
 We welcome contributions. If you have a suggestion or found a bug, please open an issue on our [GitHub page](https://github.com/jeanmajid/MCBE-Commands-plus-plus/issues). If you know how to code you can gladly open a pull request. Full AI code is discouraged and will likely be denied
