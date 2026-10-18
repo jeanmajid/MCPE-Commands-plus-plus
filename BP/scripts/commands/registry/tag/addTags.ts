@@ -34,7 +34,7 @@ import { CommandManager } from "../../command.js";
 CommandManager.register(
     {
         name: "addtags",
-        description: "Adds an array of provided tags to the targets",
+        description: 'Adds an array of provided tags to the targets written as "a, b, c"',
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
             { name: "targets", type: CustomCommandParamType.EntitySelector },
