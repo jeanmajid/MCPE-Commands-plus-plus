@@ -29,7 +29,7 @@ import {
     system,
 } from "@minecraft/server";
 
-import { MIN_SIGNED_INT32, MAX_SIGNED_INT32 } from "../../../constants/integer.js";
+import { Random } from "../../../utils/number.js";
 import { getScoreboardObjective } from "../../../utils/score.js";
 import { CommandManager } from "../../command.js";
 
@@ -67,7 +67,7 @@ CommandManager.register(
                 if (!target.isValid) {
                     continue;
                 }
-                objective.setScore(target, randomSignedInt32(min, max));
+                objective.setScore(target, Random.signedInt32(min, max));
             }
         });
 
@@ -77,16 +77,3 @@ CommandManager.register(
         };
     }
 );
-
-function randomSignedInt32(min?: number, max?: number): number {
-    if (min === undefined) {
-        min = MIN_SIGNED_INT32;
-    }
-
-    if (max === undefined) {
-        max = MAX_SIGNED_INT32;
-    }
-
-    const range = max - min + 1;
-    return Math.floor(Math.random() * range + min);
-}
