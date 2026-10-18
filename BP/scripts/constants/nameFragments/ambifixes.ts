@@ -1,1 +1,17 @@
-export const USERNAME_AMBIFIXES = ["x", "xX", "Xx", "z", "zZ", "Zz", "lll", "FaZe", "YT", "TTV"];
+export const USERNAME_AMBIFIXES = [
+    "x",
+    "xX",
+    "Xx",
+    "z",
+    "zZ",
+    "Zz",
+    "o",
+    "oO",
+    "Oo",
+    "lll",
+    "FaZe",
+    "YT",
+    "yt",
+    "TTV",
+    "ttv",
+];
