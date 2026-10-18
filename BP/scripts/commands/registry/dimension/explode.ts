@@ -75,6 +75,6 @@ CommandManager.register(
                 };
             }
         });
-        return { status: CustomCommandStatus.Success, message: `Successfully created explosion` };
+        return { status: CustomCommandStatus.Success, message: "Successfully created explosion" };
     }
 );
