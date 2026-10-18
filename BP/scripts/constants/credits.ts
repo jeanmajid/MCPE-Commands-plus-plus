@@ -30,5 +30,5 @@ export const CREDITS: Credit[] = [
     { role: "owner", names: ["jeanmajid"] },
     { role: "developers", names: ["MaxedOut4826", "conmaster2112"] },
     { role: "contributors", names: ["nikitschen", "mareczek1113", "OrangeCash090"] },
-    { role: "quality assurance", names: [] },
+    { role: "quality assurance", names: ["pixelatedgamer0281"] },
 ];
