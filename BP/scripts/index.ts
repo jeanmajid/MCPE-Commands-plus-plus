@@ -35,7 +35,7 @@ import { cacheUsernameTables } from "./utils/usernameGenerator.js";
 AttributeManager.initialize();
 GameRuleManager.initialize();
 registerCustomDimensions();
-await cacheUsernameTables();
+cacheUsernameTables();
 
 world.afterEvents.worldLoad.subscribe(() => {
     initializeDimensions();
