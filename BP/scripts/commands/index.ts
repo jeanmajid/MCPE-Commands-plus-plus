@@ -104,6 +104,8 @@ import "./registry/player/unvanish.js";
 import "./registry/player/vanish.js";
 import "./registry/score/scoreMath.js";
 import "./registry/score/scoreRandom.js";
+import "./registry/simulatedPlayer/simulatedPlayerKick.js";
+import "./registry/simulatedPlayer/simulatedPlayerSpawn.js";
 import "./registry/structure/structureList.js";
 import "./registry/tag/addTags.js";
 import "./registry/tag/removeTags.js";
