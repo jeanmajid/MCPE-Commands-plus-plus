@@ -79,7 +79,6 @@ export function tpToBlockFromViewDirection(target: Entity | undefined): undefine
     }
 
     const { face, faceLocation, block } = intersection;
-    console.log(JSON.stringify(faceLocation));
     const blockLocation = Vector.add(faceLocation, block.location);
     const destination = Vector.add(blockLocation, FaceDirectionOffset[face]);
     target.teleport(destination);
