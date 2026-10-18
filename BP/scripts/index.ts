@@ -30,10 +30,12 @@ import "./enums/index.js";
 import { GameRuleManager } from "./gameRules/gameRule.js";
 import "./gameRules/index.js";
 import { initializeDimensions, registerCustomDimensions } from "./utils/dimension.js";
+import { cacheUsernameTables } from "./utils/usernameGenerator.js";
 
 AttributeManager.initialize();
 GameRuleManager.initialize();
 registerCustomDimensions();
+await cacheUsernameTables();
 
 world.afterEvents.worldLoad.subscribe(() => {
     initializeDimensions();
