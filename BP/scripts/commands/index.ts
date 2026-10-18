@@ -39,6 +39,7 @@ import "./registry/debug/test.js";
 import "./registry/dimension/dimension.js";
 import "./registry/dimension/drain.js";
 import "./registry/dimension/explode.js";
+import "./registry/dimension/spawnParticle.js";
 import "./registry/drawer/draw.js";
 import "./registry/drawer/drawArrow.js";
 import "./registry/drawer/drawBox.js";
