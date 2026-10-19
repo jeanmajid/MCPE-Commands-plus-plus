@@ -27,7 +27,7 @@ jobs:
                   cache: "pnpm"
 
             - name: Install Dependencies
-              run: pnpm install
+              run: pnpm install --no-lockfile
 
             - name: Run TypeScript Typecheck
               run: pnpm tsc --noEmit
