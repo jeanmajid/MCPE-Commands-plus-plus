@@ -46,7 +46,7 @@ CommandManager.register(
             { name: "radius", type: CustomCommandParamType.Float },
         ],
     },
-    (origin, identifier: string, location: Vector3, count: number = 1, radius: number = 0) => {
+    (origin, identifier: string, location: Vector3, count: number = 1) => {
         // TODO add simulation validation to location
         // TODO add count and range validation
         // TODO add expression parameter which parses some expression like molang

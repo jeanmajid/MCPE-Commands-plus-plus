@@ -1,4 +1,5 @@
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+
 import { toTitleCase } from "./stringUtils.js";
 
 const DATA_DIRECTORY = "scripts/wordRandomiser/data/";
@@ -13,9 +14,9 @@ const MAX_WORD_LENGTH = 7;
 const MIN_WORD_LENGTH = 3;
 
 mkdirSync(DATA_DIRECTORY, { recursive: true });
-const wordData = readFileSync(DATA_DIRECTORY + TARGET_PATH + ".txt", {
-    encoding: "utf-8",
-}).split("\n");
+const wordData = readFileSync(DATA_DIRECTORY + TARGET_PATH + ".txt", { encoding: "utf-8" }).split(
+    "\n"
+);
 
 const outputPath = OUTPUT_DIRECTORY + TARGET_PATH;
 
@@ -26,11 +27,7 @@ for (let batch = 0; batch < TOTAL_BATCHES; ++batch) {
         const word = wordData[wordIndex];
         wordData.splice(wordIndex, 1);
 
-        if (
-            word.includes("-") ||
-            word.length > MAX_WORD_LENGTH ||
-            word.length <= MIN_WORD_LENGTH
-        ) {
+        if (word.includes("-") || word.length > MAX_WORD_LENGTH || word.length <= MIN_WORD_LENGTH) {
             --i;
             continue;
         }
@@ -42,6 +39,6 @@ for (let batch = 0; batch < TOTAL_BATCHES; ++batch) {
     mkdirSync(outputPath, { recursive: true });
     writeFileSync(
         `${outputPath}/${batch}.ts`,
-        `export const words = ${JSON.stringify(words, null, 4)}`,
+        `export const words = ${JSON.stringify(words, null, 4)}`
     );
 }

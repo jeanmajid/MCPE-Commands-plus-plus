@@ -14,7 +14,8 @@
     },
     "type": "module",
     "scripts": {
-        "watch": "mc watch"
+        "watch": "mc watch",
+        "check": "tsc --noEmit && oxlint"
     },
     "dependencies": {
         "@minecraft/debug-utilities": "1.0.0-beta.1.26.52-stable",
@@ -26,6 +27,7 @@
     "devDependencies": {
         "@jeanmajid/mcpe-tool": "^1.0.16",
         "oxfmt": "^0.56.0",
-        "oxlint": "^1.71.0"
+        "oxlint": "^1.71.0",
+        "typescript": "^7.0.2"
     }
 }

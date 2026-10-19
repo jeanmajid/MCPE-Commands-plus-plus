@@ -126,5 +126,5 @@ export const words = [
     "Snoopy",
     "Icy",
     "Lumpy",
-    "Clean"
-]
+    "Clean",
+];

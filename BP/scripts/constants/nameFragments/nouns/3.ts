@@ -126,5 +126,5 @@ export const words = [
     "Anger",
     "Mark",
     "Nothing",
-    "Chapter"
-]
+    "Chapter",
+];

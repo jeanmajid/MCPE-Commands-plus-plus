@@ -126,5 +126,5 @@ export const words = [
     "Shy",
     "Vital",
     "Decimal",
-    "Jumbo"
-]
+    "Jumbo",
+];

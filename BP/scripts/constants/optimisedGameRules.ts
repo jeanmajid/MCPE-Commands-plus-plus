@@ -59,4 +59,4 @@ export const OPTIMISED_GAMERULE_SETUP = [
     { rule: GameRule.PlayersSleepingPercentage, value: 101 },
     { rule: GameRule.ProjectilesCanBreakBlocks, value: false },
     { rule: GameRule.TntExplosionDropDecay, value: false },
-];
+] as const;

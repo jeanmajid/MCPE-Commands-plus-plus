@@ -126,5 +126,5 @@ export const words = [
     "Fair",
     "Wooden",
     "Other",
-    "Fuzzy"
-]
+    "Fuzzy",
+];

@@ -27,6 +27,7 @@ import {
     CustomCommandStatus,
     world,
     system,
+    CustomCommandResult,
 } from "@minecraft/server";
 
 import { CommandManager } from "../../command.js";
@@ -38,7 +39,7 @@ CommandManager.register(
         permissionLevel: CommandPermissionLevel.Admin,
     },
     (origin) => {
-        system.run(() => {
+        system.run((): CustomCommandResult => {
             if (!(origin.sourceEntity instanceof Player)) {
                 return { status: CustomCommandStatus.Failure };
             }
@@ -49,6 +50,8 @@ CommandManager.register(
                     ? `§aStructures in world:\n§7${structureIds.join("\n§7")}`
                     : "§cNo structures found in world";
             origin.sourceEntity.sendMessage(message);
+
+            return { status: CustomCommandStatus.Success };
         });
         return { status: CustomCommandStatus.Success };
     }
