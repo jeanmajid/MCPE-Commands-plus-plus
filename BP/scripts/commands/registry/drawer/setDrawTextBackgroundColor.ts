@@ -28,7 +28,7 @@ import {
     CustomCommandParamType,
 } from "@minecraft/server";
 
-import { getNormalizedRgba } from "../../../utils/color.js";
+import { getNormalizedRGBA } from "../../../utils/color.js";
 import { CommandManager } from "../../command.js";
 import { DrawManager } from "../../managers/drawManager.js";
 
@@ -49,7 +49,7 @@ CommandManager.register(
         const result = DrawManager.setProperty(
             shapeId,
             "backgroundColorOverride",
-            getNormalizedRgba(colorRed, colorGreen, colorBlue, alpha),
+            getNormalizedRGBA(colorRed, colorGreen, colorBlue, alpha),
             DebugText
         );
 
