@@ -34,8 +34,8 @@ import {
 } from "@minecraft/server";
 
 import { Dimensions } from "../../../constants/dimensions.js";
-import { CommandManager } from "../../command.js";
 import { loadArea } from "../../../utils/dimension.js";
+import { CommandManager } from "../../command.js";
 
 CommandManager.register(
     {
@@ -68,7 +68,7 @@ CommandManager.register(
 
         system.run(() => {
             teleportPlayersToWorldSpawn(targets);
-        })
+        });
         return { status: CustomCommandStatus.Success, message: "Sucessfully teleported entity(s)" };
     }
 );
@@ -79,7 +79,7 @@ export async function teleportPlayersToWorldSpawn(targets: Player[]): Promise<vo
 
     function teleportTargets(location: Vector3): void {
         for (const target of targets) {
-            target.teleport(location, { dimension:dimension });
+            target.teleport(location, { dimension: dimension });
         }
     }
 
@@ -90,20 +90,19 @@ export async function teleportPlayersToWorldSpawn(targets: Player[]): Promise<vo
     worldSpawn.y = 100;
 
     function getHighestAirLocation(x: number, z: number): Vector3 {
-        const location = dimension.getTopmostBlock({ x:x, z:z })?.location ?? { x:x, y:-65, z:z };
+        const location = dimension.getTopmostBlock({ x: x, z: z })?.location ?? {
+            x: x,
+            y: -65,
+            z: z,
+        };
         location.y += 1;
         return location;
     }
 
     if (dimension.isChunkLoaded(worldSpawn)) {
         teleportTargets(getHighestAirLocation(worldSpawn.x, worldSpawn.z));
-    }
-    else {
-        await loadArea(
-            dimension,
-            { ...worldSpawn, y:-64 },
-            { ...worldSpawn, y:319 }
-        )
+    } else {
+        await loadArea(dimension, { ...worldSpawn, y: -64 }, { ...worldSpawn, y: 319 });
         teleportTargets(getHighestAirLocation(worldSpawn.x, worldSpawn.z));
     }
 }
