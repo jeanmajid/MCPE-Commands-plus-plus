@@ -8,7 +8,9 @@
         "outDir": "dist",
         "noEmit": true,
         "rootDir": "BP/scripts",
-        "typeRoots": ["./BP/scripts/types"]
+        "typeRoots": ["./BP/scripts/types"],
+        "strict": true,
+        "noImplicitReturns": true
     },
     "include": ["BP/scripts/**/*.ts"]
 }

@@ -64,9 +64,7 @@ export function findSubstringInObjectKeys(searchKey, object) {
  * @returns {string}
  */
 export function toTitleCase(string) {
-    return string
-        .replaceAll("_", " ")
-        .replaceAll(/\b\w/g, (char) => char.toUpperCase());
+    return string.replaceAll("_", " ").replaceAll(/\b\w/g, (char) => char.toUpperCase());
 }
 
 /**

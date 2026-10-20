@@ -13,6 +13,10 @@
         "url": "git+https://github.com/jeanmajid/MCPE-Commands-plus-plus.git"
     },
     "type": "module",
+    "scripts": {
+        "watch": "mc watch",
+        "check": "tsc --noEmit && oxlint && oxfmt --check"
+    },
     "dependencies": {
         "@minecraft/debug-utilities": "1.0.0-beta.1.26.52-stable",
         "@minecraft/server": "2.11.0-beta.1.26.52-stable",
@@ -21,7 +25,9 @@
         "@minecraft/server-ui": "2.3.0-beta.1.26.52-stable"
     },
     "devDependencies": {
+        "@jeanmajid/mcpe-tool": "^1.0.16",
         "oxfmt": "^0.56.0",
-        "oxlint": "^1.71.0"
+        "oxlint": "^1.71.0",
+        "typescript": "^7.0.2"
     }
 }

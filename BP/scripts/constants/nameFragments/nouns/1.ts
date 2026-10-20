@@ -126,5 +126,5 @@ export const words = [
     "Pass",
     "Pride",
     "Might",
-    "Worry"
-]
+    "Worry",
+];

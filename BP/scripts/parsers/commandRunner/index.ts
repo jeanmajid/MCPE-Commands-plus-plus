@@ -1,5 +1,6 @@
-import { CommandRunner } from "./commandRunner.js";
+import "./commandRunner.js";
 import "./registry/name.js";
+//import { CommandRunner } from "./commandRunner.js";
 // CommandRunner.run("test {@s.score.{@s.name}}");
 // const now = Date.now();
 

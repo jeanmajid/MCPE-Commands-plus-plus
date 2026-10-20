@@ -34,7 +34,7 @@ import { CommandManager } from "../../command.js";
 CommandManager.register(
     {
         name: "removetags",
-        description: "Removes an array of provided tags from the targets",
+        description: 'Removes an array of provided tags from the targets written as "a, b, c"',
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [{ name: "targets", type: CustomCommandParamType.EntitySelector }],
         optionalParameters: [{ name: "tags", type: CustomCommandParamType.String }],

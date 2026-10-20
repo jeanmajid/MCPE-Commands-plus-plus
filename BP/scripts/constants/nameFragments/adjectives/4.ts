@@ -126,5 +126,5 @@ export const words = [
     "Svelte",
     "Overdue",
     "Agile",
-    "Able"
-]
+    "Able",
+];

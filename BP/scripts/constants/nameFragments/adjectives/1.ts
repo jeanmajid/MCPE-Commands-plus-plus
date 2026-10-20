@@ -126,5 +126,5 @@ export const words = [
     "Moist",
     "Wiggly",
     "Hungry",
-    "Stable"
-]
+    "Stable",
+];

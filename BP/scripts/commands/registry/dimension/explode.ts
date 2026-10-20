@@ -24,6 +24,7 @@
 import {
     CommandPermissionLevel,
     CustomCommandParamType,
+    CustomCommandResult,
     CustomCommandStatus,
     Entity,
     system,
@@ -60,7 +61,7 @@ CommandManager.register(
         const dimension = getDimensionFromCommandOrigin(origin);
         radius = clamp(radius, 1, 1000);
 
-        system.run(() => {
+        system.run((): CustomCommandResult => {
             try {
                 dimension?.createExplosion(location, radius, {
                     breaksBlocks: breaksBlocks,
@@ -68,6 +69,7 @@ CommandManager.register(
                     allowUnderwater: allowUnderwater,
                     source: explosionSource[0],
                 });
+                return { status: CustomCommandStatus.Success };
             } catch {
                 return {
                     status: CustomCommandStatus.Failure,
