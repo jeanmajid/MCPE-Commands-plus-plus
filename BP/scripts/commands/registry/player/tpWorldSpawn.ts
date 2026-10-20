@@ -73,12 +73,14 @@ CommandManager.register(
     }
 );
 
-export async function teleportPlayersToWorldSpawn(targets: Player[]) {
+export async function teleportPlayersToWorldSpawn(targets: Player[]): Promise<void> {
     const worldSpawn = world.getDefaultSpawnLocation();
     const dimension = Dimensions.overworld;
 
-    function teleportTargets(location: Vector3) {
-        for (const target of targets) target.teleport(location, { dimension:dimension });
+    function teleportTargets(location: Vector3): void {
+        for (const target of targets) {
+            target.teleport(location, { dimension:dimension });
+        }
     }
 
     if (worldSpawn.y < 32767) {
@@ -87,7 +89,7 @@ export async function teleportPlayersToWorldSpawn(targets: Player[]) {
 
     worldSpawn.y = 100;
 
-    function getHighestAirLocation(x: number, z: number) {
+    function getHighestAirLocation(x: number, z: number): Vector3 {
         const location = dimension.getTopmostBlock({ x:x, z:z })?.location ?? { x:x, y:-65, z:z };
         location.y += 1;
         return location;

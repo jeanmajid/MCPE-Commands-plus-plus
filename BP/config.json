@@ -1,9 +1,0 @@
-{
-    "$schema": "https://raw.githubusercontent.com/jeanmajid/MCPE-Tool/refs/heads/main/public/mcConfigSchema.json",
-    "name": "BP",
-    "description": "",
-    "modules": [
-        "npm"
-    ],
-    "id": "7zq9hvme4z4mvgmxy52"
-}

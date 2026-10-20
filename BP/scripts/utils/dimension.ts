@@ -86,7 +86,7 @@ export function getDimensionFromCommandOrigin(origin: CustomCommandOrigin): Dime
 
 // unsure if the `loadArea` function below should be in its own `chunks.ts` util file or not
 
-export async function loadArea(dimension: Dimension, start: Vector3, end: Vector3, discardInTicks: number = 5) {
+export async function loadArea(dimension: Dimension, start: Vector3, end: Vector3, discardInTicks: number = 5): Promise<void> {
     const tickingAreaManager = world.tickingAreaManager;
 
     const tickingAreaID = `${Date.now()};${Math.floor(Math.random()*9999)}`;
