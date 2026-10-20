@@ -21,7 +21,7 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-// IDEA: support entities, need to load spawn area manually tho
+// IDEA: support entities, although when chunk loading is required, the command doesnt wait and returns "ran-successfully" anyways, even if it hasnt finished teleporting
 
 import {
     CommandPermissionLevel,
@@ -30,6 +30,7 @@ import {
     system,
     world,
     Player,
+    Vector3,
 } from "@minecraft/server";
 
 import { Dimensions } from "../../../constants/dimensions.js";
@@ -67,40 +68,40 @@ CommandManager.register(
 
         system.run(() => {
             teleportPlayersToWorldSpawn(targets);
-        });
-        return { status: CustomCommandStatus.Success, message: "Sucessfully teleported entities" };
+        })
+        return { status: CustomCommandStatus.Success, message: "Sucessfully teleported entity(s)" };
     }
 );
 
-export async function teleportPlayersToWorldSpawn(targets: Player[]): void {
+export async function teleportPlayersToWorldSpawn(targets: Player[]) {
     const worldSpawn = world.getDefaultSpawnLocation();
     const dimension = Dimensions.overworld;
 
-    function teleportTargets(location) {
+    function teleportTargets(location: Vector3) {
         for (const target of targets) target.teleport(location, { dimension:dimension });
     }
 
     if (worldSpawn.y < 32767) {
         teleportTargets(worldSpawn);
-        return;
     }
 
     worldSpawn.y = 100;
 
+    function getHighestAirLocation(x: number, z: number) {
+        const location = dimension.getTopmostBlock({ x:x, z:z })?.location ?? { x:x, y:-65, z:z };
+        location.y += 1;
+        return location;
+    }
+
     if (dimension.isChunkLoaded(worldSpawn)) {
-        const topBlock = dimension.getTopmostBlock({ x:worldSpawn.x, z:worldSpawn.z });
-        const teleportLocation = topBlock.location;
-        teleportLocation.y += 1;
-        teleportTargets(teleportLocation);
-    } else {
+        teleportTargets(getHighestAirLocation(worldSpawn.x, worldSpawn.z));
+    }
+    else {
         await loadArea(
             dimension,
-            { ..worldSpawn, y:-64 },
-            { ..worldSpawn, y:319 }
+            { ...worldSpawn, y:-64 },
+            { ...worldSpawn, y:319 }
         )
-        const topBlock = dimension.getTopmostBlock({ x:worldSpawn.x, z:worldSpawn.z });
-        const teleportLocation = topBlock.location;
-        teleportLocation.y += 1;
-        teleportTargets(teleportLocation);
+        teleportTargets(getHighestAirLocation(worldSpawn.x, worldSpawn.z));
     }
 }
