@@ -1,4 +1,4 @@
-/* SPDX-Licence-Identifier: GPL-3.0-or-later
+/* SPDX-License-Identifier: GPL-3.0-or-later
  * ============================================================================
  * Commands Plus Plus
  * Copyright (C) 2024-2026 jeanmajid and contributors
