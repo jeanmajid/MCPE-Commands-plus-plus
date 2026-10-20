@@ -2,7 +2,7 @@
 
 <div>
 	<h1>
-		Commands Plus Plus
+		Commands++
 	</h1>
 	<h4>Minecraft Bedrock Command Extension Addon</h4>
 </div>
