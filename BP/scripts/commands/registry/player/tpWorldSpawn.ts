@@ -72,7 +72,7 @@ CommandManager.register(
     }
 );
 
-export aaync function teleportPlayersToWorldSpawn(targets: Player[]): void {
+export async function teleportPlayersToWorldSpawn(targets: Player[]): void {
     const worldSpawn = world.getDefaultSpawnLocation();
     const dimension = Dimensions.overworld;
 
