@@ -1,4 +1,4 @@
-/* SPDX-License-Identifier: GPL-3.0-or-later
+/* SPDX-Licence-Identifier: GPL-3.0-or-later
  * ============================================================================
  * Commands Plus Plus
  * Copyright (C) 2024-2026 jeanmajid and contributors
@@ -34,6 +34,7 @@ import {
 
 import { Dimensions } from "../../../constants/dimensions.js";
 import { CommandManager } from "../../command.js";
+import { loadArea } from "../../../utils/dimension.js";
 
 CommandManager.register(
     {
@@ -71,30 +72,35 @@ CommandManager.register(
     }
 );
 
-export function teleportPlayersToWorldSpawn(targets: Player[]): void {
+export aaync function teleportPlayersToWorldSpawn(targets: Player[]): void {
     const worldSpawn = world.getDefaultSpawnLocation();
-
-    for (const target of targets) {
-        target.teleport(worldSpawn);
-    }
-
     const dimension = Dimensions.overworld;
 
-    const intervalId = system.runInterval(() => {
-        if (!dimension.isChunkLoaded({ ...worldSpawn, y: 100 })) {
-            return;
-        }
+    function teleportTargets(location) {
+        for (const target of targets) target.teleport(location, { dimension:dimension });
+    }
 
-        const topBlock = Dimensions.overworld.getTopmostBlock({ x: worldSpawn.x, z: worldSpawn.z });
-        const tpLocation = topBlock?.location ?? { x: 0, y: 0, z: 0 };
-        tpLocation.y += 1;
+    if (worldSpawn.y < 32767) {
+        teleportTargets(worldSpawn);
+        return;
+    }
 
-        const teleportLocation = { ...tpLocation, dimension: Dimensions.overworld };
+    worldSpawn.y = 100;
 
-        for (const target of targets) {
-            target.teleport(teleportLocation);
-        }
-
-        system.clearRun(intervalId);
-    }, 3);
+    if (dimension.isChunkLoaded(worldSpawn)) {
+        const topBlock = dimension.getTopmostBlock({ x:worldSpawn.x, z:worldSpawn.z });
+        const teleportLocation = topBlock.location;
+        teleportLocation.y += 1;
+        teleportTargets(teleportLocation);
+    } else {
+        await loadArea(
+            dimension,
+            { ..worldSpawn, y:-64 },
+            { ..worldSpawn, y:319 }
+        )
+        const topBlock = dimension.getTopmostBlock({ x:worldSpawn.x, z:worldSpawn.z });
+        const teleportLocation = topBlock.location;
+        teleportLocation.y += 1;
+        teleportTargets(teleportLocation);
+    }
 }
