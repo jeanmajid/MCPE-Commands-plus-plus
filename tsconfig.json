@@ -1,13 +1,16 @@
 {
     "compilerOptions": {
-        "module": "ESNext",
-        "target": "ESNext",
-        "moduleResolution": "Node",
+        "target": "esnext",
+        "module": "esnext",
+        "moduleResolution": "bundler",
         "allowSyntheticDefaultImports": true,
-        "removeComments": true,
-        "outDir": "C:\\Users\\User\\AppData\\Roaming\\Minecraft Bedrock\\Users\\Shared\\games\\com.mojang\\development_behavior_packs\\MCPE-Commands-plus-plusBP/scripts"
+        "removeComments": false,
+        "outDir": "dist",
+        "noEmit": true,
+        "rootDir": "BP/scripts",
+        "typeRoots": ["./BP/scripts/types"],
+        "strict": true,
+        "noImplicitReturns": true
     },
-    "include": [
-        "BP/scripts/**/*.ts"
-    ]
+    "include": ["BP/scripts/**/*.ts"]
 }
