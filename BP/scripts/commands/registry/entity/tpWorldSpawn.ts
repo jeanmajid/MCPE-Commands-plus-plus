@@ -21,8 +21,6 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-// IDEA: support entities, although when chunk loading is required, the command doesnt wait and returns "ran-successfully" anyways, even if it hasnt finished teleporting
-
 import {
     CommandPermissionLevel,
     CustomCommandStatus,
@@ -43,7 +41,6 @@ CommandManager.register(
         name: "tpworldspawn",
         description: "Teleports all targets to the world spawn point",
         permissionLevel: CommandPermissionLevel.GameDirectors,
-
         optionalParameters: [{ name: "targets", type: CustomCommandParamType.EntitySelector }],
     },
     (origin, targets: Entity[]) => {
@@ -60,6 +57,7 @@ CommandManager.register(
                     message: "Sucessfully teleported entity",
                 };
             }
+
             return { status: CustomCommandStatus.Failure, message: "Inavlid target" };
         }
 
@@ -70,6 +68,7 @@ CommandManager.register(
         system.run(() => {
             teleportPlayersToWorldSpawn(targets);
         });
+
         return { status: CustomCommandStatus.Success, message: "Sucessfully teleported entity(s)" };
     }
 );
@@ -102,25 +101,29 @@ export async function teleportPlayersToWorldSpawn(targets: Entity[]): Promise<vo
     const chunkLocation = { ...worldSpawn, y: 100 };
     if (dimension.isChunkLoaded(chunkLocation)) {
         teleportTargets(getHighestAirLocation(worldSpawn.x, worldSpawn.z));
-    } else {
-        const chunkLoadingPlayer = targets.find((target) => target instanceof Player);
-        if (chunkLoadingPlayer) {
-            chunkLoadingPlayer.teleport(worldSpawn, { dimension: dimension });
-            let loopId: number = -1;
-            function teleportWhenLoaded(): void {
-                if (!dimension.isChunkLoaded(chunkLocation)) {
-                    return;
-                }
-                teleportTargets(getHighestAirLocation(worldSpawn.x, worldSpawn.z));
-                if (loopId) {
-                    system.clearRun(loopId);
-                }
+        return;
+    }
+
+    const chunkLoadingPlayer = targets.find((target) => target instanceof Player);
+
+    if (chunkLoadingPlayer) {
+        let loopId: number = -1;
+
+        chunkLoadingPlayer.teleport(worldSpawn, { dimension: dimension });
+
+        function teleportWhenLoaded(): void {
+            if (!dimension.isChunkLoaded(chunkLocation)) {
+                return;
             }
-            loopId = system.runInterval(teleportWhenLoaded, 3);
-            teleportWhenLoaded();
-        } else {
-            await loadArea(dimension, { ...worldSpawn, y: -64 }, { ...worldSpawn, y: 319 });
+
             teleportTargets(getHighestAirLocation(worldSpawn.x, worldSpawn.z));
+            system.clearRun(loopId);
         }
+
+        loopId = system.runInterval(teleportWhenLoaded, 3);
+        teleportWhenLoaded();
+    } else {
+        await loadArea(dimension, { ...worldSpawn, y: -64 }, { ...worldSpawn, y: 319 });
+        teleportTargets(getHighestAirLocation(worldSpawn.x, worldSpawn.z));
     }
 }

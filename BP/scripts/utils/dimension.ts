@@ -83,8 +83,7 @@ export function getDimensionFromCommandOrigin(origin: CustomCommandOrigin): Dime
     }
 }
 
-// unsure if the `loadArea` function below should be in its own `chunks.ts` util file or not
-
+// TODO move into dedicated WorldLoader class in the future (https://github.com/jeanmajid/MCPE-Commands-plus-plus/issues/118)
 export async function loadArea(
     dimension: Dimension,
     start: Vector3,
