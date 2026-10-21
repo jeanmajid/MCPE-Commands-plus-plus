@@ -29,7 +29,6 @@ import {
     world,
 } from "@minecraft/server";
 
-import { LogPrivacy } from "../../../enums/registry/logPrivacy.js";
 import { LOG_TYPE_ENUM_KEY, LogType } from "../../../enums/registry/logType.js";
 import { CommandManager } from "../../command.js";
 import { benchmark_data } from "./benchmarkStart.js";
@@ -51,7 +50,6 @@ CommandManager.register(
         origin,
         startId: string,
         logType: LogType = LogType.Info,
-        logPrivacy: LogPrivacy,
         fakeplayer: string,
         objective: string
     ) => {
@@ -66,7 +64,7 @@ CommandManager.register(
         const elapsedTime = Date.now() - start;
 
         const output = `[${startId}] Elapsed ${elapsedTime}ms`;
-        const result = log(output, logType, logPrivacy);
+        const result = log(output, logType);
         if (result.status === CustomCommandStatus.Failure) {
             return result;
         }

@@ -33,7 +33,6 @@ import "./registry/formType.js";
 import "./registry/itemLocations.js";
 import "./registry/itemMoveMode.js";
 import "./registry/liquidType.js";
-import "./registry/logPrivacy.js";
 import "./registry/logType.js";
 import "./registry/scoreOperation.js";
 import "./registry/valueUpdateMode.js";

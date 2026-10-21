@@ -29,7 +29,6 @@ import {
     world,
 } from "@minecraft/server";
 
-import { LOG_PRIVACY_ENUM_KEY, LogPrivacy } from "../../../enums/registry/logPrivacy.js";
 import { LOG_TYPE_ENUM_KEY, LogType } from "../../../enums/registry/logType.js";
 import { CommandManager } from "../../command.js";
 
@@ -41,16 +40,11 @@ CommandManager.register(
         permissionLevel: CommandPermissionLevel.GameDirectors,
         mandatoryParameters: [
             { name: "logType", type: CustomCommandParamType.Enum, enumName: LOG_TYPE_ENUM_KEY },
-            {
-                name: "logPrivacy",
-                type: CustomCommandParamType.Enum,
-                enumName: LOG_PRIVACY_ENUM_KEY,
-            },
             { name: "message", type: CustomCommandParamType.String },
         ],
     },
-    (origin, logType: LogType, logPrivacy: LogPrivacy, message: string) => {
-        return log(message, logType, logPrivacy);
+    (origin, logType: LogType, message: string) => {
+        return log(message, logType);
     }
 );
 
@@ -59,18 +53,7 @@ const SUCCESSFUL_LOG_OUTPUT = {
     message: `Logged message to the console`,
 };
 
-export function log(
-    message: string,
-    logType: string,
-    logPrivacy: string = LogPrivacy.Public
-): CustomCommandResult {
-    if (logPrivacy) {
-        return {
-            status: CustomCommandStatus.Success,
-            message: "Logs are private; enable with </config showPrivateLogs true>",
-        };
-    }
-
+export function log(message: string, logType: string): CustomCommandResult {
     switch (logType) {
         case LogType.None:
             return SUCCESSFUL_LOG_OUTPUT;
