@@ -31,6 +31,7 @@ import {
     world,
     Player,
     Vector3,
+    Entity,
 } from "@minecraft/server";
 
 import { Dimensions } from "../../../constants/dimensions.js";
@@ -43,13 +44,13 @@ CommandManager.register(
         description: "Teleports all targets to the world spawn point",
         permissionLevel: CommandPermissionLevel.GameDirectors,
 
-        optionalParameters: [{ name: "targets", type: CustomCommandParamType.PlayerSelector }],
+        optionalParameters: [{ name: "targets", type: CustomCommandParamType.EntitySelector }],
     },
-    (origin, targets: Player[]) => {
+    (origin, targets: Entity[]) => {
         const sourceEntity = origin.sourceEntity;
 
         if (!targets) {
-            if (sourceEntity instanceof Player) {
+            if (sourceEntity instanceof Entity) {
                 system.run(() => {
                     teleportPlayersToWorldSpawn([sourceEntity]);
                 });
@@ -73,7 +74,7 @@ CommandManager.register(
     }
 );
 
-export async function teleportPlayersToWorldSpawn(targets: Player[]): Promise<void> {
+export async function teleportPlayersToWorldSpawn(targets: Entity[]): Promise<void> {
     const worldSpawn = world.getDefaultSpawnLocation();
     const dimension = Dimensions.overworld;
 
@@ -85,9 +86,8 @@ export async function teleportPlayersToWorldSpawn(targets: Player[]): Promise<vo
 
     if (worldSpawn.y < 32767) {
         teleportTargets(worldSpawn);
+        return;
     }
-
-    worldSpawn.y = 100;
 
     function getHighestAirLocation(x: number, z: number): Vector3 {
         const location = dimension.getTopmostBlock({ x: x, z: z })?.location ?? {
@@ -99,10 +99,28 @@ export async function teleportPlayersToWorldSpawn(targets: Player[]): Promise<vo
         return location;
     }
 
-    if (dimension.isChunkLoaded(worldSpawn)) {
+    const chunkLocation = { ...worldSpawn, y: 100 };
+    if (dimension.isChunkLoaded(chunkLocation)) {
         teleportTargets(getHighestAirLocation(worldSpawn.x, worldSpawn.z));
     } else {
-        await loadArea(dimension, { ...worldSpawn, y: -64 }, { ...worldSpawn, y: 319 });
-        teleportTargets(getHighestAirLocation(worldSpawn.x, worldSpawn.z));
+        const chunkLoadingPlayer = targets.find((target) => target instanceof Player);
+        if (chunkLoadingPlayer) {
+            chunkLoadingPlayer.teleport(worldSpawn, { dimension: dimension });
+            let loopId: number = -1;
+            function teleportWhenLoaded(): void {
+                if (!dimension.isChunkLoaded(chunkLocation)) {
+                    return;
+                }
+                teleportTargets(getHighestAirLocation(worldSpawn.x, worldSpawn.z));
+                if (loopId) {
+                    system.clearRun(loopId);
+                }
+            }
+            loopId = system.runInterval(teleportWhenLoaded, 3);
+            teleportWhenLoaded();
+        } else {
+            await loadArea(dimension, { ...worldSpawn, y: -64 }, { ...worldSpawn, y: 319 });
+            teleportTargets(getHighestAirLocation(worldSpawn.x, worldSpawn.z));
+        }
     }
 }

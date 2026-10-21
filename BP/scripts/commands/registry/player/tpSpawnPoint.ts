@@ -32,7 +32,7 @@ import {
 } from "@minecraft/server";
 
 import { CommandManager } from "../../command.js";
-import { teleportPlayersToWorldSpawn } from "./tpWorldSpawn.js";
+import { teleportPlayersToWorldSpawn } from "../entity/tpWorldSpawn.js";
 
 CommandManager.register(
     {
