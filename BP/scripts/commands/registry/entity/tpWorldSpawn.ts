@@ -21,7 +21,7 @@
  * along with Commands Plus Plus. If not, see <https://www.gnu.org/licenses/>.
  */
 
-// IDEA: support entities, need to load spawn area manually tho
+// IDEA: support entities, although when chunk loading is required, the command doesnt wait and returns "ran-successfully" anyways, even if it hasnt finished teleporting
 
 import {
     CommandPermissionLevel,
@@ -30,9 +30,12 @@ import {
     system,
     world,
     Player,
+    Vector3,
+    Entity,
 } from "@minecraft/server";
 
 import { Dimensions } from "../../../constants/dimensions.js";
+import { loadArea } from "../../../utils/dimension.js";
 import { CommandManager } from "../../command.js";
 
 CommandManager.register(
@@ -41,13 +44,13 @@ CommandManager.register(
         description: "Teleports all targets to the world spawn point",
         permissionLevel: CommandPermissionLevel.GameDirectors,
 
-        optionalParameters: [{ name: "targets", type: CustomCommandParamType.PlayerSelector }],
+        optionalParameters: [{ name: "targets", type: CustomCommandParamType.EntitySelector }],
     },
-    (origin, targets: Player[]) => {
+    (origin, targets: Entity[]) => {
         const sourceEntity = origin.sourceEntity;
 
         if (!targets) {
-            if (sourceEntity instanceof Player) {
+            if (sourceEntity instanceof Entity) {
                 system.run(() => {
                     teleportPlayersToWorldSpawn([sourceEntity]);
                 });
@@ -67,34 +70,57 @@ CommandManager.register(
         system.run(() => {
             teleportPlayersToWorldSpawn(targets);
         });
-        return { status: CustomCommandStatus.Success, message: "Sucessfully teleported entities" };
+        return { status: CustomCommandStatus.Success, message: "Sucessfully teleported entity(s)" };
     }
 );
 
-export function teleportPlayersToWorldSpawn(targets: Player[]): void {
+export async function teleportPlayersToWorldSpawn(targets: Entity[]): Promise<void> {
     const worldSpawn = world.getDefaultSpawnLocation();
-
-    for (const target of targets) {
-        target.teleport(worldSpawn);
-    }
-
     const dimension = Dimensions.overworld;
 
-    const intervalId = system.runInterval(() => {
-        if (!dimension.isChunkLoaded({ ...worldSpawn, y: 100 })) {
-            return;
-        }
-
-        const topBlock = Dimensions.overworld.getTopmostBlock({ x: worldSpawn.x, z: worldSpawn.z });
-        const tpLocation = topBlock?.location ?? { x: 0, y: 0, z: 0 };
-        tpLocation.y += 1;
-
-        const teleportLocation = { ...tpLocation, dimension: Dimensions.overworld };
-
+    function teleportTargets(location: Vector3): void {
         for (const target of targets) {
-            target.teleport(teleportLocation);
+            target.teleport(location, { dimension: dimension });
         }
+    }
 
-        system.clearRun(intervalId);
-    }, 3);
+    if (worldSpawn.y < 32767) {
+        teleportTargets(worldSpawn);
+        return;
+    }
+
+    function getHighestAirLocation(x: number, z: number): Vector3 {
+        const location = dimension.getTopmostBlock({ x: x, z: z })?.location ?? {
+            x: x,
+            y: -65,
+            z: z,
+        };
+        location.y += 1;
+        return location;
+    }
+
+    const chunkLocation = { ...worldSpawn, y: 100 };
+    if (dimension.isChunkLoaded(chunkLocation)) {
+        teleportTargets(getHighestAirLocation(worldSpawn.x, worldSpawn.z));
+    } else {
+        const chunkLoadingPlayer = targets.find((target) => target instanceof Player);
+        if (chunkLoadingPlayer) {
+            chunkLoadingPlayer.teleport(worldSpawn, { dimension: dimension });
+            let loopId: number = -1;
+            function teleportWhenLoaded(): void {
+                if (!dimension.isChunkLoaded(chunkLocation)) {
+                    return;
+                }
+                teleportTargets(getHighestAirLocation(worldSpawn.x, worldSpawn.z));
+                if (loopId) {
+                    system.clearRun(loopId);
+                }
+            }
+            loopId = system.runInterval(teleportWhenLoaded, 3);
+            teleportWhenLoaded();
+        } else {
+            await loadArea(dimension, { ...worldSpawn, y: -64 }, { ...worldSpawn, y: 319 });
+            teleportTargets(getHighestAirLocation(worldSpawn.x, worldSpawn.z));
+        }
+    }
 }

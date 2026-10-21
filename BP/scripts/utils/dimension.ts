@@ -28,6 +28,7 @@ import {
     EntityQueryOptions,
     system,
     world,
+    Vector3,
 } from "@minecraft/server";
 
 import { CUSTOM_DIMENSIONS, Dimensions } from "../constants/dimensions.js";
@@ -80,4 +81,26 @@ export function getDimensionFromCommandOrigin(origin: CustomCommandOrigin): Dime
     } else {
         return Dimensions.overworld;
     }
+}
+
+// unsure if the `loadArea` function below should be in its own `chunks.ts` util file or not
+
+export async function loadArea(
+    dimension: Dimension,
+    start: Vector3,
+    end: Vector3,
+    discardInTicks: number = 5
+): Promise<void> {
+    const tickingAreaManager = world.tickingAreaManager;
+
+    const tickingAreaID = `${Date.now()};${Math.floor(Math.random() * 9999)}`;
+    await tickingAreaManager.createTickingArea(tickingAreaID, {
+        dimension: dimension,
+        from: start,
+        to: end,
+    });
+
+    system.runTimeout(() => {
+        tickingAreaManager.removeTickingArea(tickingAreaID);
+    }, discardInTicks);
 }
