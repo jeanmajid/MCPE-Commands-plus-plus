@@ -35,6 +35,13 @@ CommandManager.register(
             return { status: CustomCommandStatus.Failure, message: "No targets matched selector" };
         }
 
+        if (amount <= 0) {
+            return {
+                status: CustomCommandStatus.Failure,
+                message: "Amount to drop cant be 0 or lower",
+            };
+        }
+
         for (const target of targets) {
             const itemSlotResult = ItemLocations[slotLocation](target, slotIndex);
 
