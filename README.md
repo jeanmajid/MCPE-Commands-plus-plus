@@ -31,9 +31,15 @@ This Project uses [MCPE-Tool](https://github.com/jeanmajid/MCPE-Tool) for develo
 
 ## License & Disclaimer
 
-This is not an official Minecraft product. It is not approved by or associated with Mojang or Microsoft.
+This is not an official Minecraft product. It is not approved by, affiliated with, or associated with Mojang or Microsoft.
 
-This project is licensed under [GPL](https://github.com/jeanmajid/MCPE-Commands-plus-plus/blob/main/LICENSE).
+**License:** This project is licensed under the [PolyForm Noncommercial License 1.0.0](https://polyformproject.org/licenses/noncommercial/1.0.0). Please refer to the [`LICENSE`](./LICENSE) file for the full license terms.
+
+Commands++ is an independent project maintained by jeanmajid.
+
+Copyright in individual contributions remains with their respective copyright holders.
+
+**Commercial use requires prior written authorization from the applicable copyright holder.** To inquire about commercial licensing for Commands++, contact jeanmajid through the [project's GitHub repository](https://github.com/jeanmajid/MCPE-Commands-plus-plus).
 
 <div align="center">
 	<h2>Contributors</h2>
