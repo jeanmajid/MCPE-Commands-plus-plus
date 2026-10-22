@@ -99,6 +99,7 @@ import "./registry/misc/ruleset.js";
 import "./registry/misc/wiki.js";
 import "./registry/nameTag/nameTag.js";
 import "./registry/nameTag/resetNameTag.js";
+import "./registry/player/forceDrop.js";
 import "./registry/player/hunger.js";
 import "./registry/player/massKick.js";
 import "./registry/player/serverJoin.js";
