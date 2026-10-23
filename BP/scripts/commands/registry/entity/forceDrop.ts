@@ -4,7 +4,7 @@ import {
     CustomCommandStatus,
     ContainerSlot,
     ItemStack,
-    Player,
+    Entity,
     system,
     world,
 } from "@minecraft/server";
@@ -13,6 +13,12 @@ import { ITEM_LOCATIONS_ENUM_KEY, ItemLocations } from "../../../enums/registry/
 import { Vector } from "../../../utils/vector.js";
 import { CommandManager } from "../../command.js";
 
+declare module "@minecraft/server" {
+    interface Entity {
+        forceDropped?: { owner: Entity; dropTick: number };
+    }
+}
+
 CommandManager.register(
     {
         name: "forcedrop",
@@ -20,7 +26,7 @@ CommandManager.register(
         permissionLevel: CommandPermissionLevel.GameDirectors,
 
         mandatoryParameters: [
-            { name: "targets", type: CustomCommandParamType.PlayerSelector },
+            { name: "targets", type: CustomCommandParamType.EntitySelector },
             {
                 name: "slotType",
                 type: CustomCommandParamType.Enum,
@@ -42,41 +48,52 @@ CommandManager.register(
             };
         }
 
+        const targetItemSlots = new Map();
+
         for (const target of targets) {
             const itemSlotResult = ItemLocations[slotLocation](target, slotIndex);
 
             if (itemSlotResult === undefined) {
-                continue;
+                return {
+                    status: CustomCommandStatus.Failure,
+                    message: `Couldnt get ${slotLocation} for ${target?.nameTag ? target.nameTag : target?.typeId}`,
+                };
             }
 
             if (!(itemSlotResult instanceof ContainerSlot)) {
                 return itemSlotResult;
             }
 
-            const itemToDrop = itemSlotResult.getItem();
+            targetItemSlots.set(target, itemSlotResult);
+        }
+
+        // to ensure no entities iterated before possible errors gets its items dropped
+
+        for (const [target, itemSlot] of targetItemSlots) {
+            const itemToDrop = itemSlot.getItem();
             if (itemToDrop === undefined) {
                 continue;
             }
 
-            const amountToDrop = Math.min(amount, itemSlotResult.amount);
+            const amountToDrop = Math.min(amount, itemSlot.amount);
 
-            system.run(() => dropItem(target, itemSlotResult, itemToDrop, amountToDrop));
+            system.run(() => dropItem(target, itemSlot, itemToDrop, amountToDrop));
         }
 
         return {
             status: CustomCommandStatus.Success,
-            message: `Force dropped item(s) for ${targets.length} player(s)`,
+            message: `Force dropped item(s) for ${targets.length} entity(s)`,
         };
     }
 );
 
 function dropItem(
-    player: Player,
+    entity: Entity,
     containerSlot: ContainerSlot,
     itemStack: ItemStack,
     amountToDrop: number
 ): void {
-    const viewDirection = player.getViewDirection();
+    const viewDirection = entity.getViewDirection();
 
     const itemToDrop = itemStack.clone();
     itemToDrop.amount = amountToDrop;
@@ -88,12 +105,11 @@ function dropItem(
         containerSlot.setItem(itemStack);
     }
 
-    const dropLocation = player.getHeadLocation();
+    const dropLocation = entity.getHeadLocation();
     dropLocation.y -= 0.3;
-    const droppedItemEntity = player.dimension.spawnItem(itemToDrop, dropLocation);
+    const droppedItemEntity = entity.dimension.spawnItem(itemToDrop, dropLocation);
 
-    // @ts-expect-error
-    droppedItemEntity.forceDropped = { owner: player, dropTick: system.currentTick };
+    droppedItemEntity.forceDropped = { owner: entity, dropTick: system.currentTick };
 
     droppedItemEntity.clearVelocity();
     droppedItemEntity.applyImpulse(Vector.divide(viewDirection, 4));
@@ -106,7 +122,6 @@ function dropItem(
 world.beforeEvents.entityItemPickup.subscribe((event) => {
     const { entity, item } = event;
 
-    // @ts-expect-error
     const forceDropData = item?.forceDropped;
 
     if (!forceDropData) {
@@ -118,7 +133,6 @@ world.beforeEvents.entityItemPickup.subscribe((event) => {
     }
 
     if (system.currentTick - forceDropData.dropTick > 20) {
-        // @ts-expect-error
         item.forceDropped = undefined;
         return;
     }
