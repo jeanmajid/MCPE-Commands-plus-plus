@@ -19,7 +19,7 @@
  */
 
 import "./commandRunner.js";
-import "./registry/name.js";
+import "./registry/syntax/name.js";
 import { CommandRunner } from "./commandRunner.js";
 const now = Date.now();
 

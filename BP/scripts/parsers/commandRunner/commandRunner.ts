@@ -18,8 +18,8 @@
  * https://polyformproject.org/licenses/noncommercial/1.0.0
  */
 
-import { Node } from "./node.js";
-import { NodePath } from "./nodePath.js";
+import { Node } from "./node/node.js";
+import { NodePath } from "./node/nodePath.js";
 import { BracketPair, SyntaxNodeType } from "./types.js";
 
 export class CommandRunner {

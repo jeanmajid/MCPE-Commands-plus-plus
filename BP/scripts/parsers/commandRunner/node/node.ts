@@ -18,7 +18,7 @@
  * https://polyformproject.org/licenses/noncommercial/1.0.0
  */
 
-import { SyntaxNodeType } from "./types.js";
+import { SyntaxNodeType } from "../types.js";
 
 export class Node {
     public type: SyntaxNodeType;

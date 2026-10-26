@@ -18,10 +18,10 @@
  * https://polyformproject.org/licenses/noncommercial/1.0.0
  */
 
-import { CommandRunner } from "../commandRunner.js";
-import { Node } from "../node.js";
-import { NodePath } from "../nodePath.js";
-import { SyntaxNodeType } from "../types.js";
+import { CommandRunner } from "../../commandRunner.js";
+import { Node } from "../../node/node.js";
+import { NodePath } from "../../node/nodePath.js";
+import { SyntaxNodeType } from "../../types.js";
 
 const nameSyntaxSelector = new Node(SyntaxNodeType.Selector);
 const nameSyntaxString = new Node(SyntaxNodeType.String);
