@@ -25,7 +25,6 @@ import { SyntaxNodeType } from "../types.js";
 
 const nameSyntaxSelector = new Node(SyntaxNodeType.Selector);
 const nameSyntaxString = new Node(SyntaxNodeType.String);
-nameSyntaxSelector.addChild(nameSyntaxString);
 
 // @s.string -> path
 // @s.string.string -> path
@@ -33,6 +32,7 @@ nameSyntaxSelector.addChild(nameSyntaxString);
 const path1 = new NodePath();
 path1.addNode(nameSyntaxSelector);
 path1.addNode(nameSyntaxString);
+
 path1.addAction(() => {
     console.log("bombo");
 });

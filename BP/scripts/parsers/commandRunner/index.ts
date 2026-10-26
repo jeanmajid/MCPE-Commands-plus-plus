@@ -20,13 +20,13 @@
 
 import "./commandRunner.js";
 import "./registry/name.js";
-//import { CommandRunner } from "./commandRunner.js";
+import { CommandRunner } from "./commandRunner.js";
+const now = Date.now();
+
 // CommandRunner.run("test {@s.score.{@s.name}}");
-// const now = Date.now();
+CommandRunner.run("test {@s.score.objective}  {@s.score.{@s.name}}");
 
-// CommandRunner.run("test {@s.score.objective}  {@s.score.{@s.name}}");
-
-// console.log(`time: ${Date.now() - now}ms`);
+console.log(`time: ${Date.now() - now}ms`);
 
 // {@s.block_from_view_direction}
 // {@s.score.objective}
