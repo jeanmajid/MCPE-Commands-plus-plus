@@ -19,8 +19,8 @@
  */
 
 import "./commandRunner.js";
-import "./registry/syntax/name.js";
 import { CommandRunner } from "./commandRunner.js";
+import "./registry/syntax/name.js";
 const now = Date.now();
 
 // CommandRunner.run("test {@s.score.{@s.name}}");

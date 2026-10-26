@@ -68,9 +68,7 @@ export class CommandRunner {
         }
     }
 
-    private static tryParseNode(type: SyntaxNodeType, expression: string): void {
-        
-    }
+    private static tryParseNode(type: SyntaxNodeType, expression: string): void {}
 
     private static extractBracketPairs(command: string): BracketPair[] | null {
         const bracketPairs: BracketPair[] = [];
