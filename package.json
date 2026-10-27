@@ -15,7 +15,7 @@
     "type": "module",
     "scripts": {
         "watch": "mc watch",
-        "check": "tsc --noEmit && oxlint && oxfmt --check"
+        "check": "tsc --noEmit && oxlint --deny-warnings && oxfmt --check"
     },
     "dependencies": {
         "@minecraft/debug-utilities": "1.0.0-beta.1.26.52-stable",
