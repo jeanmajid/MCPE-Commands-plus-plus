@@ -18,4 +18,4 @@
  * https://polyformproject.org/licenses/noncommercial/1.0.0
  */
 
-export const NAMESPACE = "jeanmajid:";
+export const NAMESPACE = "jeanmajid_cpp:";
