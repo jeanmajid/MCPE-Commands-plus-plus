@@ -1,6 +1,5 @@
 node_modules
 package-lock.json
-pnpm-workspace.yaml
 scripts/**/pnpm-lock.yaml
 .npmrc
 
