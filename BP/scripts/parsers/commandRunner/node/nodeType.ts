@@ -1,9 +1,15 @@
 import { SyntaxNodeType } from "../types.js";
 
-type NodeParserFunction = () => unknown;
+type NodeParserFunction = (expression: string) => unknown;
 
 export class NodeType {
-    static parseTree: Record<string, NodeParserFunction> = {};
+    private static parseTree: Record<string, NodeParserFunction> = {};
 
-    static register(type: SyntaxNodeType, action: NodeParserFunction): void {}
+    public static register(type: SyntaxNodeType, action: NodeParserFunction): void {
+        this.parseTree[type] = action;
+    }
+
+    public static getParser(type: SyntaxNodeType): NodeParserFunction {
+        return this.parseTree[type];
+    }
 }
