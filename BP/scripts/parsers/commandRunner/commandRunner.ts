@@ -20,6 +20,7 @@
 
 import { Node } from "./node/node.js";
 import { NodePath } from "./node/nodePath.js";
+import { NodeType } from "./node/nodeType.js";
 import { BracketPair, SyntaxNodeType } from "./types.js";
 
 export class CommandRunner {
@@ -69,7 +70,14 @@ export class CommandRunner {
         }
     }
 
-    private static tryParseNode(_type: SyntaxNodeType, _expression: string): void {}
+    private static tryParseNode(type: SyntaxNodeType, expression: string): void {
+        const parser = NodeType.getParser(type);
+        if (!parser) {
+            return;
+        }
+
+        const _parsedExpression = parser(expression);
+    }
 
     private static extractBracketPairs(command: string): BracketPair[] | null {
         const bracketPairs: BracketPair[] = [];
