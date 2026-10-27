@@ -55,20 +55,21 @@ export class CommandRunner {
 
             const bracketContents = command.slice(pair.start + 1, pair.end);
 
-            const result = this.parseExpression(bracketContents);
+            const _result = this.parseExpression(bracketContents);
         }
     }
 
     private static parseExpression(expression: string): void {
         const parts = expression.split(".");
 
-        let current = this.rootNode;
+        // TEMP CONST
+        const current = this.rootNode;
         for (const part of parts) {
-            const result = this.tryParseNode(current.type, part);
+            const _result = this.tryParseNode(current.type, part);
         }
     }
 
-    private static tryParseNode(type: SyntaxNodeType, expression: string): void {}
+    private static tryParseNode(_type: SyntaxNodeType, _expression: string): void {}
 
     private static extractBracketPairs(command: string): BracketPair[] | null {
         const bracketPairs: BracketPair[] = [];
