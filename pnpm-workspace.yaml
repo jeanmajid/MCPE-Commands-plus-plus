@@ -1,6 +1,6 @@
 minimumReleaseAgeExclude:
-  - '@minecraft/debug-utilities@1.0.0-beta.1.26.60-stable'
-  - '@minecraft/server-admin@1.0.0-beta.1.26.60-stable'
-  - '@minecraft/server-gametest@1.0.0-beta.1.26.60-stable'
-  - '@minecraft/server-ui@2.4.0-beta.1.26.60-stable'
-  - '@minecraft/server@2.12.0-beta.1.26.60-stable'
+    - "@minecraft/debug-utilities@1.0.0-beta.1.26.60-stable"
+    - "@minecraft/server-admin@1.0.0-beta.1.26.60-stable"
+    - "@minecraft/server-gametest@1.0.0-beta.1.26.60-stable"
+    - "@minecraft/server-ui@2.4.0-beta.1.26.60-stable"
+    - "@minecraft/server@2.12.0-beta.1.26.60-stable"
