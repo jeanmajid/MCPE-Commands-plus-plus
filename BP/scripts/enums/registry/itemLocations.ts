@@ -26,6 +26,7 @@ import {
     CustomCommandStatus,
     EntityEnderInventoryComponent,
     EntityInventoryComponent,
+    Player,
 } from "@minecraft/server";
 
 import { EnumManager } from "../enum.js";
@@ -63,7 +64,7 @@ export const ItemLocations: Record<string, ItemLocationResolver> = {
         entity: Entity,
         index: number
     ): ContainerSlot | CustomCommandResult | undefined =>
-        getSizeableContainerSlot("inventory", entity, index, 9),
+        getSizeableContainerSlot("inventory", entity, index, entity instanceof Player ? 9 : 0),
 
     "slot.chest": (
         entity: Entity,
