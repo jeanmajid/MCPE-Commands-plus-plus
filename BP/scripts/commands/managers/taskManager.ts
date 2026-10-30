@@ -21,7 +21,7 @@
 import { system } from "@minecraft/server";
 
 export class TaskManager {
-    public readonly tasks: Runnable[] = [];
+    public readonly tasks: void[] = [];
     public run<T = unknown>(): Task<T> {
         return null!;
     }
@@ -45,7 +45,7 @@ export interface Task<T> {
     resume?(): void; //Mostly unsupported
 }
 
-export interface FunctionTask<T> {}
+export interface FunctionTask<_> {}
 
 /** Implementation for iterators like code that yields a lot */
 export class GeneratorTask<T> implements Task<T> {
