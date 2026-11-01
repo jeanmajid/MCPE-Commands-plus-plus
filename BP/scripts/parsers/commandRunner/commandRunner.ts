@@ -21,7 +21,10 @@
 import { Node } from "./node/node.js";
 import { NodePath } from "./node/nodePath.js";
 import { NodeType } from "./node/nodeType.js";
-import { BracketPair, SyntaxNodeType } from "./types.js";
+import { BracketPair, NodeObject, SyntaxNodeType } from "./types.js";
+
+// TEMPORARY LITERAL TABLE FOR TESTING
+const stringLiterals: Record<string, number> = { score: 1 };
 
 export class CommandRunner {
     private static rootNode: Node = new Node(SyntaxNodeType.Root);
@@ -60,23 +63,59 @@ export class CommandRunner {
         }
     }
 
-    private static parseExpression(expression: string): void {
+    private static parseExpression(expression: string): string {
         const parts = expression.split(".");
 
-        // TEMP CONST
-        const current = this.rootNode;
-        for (const part of parts) {
-            const _result = this.tryParseNode(current.type, part);
+        const results = this.tryParseExpressions(parts);
+
+        let currentNode = this.rootNode;
+        for (const result of results) {
+            const newNode = currentNode.getChild(result.type);
+            if (!newNode) {
+                // TODO BETTER ERROR HANDLING PLEASE
+                return "INVALID SYNTAX";
+            }
+
+            currentNode = newNode;
         }
     }
 
-    private static tryParseNode(type: SyntaxNodeType, expression: string): void {
-        const parser = NodeType.getParser(type);
-        if (!parser) {
-            return;
+    private static tryParseExpressions(expressions: string[]): NodeObject[] {
+        const returnValues = [];
+
+        for (const expression of expressions) {
+            const returnNode: NodeObject = {
+                type: this.getExpressionType(expression),
+                value: expression,
+            };
+
+            const parser = NodeType.getParser(returnNode.type);
+            if (!parser) {
+                console.error(`Missing parser for type: ${SyntaxNodeType[returnNode.type]}`);
+                returnValues.push(returnNode);
+                continue;
+            }
+
+            const parsedExpression = parser(expression);
+
+            returnNode.value = parsedExpression;
+
+            returnValues.push(returnNode);
         }
 
-        const _parsedExpression = parser(expression);
+        return returnValues;
+    }
+
+    private static getExpressionType(expression: string): SyntaxNodeType {
+        if (expression.startsWith("@")) {
+            return SyntaxNodeType.Selector;
+        } else if (!isNaN(Number(expression))) {
+            return SyntaxNodeType.Number;
+        } else if (stringLiterals[expression]) {
+            return SyntaxNodeType.Literal;
+        } else {
+            return SyntaxNodeType.String;
+        }
     }
 
     private static extractBracketPairs(command: string): BracketPair[] | null {

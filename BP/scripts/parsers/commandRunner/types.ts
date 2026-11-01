@@ -19,7 +19,9 @@
  */
 
 export enum SyntaxNodeType {
+    Undefined,
     Root,
+    Number,
     String,
     Selector,
     Literal,
@@ -28,4 +30,9 @@ export enum SyntaxNodeType {
 export interface BracketPair {
     start: number;
     end: number;
+}
+
+export interface NodeObject {
+    type: SyntaxNodeType;
+    value: unknown;
 }
