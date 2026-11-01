@@ -38,5 +38,4 @@ world.afterEvents.worldLoad.subscribe(() => {
     initializeDimensions();
     AttributeManager.loadAttributesFromMemory();
     GameRuleManager.loadGameRulesFromMemory();
-    let a = 12;
 });
