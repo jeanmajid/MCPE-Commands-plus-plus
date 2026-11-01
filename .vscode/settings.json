@@ -9,5 +9,6 @@
     "[json]": { "editor.defaultFormatter": "oxc.oxc-vscode" },
     "[jsonc]": { "editor.defaultFormatter": "oxc.oxc-vscode" },
     "editor.codeActionsOnSave": { "source.fixAll.oxc": "always" },
-    "oxc.lint.customization": { "prefer-const": { "autofix": false } }
+    "oxc.lint.customization": { "prefer-const": { "autofix": false } },
+    "python.terminal.activateEnvironment": false
 }

@@ -4,8 +4,28 @@ Running on mkdocs Material version 1.6.1
 
 # Setup
 
+Im gonna include 2 ways, either pip or uv
+
+1. Setup a virtual enviroment
+
+```bash
+python -m venv ./.venv
+# or
+uv venv
+```
+
+2. Then you just activate the eviroment (this step you will have to do each time)
+
+```
+.\.venv\Scripts\activate
+```
+
+3. and then install the dependencies
+
 ```sh
-pip install mkdocs-material mkdocs-git-revision-date-localized-plugin mkdocs-git-committers-plugin-2 mkdocs-awesome-nav
+pip install -r .\requirements.txt
+# or
+uv pip install -r .\requirements.txt
 ```
 
 # Running locally

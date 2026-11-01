@@ -8,3 +8,4 @@ dist
 wiki/site
 wiki/.cache
 wiki/.token
+.venv
