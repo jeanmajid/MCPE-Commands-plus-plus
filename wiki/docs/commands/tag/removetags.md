@@ -1,6 +1,6 @@
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING UNDERNEATH -->
 
-Removes an array of provided tags from the targets
+Removes an array of provided tags from the targets written as "a, b, c"
 
 ### Syntax:
 

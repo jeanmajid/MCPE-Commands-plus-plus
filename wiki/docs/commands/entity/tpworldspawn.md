@@ -5,7 +5,7 @@ Teleports all targets to the world spawn point
 ### Syntax:
 
 ```
-/tpworldspawn [targets: Player]
+/tpworldspawn [targets: Entity]
 ```
 
 ### Permission:

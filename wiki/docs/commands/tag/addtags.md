@@ -1,6 +1,6 @@
 <!-- AUTO GENERATED DO NOT TOUCH ANYTHING UNDERNEATH -->
 
-Adds an array of provided tags to the targets
+Adds an array of provided tags to the targets written as "a, b, c"
 
 ### Syntax:
 
