@@ -78,8 +78,6 @@ export class CommandRunner {
 
             currentNode = newNode;
         }
-
-        return "AAAA";
     }
 
     private static tryParseExpressions(expressions: string[]): NodeObject[] {
