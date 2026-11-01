@@ -34,5 +34,11 @@ jobs:
             - name: Install Dependencies
               run: pnpm install --frozen-lockfile
 
-            - name: Run Checks
-              run: pnpm check
+            - name: Check Typescript
+              run: pnpm tsc --noEmit
+
+            - name: Check Linter
+              run: pnpm oxlint --deny-warnings
+
+            - name: Check Formatting
+              run: pnpm oxlint --deny-warnings
