@@ -1,0 +1,7 @@
+#!/bin/sh
+
+echo "Running pre-push checks..."
+
+npm run check || exit 1
+
+echo "All checks passed!"
