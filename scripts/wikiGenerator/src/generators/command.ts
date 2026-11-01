@@ -164,3 +164,21 @@ for (const [category, commands] of Object.entries(outPutCommands)) {
 }
 
 console.log(`Succesfully generated command data in ${performance.now() - now}ms`);
+
+console.log("Checking for old commands...");
+const checkForOldNow = performance.now();
+
+{
+    const tasks: Promise<void>[] = [];
+    for await (const path of recursiveReadDir(WIKI_COMMAND_FOLDER_PATH)) {
+        const category = basename(dirname(path));
+        const commandName = basename(path).replace(".md", "");
+
+        if (!outPutCommands[category]?.[commandName]) {
+            console.log(`Command was moved or deleted: ${category}/${commandName}`);
+        }
+    }
+    await Promise.all(tasks);
+}
+
+console.log(`Succesfully checked for old commands in ${performance.now() - checkForOldNow}ms`);
