@@ -18,12 +18,12 @@
  * https://polyformproject.org/licenses/noncommercial/1.0.0
  */
 
-import { SyntaxNodeType } from "../types.js";
+import { NodeActionType, SyntaxNodeType } from "../types.js";
 
 export class Node {
     public type: SyntaxNodeType;
     public branches: Map<SyntaxNodeType, Node> = new Map();
-    public action: (() => void) | null = null;
+    public action: NodeActionType = null;
 
     public constructor(type: SyntaxNodeType) {
         this.type = type;

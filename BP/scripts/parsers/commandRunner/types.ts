@@ -40,3 +40,6 @@ export interface NodeObject {
     type: SyntaxNodeType;
     value: unknown;
 }
+
+// oxlint-disable-next-line typescript/no-explicit-any
+export type NodeActionType = ((...params: any[]) => string) | null;

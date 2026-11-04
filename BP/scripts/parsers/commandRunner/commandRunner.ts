@@ -83,9 +83,7 @@ export class CommandRunner {
 
         let currentNode = this.rootNode;
         for (const result of results) {
-            console.log(result.type);
             const newNode = currentNode.getChild(result.type);
-            console.log(newNode);
             if (!newNode) {
                 // TODO BETTER ERROR HANDLING PLEASE
                 return "INVALID SYNTAX";
@@ -94,8 +92,11 @@ export class CommandRunner {
             currentNode = newNode;
         }
 
-        // TEMP
-        return "AAAAA";
+        if (!currentNode.action) {
+            return "NO VALID END PATH";
+        }
+
+        return currentNode.action(...results.map((n) => n.value));
     }
 
     private static tryParseExpressions(expressions: string[]): NodeObject[] {
@@ -109,7 +110,7 @@ export class CommandRunner {
 
             const parser = NodeType.getParser(returnNode.type);
             if (!parser) {
-                // console.error(`Missing parser for type: ${SyntaxNodeType[returnNode.type]}`);
+                console.error(`Missing parser for type: ${returnNode.type}`);
                 returnValues.push(returnNode);
                 continue;
             }

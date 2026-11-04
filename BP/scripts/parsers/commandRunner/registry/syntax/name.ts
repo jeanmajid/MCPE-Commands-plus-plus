@@ -33,8 +33,12 @@ const path1 = new NodePath();
 path1.addNode(nameSyntaxSelector);
 path1.addNode(nameSyntaxString);
 
-path1.addAction(() => {
+path1.addAction((selector: string, nameLiteral: string) => {
+    console.log(selector);
+    console.log(nameLiteral);
     console.log("bombo");
+
+    return "HELLO WORLD";
 });
 
 CommandRunner.registerSyntax(path1);

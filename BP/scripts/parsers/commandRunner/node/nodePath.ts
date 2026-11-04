@@ -18,17 +18,18 @@
  * https://polyformproject.org/licenses/noncommercial/1.0.0
  */
 
+import { NodeActionType, SyntaxNodeType } from "../types.js";
 import { Node } from "./node.js";
 
 export class NodePath {
-    public path: number[] = [];
-    public action: (() => void) | null = null;
+    public path: SyntaxNodeType[] = [];
+    public action: NodeActionType = null;
 
     public addNode(node: Node): void {
         this.path.push(node.type);
     }
 
-    public addAction(action: () => void): void {
+    public addAction(action: NodeActionType): void {
         this.action = action;
     }
 }
