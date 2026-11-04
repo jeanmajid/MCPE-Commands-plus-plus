@@ -30,7 +30,7 @@ import {
 } from "@minecraft/server";
 
 import { Dimensions } from "../../../constants/dimensions.js";
-import { loadArea } from "../../../utils/dimension.js";
+import { loadAreaTemp } from "../../../utils/dimension.js";
 import { CommandManager } from "../../command.js";
 
 CommandManager.register(
@@ -120,7 +120,7 @@ export async function teleportPlayersToWorldSpawn(targets: Entity[]): Promise<vo
         loopId = system.runInterval(teleportWhenLoaded, 3);
         teleportWhenLoaded();
     } else {
-        await loadArea(dimension, { ...worldSpawn, y: -64 }, { ...worldSpawn, y: 319 });
+        await loadAreaTemp(dimension, { ...worldSpawn, y: -64 }, { ...worldSpawn, y: 319 });
         teleportTargets(getHighestAirLocation(worldSpawn.x, worldSpawn.z));
     }
 }
