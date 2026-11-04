@@ -18,14 +18,20 @@
  * https://polyformproject.org/licenses/noncommercial/1.0.0
  */
 
-export enum SyntaxNodeType {
+import { CustomCommandOrigin } from "@minecraft/server";
+
+export enum SyntaxNodeTypeEnum {
     Undefined,
+    Literal,
     Root,
     Number,
     String,
     Selector,
-    Literal,
 }
+
+export type SyntaxNodeTypeLiteral = string;
+
+export type SyntaxNodeType = SyntaxNodeTypeEnum | SyntaxNodeTypeLiteral;
 
 export interface BracketPair {
     start: number;
@@ -36,3 +42,6 @@ export interface NodeObject {
     type: SyntaxNodeType;
     value: unknown;
 }
+
+// oxlint-disable-next-line typescript/no-explicit-any
+export type NodeActionType = ((origin: CustomCommandOrigin, ...params: any[]) => string) | null;

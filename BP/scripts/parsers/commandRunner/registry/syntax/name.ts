@@ -21,10 +21,10 @@
 import { CommandRunner } from "../../commandRunner.js";
 import { Node } from "../../node/node.js";
 import { NodePath } from "../../node/nodePath.js";
-import { SyntaxNodeType } from "../../types.js";
+import { SyntaxNodeTypeEnum } from "../../types.js";
 
-const nameSyntaxSelector = new Node(SyntaxNodeType.Selector);
-const nameSyntaxString = new Node(SyntaxNodeType.String);
+const nameSyntaxSelector = new Node(SyntaxNodeTypeEnum.Selector);
+const nameSyntaxString = new Node("name");
 
 // @s.string -> path
 // @s.string.string -> path
@@ -33,8 +33,12 @@ const path1 = new NodePath();
 path1.addNode(nameSyntaxSelector);
 path1.addNode(nameSyntaxString);
 
-path1.addAction(() => {
+path1.addAction((origin, selector: string, nameLiteral: string) => {
+    console.log(selector);
+    console.log(nameLiteral);
     console.log("bombo");
+
+    return "HELLO WORLD";
 });
 
 CommandRunner.registerSyntax(path1);

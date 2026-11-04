@@ -18,4 +18,12 @@
  * https://polyformproject.org/licenses/noncommercial/1.0.0
  */
 
-console.log("selector");
+import { NodeType } from "../../node/nodeType.js";
+import { SyntaxNodeTypeEnum } from "../../types.js";
+
+NodeType.register(SyntaxNodeTypeEnum.Selector, (origin, expression) => {
+    switch (expression[1]) {
+        case "a":
+        case "s":
+    }
+});

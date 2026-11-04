@@ -18,24 +18,26 @@
  * https://polyformproject.org/licenses/noncommercial/1.0.0
  */
 
+import { CustomCommandOrigin } from "@minecraft/server";
+
 import { Node } from "./node/node.js";
 import { NodePath } from "./node/nodePath.js";
 import { NodeType } from "./node/nodeType.js";
-import { BracketPair, NodeObject, SyntaxNodeType } from "./types.js";
-
-// TEMPORARY LITERAL TABLE FOR TESTING
-const stringLiterals: Record<string, number> = { score: 1 };
+import { BracketPair, NodeObject, SyntaxNodeType, SyntaxNodeTypeEnum } from "./types.js";
 
 export class CommandRunner {
-    private static rootNode: Node = new Node(SyntaxNodeType.Root);
+    private static rootNode: Node = new Node(SyntaxNodeTypeEnum.Root);
+    private static stringLiterals: Set<SyntaxNodeType> = new Set();
 
-    public static run(command: string): void {
+    public static run(commandOrigin: CustomCommandOrigin, command: string): void {
         const bracketPairs = this.extractBracketPairs(command);
         if (bracketPairs === null) {
             return;
         }
 
-        this.parseBrackets(command, bracketPairs);
+        const parsedCommand = this.parseCommand(commandOrigin, command, bracketPairs);
+
+        console.log(parsedCommand);
     }
 
     public static registerSyntax(syntax: NodePath): void {
@@ -48,25 +50,42 @@ export class CommandRunner {
 
             current.addChild(node);
             current = node;
+
+            if (typeof current.type === "string") {
+                this.stringLiterals.add(current.type);
+            }
         }
 
         current.action = syntax.action;
     }
 
-    private static parseBrackets(command: string, bracketPairs: BracketPair[]): void {
-        for (let i = bracketPairs.length - 1; i >= 0; --i) {
-            const pair = bracketPairs[i];
+    private static parseCommand(
+        commandOrigin: CustomCommandOrigin,
+        command: string,
+        bracketPairs: BracketPair[]
+    ): string {
+        const stringBuilder = [];
+        let lastEndIndex = 0;
+
+        // TODO GOING FORWARD, NOT SUPPORTING NESTED SYNTAX FOR NOW
+        for (const pair of bracketPairs) {
+            stringBuilder.push(command.slice(lastEndIndex, pair.start));
 
             const bracketContents = command.slice(pair.start + 1, pair.end);
+            const result = this.parseExpression(commandOrigin, bracketContents);
+            stringBuilder.push(result);
 
-            const _result = this.parseExpression(bracketContents);
+            lastEndIndex = pair.end + 1;
         }
+        stringBuilder.push(command.slice(lastEndIndex, command.length));
+
+        return stringBuilder.join("");
     }
 
-    private static parseExpression(expression: string): string {
+    private static parseExpression(commandOrigin: CustomCommandOrigin, expression: string): string {
         const parts = expression.split(".");
 
-        const results = this.tryParseExpressions(parts);
+        const results = this.tryParseExpressions(commandOrigin, parts);
 
         let currentNode = this.rootNode;
         for (const result of results) {
@@ -79,11 +98,17 @@ export class CommandRunner {
             currentNode = newNode;
         }
 
-        // TEMP
-        return "AAAAA";
+        if (!currentNode.action) {
+            return "NO VALID END PATH";
+        }
+
+        return currentNode.action(commandOrigin, ...results.map((n) => n.value));
     }
 
-    private static tryParseExpressions(expressions: string[]): NodeObject[] {
+    private static tryParseExpressions(
+        commandOrigin: CustomCommandOrigin,
+        expressions: string[]
+    ): NodeObject[] {
         const returnValues = [];
 
         for (const expression of expressions) {
@@ -94,12 +119,12 @@ export class CommandRunner {
 
             const parser = NodeType.getParser(returnNode.type);
             if (!parser) {
-                console.error(`Missing parser for type: ${SyntaxNodeType[returnNode.type]}`);
+                console.error(`Missing parser for type: ${returnNode.type}`);
                 returnValues.push(returnNode);
                 continue;
             }
 
-            const parsedExpression = parser(expression);
+            const parsedExpression = parser(commandOrigin, expression);
 
             returnNode.value = parsedExpression;
 
@@ -111,13 +136,13 @@ export class CommandRunner {
 
     private static getExpressionType(expression: string): SyntaxNodeType {
         if (expression.startsWith("@")) {
-            return SyntaxNodeType.Selector;
+            return SyntaxNodeTypeEnum.Selector;
         } else if (!isNaN(Number(expression))) {
-            return SyntaxNodeType.Number;
-        } else if (stringLiterals[expression]) {
-            return SyntaxNodeType.Literal;
+            return SyntaxNodeTypeEnum.Number;
+        } else if (this.stringLiterals.has(expression)) {
+            return expression;
         } else {
-            return SyntaxNodeType.String;
+            return SyntaxNodeTypeEnum.String;
         }
     }
 
