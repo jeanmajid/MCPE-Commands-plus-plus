@@ -24,7 +24,8 @@ import "./registry/syntax/name.js";
 const now = Date.now();
 
 // CommandRunner.run("test {@s.score.{@s.name}}");
-CommandRunner.run("test {@s.score.objective}  {@s.score.{@s.name}}");
+// CommandRunner.run("test {@s.score.objective} {@s.score.test}");
+CommandRunner.run("test {@s.name}");
 
 console.log(`time: ${Date.now() - now}ms`);
 
