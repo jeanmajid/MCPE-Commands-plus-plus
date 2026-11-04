@@ -18,6 +18,8 @@
  * https://polyformproject.org/licenses/noncommercial/1.0.0
  */
 
+import { CustomCommandSource, Entity } from "@minecraft/server";
+
 import "./commandRunner.js";
 import { CommandRunner } from "./commandRunner.js";
 import "./registry/syntax/name.js";
@@ -25,7 +27,10 @@ const now = Date.now();
 
 // CommandRunner.run("test {@s.score.{@s.name}}");
 // CommandRunner.run("test {@s.score.objective} {@s.score.test}");
-CommandRunner.run("test {@s.name}");
+CommandRunner.run(
+    { sourceType: CustomCommandSource.Entity, sourceEntity: {} as unknown as Entity },
+    "test {@s.name}"
+);
 
 console.log(`time: ${Date.now() - now}ms`);
 

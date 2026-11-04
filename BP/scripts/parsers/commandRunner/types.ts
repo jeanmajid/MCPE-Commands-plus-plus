@@ -18,6 +18,8 @@
  * https://polyformproject.org/licenses/noncommercial/1.0.0
  */
 
+import { CustomCommandOrigin } from "@minecraft/server";
+
 export enum SyntaxNodeTypeEnum {
     Undefined,
     Literal,
@@ -42,4 +44,4 @@ export interface NodeObject {
 }
 
 // oxlint-disable-next-line typescript/no-explicit-any
-export type NodeActionType = ((...params: any[]) => string) | null;
+export type NodeActionType = ((origin: CustomCommandOrigin, ...params: any[]) => string) | null;

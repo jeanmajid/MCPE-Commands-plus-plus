@@ -18,9 +18,11 @@
  * https://polyformproject.org/licenses/noncommercial/1.0.0
  */
 
+import { CustomCommandOrigin } from "@minecraft/server";
+
 import { SyntaxNodeType } from "../types.js";
 
-type NodeParserFunction = (expression: string) => unknown;
+type NodeParserFunction = (origin: CustomCommandOrigin, expression: string) => unknown;
 
 export class NodeType {
     private static parseTree: Record<string, NodeParserFunction> = {};

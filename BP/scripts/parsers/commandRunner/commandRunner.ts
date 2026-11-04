@@ -18,6 +18,8 @@
  * https://polyformproject.org/licenses/noncommercial/1.0.0
  */
 
+import { CustomCommandOrigin } from "@minecraft/server";
+
 import { Node } from "./node/node.js";
 import { NodePath } from "./node/nodePath.js";
 import { NodeType } from "./node/nodeType.js";
@@ -27,13 +29,13 @@ export class CommandRunner {
     private static rootNode: Node = new Node(SyntaxNodeTypeEnum.Root);
     private static stringLiterals: Set<SyntaxNodeType> = new Set();
 
-    public static run(command: string): void {
+    public static run(commandOrigin: CustomCommandOrigin, command: string): void {
         const bracketPairs = this.extractBracketPairs(command);
         if (bracketPairs === null) {
             return;
         }
 
-        const parsedCommand = this.parseCommand(command, bracketPairs);
+        const parsedCommand = this.parseCommand(commandOrigin, command, bracketPairs);
 
         console.log(parsedCommand);
     }
@@ -57,7 +59,11 @@ export class CommandRunner {
         current.action = syntax.action;
     }
 
-    private static parseCommand(command: string, bracketPairs: BracketPair[]): string {
+    private static parseCommand(
+        commandOrigin: CustomCommandOrigin,
+        command: string,
+        bracketPairs: BracketPair[]
+    ): string {
         const stringBuilder = [];
         let lastEndIndex = 0;
 
@@ -66,7 +72,7 @@ export class CommandRunner {
             stringBuilder.push(command.slice(lastEndIndex, pair.start));
 
             const bracketContents = command.slice(pair.start + 1, pair.end);
-            const result = this.parseExpression(bracketContents);
+            const result = this.parseExpression(commandOrigin, bracketContents);
             stringBuilder.push(result);
 
             lastEndIndex = pair.end + 1;
@@ -76,10 +82,10 @@ export class CommandRunner {
         return stringBuilder.join("");
     }
 
-    private static parseExpression(expression: string): string {
+    private static parseExpression(commandOrigin: CustomCommandOrigin, expression: string): string {
         const parts = expression.split(".");
 
-        const results = this.tryParseExpressions(parts);
+        const results = this.tryParseExpressions(commandOrigin, parts);
 
         let currentNode = this.rootNode;
         for (const result of results) {
@@ -96,10 +102,13 @@ export class CommandRunner {
             return "NO VALID END PATH";
         }
 
-        return currentNode.action(...results.map((n) => n.value));
+        return currentNode.action(commandOrigin, ...results.map((n) => n.value));
     }
 
-    private static tryParseExpressions(expressions: string[]): NodeObject[] {
+    private static tryParseExpressions(
+        commandOrigin: CustomCommandOrigin,
+        expressions: string[]
+    ): NodeObject[] {
         const returnValues = [];
 
         for (const expression of expressions) {
@@ -115,7 +124,7 @@ export class CommandRunner {
                 continue;
             }
 
-            const parsedExpression = parser(expression);
+            const parsedExpression = parser(commandOrigin, expression);
 
             returnNode.value = parsedExpression;
 
