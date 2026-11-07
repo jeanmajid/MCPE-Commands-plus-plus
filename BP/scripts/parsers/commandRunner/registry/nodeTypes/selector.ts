@@ -22,6 +22,8 @@ import { NodeType } from "../../node/nodeType.js";
 import { SyntaxNodeTypeEnum } from "../../types.js";
 
 NodeType.register(SyntaxNodeTypeEnum.Selector, (origin, expression) => {
+    // TODO move parser to parsers
+    // TODO handle []
     switch (expression[1]) {
         case "a":
         case "s":

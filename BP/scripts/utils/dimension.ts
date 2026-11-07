@@ -81,7 +81,7 @@ export function getDimensionFromCommandOrigin(origin: CustomCommandOrigin): Dime
 }
 
 // TODO move into dedicated WorldLoader class in the future (https://github.com/jeanmajid/MCPE-Commands-plus-plus/issues/118)
-export async function loadArea(
+export async function loadAreaTemp(
     dimension: Dimension,
     start: Vector3,
     end: Vector3,
