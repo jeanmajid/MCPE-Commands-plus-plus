@@ -18,11 +18,11 @@
         "prepare": "git config core.hooksPath .githooks"
     },
     "dependencies": {
-        "@minecraft/debug-utilities": "1.0.0-beta.1.26.61-stable",
-        "@minecraft/server": "2.12.0-beta.1.26.61-stable",
-        "@minecraft/server-admin": "1.0.0-beta.1.26.61-stable",
-        "@minecraft/server-gametest": "1.0.0-beta.1.26.61-stable",
-        "@minecraft/server-ui": "2.4.0-beta.1.26.61-stable"
+        "@minecraft/debug-utilities": "1.0.0-beta.1.26.63-stable",
+        "@minecraft/server": "2.12.0-beta.1.26.63-stable",
+        "@minecraft/server-admin": "1.0.0-beta.1.26.63-stable",
+        "@minecraft/server-gametest": "1.0.0-beta.1.26.63-stable",
+        "@minecraft/server-ui": "2.4.0-beta.1.26.63-stable"
     },
     "devDependencies": {
         "@jeanmajid/mcpe-tool": "^1.0.16",
