@@ -42,14 +42,8 @@ interface Command {
     callback: CustomCommandCallback;
 }
 
-interface CommandEnum {
-    name: string;
-    values: string[];
-}
-
 export class CommandManager {
     public static commands: Command[] = [];
-    public static enums: CommandEnum[] = [];
 
     public static register(
         customCommand: CommandData,
