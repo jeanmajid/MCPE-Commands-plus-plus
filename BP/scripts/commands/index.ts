@@ -59,6 +59,7 @@ import "./registry/drawer/undrawAll.js";
 import "./registry/entity/entityCount.js";
 import "./registry/entity/extinguish.js";
 import "./registry/entity/fmbe.js";
+import "./registry/entity/forceDrop.js";
 import "./registry/entity/harm.js";
 import "./registry/entity/heal.js";
 import "./registry/entity/health.js";
